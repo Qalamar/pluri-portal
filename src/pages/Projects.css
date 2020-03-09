@@ -1,0 +1,47 @@
+.titleHeader {
+  width: 100%;
+  height: 150px;
+  background-image: url("../images/background.png");
+  background-size: cover;
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup {
+  --background: var(--ion-color-dark);
+  --color: var(--ion-color-dark);
+  --backdrop-opacity: 60%;
+}
+
+ion-button {
+  min-width: 160px;
+}
+
+.img-round {
+  width: auto;
+  height: 128px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 8px rgb(18, 17, 18, 0.5);
+}
+ion-card-title {
+  margin: 0 auto;
+}
+.title {
+  font-size: 4em;
+  border-radius: 1px;
+  text-shadow: 0px 0px 5px rgb(18, 17, 18, 0.2);
+  font-weight: bold;
+}
+iframe {
+  margin: 0 auto;
+  width: 100%;
+  min-height: 250px;
+  display: block;
+}
