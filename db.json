@@ -1,5 +1,25 @@
 {
-  "employees": [
+  "Students": [
+    {
+      "id": 1,
+      "first_name": "Moussa",
+      "last_name": "Khodja",
+      "email": "sebastian@codingthesmartway.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Ilyes",
+      "last_name": "Bragdon",
+      "email": "steve@codingthesmartway.com"
+    },
+    {
+      "id": 3,
+      "first_name": "A",
+      "last_name": "Name",
+      "email": "ann@codingthesmartway.com"
+    }
+  ],
+  "Teachers": [
     {
       "id": 1,
       "first_name": "Sebastian",
@@ -17,12 +37,6 @@
       "first_name": "Ann",
       "last_name": "Smith",
       "email": "ann@codingthesmartway.com"
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
     }
   ]
 }

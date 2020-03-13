@@ -17,7 +17,8 @@ import {
   heartOutline,
   heartSharp,
   peopleCircleOutline,
-  newspaperOutline
+  newspaperOutline,
+  lockClosedOutline
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -36,6 +37,12 @@ const appPages: AppPage[] = [
   {
     title: "Authentication",
     url: "/about",
+    iosIcon: lockClosedOutline,
+    mdIcon: lockClosedOutline
+  },
+  {
+    title: "Users",
+    url: "/users",
     iosIcon: peopleCircleOutline,
     mdIcon: peopleCircleOutline
   },
@@ -44,12 +51,6 @@ const appPages: AppPage[] = [
     url: "/projects",
     iosIcon: archiveOutline,
     mdIcon: archiveSharp
-  },
-  {
-    title: "Accomplishements",
-    url: "/accomplishements",
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
   }
 ];
 
@@ -77,7 +78,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
             <IonItem
               onClick={() => setSelected([false, true, false])}
               className={selected[1] ? "selected" : ""}
-              routerLink={"/projects"}
+              routerLink={"/users"}
               routerDirection="none"
               lines="none"
               detail={false}
@@ -88,7 +89,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
             <IonItem
               onClick={() => setSelected([false, false, true])}
               className={selected[2] ? "selected" : ""}
-              routerLink={"/accomplishements"}
+              routerLink={"/projects"}
               routerDirection="none"
               lines="none"
               detail={false}

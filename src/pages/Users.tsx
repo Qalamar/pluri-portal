@@ -25,7 +25,7 @@ import {
 } from "ionicons/icons";
 import Anime from "react-anime";
 
-const Accomplishements: React.FC = () => {
+const Users: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -34,7 +34,7 @@ const Accomplishements: React.FC = () => {
             <IonMenuButton />
           </IonButtons>
           <IonTitle>
-            <strong>Accomplishements</strong>
+            <strong>USERS</strong>
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -43,11 +43,11 @@ const Accomplishements: React.FC = () => {
           <IonGrid>
             <IonRow class="ion-align-items-center">
               <IonCol></IonCol>
-              <IonCol size="12" sizeMd="10">
+              <IonCol size="12">
                 <IonCard class="neum">
                   <IonCardHeader class="ion-text-center ion-padding">
                     <IonCardTitle color="light" className="title">
-                      Teams
+                      Users
                     </IonCardTitle>
                   </IonCardHeader>
                   <IonCardContent>
@@ -66,4 +66,4 @@ const Accomplishements: React.FC = () => {
   );
 };
 
-export default Accomplishements;
+export default Users;
