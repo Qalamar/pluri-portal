@@ -13,9 +13,7 @@ ion-card-header {
   align-items: center;
   justify-content: center;
 }
-ion-card-title {
-  margin: 0 auto;
-}
+
 .img-rounds {
   width: auto;
   height: 128px;
