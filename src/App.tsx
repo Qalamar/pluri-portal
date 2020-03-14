@@ -2,9 +2,8 @@ import Menu from "./components/Menu";
 
 import About from "./pages/About";
 import Projects from "./pages/Projects";
-import Users from "./pages/Users" ;
+import Users from "./pages/Users";
 import Promo from "./pages/Promo";
-import Accomplishements from "./pages/Accomplishements";
 import React, { useState } from "react";
 import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -45,13 +44,9 @@ const App: React.FC = () => {
             />
             <Route path="/about" component={About} exact={true} />
             <Route path="/projects" component={Projects} exact={true} />
-            <Route
-              path="/accomplishements"
-              component={Accomplishements}
-              exact={true}
-            />
-             <Route path="/users" component={Users} exact={true} />
-             <Route path="/promo" component={Promo} exact={true} />
+            <Route path="/users" component={Users} exact={true} />
+            <Route path="/users" component={Users} exact={true} />
+            <Route path="/promo" component={Promo} exact={true} />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

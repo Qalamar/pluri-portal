@@ -20,7 +20,9 @@ import {
   IonText,
   IonList,
   IonButton,
-  IonSearchbar
+  IonSearchbar,
+  IonModal,
+  IonInput
 } from "@ionic/react";
 import React, { useEffect, useState, useReducer } from "react";
 import {
@@ -35,11 +37,13 @@ import axios from "axios";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 import { store } from "../stores/Store";
+import UserForm from "../components/UserForm";
 import "./Accomplishements.css";
 
 const Users: React.FC = observer(() => {
   const [ignored, render] = useReducer(x => x + 1, 0);
   const [students, setstudents] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const getUsers = async () => {
     let res = await axios.get("/students");
@@ -49,6 +53,10 @@ const Users: React.FC = observer(() => {
 
   const searchHandle = (input: string) => {
     store.searchList = input;
+  };
+
+  const addUser = () => {
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -67,7 +75,11 @@ const Users: React.FC = observer(() => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent class="bg">
+      <IonContent>
+        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+          <UserForm />
+        </IonModal>
+
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="12">
@@ -76,6 +88,7 @@ const Users: React.FC = observer(() => {
                   <IonCardTitle color="light" className="title">
                     Users
                   </IonCardTitle>
+                  <IonInput autoCapitalize="characters"></IonInput>
                 </IonCardHeader>
 
                 <IonCardContent>
@@ -90,7 +103,11 @@ const Users: React.FC = observer(() => {
                           }
                         />
                       </IonCol>
-                      <IonCol></IonCol>
+                      <IonCol class="ion-text-center">
+                        <IonButton onClick={() => addUser()} color="danger">
+                          Add User
+                        </IonButton>
+                      </IonCol>
                     </IonRow>
                     <IonRow>
                       {students.length === 0 ? (
@@ -113,7 +130,13 @@ const Users: React.FC = observer(() => {
                                     className="user"
                                     class="shadow ion-text-center"
                                   >
-                                    <IonCardHeader></IonCardHeader>
+                                    <IonCardHeader>
+                                      <img
+                                        alt=""
+                                        className="img-round"
+                                        src={require("../images/icons/tinygiantr.png")}
+                                      />
+                                    </IonCardHeader>
                                     <IonCardTitle
                                       color="dark"
                                       className="ion-padding"
