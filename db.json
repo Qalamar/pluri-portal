@@ -1,45 +1,13 @@
 {
   "students": [
     {
-      "id": 1,
-      "first_name": "Moussa",
-      "last_name": "Khodja",
-      "profile_pic": "346HRTH456YUYJEZQERT45Y657UIT7O8967754ZRGZRTH57568I6O7L6765Y36H356H",
-      "class": "1CS",
-      "group": "3",
-      "email": "sebastian@codingthesmartway.com"
-    },
-    {
-      "id": 2,
-      "first_name": "Ilyes",
-      "last_name": "Bragdon",
-      "class": "1CS",
-      "group": "3",
-      "email": "steve@codingthesmartway.com"
-    },
-    {
-      "id": 3,
-      "first_name": "Best",
-      "last_name": "Name",
-      "class": "1CS",
-      "group": "3",
-      "email": "ann@codingthesmartway.com"
-    },
-    {
-      "id": 4,
-      "first_name": "Ahmed",
-      "last_name": "Mhammed",
-      "class": "1CPI",
-      "group": "1",
-      "email": "ann@codingthesmartway.com"
-    },
-    {
-      "id": 5,
-      "first_name": "Random",
-      "last_name": "Master",
-      "class": "2CS",
-      "group": "2",
-      "email": "ann@codingthesmartway.com"
+      "first_name": "Iles",
+      "last_name": "BRAGD",
+      "class": "Student",
+      "email": "sd@fg.co",
+      "gender": "MALE",
+      "promo": "1CS",
+      "id": 1
     }
   ],
   "teachers": [

@@ -15,7 +15,8 @@ import {
   IonSelect,
   IonSelectOption,
   IonRange,
-  IonButton
+  IonButton,
+  IonToast
 } from "@ionic/react";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
@@ -34,16 +35,19 @@ import {
 } from "ionicons/icons";
 import { store } from "../stores/Store";
 import { useForm, Controller } from "react-hook-form";
+import Anime from "react-anime";
+import axios from "axios";
 import "./UserForm.css";
 
 let renderCount = 0;
 let initialValues = {
   rangeInfo: -100,
-  fullName: "",
+  firstName: "",
   lastName: "",
   gender: "",
-  techCos: "",
-  email: ""
+  class: "",
+  email: "",
+  promo: ""
 };
 
 const UserForm: React.FC = observer(() => {
@@ -53,6 +57,7 @@ const UserForm: React.FC = observer(() => {
   });
 
   const [data, setData] = useState();
+  const [showToast, setshowToast] = useState(false);
   renderCount++;
 
   /**
@@ -72,13 +77,39 @@ const UserForm: React.FC = observer(() => {
    *
    * @param data
    */
+
+  const capitalizeFirstLetter = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const onSubmit = (data: any) => {
-    alert(JSON.stringify(data, null, 2));
     setData(data);
+    axios
+      .post("/students", {
+        first_name: capitalizeFirstLetter(data.firstName),
+        last_name: data.lastName.toUpperCase(),
+        class: data.class,
+        email: data.email,
+        gender: data.gender,
+        promo: data.promo
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   return (
     <IonContent color="dark" class="ion-padding">
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setshowToast(false)}
+        message="User added."
+        duration={400}
+      />
+
       <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 18 }}>
         <IonLabel color="light">
           <h1>Information</h1>
@@ -93,17 +124,17 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("fullName", selected.detail.value);
+              console.log("firstName", selected.detail.value);
               return selected.detail.value;
             }}
-            name="fullName"
+            name="firstName"
             rules={{
               required: true,
               minLength: { value: 4, message: "Must be 4 chars long" }
             }}
           />
         </IonItem>
-        {showError("fullName")}
+        {showError("firstName")}
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={peopleCircleOutline}></IonIcon>
 
@@ -186,7 +217,7 @@ const UserForm: React.FC = observer(() => {
             </IonRadioGroup>
           }
           control={control}
-          name="techCos"
+          name="class"
           rules={{ required: true }}
           onChangeName="onIonChange"
           onChange={([selected]) => {
@@ -215,16 +246,10 @@ const UserForm: React.FC = observer(() => {
               console.log(selected.detail.value);
               return selected.detail.value;
             }}
-            name="gender"
+            name="promo"
             rules={{ required: true }}
           />
         </IonItem>
-
-        {data && (
-          <pre style={{ textAlign: "left" }}>
-            {JSON.stringify(data, null, 2)}
-          </pre>
-        )}
 
         <IonButton
           color="danger"
@@ -238,6 +263,7 @@ const UserForm: React.FC = observer(() => {
         <IonButton
           color="light"
           type="submit"
+          onClick={() => setshowToast(true)}
           disabled={formState.isValid === false}
         >
           Submit

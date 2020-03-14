@@ -32,13 +32,14 @@ import {
   linkOutline,
   imageOutline
 } from "ionicons/icons";
-import Anime from "react-anime";
+
 import axios from "axios";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 import { store } from "../stores/Store";
 import UserForm from "../components/UserForm";
 import "./Accomplishements.css";
+import Anime from "react-anime";
 
 const Users: React.FC = observer(() => {
   const [ignored, render] = useReducer(x => x + 1, 0);
@@ -88,7 +89,6 @@ const Users: React.FC = observer(() => {
                   <IonCardTitle color="light" className="title">
                     Users
                   </IonCardTitle>
-                  <IonInput autoCapitalize="characters"></IonInput>
                 </IonCardHeader>
 
                 <IonCardContent>
@@ -126,36 +126,42 @@ const Users: React.FC = observer(() => {
                                   sizeMd="3"
                                   class=" ion-text-center"
                                 >
-                                  <IonCard
-                                    className="user"
-                                    class="shadow ion-text-center"
+                                  <Anime
+                                    opacity={[0, 1]}
+                                    duration={2000}
+                                    easing="easeOutElastic"
                                   >
-                                    <IonCardHeader>
-                                      <img
-                                        alt=""
-                                        className="img-round"
-                                        src={require("../images/icons/tinygiantr.png")}
-                                      />
-                                    </IonCardHeader>
-                                    <IonCardTitle
-                                      color="dark"
-                                      className="ion-padding"
+                                    <IonCard
+                                      className="user"
+                                      class="shadow ion-text-center"
                                     >
-                                      <strong>
-                                        {e.first_name + " " + e.last_name}
-                                      </strong>
-                                    </IonCardTitle>
-                                    <IonChip outline={true} color="dark">
-                                      <IonLabel>Group: {e.group}</IonLabel>
-                                    </IonChip>
-                                    <IonChip color="dark" outline={true}>
-                                      <IonLabel>{e.class}</IonLabel>
-                                    </IonChip>
+                                      <IonCardHeader>
+                                        <img
+                                          alt=""
+                                          className="img-round"
+                                          src={require("../images/icons/tinygiantr.png")}
+                                        />
+                                      </IonCardHeader>
+                                      <IonCardTitle
+                                        color="dark"
+                                        className="ion-padding "
+                                      >
+                                        <strong>
+                                          {e.first_name + " " + e.last_name}
+                                        </strong>
+                                      </IonCardTitle>
+                                      <IonChip outline={true} color="dark">
+                                        <IonLabel>{e.promo}</IonLabel>
+                                      </IonChip>
+                                      <IonChip color="dark" outline={true}>
+                                        <IonLabel>{e.class}</IonLabel>
+                                      </IonChip>
 
-                                    <IonCardContent>
-                                      <IonText>A simple user.</IonText>
-                                    </IonCardContent>
-                                  </IonCard>
+                                      <IonCardContent>
+                                        <IonText>A simple user.</IonText>
+                                      </IonCardContent>
+                                    </IonCard>
+                                  </Anime>
                                 </IonCol>
                               );
                           }
