@@ -1,3 +1,15 @@
+.container {
+  margin-top: 6em;
+}
+
+.shadow {
+}
+.popup {
+  --background: var(--ion-color-dark);
+  --color: var(--ion-color-dark);
+  --backdrop-opacity: 60%;
+}
+
 ion-card-header {
   width: 100%;
   height: 150px;
@@ -13,12 +25,9 @@ ion-card-header {
   align-items: center;
   justify-content: center;
 }
-
-.img-rounds {
-  width: auto;
-  height: 128px;
+ion-card-title {
+  margin: 0 auto;
 }
-
 .title {
   font-size: 4em;
   border-radius: 1px;
@@ -27,4 +36,7 @@ ion-card-header {
 }
 .ico {
   font-size: 6em;
+}
+ion-modal a {
+  text-decoration: none;
 }

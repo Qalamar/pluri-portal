@@ -1,6 +1,6 @@
 import Menu from "./components/Menu";
 
-import About from "./pages/About";
+import Auth from "./pages/Auth";
 import Projects from "./pages/Projects";
 import Users from "./pages/Users";
 import Promo from "./pages/Promo";
@@ -39,12 +39,11 @@ const App: React.FC = () => {
           <IonRouterOutlet id="main">
             <Route
               path="/"
-              render={() => <Redirect to="/about" />}
+              render={() => <Redirect to="/auth" />}
               exact={true}
             />
-            <Route path="/about" component={About} exact={true} />
+            <Route path="/auth" component={Auth} exact={true} />
             <Route path="/projects" component={Projects} exact={true} />
-            <Route path="/users" component={Users} exact={true} />
             <Route path="/users" component={Users} exact={true} />
             <Route path="/promo" component={Promo} exact={true} />
           </IonRouterOutlet>

@@ -37,7 +37,7 @@ interface AppPage {
 const appPages: AppPage[] = [
   {
     title: "Authentication",
-    url: "/about",
+    url: "/auth",
     iosIcon: lockClosedOutline,
     mdIcon: lockClosedOutline
   },
@@ -54,15 +54,15 @@ const appPages: AppPage[] = [
     mdIcon: archiveSharp
   },
   {
-    title :"Promos",
-    url :"/Promo",
-    iosIcon :schoolOutline ,
-    mdIcon : schoolOutline
+    title: "Promos",
+    url: "/Promo",
+    iosIcon: schoolOutline,
+    mdIcon: schoolOutline
   }
 ];
 
 const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
-  const [selected, setSelected] = useState([true, false, false,false]);
+  const [selected, setSelected] = useState([true, false, false, false]);
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
@@ -72,9 +72,9 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
 
           <IonMenuToggle autoHide={false}>
             <IonItem
-              onClick={() => setSelected([true, false, false,false])}
+              onClick={() => setSelected([true, false, false, false])}
               className={selected[0] ? "selected" : ""}
-              routerLink={"/about"}
+              routerLink={"/auth"}
               routerDirection="none"
               lines="none"
               detail={false}
@@ -83,7 +83,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               <IonLabel>{appPages[0].title}</IonLabel>
             </IonItem>
             <IonItem
-              onClick={() => setSelected([false, true, false,false])}
+              onClick={() => setSelected([false, true, false, false])}
               className={selected[1] ? "selected" : ""}
               routerLink={"/users"}
               routerDirection="none"
@@ -94,28 +94,27 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               <IonLabel>{appPages[1].title}</IonLabel>
             </IonItem>
             <IonItem
-              onClick={() => setSelected([false, false, true,false])}
+              onClick={() => setSelected([false, false, true, false])}
               className={selected[2] ? "selected" : ""}
               routerLink={"/projects"}
               routerDirection="none"
               lines="none"
               detail={false}
-            ><IonIcon slot="start" icon={appPages[2].iosIcon} />
-            <IonLabel>{appPages[2].title}</IonLabel>
-              </IonItem>
-              <IonItem
-              onClick={() => setSelected([false, false, false,true])}
+            >
+              <IonIcon slot="start" icon={appPages[2].iosIcon} />
+              <IonLabel>{appPages[2].title}</IonLabel>
+            </IonItem>
+            <IonItem
+              onClick={() => setSelected([false, false, false, true])}
               className={selected[3] ? "selected" : ""}
               routerLink={"/Promo"}
               routerDirection="none"
               lines="none"
               detail={false}
-              >
-                <IonIcon slot="start" icon={appPages[3].iosIcon} />
-            <IonLabel>{appPages[3].title}</IonLabel>
-              </IonItem>
-              
-            
+            >
+              <IonIcon slot="start" icon={appPages[3].iosIcon} />
+              <IonLabel>{appPages[3].title}</IonLabel>
+            </IonItem>
           </IonMenuToggle>
         </IonList>
       </IonContent>

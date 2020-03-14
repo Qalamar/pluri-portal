@@ -14,43 +14,19 @@ import {
   IonCardHeader,
   IonCardContent,
   IonIcon,
-  IonList,
   IonItem,
-  IonLabel,
   IonText,
   IonButton,
   IonModal,
-  IonChip,
-  IonInput,
-  IonItemDivider
+  IonInput
 } from "@ionic/react";
 import React, { useState } from "react";
 import Anime from "react-anime";
-import {
-  mailOutline,
-  logoGithub,
-  logoLinkedin,
-  cubeOutline,
-  logoNodejs,
-  colorFilterOutline,
-  logoFirebase,
-  logoJavascript,
-  serverOutline,
-  logoHtml5,
-  logoReact,
-  layersOutline,
-  logoIonic,
-  gitBranchOutline,
-  logoDribbble,
-  gameControllerOutline,
-  fileTrayFullOutline,
-  informationCircleOutline,
-  lockClosedOutline
-} from "ionicons/icons";
+import { mailOutline, lockClosedOutline } from "ionicons/icons";
 import axios from "axios";
-import "./About.css";
+import "./Auth.css";
 
-const About: React.FC = () => {
+const Auth: React.FC = () => {
   const [isOpen, setisOpen] = useState(false);
   const showProfile = () => {
     axios.get("/employees?id=1").then(function(response) {
@@ -169,4 +145,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default Auth;

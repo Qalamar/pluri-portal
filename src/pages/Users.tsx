@@ -14,31 +14,22 @@ import {
   IonCardTitle,
   IonCardContent,
   IonIcon,
-  IonItem,
   IonLabel,
   IonChip,
   IonText,
-  IonList,
   IonButton,
   IonSearchbar,
-  IonModal,
-  IonInput
+  IonModal
 } from "@ionic/react";
 import React, { useEffect, useState, useReducer } from "react";
-import {
-  calendarOutline,
-  trophyOutline,
-  logoWebComponent,
-  linkOutline,
-  imageOutline
-} from "ionicons/icons";
+import { personCircleOutline } from "ionicons/icons";
 
 import axios from "axios";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 import { store } from "../stores/Store";
 import UserForm from "../components/UserForm";
-import "./Accomplishements.css";
+import "./Users.css";
 import Anime from "react-anime";
 
 const Users: React.FC = observer(() => {
@@ -136,11 +127,11 @@ const Users: React.FC = observer(() => {
                                       class="shadow ion-text-center"
                                     >
                                       <IonCardHeader>
-                                        <img
-                                          alt=""
-                                          className="img-round"
-                                          src={require("../images/icons/tinygiantr.png")}
-                                        />
+                                        <IonIcon
+                                          icon={personCircleOutline}
+                                          class="ico"
+                                          color="light"
+                                        ></IonIcon>
                                       </IonCardHeader>
                                       <IonCardTitle
                                         color="dark"

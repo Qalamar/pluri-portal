@@ -8,6 +8,15 @@
       "gender": "MALE",
       "promo": "1CS",
       "id": 1
+    },
+    {
+      "first_name": "Tariq",
+      "last_name": "HAMRIT",
+      "class": "Student",
+      "email": "ham@gmail.com",
+      "gender": "MALE",
+      "promo": "1CS",
+      "id": 2
     }
   ],
   "teachers": [

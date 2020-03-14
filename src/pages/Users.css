@@ -1,16 +1,3 @@
-.container {
-  margin-top: 6em;
-}
-
-.shadow {
-  box-shadow: 7px 7px 14px #cccccc, -7px -7px 14px #ffffff;
-}
-.popup {
-  --background: var(--ion-color-dark);
-  --color: var(--ion-color-dark);
-  --backdrop-opacity: 60%;
-}
-
 ion-card-header {
   width: 100%;
   height: 150px;
@@ -26,9 +13,12 @@ ion-card-header {
   align-items: center;
   justify-content: center;
 }
-ion-card-title {
-  margin: 0 auto;
+
+.img-rounds {
+  width: auto;
+  height: 128px;
 }
+
 .title {
   font-size: 4em;
   border-radius: 1px;
@@ -36,8 +26,5 @@ ion-card-title {
   font-weight: bold;
 }
 .ico {
-  font-size: 6em;
-}
-ion-modal a {
-  text-decoration: none;
+  font-size: 8em;
 }
