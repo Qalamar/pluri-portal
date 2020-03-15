@@ -1,46 +1,45 @@
 {
   "students": [
     {
-      "first_name": "Iles",
-      "last_name": "BRAGD",
-      "class": "Student",
-      "email": "sd@fg.co",
-      "gender": "MALE",
-      "promo": "1CS",
-      "id": 1
-    },
-    {
-      "first_name": "Tariq",
-      "last_name": "HAMRIT",
-      "class": "Student",
-      "email": "ham@gmail.com",
-      "gender": "MALE",
-      "promo": "1CS",
-      "id": 2
+      "studentCode" : 1,
+      "firstName": "Moussa",
+      "lastLame": "Khodja",
+      "dateOfBirth" : "1997/04/12",
+      "placeOfBirth" : "M'sila",
+      "email" : "m.khodja@esi-sba.dz",
+      "userName" : "moozes",
+      "password" : "hello",
+      "codePromotion" : "2"
     }
   ],
   "teachers": [
     {
-      "id": 1,
-      "first_name": "Sebastian",
-      "last_name": "Eschweiler",
-      "class": "1CS",
-      "group": "3",
-      "email": "sebastian@codingthesmartway.com"
-    },
+      "teacherCode" : 1,
+      "firstName": "siMoh",
+      "lastLame": "legend",
+      "dateOfBirth" : "0000/00/00",
+      "placeOfBirth" : "somewhere",
+      "grade" : "professor",
+      "speciality" : "pascal",
+      "email" : "s.legend@esi-sba.dz",
+      "userName" : "siMoh",
+      "password" : "123PASCALPASCAL"
+    }
+  ],
+  "promotion" : [
     {
-      "id": 2,
-      "first_name": "Steve",
-      "last_name": "Palmer",
-      "class": "1CS",
-      "email": "steve@codingthesmartway.com"
-    },
+      "codePromotion" : "2",
+      "cycle" : "CS",
+      "level" : 1,
+      "academicYear" : "2020/2019",
+      "specialityCode" : 10
+    }
+  ],
+  "speciality" : [
     {
-      "id": 3,
-      "first_name": "Ann",
-      "last_name": "Smith",
-      "class": "1CS",
-      "email": "ann@codingthesmartway.com"
+      "specialityCode" : 10,
+      "specialityName" : "isi",
+      "description" : "blablabla......."
     }
   ]
 }
