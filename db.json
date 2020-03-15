@@ -9,7 +9,7 @@
       "email" : "m.khodja@esi-sba.dz",
       "userName" : "moozes",
       "password" : "hello",
-      "codePromotion" : "2"
+      "promotion" : "1CS"
     }
   ],
   "teachers": [
@@ -24,15 +24,6 @@
       "email" : "s.legend@esi-sba.dz",
       "userName" : "siMoh",
       "password" : "123PASCALPASCAL"
-    }
-  ],
-  "promotion" : [
-    {
-      "codePromotion" : "2",
-      "cycle" : "CS",
-      "level" : 1,
-      "academicYear" : "2020/2019",
-      "specialityCode" : 10
     }
   ],
   "speciality" : [
