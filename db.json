@@ -1,36 +1,36 @@
 {
   "students": [
     {
-      "studentCode" : 1,
+      "id": 1,
       "firstName": "Moussa",
-      "lastLame": "Khodja",
-      "dateOfBirth" : "1997/04/12",
-      "placeOfBirth" : "M'sila",
-      "email" : "m.khodja@esi-sba.dz",
-      "userName" : "moozes",
-      "password" : "hello",
-      "promotion" : "1CS"
+      "lastName": "Khodja",
+      "dateOfBirth": "1997/04/12",
+      "placeOfBirth": "M'sila",
+      "email": "m.khodja@esi-sba.dz",
+      "userName": "moozes",
+      "password": "hello",
+      "promotion": "1CS"
     }
   ],
   "teachers": [
     {
-      "teacherCode" : 1,
+      "id": 1,
       "firstName": "siMoh",
       "lastLame": "legend",
-      "dateOfBirth" : "0000/00/00",
-      "placeOfBirth" : "somewhere",
-      "grade" : "professor",
-      "speciality" : "pascal",
-      "email" : "s.legend@esi-sba.dz",
-      "userName" : "siMoh",
-      "password" : "123PASCALPASCAL"
+      "dateOfBirth": "0000/00/00",
+      "placeOfBirth": "somewhere",
+      "grade": "professor",
+      "speciality": "pascal",
+      "email": "s.legend@esi-sba.dz",
+      "userName": "siMoh",
+      "password": "123PASCALPASCAL"
     }
   ],
-  "speciality" : [
+  "speciality": [
     {
-      "specialityCode" : 10,
-      "specialityName" : "isi",
-      "description" : "blablabla......."
+      "id": 10,
+      "specialityName": "isi",
+      "description": "blablabla......."
     }
   ]
 }
