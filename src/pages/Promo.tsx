@@ -28,7 +28,6 @@ import {
   import Anime from "react-anime";
 import "./Promo.css";
 
-import PromoForm from "../components/PromoForm";
 
 const Promo: React.FC = () => {
  
@@ -53,7 +52,7 @@ const Promo: React.FC = () => {
         <IonContent class="bg">
         
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-          <PromoForm />
+         
         </IonModal>
           
           <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">

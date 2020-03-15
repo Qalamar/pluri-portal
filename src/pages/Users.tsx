@@ -107,7 +107,7 @@ const Users: React.FC = observer(() => {
                         students.map((e: any, i) => {
                           {
                             if (
-                              e.first_name
+                              e.firstName
                                 .toLowerCase()
                                 .includes(store.searchList.toLowerCase())
                             )
@@ -138,14 +138,14 @@ const Users: React.FC = observer(() => {
                                         className="ion-padding "
                                       >
                                         <strong>
-                                          {e.first_name + " " + e.last_name}
+                                          {e.firstName + " " + e.lastName}
                                         </strong>
                                       </IonCardTitle>
                                       <IonChip outline={true} color="dark">
                                         <IonLabel>{e.promo}</IonLabel>
                                       </IonChip>
                                       <IonChip color="dark" outline={true}>
-                                        <IonLabel>{e.class}</IonLabel>
+                                        <IonLabel>{e.type}</IonLabel>
                                       </IonChip>
 
                                       <IonCardContent>

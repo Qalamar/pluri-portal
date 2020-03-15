@@ -3,20 +3,23 @@
     {
       "studentCode" : 1,
       "firstName": "Moussa",
-      "lastLame": "Khodja",
+      "type": "Student",
+      "lastName": "Khodja",
       "dateOfBirth" : "1997/04/12",
       "placeOfBirth" : "M'sila",
       "email" : "m.khodja@esi-sba.dz",
       "userName" : "moozes",
       "password" : "hello",
-      "codePromotion" : "2"
+      "codePromotion" : "2",
+      "promo": "1CS"
     }
   ],
   "teachers": [
     {
       "teacherCode" : 1,
       "firstName": "siMoh",
-      "lastLame": "legend",
+      "type": "Teacher",
+      "lastName": "legend",
       "dateOfBirth" : "0000/00/00",
       "placeOfBirth" : "somewhere",
       "grade" : "professor",
