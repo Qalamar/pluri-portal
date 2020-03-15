@@ -30,6 +30,7 @@ import "./Promo.css";
 
 import PromoForm from "../components/PromoForm";
 
+
 const Promo: React.FC = () => {
  
   const [showModal, setShowModal] = useState(false);
@@ -37,6 +38,7 @@ const Promo: React.FC = () => {
    const addPromo = () => {
     setShowModal(true);
   };
+  
     return ( 
 
         <IonPage>
@@ -55,8 +57,7 @@ const Promo: React.FC = () => {
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <PromoForm />
         </IonModal>
-          
-          <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
+                    <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
             
             <IonGrid>
               <IonRow class="ion-align-items-center">
@@ -193,13 +194,7 @@ const Promo: React.FC = () => {
                 </IonRow> 
                   <IonRow></IonRow>
                   <IonRow></IonRow>
-                  <IonRow>
-                  <IonCol></IonCol>
-                <IonCol></IonCol>
-                <IonCol></IonCol>
-                <IonCol>
-                <IonButton   color="dark"> ADD New Speciality </IonButton></IonCol>
-                  </IonRow>
+                  
              </IonGrid>
           </Anime>
         </IonContent>
@@ -208,4 +203,4 @@ const Promo: React.FC = () => {
 
 };
 
-export default Promo;  
+export default Promo; 
