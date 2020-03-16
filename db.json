@@ -26,6 +26,22 @@
       "password": "123PASCALPASCAL"
     }
   ],
+  "promotion" : [
+    {
+      "codePromotion" : "1SC",
+      "cycle" : "Secondary",
+      "level" : 1,
+      "academicYear" : "2019-2020",
+      "specialityCode" : ""
+    },
+    {
+      "codePromotion" : "2SC",
+      "cycle" : "Secondary",
+      "level" : 2,
+      "academicYear" : "2019-2020",
+      "specialityCode" : "ISI"
+    }
+  ],
   "speciality": [
     {
       "id": 10,
