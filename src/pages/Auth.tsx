@@ -110,7 +110,7 @@ const Auth: React.FC = () => {
           <IonGrid>
             <IonRow class="ion-align-items-center container">
               <IonCol></IonCol>
-              <IonCol size="12" sizeMd="6">
+              <IonCol size="12" sizeMd="5">
                 <IonCard class="ion-text-center shadow">
                   <IonCardHeader>
                     <IonTitle color="light" class="title ion-padding">
