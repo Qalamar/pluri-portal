@@ -94,12 +94,15 @@ const Promo: React.FC = () => {
                             return (
                               <IonCol>
                                 <IonCard class="shadow ion-text-center">
-                                  <IonCardTitle
-                                    color="dark"
-                                    className="ion-padding"
-                                  >
-                                    <strong>{promo.codePromotion}</strong>
-                                  </IonCardTitle>
+                                  <IonCardHeader class="ion-margin-bottom">
+                                    <IonCardTitle
+                                      color="light"
+                                      className="ion-padding title"
+                                    >
+                                      <strong>{promo.codePromotion}</strong>
+                                    </IonCardTitle>
+                                  </IonCardHeader>
+
                                   <IonChip outline={true} color="dark">
                                     <IonLabel>{promo.level} </IonLabel>
                                   </IonChip>
@@ -136,12 +139,15 @@ const Promo: React.FC = () => {
                                 <IonCol> </IonCol>
                                 <IonCol> </IonCol>
                                 <IonCard class="shadow ion-text-center">
-                                  <IonCardTitle
-                                    color="dark"
-                                    className="ion-padding"
-                                  >
-                                    <strong>{promo.codePromotion}</strong>
-                                  </IonCardTitle>
+                                  <IonCardHeader class="ion-margin-bottom">
+                                    <IonCardTitle
+                                      color="light"
+                                      className="ion-padding title"
+                                    >
+                                      <strong>{promo.codePromotion}</strong>
+                                    </IonCardTitle>
+                                  </IonCardHeader>
+
                                   <IonChip outline={true} color="dark">
                                     <IonLabel>{promo.level} </IonLabel>
                                   </IonChip>
