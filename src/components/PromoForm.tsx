@@ -1,7 +1,6 @@
 import {
     IonInput,
-   
-    IonToggle,
+   IonToggle,
     IonSelect,
     IonButton,
     IonLabel,
@@ -24,6 +23,7 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import "./PromoForm.css";
+import axios from "axios";
 
 
 let renderCount = 0;
@@ -61,29 +61,26 @@ const PromoForm: React.FC = observer(() => {
      </div>
    ) : null;
  };
+ const onSubmit = (data: any) => {
+  setData(data);
+  axios
+    .post("/promotion", {
+      codePromotion :data.CodePromo ,
+      cycle :data.Cycle,
+      level : data.Level,
+      academicYear :data.AcademicYear ,
+      specialityCode : data.Speciality
+    })
+  
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+};
 
 
- /* const ShowSpeciality = () => {
-    setChecked(true);
-    setChecked1(true);
-    return (<Controller
-    as={<IonInput disabled={checked} ></IonInput>}
-    placeholder="ab"
-    className="firstCapital"
-    control={control}
-    onChangeName="onIonChange"
-    onChange={([selected]) => {
-      console.log("ab", selected.detail.value);
-      return selected.detail.value;
-    }}
-    name="ab"
-    rules={{
-      required: true,
-      minLength: { value: 2, message: "Must be 2 chars long" }
-    }}
-  />);
-      
-  };*/
   
 
   
@@ -97,7 +94,7 @@ return (
         message="Promo Added"
         duration={400}
         />
-        <form style={{ padding: 18 }}>
+        <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 18 }}>
         <IonLabel color="light">
           <h1>Information About Promo </h1>
         </IonLabel>
@@ -225,7 +222,7 @@ return (
         <IonButton
           color="light"
           type="submit"
-          onClick={() => setshowToast(true)}
+          onClick={()=>setshowToast(true)}
           disabled={formState.isValid === false}
         >
           Submit
