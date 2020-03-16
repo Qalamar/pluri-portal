@@ -23,21 +23,30 @@ import {
     IonModal
     
   } from "@ionic/react";
-  import React, { useState } from "react";
+  import React, {useEffect, useState } from "react";
  
   import Anime from "react-anime";
 import "./Promo.css";
-
+import axios from "axios";
 import PromoForm from "../components/PromoForm";
 
 
 const Promo: React.FC = () => {
- 
+
   const [showModal, setShowModal] = useState(false);
   const [promos, setpromos] = useState([]);
    const addPromo = () => {
     setShowModal(true);
   };
+  const getPromos= async () => {
+    let res = await axios.get("/promotion");
+    let data = res.data;
+    setpromos(data);
+  };
+  useEffect(() => {
+    getPromos();
+  }, []);
+ 
   
     return ( 
 
@@ -52,16 +61,20 @@ const Promo: React.FC = () => {
             </IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent class="bg">
         
+        <IonContent class="bg">
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <PromoForm />
         </IonModal>
-                    <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
+        <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
+      
+
+       
             
             <IonGrid>
               <IonRow class="ion-align-items-center">
-                <IonCol></IonCol>
+                <IonCol> 
+                </IonCol>
                 <IonCol size="12" sizeMd="10">
                   <IonCard class="neum">
                     <IonCardHeader class="head">
@@ -73,116 +86,71 @@ const Promo: React.FC = () => {
                       <IonGrid>
                         
 
-
-      
-                        <IonRow></IonRow>
+                        
+                       <IonRow>
+                        </IonRow>                        
                       </IonGrid>
                     </IonCardContent>
                   </IonCard>
+
                 </IonCol>
+
 
                 <IonCol></IonCol>
                 </IonRow>
-                
-                
-                <IonRow></IonRow>
-                <IonRow></IonRow>
-                 <IonRow>
-                   <IonCol>
-                    
-                     <IonCard  class="shadow ion-text-center">
+                {promos.map((promo:any)=>{
+                         return (
+                           <IonRow>
+                             <IonCol> </IonCol>
+                             <IonCol> </IonCol>
+                          <IonCard  class="shadow ion-text-center">
                      
-                            <IonCardTitle color="dark" className="ion-padding">
-                              <strong>1 CPI</strong>
-                            </IonCardTitle>                                                     
-                            <IonChip outline={true} color="dark">
-                              <IonLabel>2017-2018</IonLabel>
-                            </IonChip>
-                            <IonChip outline={true} color="dark">
-                              <IonLabel>Preparatory Cycle</IonLabel>
-                            </IonChip>
-                            <IonCardContent>
-                             <IonList>
-                              <IonButton
-                                 target="_blank"
-                                  color="danger"
-                                >
-                                  <IonLabel class="ion-margin">Edit</IonLabel>
-                                </IonButton>
-                                <IonButton target="_blank"
-                                  color="dark"
-                                  
-                                  >
-                                    <IonLabel class="ion-margin">Delete</IonLabel>
-                                  </IonButton>
-                                </IonList>
-                                </IonCardContent> 
-                                 
+                          <IonCardTitle color="dark" className="ion-padding">
+                            <strong>{promo.codePromotion}</strong>
+                          </IonCardTitle>  
+                          <IonChip outline={true} color="dark">
+                            <IonLabel>{promo.codePromotion} </IonLabel>
+                          </IonChip>                                                   
+                          <IonChip outline={true} color="dark">
+                            <IonLabel>{promo.cycle}</IonLabel>
+                          </IonChip>
+                          <IonChip outline={true} color="dark">
+                            <IonLabel>{promo.academicYear}</IonLabel>
+                          </IonChip>
+                          <IonChip outline={true} color="dark">
+                            <IonLabel>{promo.specialityCode} </IonLabel>
+                          </IonChip>
+                          
+                          <IonCardContent>
+                           <IonList>
+                            <IonButton
+                               target="_blank"
+                                color="danger"
+                              >
+                                <IonLabel class="ion-margin">Edit</IonLabel>
+                              </IonButton>
+                              <IonButton target="_blank"
+                                color="dark"
                                 
-                     </IonCard>
-                       </IonCol>
-                       <IonCol>
-                       <IonCard  class="shadow ion-text-center">
-                     
-                     <IonCardTitle color="dark" className="ion-padding">
-                       <strong>2 CPI</strong>
-                     </IonCardTitle>                                                     
-                     <IonChip outline={true} color="dark">
-                              <IonLabel>2017-2018</IonLabel>
-                            </IonChip>
-                            <IonChip outline={true} color="dark">
-                              <IonLabel>Preparatory Cycle</IonLabel>
-                            </IonChip>
-                            <IonCardContent>
-                             <IonList>
-                              <IonButton
-                                 target="_blank"
-                                  color="danger"
                                 >
-                                  <IonLabel class="ion-margin">Edit</IonLabel>
+                                  <IonLabel class="ion-margin">Delete</IonLabel>
                                 </IonButton>
-                                <IonButton target="_blank"
-                                  color="dark"
-                                  
-                                  >
-                                    <IonLabel class="ion-margin">Delete</IonLabel>
-                                  </IonButton>
-                                </IonList>
-                                </IonCardContent>
-              </IonCard>
+                              </IonList>
+                              </IonCardContent> 
+                               
+                              
+                   </IonCard>
+                   <IonCol> </IonCol>
+                   <IonCol> </IonCol>
+                     
+                      
+                   </IonRow>
 
-                     </IonCol>
-                     
-                     <IonCol>
-                     <IonCard class="shadow ion-text-center">
-                     <IonCardTitle color="dark" className="ion-padding">
-                       <strong>1 SC</strong>
-                     </IonCardTitle>                                                     
-                     <IonChip outline={true} color="dark">
-                              <IonLabel>2017-2018</IonLabel>
-                            </IonChip>
-                            <IonChip outline={true} color="dark">
-                              <IonLabel>Secondary Cycle</IonLabel>
-                            </IonChip>
-                            <IonCardContent>
-                             <IonList>
-                              <IonButton
-                                 target="_blank"
-                                  color="danger"
-                                >
-                                  <IonLabel class="ion-margin">Edit</IonLabel>
-                                </IonButton>
-                                <IonButton target="_blank"
-                                  color="dark"
-                                  
-                                  >
-                                    <IonLabel class="ion-margin">Delete</IonLabel>
-                                  </IonButton>
-                                </IonList>
-                                </IonCardContent>
-                                 </IonCard>
-                     </IonCol>
-                 </IonRow>
+                         ) ;
+                }
+                        )
+                        }
+               
                  <IonRow></IonRow>
                  <IonRow></IonRow>
                  <IonRow></IonRow>
@@ -203,4 +171,5 @@ const Promo: React.FC = () => {
 
 };
 
-export default Promo; 
+export default Promo;    
+                           
