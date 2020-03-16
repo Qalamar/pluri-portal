@@ -99,6 +99,7 @@ const Promo: React.FC = () => {
                 <IonCol></IonCol>
                 </IonRow>
                 {promos.map((promo:any)=>{
+                  if (promo.specialityCode.length>0)
                          return (
                            <IonRow>
                              <IonCol> </IonCol>
@@ -109,7 +110,7 @@ const Promo: React.FC = () => {
                             <strong>{promo.codePromotion}</strong>
                           </IonCardTitle>  
                           <IonChip outline={true} color="dark">
-                            <IonLabel>{promo.codePromotion} </IonLabel>
+                            <IonLabel>{promo.level} </IonLabel>
                           </IonChip>                                                   
                           <IonChip outline={true} color="dark">
                             <IonLabel>{promo.cycle}</IonLabel>
@@ -147,6 +148,52 @@ const Promo: React.FC = () => {
                    </IonRow>
 
                          ) ;
+              else return (
+                <IonRow>
+                <IonCol> </IonCol>
+                <IonCol> </IonCol>
+             <IonCard  class="shadow ion-text-center">
+        
+             <IonCardTitle color="dark" className="ion-padding">
+               <strong>{promo.codePromotion}</strong>
+             </IonCardTitle>  
+             <IonChip outline={true} color="dark">
+               <IonLabel>{promo.level} </IonLabel>
+             </IonChip>                                                   
+             <IonChip outline={true} color="dark">
+               <IonLabel>{promo.cycle}</IonLabel>
+             </IonChip>
+             <IonChip outline={true} color="dark">
+               <IonLabel>{promo.academicYear}</IonLabel>
+             </IonChip>
+    
+             
+             <IonCardContent>
+              <IonList>
+               <IonButton
+                  target="_blank"
+                   color="danger"
+                 >
+                   <IonLabel class="ion-margin">Edit</IonLabel>
+                 </IonButton>
+                 <IonButton target="_blank"
+                   color="dark"
+                   
+                   >
+                     <IonLabel class="ion-margin">Delete</IonLabel>
+                   </IonButton>
+                 </IonList>
+                 </IonCardContent> 
+                  
+                 
+      </IonCard>
+      <IonCol> </IonCol>
+      <IonCol> </IonCol>
+        
+         
+      </IonRow>
+
+              );
                 }
                         )
                         }
@@ -171,5 +218,4 @@ const Promo: React.FC = () => {
 
 };
 
-export default Promo;    
-                           
+export default Promo; 
