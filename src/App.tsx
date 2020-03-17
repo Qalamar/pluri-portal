@@ -28,9 +28,13 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
+import * as api from './utils/api';
+
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");
+  api.addSpecialty(1, '', '')
+  .then((rep) => console.log(rep.data));
   return (
     <IonApp>
       <IonReactRouter>

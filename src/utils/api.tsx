@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-const studentsUrl = 'http://localhost:3000/students?'
-const teachersUrl = 'http://localhost:3000/teachers?'
-
+const url = 'http://localhost:3000/';
+const studentsUrl = 'http://localhost:3000/student?';
+const teachersUrl = 'http://localhost:3000/teacher?';
+const promotionUrl = 'http://localhost:3000/promotion';
+const specialtyUrl = 'http://localhost:3000/specialty';
 /** 
  * this function return a promise so you can deal with response as you like
 */
-export  const addStudent = (fName : string, lName : string, dateOfBirth : string, placeOfBirth : string, email : string, userName : string, password : string, promotion : string) => {
+export  const addStudent = (fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, promotion : string) => {
     // the  id will be generated automatically  by json-server
     let url = studentsUrl;
     const student = {
@@ -49,7 +51,7 @@ export const getStudents = (fullName? : string) => {
 }
 
 //same as addStudent
-export const addTeacher = (fName : string, lName : string, dateOfBirth : string, placeOfBirth : string, email : string, userName : string, password : string, grade : string, specialty : string) => {
+export const addTeacher = (fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, grade : string, specialty : string) => {
     let url = teachersUrl;
     //the id will be generated automatically
     const teacher = {
@@ -85,4 +87,34 @@ export const getTeachers = (fullName? : string) => {
     } 
 
     return axios.get(url);
+}
+
+export const getPromotions = () => {
+    return axios.get(promotionUrl);
+}
+
+export const addPromotion = (cP : string, c : string, l : number, aY : Date, sC : string) => {
+    const promotion = {
+        codePromotion : cP,
+        cycle : c,
+        level : l,
+        academicYear : aY,
+        specialtyCode : sC,
+    }
+
+    return axios.post(promotionUrl, promotion);
+}
+
+export const getSpecialties = () => {
+    return axios.get(specialtyUrl);
+}
+
+export const addSpecialty = (sC : number, sN : string, d : string) => {
+    const specialty = {
+        specialtyCode : sC,
+        specialtyName : sN,
+        description : d,
+    }
+
+   return  axios.post(specialtyUrl, specialty);
 }

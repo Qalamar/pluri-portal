@@ -1,5 +1,5 @@
 {
-  "students": [
+  "student": [
     {
       "id": 1,
       "firstName": "Moussa",
@@ -12,7 +12,7 @@
       "promotion": "1CS"
     }
   ],
-  "teachers": [
+  "teacher": [
     {
       "id": 1,
       "firstName": "siMoh",
@@ -26,27 +26,30 @@
       "password": "123PASCALPASCAL"
     }
   ],
-  "promotion" : [
+  "promotion": [
     {
-      "codePromotion" : "1SC",
-      "cycle" : "Secondary",
-      "level" : 1,
-      "academicYear" : "2019-2020",
-      "specialtyCode" : ""
+      "id": 1,
+      "codePromotion": "1SC",
+      "cycle": "Secondary",
+      "level": 1,
+      "academicYear": "2019-2020",
+      "specialtyCode": ""
     },
     {
-      "codePromotion" : "2SC",
-      "cycle" : "Secondary",
-      "level" : 2,
-      "academicYear" : "2019-2020",
-      "specialtyCode" : "ISI"
+      "id": 2,
+      "codePromotion": "2SC",
+      "cycle": "Secondary",
+      "level": 2,
+      "academicYear": "2019-2020",
+      "specialtyCode": "ISI"
     }
   ],
   "specialty": [
     {
       "id": 10,
       "specialtyName": "isi",
-      "description": "blablabla......."
+      "description": "blablabla.......",
+      "codeSpecialty": "somthing"
     }
   ]
 }
