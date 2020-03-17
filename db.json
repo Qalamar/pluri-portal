@@ -20,7 +20,7 @@
       "dateOfBirth": "0000/00/00",
       "placeOfBirth": "somewhere",
       "grade": "professor",
-      "speciality": "pascal",
+      "specialty": "pascal",
       "email": "s.legend@esi-sba.dz",
       "userName": "siMoh",
       "password": "123PASCALPASCAL"
@@ -32,20 +32,20 @@
       "cycle" : "Secondary",
       "level" : 1,
       "academicYear" : "2019-2020",
-      "specialityCode" : ""
+      "specialtyCode" : ""
     },
     {
       "codePromotion" : "2SC",
       "cycle" : "Secondary",
       "level" : 2,
       "academicYear" : "2019-2020",
-      "specialityCode" : "ISI"
+      "specialtyCode" : "ISI"
     }
   ],
-  "speciality": [
+  "specialty": [
     {
       "id": 10,
-      "specialityName": "isi",
+      "specialtyName": "isi",
       "description": "blablabla......."
     }
   ]

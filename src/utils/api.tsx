@@ -27,6 +27,7 @@ export  const addStudent = (fName : string, lName : string, dateOfBirth : string
     notice that the parametere is optional 
     if no paramateres are provided it will fetch all students
     it works with reguler expresions ie : you need to provide the full name or just PART OF IT 
+    ---------starts with first name-------------------- 
     the functions returns a promise so you can manage the response as you like
 */
 export const getStudents = (fullName? : string) => {
@@ -48,7 +49,7 @@ export const getStudents = (fullName? : string) => {
 }
 
 //same as addStudent
-export const addTeacher = (fName : string, lName : string, dateOfBirth : string, placeOfBirth : string, email : string, userName : string, password : string, grade : string, speciality : string) => {
+export const addTeacher = (fName : string, lName : string, dateOfBirth : string, placeOfBirth : string, email : string, userName : string, password : string, grade : string, specialty : string) => {
     let url = teachersUrl;
     //the id will be generated automatically
     const teacher = {
@@ -61,7 +62,7 @@ export const addTeacher = (fName : string, lName : string, dateOfBirth : string,
         userName : userName,
         password : password,
         grade : grade,
-        speciality : speciality
+        specialty : specialty
     }
 
     return axios.post(url, teacher);
