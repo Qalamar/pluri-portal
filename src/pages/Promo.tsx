@@ -13,18 +13,14 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonCardSubtitle,
   IonChip,
   IonLabel,
   IonButton,
-  IonIcon,
   IonList,
-  IonText,
   IonModal,
   IonSearchbar
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-
 import Anime from "react-anime";
 import "./Promo.css";
 import axios from "axios";
@@ -81,9 +77,9 @@ const Promo: React.FC = () => {
                           <IonSearchbar placeholder="Search for a promotion" />
                         </IonCol>
                         <IonCol class="ion-text-center">
-                          <IonButton onClick={() => addPromo()} color="danger">
+                          <IonButton onClick={() => addPromo()} color="dark">
                             {" "}
-                            ADD New Promo{" "}
+                            ADD Promo{" "}
                           </IonButton>
                         </IonCol>
                       </IonRow>
@@ -114,9 +110,13 @@ const Promo: React.FC = () => {
                                   <IonChip outline={true} color="dark">
                                     <IonLabel>{promo.academicYear}</IonLabel>
                                   </IonChip>
-                                  <IonChip outline={true} color="dark">
-                                    <IonLabel>{promo.specialityCode} </IonLabel>
-                                  </IonChip>
+                                  {promo.specialityCode.length > 0 && (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>
+                                        {promo.specialityCode}{" "}
+                                      </IonLabel>
+                                    </IonChip>
+                                  )}
 
                                   <IonCardContent>
                                     <IonList>
@@ -145,18 +145,6 @@ const Promo: React.FC = () => {
 
               <IonCol></IonCol>
             </IonRow>
-
-            <IonRow></IonRow>
-            <IonRow></IonRow>
-            <IonRow></IonRow>
-            <IonRow>
-              <IonCol></IonCol>
-              <IonCol></IonCol>
-              <IonCol></IonCol>
-              <IonCol> </IonCol>
-            </IonRow>
-            <IonRow></IonRow>
-            <IonRow></IonRow>
           </IonGrid>
         </Anime>
       </IonContent>

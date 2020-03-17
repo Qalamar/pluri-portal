@@ -1,30 +1,26 @@
 import {
-    IonInput,
-   IonToggle,
-    IonSelect,
-    IonButton,
-    IonLabel,
-    IonIcon,
-    IonItem,
-    IonContent,
-    IonToast,
-    IonSelectOption ,
-    IonRadioGroup,
-    IonRadio
+  IonInput,
+  IonSelect,
+  IonButton,
+  IonLabel,
+  IonIcon,
+  IonItem,
+  IonContent,
+  IonToast,
+  IonSelectOption
 } from "@ionic/react";
 import {
-    calendarOutline,
-    speedometerOutline,
-    codeOutline,
-    layersOutline,
-    constructOutline,
-  } from "ionicons/icons";
+  calendarOutline,
+  speedometerOutline,
+  codeOutline,
+  layersOutline,
+  constructOutline
+} from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import "./PromoForm.css";
 import axios from "axios";
-
 
 let renderCount = 0;
 let initialValues = {
@@ -32,75 +28,65 @@ let initialValues = {
   CodePromo: "",
   Cycle: "",
   Level: "",
-  AcademicYear :"2019-2020",
-  Speciality:"",
-
+  AcademicYear: "2019-2020",
+  Speciality: ""
 };
 
-
-
 const PromoForm: React.FC = observer(() => {
-    const { control, handleSubmit, formState, reset, errors } = useForm({
-        defaultValues: { ...initialValues },
-        mode:"onChange"
-         
-      });renderCount++;
-      const [data, setData] = useState();
+  const { control, handleSubmit, formState, reset, errors } = useForm({
+    defaultValues: { ...initialValues },
+    mode: "onChange"
+  });
+  renderCount++;
+  const [data, setData] = useState();
   const [showToast, setshowToast] = useState(false);
-  
+
   const [SelectCycle, setCycle] = useState<string>();
   const [SelectSpeciality, setSpeciality] = useState<string>();
   /*const [checked, setChecked] = useState(false);*/
-  
-  
- const showError = (_fieldName: string) => {
-   let error = (errors as any)[_fieldName];
-   return error ? (
-     <div style={{ color: "red", fontWeight: "bold" }}>
-       {error.message || "Field Is Required"}
-     </div>
-   ) : null;
- };
- const onSubmit = (data: any) => {
-  setData(data);
-  axios
-    .post("/promotion", {
-      codePromotion :data.CodePromo ,
-      cycle :data.Cycle,
-      level : data.Level,
-      academicYear :data.AcademicYear ,
-      specialityCode : data.Speciality
-    })
-  
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-};
 
+  const showError = (_fieldName: string) => {
+    let error = (errors as any)[_fieldName];
+    return error ? (
+      <div style={{ color: "red", fontWeight: "bold" }}>
+        {error.message || "Field Is Required"}
+      </div>
+    ) : null;
+  };
+  const onSubmit = (data: any) => {
+    setData(data);
+    axios
+      .post("/promotion", {
+        codePromotion: data.CodePromo,
+        cycle: data.Cycle,
+        level: data.Level,
+        academicYear: data.AcademicYear,
+        specialityCode: data.Speciality
+      })
 
-  
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
-  
-
-
-return (
-    <IonContent color="dark" >
+  return (
+    <IonContent color="dark">
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
         message="Promo Added"
         duration={400}
-        />
-        <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 18 }}>
+      />
+      <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 18 }}>
         <IonLabel color="light">
           <h1>Information About Promo </h1>
         </IonLabel>
         <IonItem color="dark" class="">
-            <IonIcon slot="start" icon={codeOutline}></IonIcon>
-           <Controller
+          <IonIcon slot="start" icon={codeOutline}></IonIcon>
+          <Controller
             as={IonInput}
             placeholder="Code Promo"
             className="firstCapital"
@@ -119,32 +105,38 @@ return (
         </IonItem>
         {showError("CodePromo")}
         <IonItem color="dark">
-            <IonLabel>Cycle</IonLabel>
-             <IonIcon slot="start" icon={layersOutline} ></IonIcon>
-            <Controller
-            
-            as={ <IonSelect value={SelectCycle} placeholder="Select One" onIonChange={e => setCycle(e.detail.value)}>
-              <IonSelectOption value="Preparatory">Preparatory</IonSelectOption>
-              <IonSelectOption value="Secondary">Secondary</IonSelectOption>
-            </IonSelect>
+          <IonLabel>Cycle</IonLabel>
+          <IonIcon slot="start" icon={layersOutline}></IonIcon>
+          <Controller
+            as={
+              <IonSelect
+                value={SelectCycle}
+                placeholder="Select One"
+                onIonChange={e => setCycle(e.detail.value)}
+              >
+                <IonSelectOption value="Preparatory">
+                  Preparatory
+                </IonSelectOption>
+                <IonSelectOption value="Secondary">Secondary</IonSelectOption>
+              </IonSelect>
             }
             control={control}
             onChangeName="onIonChange"
-                onChange={([selected]) => {
-                  console.log(selected.detail.value);
-                  return selected.detail.value;
-                }}
+            onChange={([selected]) => {
+              console.log(selected.detail.value);
+              return selected.detail.value;
+            }}
             name="Cycle"
             rules={{
-              required: true,
+              required: true
             }}
           />
-        {showError("Cycle")}
-          </IonItem>
+          {showError("Cycle")}
+        </IonItem>
 
-          <IonItem color="dark" class="">
-              <IonIcon slot="start" icon={speedometerOutline} ></IonIcon>
-           <Controller
+        <IonItem color="dark" class="">
+          <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
+          <Controller
             as={IonInput}
             placeholder="Level"
             control={control}
@@ -157,7 +149,7 @@ return (
             rules={{
               required: true,
               pattern: {
-                value:  /^[1-9]$/i,
+                value: /^[1-9]$/i,
                 message: "invalid Level"
               }
             }}
@@ -165,8 +157,8 @@ return (
           {showError("Level")}
         </IonItem>
         <IonItem color="dark" class="">
-        <IonIcon slot="start" icon={calendarOutline}></IonIcon>
-           <Controller
+          <IonIcon slot="start" icon={calendarOutline}></IonIcon>
+          <Controller
             as={IonInput}
             placeholder="Academic Year"
             control={control}
@@ -179,7 +171,7 @@ return (
             rules={{
               required: true,
               pattern: {
-                value:  /^20[0-9][0-9]-20[0-9][0-9]$/i,
+                value: /^20[0-9][0-9]-20[0-9][0-9]$/i,
                 message: "Academic year must be 20xx-20xx"
               }
             }}
@@ -187,29 +179,33 @@ return (
           {showError("AcademicYear")}
         </IonItem>
         <IonItem color="dark">
-            <IonLabel>Speciality</IonLabel>
-             <IonIcon slot="start" icon={constructOutline} ></IonIcon>
-            <Controller
-            
-            as={ <IonSelect value={SelectSpeciality} placeholder="Select One" onIonChange={e => setSpeciality(e.detail.value)}>
-              <IonSelectOption value="ISI">ISI</IonSelectOption>
-              <IonSelectOption value="SIW">SIW</IonSelectOption>
-            </IonSelect>
+          <IonLabel>Speciality</IonLabel>
+          <IonIcon slot="start" icon={constructOutline}></IonIcon>
+          <Controller
+            as={
+              <IonSelect
+                value={SelectSpeciality}
+                placeholder="Select One"
+                onIonChange={e => setSpeciality(e.detail.value)}
+              >
+                <IonSelectOption value="ISI">ISI</IonSelectOption>
+                <IonSelectOption value="SIW">SIW</IonSelectOption>
+              </IonSelect>
             }
             control={control}
             onChangeName="onIonChange"
-                onChange={([selected]) => {
-                  console.log(selected.detail.value);
-                  return selected.detail.value;
-                }}
+            onChange={([selected]) => {
+              console.log(selected.detail.value);
+              return selected.detail.value;
+            }}
             name="Speciality"
             rules={{
-              required: false,
+              required: false
             }}
           />
-        {showError("Speciality")}
-          </IonItem>
-       
+          {showError("Speciality")}
+        </IonItem>
+
         <IonButton
           color="danger"
           type="button"
@@ -222,14 +218,13 @@ return (
         <IonButton
           color="light"
           type="submit"
-          onClick={()=>setshowToast(true)}
+          onClick={() => setshowToast(true)}
           disabled={formState.isValid === false}
         >
           Submit
         </IonButton>
-        </form>
-      </IonContent>
-
-);
+      </form>
+    </IonContent>
+  );
 });
 export default PromoForm;

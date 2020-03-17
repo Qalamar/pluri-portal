@@ -24,16 +24,7 @@ import {
   IonChip
 } from "@ionic/react";
 import React, { useState } from "react";
-import {
-  linkOutline,
-  imageOutline,
-  cardOutline,
-  lockClosedOutline,
-  lockOpenOutline,
-  logoGithub,
-  peopleCircleOutline,
-  bookOutline
-} from "ionicons/icons";
+import { linkOutline, imageOutline, logoGithub } from "ionicons/icons";
 import "./Projects.css";
 import Anime from "react-anime";
 

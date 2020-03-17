@@ -3,35 +3,25 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
-  IonList,
-  IonListHeader,
-  IonMenu,
-  IonMenuToggle,
-  IonNote,
-  IonModal,
   IonInput,
   IonRadioGroup,
   IonRadio,
   IonSelect,
   IonSelectOption,
-  IonRange,
   IonButton,
-  IonToast
+  IonToast,
+  IonButtons
 } from "@ionic/react";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
-  archiveOutline,
-  archiveSharp,
   peopleCircleOutline,
-  lockClosedOutline,
   schoolOutline,
-  personAddOutline,
   personCircleOutline,
   mailOutline,
   maleFemaleOutline,
-  briefcaseOutline
+  briefcaseOutline,
+  walkOutline
 } from "ionicons/icons";
 import { store } from "../stores/Store";
 import { useForm, Controller } from "react-hook-form";
@@ -67,9 +57,7 @@ const UserForm: React.FC = observer(() => {
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
     return error ? (
-      <div style={{ color: "red", fontWeight: "bold" }}>
-        {error.message || "Field Is Required"}
-      </div>
+      <div style={{ color: "red" }}>{error.message || "Field Is Required"}</div>
     ) : null;
   };
 
@@ -102,7 +90,7 @@ const UserForm: React.FC = observer(() => {
   };
 
   return (
-    <IonContent color="dark" class="ion-padding">
+    <IonContent color="dark" class="ion-padding-top ion-margin-top">
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
@@ -225,9 +213,9 @@ const UserForm: React.FC = observer(() => {
             return selected.detail.value;
           }}
         />
-
-        <IonItem color="dark">
-          <IonLabel>Promo</IonLabel>
+        <IonItem color="dark" class="ion-margin-bottom">
+          <IonIcon slot="start" icon={walkOutline}></IonIcon>
+          <IonLabel>Promotion</IonLabel>
           <Controller
             as={
               <IonSelect placeholder="Select One">
@@ -249,25 +237,28 @@ const UserForm: React.FC = observer(() => {
             name="promo"
             rules={{ required: true }}
           />
-        </IonItem>
-
-        <IonButton
-          color="danger"
-          type="button"
-          onClick={() => {
-            reset(initialValues);
-          }}
-        >
-          Reset Form
-        </IonButton>
-        <IonButton
-          color="light"
-          type="submit"
-          onClick={() => setshowToast(true)}
-          disabled={formState.isValid === false}
-        >
-          Submit
-        </IonButton>
+        </IonItem>{" "}
+        <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
+          <IonButton
+            color="danger"
+            fill="outline"
+            type="button"
+            onClick={() => {
+              reset(initialValues);
+            }}
+          >
+            Reset Form
+          </IonButton>
+          <IonButton
+            color="light"
+            type="submit"
+            fill="outline"
+            onClick={() => setshowToast(true)}
+            disabled={formState.isValid === false}
+          >
+            Submit
+          </IonButton>
+        </IonButtons>
       </form>
     </IonContent>
   );

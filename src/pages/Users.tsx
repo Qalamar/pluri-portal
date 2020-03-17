@@ -19,7 +19,8 @@ import {
   IonText,
   IonButton,
   IonSearchbar,
-  IonModal
+  IonModal,
+  IonItem
 } from "@ionic/react";
 import React, { useEffect, useState, useReducer } from "react";
 import { personCircleOutline } from "ionicons/icons";
@@ -33,7 +34,6 @@ import "./Users.css";
 import Anime from "react-anime";
 
 const Users: React.FC = observer(() => {
-  const [ignored, render] = useReducer(x => x + 1, 0);
   const [students, setstudents] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -85,19 +85,34 @@ const Users: React.FC = observer(() => {
                 <IonCardContent>
                   <IonGrid>
                     <IonRow>
-                      <IonCol></IonCol>
                       <IonCol size="12" sizeMd="8">
-                        <IonSearchbar
-                          placeholder="Search for a student"
-                          onIonChange={(e: CustomEvent) =>
-                            searchHandle(e.detail.value)
-                          }
-                        />
+                        <IonItem lines="none">
+                          <IonSearchbar
+                            class="ion-padding"
+                            placeholder="Search"
+                            onIonChange={(e: CustomEvent) =>
+                              searchHandle(e.detail.value)
+                            }
+                          />
+                        </IonItem>
                       </IonCol>
-                      <IonCol class="ion-text-center">
-                        <IonButton onClick={() => addUser()} color="danger">
-                          Add User
-                        </IonButton>
+                      <IonCol>
+                        <IonButtons class="ion-margin-top">
+                          <IonButton
+                            size="default"
+                            onClick={() => addUser()}
+                            color="dark"
+                          >
+                            Add
+                          </IonButton>
+                          <IonButton
+                            size="default"
+                            onClick={() => addUser()}
+                            color="dark"
+                          >
+                            Filter
+                          </IonButton>
+                        </IonButtons>
                       </IonCol>
                     </IonRow>
                     <IonRow>

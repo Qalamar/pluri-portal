@@ -14,10 +14,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   archiveOutline,
   archiveSharp,
-  heartOutline,
-  heartSharp,
   peopleCircleOutline,
-  newspaperOutline,
   lockClosedOutline,
   schoolOutline
 } from "ionicons/icons";
