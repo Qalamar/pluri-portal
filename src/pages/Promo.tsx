@@ -89,8 +89,10 @@ const Promo: React.FC = () => {
                       </IonRow>
                       <IonRow>
                         {" "}
-                        {promos.map((promo: any) => {
-                          if (promo.specialityCode.length > 0)
+                        {promos.length === 0 ? (
+                          <div>Loading...</div>
+                        ) : (
+                          promos.map((promo: any) => {
                             return (
                               <IonCol>
                                 <IonCard class="shadow ion-text-center">
@@ -133,51 +135,8 @@ const Promo: React.FC = () => {
                                 </IonCard>{" "}
                               </IonCol>
                             );
-                          else
-                            return (
-                              <IonRow>
-                                <IonCol> </IonCol>
-                                <IonCol> </IonCol>
-                                <IonCard class="shadow ion-text-center">
-                                  <IonCardHeader class="ion-margin-bottom">
-                                    <IonCardTitle
-                                      color="light"
-                                      className="ion-padding title"
-                                    >
-                                      <strong>{promo.codePromotion}</strong>
-                                    </IonCardTitle>
-                                  </IonCardHeader>
-
-                                  <IonChip outline={true} color="dark">
-                                    <IonLabel>{promo.level} </IonLabel>
-                                  </IonChip>
-                                  <IonChip outline={true} color="dark">
-                                    <IonLabel>{promo.cycle}</IonLabel>
-                                  </IonChip>
-                                  <IonChip outline={true} color="dark">
-                                    <IonLabel>{promo.academicYear}</IonLabel>
-                                  </IonChip>
-
-                                  <IonCardContent>
-                                    <IonList>
-                                      <IonButton target="_blank" color="danger">
-                                        <IonLabel class="ion-margin">
-                                          Edit
-                                        </IonLabel>
-                                      </IonButton>
-                                      <IonButton target="_blank" color="dark">
-                                        <IonLabel class="ion-margin">
-                                          Delete
-                                        </IonLabel>
-                                      </IonButton>
-                                    </IonList>
-                                  </IonCardContent>
-                                </IonCard>
-                                <IonCol> </IonCol>
-                                <IonCol> </IonCol>
-                              </IonRow>
-                            );
-                        })}
+                          })
+                        )}
                       </IonRow>
                     </IonGrid>
                   </IonCardContent>
