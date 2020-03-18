@@ -10,7 +10,6 @@ const specialtyUrl = 'http://localhost:3000/specialty';
 */
 export  const addStudent = (fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, promotion : string) => {
     // the  id will be generated automatically  by json-server
-    let url = studentsUrl;
     const student = {
         firstName: fName,
         lastLame: lName,
@@ -22,30 +21,32 @@ export  const addStudent = (fName : string, lName : string, dateOfBirth : Date, 
         promotion : promotion
     };
     
-    return axios.post(url, student);
+    return axios.post(studentsUrl, student);
+}
+
+export const modifyStudent = (id : number, fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, promotion : string) => {
+    let student = {
+        firstName: fName,
+        lastLame: lName,
+        dateOfBirth : dateOfBirth,
+        placeOfBirth : placeOfBirth,
+        email : email,
+        userName : userName,
+        password : password,
+        promotion : promotion
+    }
+    return axios.put(studentsUrl+'/'+id, student);
 }
 
 /* 
     notice that the parametere is optional 
     if no paramateres are provided it will fetch all students
     it works with reguler expresions ie : you need to provide the full name or just PART OF IT 
-    ---------starts with first name-------------------- 
+    ---------starts with first name, and use one blank as seperation-------------------- 
     the functions returns a promise so you can manage the response as you like
 */
-export const getStudents = (fullName? : string) => {
+export const getStudents = () => {
     let url = studentsUrl+'?';
-    let fName, lName;
-    if(fullName) {
-        const s : string[] = fullName.split(" ");
-        if(s[0])  {
-            fName = s[0];
-            url += `firstName_like=${fName}&`;
-        }
-        if(s[1])  {
-            lName = s[1];
-            url += `lastName_like=${lName}&`;
-        }
-    } 
 
     return axios.get(url);
 }
@@ -56,7 +57,6 @@ export const deleteStudent = (id : number) => {
 
 //same as addStudent
 export const addTeacher = (fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, grade : string, specialty : string) => {
-    let url = teachersUrl;
     //the id will be generated automatically
     const teacher = {
         
@@ -71,30 +71,34 @@ export const addTeacher = (fName : string, lName : string, dateOfBirth : Date, p
         specialty : specialty
     }
 
-    return axios.post(url, teacher);
+    return axios.post(teachersUrl, teacher);
+}
+
+export const modifyTeacher = (id : number, fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, grade : string, specialty : string) => {
+    let teacher = {
+        firstName: fName,
+        lastLame: lName,
+        dateOfBirth : dateOfBirth,
+        placeOfBirth : placeOfBirth,
+        email : email,
+        userName : userName,
+        password : password,
+        grade : grade,
+        specialty : specialty
+    }
+
+    return axios.put(teachersUrl+'/'+id, teacher);
 }
 
 //same as getStudent
-export const getTeachers = (fullName? : string) => {
+export const getTeachers = () => {
     let url = teachersUrl+'?';
-    let fName, lName;
-    if(fullName) {
-        const s : string[] = fullName.split(" ");
-        if(s[0])  {
-            fName = s[0];
-            url += `firstName_like=${fName}&`;
-        }
-        if(s[1])  {
-            lName = s[1];
-            url += `lastName_like=${lName}&`;
-        }
-    } 
 
     return axios.get(url);
 }
 
 export const deleteTeacher = (id : number) => {
-    return axios(teachersUrl+'/'+id);
+    return axios.delete(teachersUrl+'/'+id);
 }
 
 export const getPromotions = () => {
@@ -113,6 +117,22 @@ export const addPromotion = (cP : string, c : string, l : number, aY : Date, sC 
     return axios.post(promotionUrl, promotion);
 }
 
+export const modifyPromotion = (id : number, cP : string, c : string, l : number, aY : Date, sC : string) => {
+    const promotion = {
+        codePromotion : cP,
+        cycle : c,
+        level : l,
+        academicYear : aY,
+        specialtyCode : sC,
+    }
+
+    return axios.put(promotionUrl+'/'+id, promotion);
+}
+
+export const deletePromotion = (id : number) => {
+    return axios.delete(promotionUrl+'/'+id);
+} 
+
 export const getSpecialties = () => {
     return axios.get(specialtyUrl);
 }
@@ -125,4 +145,18 @@ export const addSpecialty = (sC : number, sN : string, d : string) => {
     }
 
    return  axios.post(specialtyUrl, specialty);
+}
+
+export const modifySpecialty = (id : number, sC : number, sN : string, d : string) => {
+    const specialty = {
+        specialtyCode : sC,
+        specialtyName : sN,
+        description : d,
+    }
+
+    return axios.put(specialtyUrl+'/'+id, specialty);
+}
+
+export const deleteSpecialty = (id : number) => {
+    return axios.delete(specialtyUrl+'/'+id);
 }

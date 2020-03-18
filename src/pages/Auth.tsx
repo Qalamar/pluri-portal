@@ -129,7 +129,6 @@ const Auth: React.FC = () => {
                         placeholder="Password"
                       ></IonInput>
                     </IonItem>
-
                     <IonButton color="dark" type="submit">
                       Login
                     </IonButton>

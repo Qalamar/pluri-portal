@@ -1,55 +1,54 @@
 {
   "student": [
     {
-      "id": 1,
-      "firstName": "Moussa",
-      "lastName": "Khodja",
-      "dateOfBirth": "1997/04/12",
-      "placeOfBirth": "M'sila",
-      "email": "m.khodja@esi-sba.dz",
-      "userName": "moozes",
-      "password": "hello",
-      "promotion": "1CS"
+      "firstName": "moussa",
+      "lastLame": "khodjab",
+      "dateOfBirth": "2020-03-18T18:29:05.647Z",
+      "placeOfBirth": "",
+      "email": "",
+      "userName": "",
+      "password": "",
+      "promotion": "",
+      "id": 1
+    },
+    {
+      "firstName": "tariq",
+      "lastLame": "hamritb",
+      "dateOfBirth": "2020-03-18T18:29:26.439Z",
+      "placeOfBirth": "",
+      "email": "",
+      "userName": "",
+      "password": "",
+      "promotion": "",
+      "id": 2
     }
   ],
   "teacher": [
     {
-      "id": 1,
-      "firstName": "siMoh",
-      "lastLame": "legend",
-      "dateOfBirth": "0000/00/00",
-      "placeOfBirth": "somewhere",
-      "grade": "professor",
-      "specialty": "pascal",
-      "email": "s.legend@esi-sba.dz",
-      "userName": "siMoh",
-      "password": "123PASCALPASCAL"
-    }
-  ],
-  "promotion": [
-    {
-      "id": 1,
-      "codePromotion": "1SC",
-      "cycle": "Secondary",
-      "level": 1,
-      "academicYear": "2019-2020",
-      "specialtyCode": ""
+      "firstName": "moussa",
+      "lastLame": "khodjab",
+      "dateOfBirth": "2020-03-18T18:29:11.895Z",
+      "placeOfBirth": "",
+      "email": "",
+      "userName": "",
+      "password": "",
+      "grade": "",
+      "specialty": "",
+      "id": 1
     },
     {
-      "id": 2,
-      "codePromotion": "2SC",
-      "cycle": "Secondary",
-      "level": 2,
-      "academicYear": "2019-2020",
-      "specialtyCode": "ISI"
+      "firstName": "tariq",
+      "lastLame": "hamritb",
+      "dateOfBirth": "2020-03-18T18:29:18.015Z",
+      "placeOfBirth": "",
+      "email": "",
+      "userName": "",
+      "password": "",
+      "grade": "",
+      "specialty": "",
+      "id": 2
     }
   ],
-  "specialty": [
-    {
-      "id": 10,
-      "specialtyName": "isi",
-      "description": "blablabla.......",
-      "codeSpecialty": "somthing"
-    }
-  ]
+  "promotion": [],
+  "specialty": []
 }
