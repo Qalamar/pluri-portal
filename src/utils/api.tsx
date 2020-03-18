@@ -1,42 +1,61 @@
-import axios from 'axios';
+import axios from "axios";
 
-const url = 'http://localhost:3000/';
-const studentsUrl = 'http://localhost:3000/student';
-const teachersUrl = 'http://localhost:3000/teacher';
-const promotionUrl = 'http://localhost:3000/promotion';
-const specialtyUrl = 'http://localhost:3000/specialty';
-/** 
+const url = "http://localhost:3000/";
+const studentsUrl = "http://localhost:3000/student";
+const teachersUrl = "http://localhost:3000/teacher";
+const promotionUrl = "http://localhost:3000/promotion";
+const specialtyUrl = "http://localhost:3000/specialty";
+/**
  * this function return a promise so you can deal with response as you like
-*/
-export  const addStudent = (fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, promotion : string) => {
-    // the  id will be generated automatically  by json-server
-    const student = {
-        firstName: fName,
-        lastLame: lName,
-        dateOfBirth : dateOfBirth,
-        placeOfBirth : placeOfBirth,
-        email : email,
-        userName : userName,
-        password : password,
-        promotion : promotion
-    };
-    
-    return axios.post(studentsUrl, student);
-}
+ */
+export const addStudent = (
+  fName: string,
+  lName: string,
+  dateOfBirth: Date,
+  placeOfBirth: string,
+  email: string,
+  userName: string,
+  password: string,
+  promotion: string
+) => {
+  // the  id will be generated automatically  by json-server
+  const student = {
+    firstName: fName,
+    lastName: lName,
+    dateOfBirth: dateOfBirth,
+    placeOfBirth: placeOfBirth,
+    email: email,
+    userName: userName,
+    password: password,
+    promotion: promotion
+  };
 
-export const modifyStudent = (id : number, fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, promotion : string) => {
-    let student = {
-        firstName: fName,
-        lastLame: lName,
-        dateOfBirth : dateOfBirth,
-        placeOfBirth : placeOfBirth,
-        email : email,
-        userName : userName,
-        password : password,
-        promotion : promotion
-    }
-    return axios.put(studentsUrl+'/'+id, student);
-}
+  return axios.post(studentsUrl, student);
+};
+
+export const modifyStudent = (
+  id: number,
+  fName: string,
+  lName: string,
+  dateOfBirth: Date,
+  placeOfBirth: string,
+  email: string,
+  userName: string,
+  password: string,
+  promotion: string
+) => {
+  let student = {
+    firstName: fName,
+    lastName: lName,
+    dateOfBirth: dateOfBirth,
+    placeOfBirth: placeOfBirth,
+    email: email,
+    userName: userName,
+    password: password,
+    promotion: promotion
+  };
+  return axios.put(studentsUrl + "/" + id, student);
+};
 
 /* 
     notice that the parametere is optional 
@@ -46,117 +65,155 @@ export const modifyStudent = (id : number, fName : string, lName : string, dateO
     the functions returns a promise so you can manage the response as you like
 */
 export const getStudents = () => {
-    let url = studentsUrl+'?';
+  let url = studentsUrl + "?";
 
-    return axios.get(url);
-}
+  return axios.get(url);
+};
 
-export const deleteStudent = (id : number) => {
-    return axios.delete(studentsUrl+'/'+id);
-}
+export const deleteStudent = (id: number) => {
+  return axios.delete(studentsUrl + "/" + id);
+};
 
 //same as addStudent
-export const addTeacher = (fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, grade : string, specialty : string) => {
-    //the id will be generated automatically
-    const teacher = {
-        
-        firstName: fName,
-        lastLame: lName,
-        dateOfBirth : dateOfBirth,
-        placeOfBirth : placeOfBirth,
-        email : email,
-        userName : userName,
-        password : password,
-        grade : grade,
-        specialty : specialty
-    }
+export const addTeacher = (
+  fName: string,
+  lName: string,
+  dateOfBirth: Date,
+  placeOfBirth: string,
+  email: string,
+  userName: string,
+  password: string,
+  grade: string,
+  specialty: string
+) => {
+  //the id will be generated automatically
+  const teacher = {
+    firstName: fName,
+    lastName: lName,
+    dateOfBirth: dateOfBirth,
+    placeOfBirth: placeOfBirth,
+    email: email,
+    userName: userName,
+    password: password,
+    grade: grade,
+    specialty: specialty
+  };
 
-    return axios.post(teachersUrl, teacher);
-}
+  return axios.post(teachersUrl, teacher);
+};
 
-export const modifyTeacher = (id : number, fName : string, lName : string, dateOfBirth : Date, placeOfBirth : string, email : string, userName : string, password : string, grade : string, specialty : string) => {
-    let teacher = {
-        firstName: fName,
-        lastLame: lName,
-        dateOfBirth : dateOfBirth,
-        placeOfBirth : placeOfBirth,
-        email : email,
-        userName : userName,
-        password : password,
-        grade : grade,
-        specialty : specialty
-    }
+export const modifyTeacher = (
+  id: number,
+  fName: string,
+  lName: string,
+  dateOfBirth: Date,
+  placeOfBirth: string,
+  email: string,
+  userName: string,
+  password: string,
+  grade: string,
+  specialty: string
+) => {
+  let teacher = {
+    firstName: fName,
+    lastName: lName,
+    dateOfBirth: dateOfBirth,
+    placeOfBirth: placeOfBirth,
+    email: email,
+    userName: userName,
+    password: password,
+    grade: grade,
+    specialty: specialty
+  };
 
-    return axios.put(teachersUrl+'/'+id, teacher);
-}
+  return axios.put(teachersUrl + "/" + id, teacher);
+};
 
 //same as getStudent
 export const getTeachers = () => {
-    let url = teachersUrl+'?';
+  let url = teachersUrl + "?";
 
-    return axios.get(url);
-}
+  return axios.get(url);
+};
 
-export const deleteTeacher = (id : number) => {
-    return axios.delete(teachersUrl+'/'+id);
-}
+export const deleteTeacher = (id: number) => {
+  return axios.delete(teachersUrl + "/" + id);
+};
 
 export const getPromotions = () => {
-    return axios.get(promotionUrl);
-}
+  return axios.get(promotionUrl);
+};
 
-export const addPromotion = (cP : string, c : string, l : number, aY : Date, sC : string) => {
-    const promotion = {
-        codePromotion : cP,
-        cycle : c,
-        level : l,
-        academicYear : aY,
-        specialtyCode : sC,
-    }
+export const addPromotion = (
+  cP: string,
+  c: string,
+  l: number,
+  aY: Date,
+  sC: string
+) => {
+  const promotion = {
+    codePromotion: cP,
+    cycle: c,
+    level: l,
+    academicYear: aY,
+    specialtyCode: sC
+  };
 
-    return axios.post(promotionUrl, promotion);
-}
+  return axios.post(promotionUrl, promotion);
+};
 
-export const modifyPromotion = (id : number, cP : string, c : string, l : number, aY : Date, sC : string) => {
-    const promotion = {
-        codePromotion : cP,
-        cycle : c,
-        level : l,
-        academicYear : aY,
-        specialtyCode : sC,
-    }
+export const modifyPromotion = (
+  id: number,
+  cP: string,
+  c: string,
+  l: number,
+  aY: Date,
+  sC: string
+) => {
+  const promotion = {
+    codePromotion: cP,
+    cycle: c,
+    level: l,
+    academicYear: aY,
+    specialtyCode: sC
+  };
 
-    return axios.put(promotionUrl+'/'+id, promotion);
-}
+  return axios.put(promotionUrl + "/" + id, promotion);
+};
 
-export const deletePromotion = (id : number) => {
-    return axios.delete(promotionUrl+'/'+id);
-} 
+export const deletePromotion = (id: number) => {
+  return axios.delete(promotionUrl + "/" + id);
+};
 
 export const getSpecialties = () => {
-    return axios.get(specialtyUrl);
-}
+  return axios.get(specialtyUrl);
+};
 
-export const addSpecialty = (sC : number, sN : string, d : string) => {
-    const specialty = {
-        specialtyCode : sC,
-        specialtyName : sN,
-        description : d,
-    }
+export const addSpecialty = (sC: number, sN: string, d: string) => {
+  const specialty = {
+    specialtyCode: sC,
+    specialtyName: sN,
+    description: d
+  };
 
-   return  axios.post(specialtyUrl, specialty);
-}
+  return axios.post(specialtyUrl, specialty);
+};
 
-export const modifySpecialty = (id : number, sC : number, sN : string, d : string) => {
-    const specialty = {
-        specialtyCode : sC,
-        specialtyName : sN,
-        description : d,
-    }
+export const modifySpecialty = (
+  id: number,
+  sC: number,
+  sN: string,
+  d: string
+) => {
+  const specialty = {
+    specialtyCode: sC,
+    specialtyName: sN,
+    description: d
+  };
 
-    return axios.put(specialtyUrl+'/'+id, specialty);
-}
+  return axios.put(specialtyUrl + "/" + id, specialty);
+};
 
-export const deleteSpecialty = (id : number) => {
-    return axios.delete(specialtyUrl+'/'+id);
-}
+export const deleteSpecialty = (id: number) => {
+  return axios.delete(specialtyUrl + "/" + id);
+};

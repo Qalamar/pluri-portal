@@ -2,7 +2,7 @@
   "student": [
     {
       "firstName": "moussa",
-      "lastLame": "khodjab",
+      "lastName": "khodjab",
       "dateOfBirth": "2020-03-18T18:29:05.647Z",
       "placeOfBirth": "",
       "email": "",
@@ -13,7 +13,7 @@
     },
     {
       "firstName": "tariq",
-      "lastLame": "hamritb",
+      "lastName": "hamritb",
       "dateOfBirth": "2020-03-18T18:29:26.439Z",
       "placeOfBirth": "",
       "email": "",
@@ -26,7 +26,7 @@
   "teacher": [
     {
       "firstName": "moussa",
-      "lastLame": "khodjab",
+      "lastName": "khodjab",
       "dateOfBirth": "2020-03-18T18:29:11.895Z",
       "placeOfBirth": "",
       "email": "",
@@ -38,7 +38,7 @@
     },
     {
       "firstName": "tariq",
-      "lastLame": "hamritb",
+      "lastName": "hamritb",
       "dateOfBirth": "2020-03-18T18:29:18.015Z",
       "placeOfBirth": "",
       "email": "",
