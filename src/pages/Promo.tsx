@@ -25,10 +25,14 @@ import Anime from "react-anime";
 import "./Promo.css";
 import axios from "axios";
 import PromoForm from "../components/PromoForm";
+import PromoFormEditing from "../components/PromoFormEditing";
+ 
 
 const Promo: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showModalEditing, setShowModalEditing] = useState(false);
   const [promos, setpromos] = useState([]);
+  const[editpromo,setEditpromo]=useState();
   const addPromo = () => {
     setShowModal(true);
   };
@@ -40,7 +44,12 @@ const Promo: React.FC = () => {
   useEffect(() => {
     getPromos();
   }, []);
-
+  const edit =(promos:any)=>{ 
+    setShowModalEditing(true);
+    setEditpromo(promos);
+   
+ };
+ 
   return (
     <IonPage>
       <IonHeader>
@@ -48,6 +57,7 @@ const Promo: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
+
           <IonTitle>
             <strong>Promos</strong>
           </IonTitle>
@@ -58,6 +68,11 @@ const Promo: React.FC = () => {
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <PromoForm />
         </IonModal>
+       
+        <IonModal isOpen={showModalEditing} onDidDismiss={() => setShowModalEditing(false)}>
+        <PromoFormEditing promo={editpromo} />
+        </IonModal>
+        
         <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
           <IonGrid>
             <IonRow class="ion-align-items-center">
@@ -120,9 +135,9 @@ const Promo: React.FC = () => {
 
                                   <IonCardContent>
                                     <IonList>
-                                      <IonButton target="_blank" color="danger">
+                                      <IonButton onClick={()=>edit(promo)}    target="_blank" color="danger">
                                         <IonLabel class="ion-margin">
-                                          Edit
+                                          Edit 
                                         </IonLabel>
                                       </IonButton>
                                       <IonButton target="_blank" color="dark">
@@ -152,4 +167,10 @@ const Promo: React.FC = () => {
   );
 };
 
-export default Promo;
+export default Promo;     
+                                           
+                                  
+                                
+                                 
+                                  
+                               
