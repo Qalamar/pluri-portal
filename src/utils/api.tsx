@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const url = 'http://localhost:3000/';
-const studentsUrl = 'http://localhost:3000/student?';
-const teachersUrl = 'http://localhost:3000/teacher?';
+const studentsUrl = 'http://localhost:3000/student';
+const teachersUrl = 'http://localhost:3000/teacher';
 const promotionUrl = 'http://localhost:3000/promotion';
 const specialtyUrl = 'http://localhost:3000/specialty';
 /** 
@@ -33,7 +33,7 @@ export  const addStudent = (fName : string, lName : string, dateOfBirth : Date, 
     the functions returns a promise so you can manage the response as you like
 */
 export const getStudents = (fullName? : string) => {
-    let url = studentsUrl;
+    let url = studentsUrl+'?';
     let fName, lName;
     if(fullName) {
         const s : string[] = fullName.split(" ");
@@ -48,6 +48,10 @@ export const getStudents = (fullName? : string) => {
     } 
 
     return axios.get(url);
+}
+
+export const deleteStudent = (id : number) => {
+    return axios.delete(studentsUrl+'/'+id);
 }
 
 //same as addStudent
@@ -72,7 +76,7 @@ export const addTeacher = (fName : string, lName : string, dateOfBirth : Date, p
 
 //same as getStudent
 export const getTeachers = (fullName? : string) => {
-    let url = teachersUrl;
+    let url = teachersUrl+'?';
     let fName, lName;
     if(fullName) {
         const s : string[] = fullName.split(" ");
@@ -87,6 +91,10 @@ export const getTeachers = (fullName? : string) => {
     } 
 
     return axios.get(url);
+}
+
+export const deleteTeacher = (id : number) => {
+    return axios(teachersUrl+'/'+id);
 }
 
 export const getPromotions = () => {

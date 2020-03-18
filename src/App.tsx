@@ -33,8 +33,9 @@ import * as api from './utils/api';
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");
-  api.addSpecialty(1, '', '')
-  .then((rep) => console.log(rep.data));
+  // nahi had comentaire apres ma diri ionic serve , for every page refresh there will be a new promo in db.json
+  api.addPromotion('bla', 'bla', 1, new Date(), 'bla')
+  .then((rep) => console.log(rep));
   return (
     <IonApp>
       <IonReactRouter>
