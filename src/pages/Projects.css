@@ -20,10 +20,6 @@
   --backdrop-opacity: 60%;
 }
 
-ion-button {
-  min-width: 160px;
-}
-
 .img-round {
   width: auto;
   height: 128px;

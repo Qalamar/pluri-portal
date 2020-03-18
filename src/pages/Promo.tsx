@@ -18,7 +18,8 @@ import {
   IonButton,
   IonList,
   IonModal,
-  IonSearchbar
+  IonSearchbar,
+  IonIcon
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
@@ -26,13 +27,13 @@ import "./Promo.css";
 import axios from "axios";
 import PromoForm from "../components/PromoForm";
 import PromoFormEditing from "../components/PromoFormEditing";
- 
+import { addCircleOutline, filterOutline } from "ionicons/icons";
 
 const Promo: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [showModalEditing, setShowModalEditing] = useState(false);
   const [promos, setpromos] = useState([]);
-  const[editpromo,setEditpromo]=useState();
+  const [editpromo, setEditpromo] = useState();
   const addPromo = () => {
     setShowModal(true);
   };
@@ -44,12 +45,11 @@ const Promo: React.FC = () => {
   useEffect(() => {
     getPromos();
   }, []);
-  const edit =(promos:any)=>{ 
+  const edit = (promos: any) => {
     setShowModalEditing(true);
     setEditpromo(promos);
-   
- };
- 
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -68,11 +68,14 @@ const Promo: React.FC = () => {
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <PromoForm />
         </IonModal>
-       
-        <IonModal isOpen={showModalEditing} onDidDismiss={() => setShowModalEditing(false)}>
-        <PromoFormEditing promo={editpromo} />
+
+        <IonModal
+          isOpen={showModalEditing}
+          onDidDismiss={() => setShowModalEditing(false)}
+        >
+          <PromoFormEditing promo={editpromo} />
         </IonModal>
-        
+
         <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
           <IonGrid>
             <IonRow class="ion-align-items-center">
@@ -86,18 +89,37 @@ const Promo: React.FC = () => {
                   </IonCardHeader>
                   <IonCardContent>
                     <IonGrid>
-                      <IonRow>
-                        <IonCol></IonCol>
+                      <IonRow class="ion-justify-content-center ion-text-center ion-align-items-center">
                         <IonCol size="12" sizeMd="8">
                           <IonSearchbar placeholder="Search for a promotion" />
                         </IonCol>
-                        <IonCol class="ion-text-center">
-                          <IonButton onClick={() => addPromo()} color="dark">
-                            {" "}
-                            ADD Promo{" "}
+                      </IonRow>
+                      <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
+                        <IonCol>
+                          <IonButton
+                            size="default"
+                            fill="clear"
+                            onClick={() => addPromo()}
+                            color="danger"
+                          >
+                            <IonIcon
+                              icon={addCircleOutline}
+                              slot="start"
+                              size="large"
+                            ></IonIcon>
+                            Add
+                          </IonButton>
+                          <IonButton fill="clear" size="default" color="dark">
+                            <IonIcon
+                              icon={filterOutline}
+                              slot="start"
+                              size="large"
+                            ></IonIcon>
+                            Filter
                           </IonButton>
                         </IonCol>
                       </IonRow>
+                      <IonRow></IonRow>
                       <IonRow>
                         {" "}
                         {promos.length === 0 ? (
@@ -135,9 +157,13 @@ const Promo: React.FC = () => {
 
                                   <IonCardContent>
                                     <IonList>
-                                      <IonButton onClick={()=>edit(promo)}    target="_blank" color="danger">
+                                      <IonButton
+                                        onClick={() => edit(promo)}
+                                        target="_blank"
+                                        color="danger"
+                                      >
                                         <IonLabel class="ion-margin">
-                                          Edit 
+                                          Edit
                                         </IonLabel>
                                       </IonButton>
                                       <IonButton target="_blank" color="dark">
@@ -167,10 +193,4 @@ const Promo: React.FC = () => {
   );
 };
 
-export default Promo;     
-                                           
-                                  
-                                
-                                 
-                                  
-                               
+export default Promo;
