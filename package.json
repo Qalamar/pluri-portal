@@ -51,5 +51,8 @@
       "last 1 safari version"
     ]
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "devDependencies": {
+    "json-server-auth": "^1.2.1"
+  }
 }
