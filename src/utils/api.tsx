@@ -217,3 +217,37 @@ export const modifySpecialty = (
 export const deleteSpecialty = (id: number) => {
   return axios.delete(specialtyUrl + "/" + id);
 };
+
+export const register = (
+  email : string,
+  password : string
+) => {
+  const newUser = {
+    email : email,
+    password : password
+  }
+
+  return axios({
+    method : 'POST',
+    url : url+'register',
+    data : newUser
+  })
+}
+
+// this function (if successful) will return an accessToken property in reponse.data (expiration 1 hour)
+export const login = (
+  email : string,
+  password : string,
+) => {
+  const login = {
+    email : email,
+    password : password
+  };
+
+  //TODO : the url will be changed when integrating with the real backend
+  return axios({
+    method : 'POST',
+    url : url+'login',
+    data : login
+  });
+}

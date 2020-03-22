@@ -50,5 +50,17 @@
     }
   ],
   "promotion": [],
-  "specialty": []
+  "specialty": [],
+  "users": [
+    {
+      "id": 1,
+      "email": "exampla@yahoo.com",
+      "password": "hello"
+    },
+    {
+      "email": "example@yahoo.com",
+      "password": "$2a$10$.Mf/bRO2/8pv64.xEyM7kOc9w8HhZcHjItUNRnKioDWrqKGXVF7OC",
+      "id": 2
+    }
+  ]
 }
