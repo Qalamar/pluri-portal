@@ -80,7 +80,8 @@ const PromoForm: React.FC = observer(() => {
         message="Promo Added"
         duration={400}
       />
-      <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 18 }}>
+
+      <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 38 }}>
         <IonLabel color="light">
           <h1>Information About Promo </h1>
         </IonLabel>

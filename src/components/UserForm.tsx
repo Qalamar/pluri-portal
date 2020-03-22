@@ -98,7 +98,7 @@ const UserForm: React.FC = observer(() => {
         duration={400}
       />
 
-      <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 18 }}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 38 }}>
         <IonLabel color="light">
           <h1>Information</h1>
         </IonLabel>
