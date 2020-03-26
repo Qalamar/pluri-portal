@@ -19,7 +19,9 @@ import {
   IonList,
   IonModal,
   IonSearchbar,
-  IonIcon
+  IonIcon,
+  IonAlert,
+  IonToast
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
@@ -28,12 +30,16 @@ import axios from "axios";
 import PromoForm from "../components/PromoForm";
 import PromoFormEditing from "../components/PromoFormEditing";
 import { addCircleOutline, filterOutline } from "ionicons/icons";
+import * as api from "../utils/api";
 
 const Promo: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [Id,setId]=useState(0);
+   const [showModal, setShowModal] = useState(false);
   const [showModalEditing, setShowModalEditing] = useState(false);
   const [promos, setpromos] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
   const [editpromo, setEditpromo] = useState();
+  const [showToast, setshowToast] = useState(false);
   const addPromo = () => {
     setShowModal(true);
   };
@@ -49,7 +55,6 @@ const Promo: React.FC = () => {
     setShowModalEditing(true);
     setEditpromo(promos);
   };
-
   return (
     <IonPage>
       <IonHeader>
@@ -65,6 +70,12 @@ const Promo: React.FC = () => {
       </IonHeader>
 
       <IonContent class="bg">
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setshowToast(false)}
+        message="Promo Deleted"
+        duration={400}
+      />
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <PromoForm />
         </IonModal>
@@ -75,6 +86,30 @@ const Promo: React.FC = () => {
         >
           <PromoFormEditing promo={editpromo} />
         </IonModal>
+        <IonAlert
+         
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          message={'Do you Confirm your demand ?'}
+          buttons={[
+            { 
+              text: 'Cancel',
+              role: 'cancel',
+              
+              handler: () => {
+                console.log('Confirm cancel');
+              }
+            },
+            {  cssClass:'del',
+              text: 'Delete',
+              handler: () => 
+              {
+               api.deletePromotion(Id);
+               setshowToast(true);
+              }
+            }
+          ]}
+        />
 
         <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
           <IonGrid>
@@ -166,8 +201,14 @@ const Promo: React.FC = () => {
                                           Edit
                                         </IonLabel>
                                       </IonButton>
-                                      <IonButton target="_blank" color="dark">
+                                      <IonButton onClick={() => {
+                                        setId(promo.id);
+                                        setShowAlert(true);
+                                         
+                                      }}
+                                      target="_blank" color="dark">
                                         <IonLabel class="ion-margin">
+                                        
                                           Delete
                                         </IonLabel>
                                       </IonButton>
