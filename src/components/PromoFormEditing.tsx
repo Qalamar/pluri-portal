@@ -260,7 +260,7 @@ import {
               type="submit"
               fill="outline"
              /* onClick={() => setshowToast(true)}*/
-              disabled={formState.isValid === false}
+              disabled={formState.dirty === false}
             >
               Save
             </IonButton>
