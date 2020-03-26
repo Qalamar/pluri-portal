@@ -7,7 +7,8 @@ import {
   IonItem,
   IonContent,
   IonToast,
-  IonSelectOption
+  IonSelectOption,
+  IonButtons
 } from "@ionic/react";
 import {
   calendarOutline,
@@ -20,7 +21,7 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import "./PromoForm.css";
-import axios from "axios";
+import * as api  from "../utils/api";
 
 let renderCount = 0;
 let initialValues = {
@@ -31,6 +32,14 @@ let initialValues = {
   AcademicYear: "2019-2020",
   Speciality: ""
 };
+let ValuesPromo ={
+  rangeInfo: -100,
+  CodePromo: "",
+  Cycle: "",
+  Level: "",
+  AcademicYear: "2019-2020",
+  Speciality: ""
+}
 
 const PromoForm: React.FC = observer(() => {
   const { control, handleSubmit, formState, reset, errors } = useForm({
@@ -43,7 +52,7 @@ const PromoForm: React.FC = observer(() => {
 
   const [SelectCycle, setCycle] = useState<string>();
   const [SelectSpeciality, setSpeciality] = useState<string>();
-  /*const [checked, setChecked] = useState(false);*/
+  
 
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
@@ -55,21 +64,8 @@ const PromoForm: React.FC = observer(() => {
   };
   const onSubmit = (data: any) => {
     setData(data);
-    axios
-      .post("/promotion", {
-        codePromotion: data.CodePromo,
-        cycle: data.Cycle,
-        level: data.Level,
-        academicYear: data.AcademicYear,
-        specialityCode: data.Speciality
-      })
-
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+   api.addPromotion(data.id,data.CodePromo,data.Cycle,data.Level,data.AcademicYear,data.Speciality);
+   
   };
 
   return (
@@ -80,10 +76,9 @@ const PromoForm: React.FC = observer(() => {
         message="Promo Added"
         duration={400}
       />
-
-      <form onSubmit={handleSubmit(onSubmit)} style={{ padding: 38 }}>
+      <form onSubmit={handleSubmit(()=>onSubmit(ValuesPromo))} style={{ padding: 20 , margin:30 , height:'auto'}}>
         <IonLabel color="light">
-          <h1>Information About Promo </h1>
+          <h1>Information About Promotion </h1>
         </IonLabel>
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={codeOutline}></IonIcon>
@@ -95,6 +90,7 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log("CodePromo", selected.detail.value);
+              ValuesPromo.CodePromo=selected.detail.value;
               return selected.detail.value;
             }}
             name="CodePromo"
@@ -125,6 +121,7 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log(selected.detail.value);
+              ValuesPromo.Cycle=selected.detail.value;
               return selected.detail.value;
             }}
             name="Cycle"
@@ -144,6 +141,7 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log("Level", selected.detail.value);
+              ValuesPromo.Level=selected.detail.value;
               return selected.detail.value;
             }}
             name="Level"
@@ -166,6 +164,7 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log("AcademicYear", selected.detail.value);
+              ValuesPromo.AcademicYear=selected.detail.value;
               return selected.detail.value;
             }}
             name="AcademicYear"
@@ -188,7 +187,8 @@ const PromoForm: React.FC = observer(() => {
                 value={SelectSpeciality}
                 placeholder="Select One"
                 onIonChange={e => setSpeciality(e.detail.value)}
-              >
+              > 
+                <IonSelectOption value="" > None</IonSelectOption>
                 <IonSelectOption value="ISI">ISI</IonSelectOption>
                 <IonSelectOption value="SIW">SIW</IonSelectOption>
               </IonSelect>
@@ -197,6 +197,7 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log(selected.detail.value);
+              ValuesPromo.Speciality=selected.detail.value;
               return selected.detail.value;
             }}
             name="Speciality"
@@ -207,23 +208,28 @@ const PromoForm: React.FC = observer(() => {
           {showError("Speciality")}
         </IonItem>
 
-        <IonButton
-          color="danger"
-          type="button"
-          onClick={() => {
-            reset(initialValues);
-          }}
-        >
-          Reset Form
-        </IonButton>
-        <IonButton
-          color="light"
-          type="submit"
-          onClick={() => setshowToast(true)}
-          disabled={formState.isValid === false}
-        >
-          Submit
-        </IonButton>
+        {" "}
+        <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
+          <IonButton
+            color="danger"
+            fill="outline"
+            type="button"
+            onClick={() => {
+              reset(initialValues);
+            }}
+          >
+            Reset Form
+          </IonButton>
+          <IonButton
+            color="light"
+            type="submit"
+            fill="outline"
+            onClick={() => setshowToast(true)}
+            disabled={formState.isValid === false}
+          >
+            Submit
+          </IonButton>
+        </IonButtons>
       </form>
     </IonContent>
   );
