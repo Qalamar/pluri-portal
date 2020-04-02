@@ -23,52 +23,64 @@ import {
   import { useForm, Controller } from "react-hook-form";
   import "./PromoForm.css";
   import * as api from "../utils/api";
-  
+  import {promotion } from "../pages/Promo";
+
   let renderCount = 0;
   let initialValues = {
     rangeInfo: -100,
-    CodePromo: "",
-    Cycle: "",
-    Level: "",
-    AcademicYear: "2019-2020",
-    Speciality: ""
+    codePromotion: "",
+    cycle: "",
+    level: "",
+    academicYear: "2019-2020",
+    specialityCode: ""
   };
  
-   export interface promotion {
-      promo:any;
-  }
- 
-  const PromoFormEditing: React.FC<promotion> = observer(({ promo }) => {
-
-    initialValues.CodePromo=promo.codePromotion;
-    initialValues.Cycle=promo.cycle;
-    initialValues.Level=promo.level;
-    initialValues.AcademicYear=promo.academicYear;
-    initialValues.Speciality=promo.specialityCode;
   
-    
-
-    const { control, handleSubmit, formState, reset, errors } = useForm({
-      defaultValues: { ...initialValues },
+export interface Promo {
+  promo:promotion;
+  }
+  interface PromoState {
+    PromoEdit: promotion;
+    setPromo: React.Dispatch<React.SetStateAction<promotion>>;
+  }
+  
+   const usePromo = (overrides?: Partial<promotion>): PromoState => {
+      const defaultPromo: promotion= {
+        id:0,
+     codePromotion:"",
+     cycle:"",
+     level:"",
+     academicYear:"",
+     specialityCode:""
+      };
+      const [PromoEdit, setPromo] = useState<promotion>({
+    ...defaultPromo,
+    ...overrides,
+  }); 
+   return {PromoEdit, setPromo };
+    };
+  const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
+   
+  const {PromoEdit}=usePromo({
+      id:promo.id,
+      codePromotion:promo.codePromotion,
+      cycle:promo.cycle,
+      level:promo.level,
+      academicYear:promo.academicYear,
+      specialityCode:promo.specialityCode
+});
+   const { control, handleSubmit, formState, reset, errors } = useForm({
+      defaultValues: { ...PromoEdit},
       mode: "onChange"
     });
     renderCount++;
-    const [data, setData] = useState();
+    
     const [showAlert, setShowAlert] = useState(false);
     const [showToast, setshowToast] = useState(false);
-    const [editp, setEditp] = useState(false);
     const [SelectCycle, setCycle] = useState<string>();
     const [SelectSpeciality, setSpeciality] = useState<string>();
-    const [cp,setCp] =useState(initialValues.CodePromo);
-    const [cl,setCl]=useState(initialValues.Cycle);
-    const [lv,setLv]=useState(initialValues.Level);
-    const [ay,setAy]=useState(initialValues.AcademicYear);
-    const [sp,setSp]=useState(initialValues.Speciality);
-
-
-    
-    
-  
+   
+   
     const showError = (_fieldName: string) => {
       let error = (errors as any)[_fieldName];
       return error ? (
@@ -76,12 +88,8 @@ import {
           {error.message || "Field Is Required"}
         </div>
       ) : null;
+
     };
-    const onSubmit = (data: any) => {
-      setData(data);
-      setShowAlert(true);
-    };
-  
     return (
       <IonContent color="dark">
         <IonToast
@@ -106,13 +114,13 @@ import {
             {
               text: 'Save',
               handler: () =>{
-                api.modifyPromotion(promo.id,cp,cl,lv,ay,sp);
+              api.modifyPromotion(PromoEdit.id,PromoEdit.codePromotion,PromoEdit.cycle,PromoEdit.level,PromoEdit.academicYear,PromoEdit.specialityCode);
                 setshowToast(true);
               }
             }
           ]}
         />
-          <form onSubmit={handleSubmit(()=>onSubmit(promo.id))} style={{ padding: 20 , margin:30 , height:'auto'}} >
+          <form onSubmit={handleSubmit(()=>setShowAlert(true))} style={{ padding: 20 , margin:30 , height:'auto'}} >
           <IonLabel color="light">
             <h1>Information About Promotion </h1>
           </IonLabel>
@@ -121,22 +129,23 @@ import {
             <Controller
               as={IonInput}
               placeholder="Code Promo"
-              className="firstCapital"
+              
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log("CodePromo", selected.detail.value);
-                setCp(selected.detail.value);
+                PromoEdit.codePromotion=selected.detail.value;
+                
                 return selected.detail.value;
               }}
-              name="CodePromo"
+              name="codePromotion"
               rules={{
                 required: true,
                 minLength: { value: 2, message: "Must be 2 chars long" }
               }}
             />
           </IonItem>
-          {showError("CodePromo")}
+          {showError("codePromotion")}
           <IonItem color="dark">
             <IonLabel>Cycle</IonLabel>
             <IonIcon slot="start" icon={layersOutline}></IonIcon>
@@ -157,15 +166,15 @@ import {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log(selected.detail.value);
-                setCl(selected.detail.value);
+                PromoEdit.cycle=selected.detail.value;
                 return selected.detail.value;
               }}
-              name="Cycle"
+              name="cycle"
               rules={{
                 required: true
               }}
             />
-            {showError("Cycle")}
+            {showError("cycle")}
           </IonItem>
   
           <IonItem color="dark" class="">
@@ -176,11 +185,11 @@ import {
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
-                console.log("Level", selected.detail.value);
-                setLv(selected.detail.value);
+                PromoEdit.level=selected.detail.value;
+               
                 return selected.detail.value;
               }}
-              name="Level"
+              name="level"
               rules={{
                 required: true,
                 pattern: {
@@ -189,7 +198,7 @@ import {
                 }
               }}
             />
-            {showError("Level")}
+            {showError("level")}
           </IonItem>
           <IonItem color="dark" class="">
             <IonIcon slot="start" icon={calendarOutline}></IonIcon>
@@ -200,10 +209,10 @@ import {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log("AcademicYear", selected.detail.value);
-                setAy(selected.detail.value);
+                PromoEdit.academicYear=selected.detail.value;
                 return selected.detail.value;
               }}
-              name="AcademicYear"
+              name="academicYear"
               rules={{
                 required: true,
                 pattern: {
@@ -212,7 +221,7 @@ import {
                 }
               }}
             />
-            {showError("AcademicYear")}
+            {showError("academicYear")}
           </IonItem>
           <IonItem color="dark">
             <IonLabel>Speciality</IonLabel>
@@ -232,15 +241,15 @@ import {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log(selected.detail.value);
-               setSp(selected.detail.value);
+               PromoEdit.specialityCode=selected.detail.value;
                 return selected.detail.value;
               }}
-              name="Speciality"
+              name="specialityCode"
               rules={{
-                required: false
+                required: true
               }}
             />
-            {showError("Speciality")}
+            {showError("specialityCode")}
           </IonItem>
   
           {" "}
@@ -259,8 +268,7 @@ import {
               color="light"
               type="submit"
               fill="outline"
-             /* onClick={() => setshowToast(true)}*/
-              disabled={formState.dirty === false}
+             disabled={formState.dirty === false}
             >
               Save
             </IonButton>
