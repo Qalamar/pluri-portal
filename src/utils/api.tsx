@@ -161,7 +161,6 @@ export const addPromotion = (
 
   return axios.post(promotionUrl, promotion);
   /*
-  I modify types also in modifyPromotion
   export const addPromotion = (
   Id :number,
   cP: string,
@@ -179,8 +178,33 @@ export const addPromotion = (
     specialityCode: sC
   };
 
-  return axios.post(promotionUrl, promotion);*/
+  return axios.post(promotionUrl, promotion);
 };
+
+export const modifyPromotion = (
+  Id: number,
+  cP: string,
+  c: string,
+  l: string,
+  aY: string,
+  sC: string
+) => {
+  const promotion = {
+    id :Id,
+    codePromotion: cP,
+    cycle: c,
+    level: l,
+    academicYear: aY,
+    specialityCode: sC
+  };
+
+  return axios.put(promotionUrl + "/" + Id, promotion);
+};
+
+export const deletePromotion = (id: number) => {
+  return axios.delete(promotionUrl + "/" + id);
+};
+  */
 
 export const modifyPromotion = (
   id: number,
