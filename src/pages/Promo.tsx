@@ -27,18 +27,36 @@ import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import "./Promo.css";
 import axios from "axios";
+import { store } from "../stores/Store";
 import PromoForm from "../components/PromoForm";
 import PromoFormEditing from "../components/PromoFormEditing";
 import { addCircleOutline, filterOutline } from "ionicons/icons";
 import * as api from "../utils/api";
 
-const Promo: React.FC = () => {
+export interface promotion {
+  id:number,
+  codePromotion:string;
+  cycle:string;
+  level:string;
+  academicYear:string;
+  specialityCode:string;
+}
+
+const Promo: React.FC= () => {
+
   const [Id,setId]=useState(0);
    const [showModal, setShowModal] = useState(false);
   const [showModalEditing, setShowModalEditing] = useState(false);
   const [promos, setpromos] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
-  const [editpromo, setEditpromo] = useState();
+  const [editpromo, setEditpromo] = useState<promotion>({
+    id:0,
+    codePromotion:"",
+    cycle:"",
+    level:"",
+    academicYear:"",
+    specialityCode:""
+  });
   const [showToast, setshowToast] = useState(false);
   const addPromo = () => {
     setShowModal(true);
@@ -48,13 +66,16 @@ const Promo: React.FC = () => {
     let data = res.data;
     setpromos(data);
   };
+  const searchHandle = (input: string) => {
+    store.searchList = input;
+  };
   useEffect(() => {
     getPromos();
   }, []);
-  const edit = (promos: any) => {
-    setShowModalEditing(true);
+  const edit = (promos: promotion) => {
     setEditpromo(promos);
-  };
+    setShowModalEditing(true);
+     };
   return (
     <IonPage>
       <IonHeader>
@@ -80,11 +101,11 @@ const Promo: React.FC = () => {
           <PromoForm />
         </IonModal>
 
-        <IonModal
+          <IonModal
           isOpen={showModalEditing}
           onDidDismiss={() => setShowModalEditing(false)}
         >
-          <PromoFormEditing promo={editpromo} />
+        <PromoFormEditing promo={editpromo}/>  
         </IonModal>
         <IonAlert
          
@@ -100,7 +121,7 @@ const Promo: React.FC = () => {
                 console.log('Confirm cancel');
               }
             },
-            {  cssClass:'del',
+            { cssClass:'del',
               text: 'Delete',
               handler: () => 
               {
@@ -126,7 +147,11 @@ const Promo: React.FC = () => {
                     <IonGrid>
                       <IonRow class="ion-justify-content-center ion-text-center ion-align-items-center">
                         <IonCol size="12" sizeMd="8">
-                          <IonSearchbar placeholder="Search for a promotion" />
+                          <IonSearchbar placeholder="Search for a promotion" 
+                          onIonChange={(e: CustomEvent) =>
+                            searchHandle(e.detail.value)
+                          }
+                          />
                         </IonCol>
                       </IonRow>
                       <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
@@ -160,9 +185,17 @@ const Promo: React.FC = () => {
                         {promos.length === 0 ? (
                           <div>Loading...</div>
                         ) : (
-                          promos.map((promo: any) => {
+                          promos.map((promo: any,i) => {
+                           { 
+                            
                             return (
-                              <IonCol>
+                              <IonCol
+                                  size="12"
+                                  sizeMd="6"
+                                  class=" ion-text-center">
+                                   
+                                
+
                                 <IonCard class="shadow ion-text-center">
                                   <IonCardHeader class="ion-margin-bottom">
                                     <IonCardTitle
@@ -217,6 +250,7 @@ const Promo: React.FC = () => {
                                 </IonCard>{" "}
                               </IonCol>
                             );
+                            }
                           })
                         )}
                       </IonRow>
