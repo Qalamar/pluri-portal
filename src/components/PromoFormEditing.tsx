@@ -26,25 +26,17 @@ import {
   import {promotion } from "../pages/Promo";
 
   let renderCount = 0;
-  let initialValues = {
-    rangeInfo: -100,
-    codePromotion: "",
-    cycle: "",
-    level: "",
-    academicYear: "2019-2020",
-    specialityCode: ""
-  };
  
-  
+ 
 export interface Promo {
   promo:promotion;
   }
   interface PromoState {
-    PromoEdit: promotion;
+    promot: promotion;
     setPromo: React.Dispatch<React.SetStateAction<promotion>>;
   }
   
-   const usePromo = (overrides?: Partial<promotion>): PromoState => {
+  export  const usePromo = (overrides?: Partial<promotion>): PromoState => {
       const defaultPromo: promotion= {
         id:0,
      codePromotion:"",
@@ -53,15 +45,15 @@ export interface Promo {
      academicYear:"",
      specialityCode:""
       };
-      const [PromoEdit, setPromo] = useState<promotion>({
+      const [promot, setPromo] = useState<promotion>({
     ...defaultPromo,
     ...overrides,
   }); 
-   return {PromoEdit, setPromo };
+   return {promot, setPromo };
     };
   const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
    
-  const {PromoEdit}=usePromo({
+  const {promot}=usePromo({
       id:promo.id,
       codePromotion:promo.codePromotion,
       cycle:promo.cycle,
@@ -70,7 +62,7 @@ export interface Promo {
       specialityCode:promo.specialityCode
 });
    const { control, handleSubmit, formState, reset, errors } = useForm({
-      defaultValues: { ...PromoEdit},
+      defaultValues: { ...promot},
       mode: "onChange"
     });
     renderCount++;
@@ -114,7 +106,7 @@ export interface Promo {
             {
               text: 'Save',
               handler: () =>{
-              api.modifyPromotion(PromoEdit.id,PromoEdit.codePromotion,PromoEdit.cycle,PromoEdit.level,PromoEdit.academicYear,PromoEdit.specialityCode);
+              api.modifyPromotion(promot.id,promot.codePromotion,promot.cycle,promot.level,promot.academicYear,promot.specialityCode);
                 setshowToast(true);
               }
             }
@@ -134,7 +126,7 @@ export interface Promo {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log("CodePromo", selected.detail.value);
-                PromoEdit.codePromotion=selected.detail.value;
+                promot.codePromotion=selected.detail.value;
                 
                 return selected.detail.value;
               }}
@@ -166,7 +158,7 @@ export interface Promo {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log(selected.detail.value);
-                PromoEdit.cycle=selected.detail.value;
+                promot.cycle=selected.detail.value;
                 return selected.detail.value;
               }}
               name="cycle"
@@ -185,7 +177,7 @@ export interface Promo {
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
-                PromoEdit.level=selected.detail.value;
+                promot.level=selected.detail.value;
                
                 return selected.detail.value;
               }}
@@ -209,7 +201,7 @@ export interface Promo {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log("AcademicYear", selected.detail.value);
-                PromoEdit.academicYear=selected.detail.value;
+                promot.academicYear=selected.detail.value;
                 return selected.detail.value;
               }}
               name="academicYear"
@@ -241,7 +233,7 @@ export interface Promo {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log(selected.detail.value);
-               PromoEdit.specialityCode=selected.detail.value;
+               promot.specialityCode=selected.detail.value;
                 return selected.detail.value;
               }}
               name="specialityCode"
@@ -259,7 +251,7 @@ export interface Promo {
               fill="outline"
               type="button"
               onClick={() => {
-                reset(initialValues);
+                reset(promo);
               }}
             >
               Reset Form
