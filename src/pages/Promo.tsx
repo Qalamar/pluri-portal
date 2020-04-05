@@ -22,6 +22,7 @@ import {
   IonIcon,
   IonAlert,
   IonToast,
+  IonText
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
@@ -36,6 +37,7 @@ import * as api from "../utils/api";
 export interface promotion {
   id: number;
   codePromotion: string;
+  description:string;
   cycle: string;
   level: string;
   academicYear: string;
@@ -51,6 +53,7 @@ const Promo: React.FC = () => {
   const [editpromo, setEditpromo] = useState<promotion>({
     id: 0,
     codePromotion: "",
+    description:"",
     cycle: "",
     level: "",
     academicYear: "",
@@ -224,6 +227,7 @@ const Promo: React.FC = () => {
                                     )}
 
                                     <IonCardContent>
+                                      <IonText>{promo.description}</IonText>
                                       <IonList>
                                         <IonButton
                                           onClick={() => edit(promo)}
