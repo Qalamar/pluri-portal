@@ -25,6 +25,7 @@ import "./PromoForm.css";
 import * as api  from "../utils/api";
 import axios from "axios";
 import {promotion} from "../pages/Promo";
+import {usePromo} from "../components/PromoFormEditing";
 
 let renderCount = 0;
 let initialValues = {
@@ -36,22 +37,20 @@ let initialValues = {
   specialityCode: ""
 };
 
- let ValuesPromo ={
-   id :0,
+const PromoForm: React.FC = observer(() => {
+  const {promot} = usePromo({
+    id :0,
   codePromotion: "",
   cycle: "",
   level: "",
   academicYear: "2019-2020",
   specialityCode: ""
-}
-
-const PromoForm: React.FC = observer(() => {
+  });
   const { control, handleSubmit, formState, reset, errors } = useForm({
-    defaultValues: { ...initialValues },
+    defaultValues: { ...promot },
     mode: "onChange"
   });
   renderCount++;
-  const [data, setData] = useState<promotion>();
   const [showToast, setshowToast] = useState(false);
   const [SelectCycle, setCycle] = useState<string>();
   const [SelectSpeciality, setSpeciality] = useState<string>();
@@ -77,7 +76,7 @@ const PromoForm: React.FC = observer(() => {
       </div>
     ) : null;
   };
-    const onSubmit = (data: promotion) => {
+    const onSubmit = () => {
     let i;
     let value:promotion; 
     let include:boolean;
@@ -85,13 +84,13 @@ const PromoForm: React.FC = observer(() => {
   getPromos();
     for (i=0;i<promos.length;i++){
        value=promos[i];
-      if(data.codePromotion.localeCompare(value.codePromotion)===0) 
+      if(promot.codePromotion.localeCompare(value.codePromotion)===0) 
           include=true;
           }
          
    if (include===false){
-   setData(data);
-   api.addPromotion(data.id,data.codePromotion,data.cycle,data.level,data.academicYear,data.specialityCode);
+   
+   api.addPromotion(promot.id,promot.codePromotion,promot.cycle,promot.level,promot.academicYear,promot.specialityCode);
    setshowToast(true);
  }
  else setshowAlert(true);
@@ -112,7 +111,7 @@ const PromoForm: React.FC = observer(() => {
           message={'This Promotion Exists'}
           buttons={['OK']}
         />
-      <form onSubmit={handleSubmit(()=>onSubmit(ValuesPromo))} style={{ padding: 20 , margin:30 , height:'auto'}}>
+      <form onSubmit={handleSubmit(()=>onSubmit())} style={{ padding: 20 , margin:30 , height:'auto'}}>
         <IonLabel color="light">
           <h1>Informations About Promotion </h1>
         </IonLabel>
@@ -127,8 +126,8 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log("CodePromo", selected.detail.value);
-              
-              ValuesPromo.codePromotion=selected.detail.value;
+              promot.codePromotion=selected.detail.value;
+             
               return selected.detail.value;
             }}
             name="codePromotion"
@@ -159,7 +158,8 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log(selected.detail.value);
-              ValuesPromo.cycle=selected.detail.value;
+              promot.cycle=selected.detail.value;
+            
               return selected.detail.value;
             }}
             name="cycle"
@@ -179,7 +179,8 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log("Level", selected.detail.value);
-              ValuesPromo.level=selected.detail.value;
+              promot.level=selected.detail.value;
+             
               return selected.detail.value;
             }}
             name="level"
@@ -202,7 +203,8 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log("academicYear", selected.detail.value);
-              ValuesPromo.academicYear=selected.detail.value;
+              promot.academicYear=selected.detail.value;
+             
               return selected.detail.value;
             }}
             name="academicYear"
@@ -235,7 +237,8 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log(selected.detail.value);
-              ValuesPromo.specialityCode=selected.detail.value;
+              promot.specialityCode=selected.detail.value;
+             
               return selected.detail.value;
             }}
             name="specialityCode"
@@ -262,7 +265,7 @@ const PromoForm: React.FC = observer(() => {
             color="light"
             type="submit"
             fill="outline"
-          /* onClick={() => getPromos()}*/
+          onClick={() => console.log(promot)}
             disabled={formState.isValid === false}
           >
             Submit
