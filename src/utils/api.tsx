@@ -147,12 +147,14 @@ export const getPromotions = () => {
 export const addPromotion = (
   cP: string,
   c: string,
+  d :stringl,
   l: string,
   aY: string,
   sC: string
 ) => {
   const promotion = {
     codePromotion: cP,
+    description:d,
     cycle: c,
     level: l,
     academicYear: aY,
@@ -206,6 +208,7 @@ export const modifyPromotion = (
 export const modifyPromotion = (
   id: number,
   cP: string,
+  d: string,
   c: string,
   l: string,
   aY: string,
@@ -213,6 +216,7 @@ export const modifyPromotion = (
 ) => {
   const promotion = {
     codePromotion: cP,
+    description:d,
     cycle: c,
     level: l,
     academicYear: aY,
