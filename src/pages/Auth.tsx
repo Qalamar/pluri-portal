@@ -18,18 +18,35 @@ import {
   IonText,
   IonButton,
   IonModal,
-  IonInput
+  IonInput,
+  IonPopover,
+  IonList,
+  IonLabel,
 } from "@ionic/react";
 import React, { useState } from "react";
 import Anime from "react-anime";
-import { mailOutline, lockClosedOutline } from "ionicons/icons";
+import {
+  mailOutline,
+  lockClosedOutline,
+  notificationsCircleOutline,
+  addCircleOutline,
+  calendarOutline,
+} from "ionicons/icons";
 import axios from "axios";
 import "./Auth.css";
 
 const Auth: React.FC = () => {
+  const [showPopover, setShowPopover] = useState<{
+    open: boolean;
+    event: Event | undefined;
+  }>({
+    open: false,
+    event: undefined,
+  });
+
   const [isOpen, setisOpen] = useState(false);
   const showProfile = () => {
-    axios.get("/employees?id=1").then(function(response) {
+    axios.get("/employees?id=1").then(function (response) {
       let data = response.data;
 
       // handle success
@@ -49,13 +66,13 @@ const Auth: React.FC = () => {
     axios
       .post(url, form_data, {
         headers: {
-          "content-type": "multipart/form-data"
-        }
+          "content-type": "multipart/form-data",
+        },
       })
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
   return (
     <IonPage>
@@ -67,6 +84,40 @@ const Auth: React.FC = () => {
           <IonTitle>
             <strong>Authentication</strong>
           </IonTitle>
+          <IonButtons slot="end">
+            <IonButton
+              size="large"
+              color="dark"
+              onClick={(e) =>
+                setShowPopover({ open: true, event: e.nativeEvent })
+              }
+            >
+              <IonIcon
+                slot="icon-only"
+                class="icons"
+                size="large"
+                icon={notificationsCircleOutline}
+              />
+            </IonButton>
+            <IonPopover
+              isOpen={showPopover.open}
+              event={showPopover.event}
+              onDidDismiss={(e) =>
+                setShowPopover({ open: false, event: undefined })
+              }
+            >
+              <IonList>
+                <IonItem>
+                  <IonLabel>Invite to a team</IonLabel>
+                  <IonIcon icon={addCircleOutline}></IonIcon>
+                </IonItem>
+                <IonItem>
+                  <IonLabel>Assigment deadline</IonLabel>
+                  <IonIcon icon={calendarOutline}></IonIcon>
+                </IonItem>
+              </IonList>
+            </IonPopover>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent>

@@ -2,8 +2,14 @@
   margin-top: 6em;
 }
 
-.shadow {
+.icons {
+  font-size: 7em;
+  height: 9em;
+  size: 5em;
+  scale: 1.5;
+  transform: scale(1.6);
 }
+
 .popup {
   --background: var(--ion-color-dark);
   --color: var(--ion-color-dark);

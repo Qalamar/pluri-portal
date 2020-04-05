@@ -7,16 +7,16 @@ import {
   IonListHeader,
   IonMenu,
   IonMenuToggle,
-  IonNote
+  IonNote,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   archiveOutline,
   archiveSharp,
   peopleCircleOutline,
   lockClosedOutline,
-  schoolOutline
+  schoolOutline,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -36,30 +36,31 @@ const appPages: AppPage[] = [
     title: "Authentication",
     url: "/auth",
     iosIcon: lockClosedOutline,
-    mdIcon: lockClosedOutline
+    mdIcon: lockClosedOutline,
   },
   {
     title: "Users",
     url: "/users",
     iosIcon: peopleCircleOutline,
-    mdIcon: peopleCircleOutline
+    mdIcon: peopleCircleOutline,
   },
   {
     title: "Projects",
     url: "/projects",
     iosIcon: archiveOutline,
-    mdIcon: archiveSharp
+    mdIcon: archiveSharp,
   },
   {
     title: "Promos",
     url: "/Promo",
     iosIcon: schoolOutline,
-    mdIcon: schoolOutline
-  }
+    mdIcon: schoolOutline,
+  },
 ];
 
 const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
   const [selected, setSelected] = useState([true, false, false, false]);
+
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>

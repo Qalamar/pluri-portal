@@ -130,67 +130,71 @@ const Promo: React.FC = () => {
           ]}
         />
 
-        <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
-          <IonGrid>
-            <IonRow class="ion-align-items-center">
-              <IonCol></IonCol>
-              <IonCol size="12" sizeMd="10">
-                <IonCard class="neum">
-                  <IonCardHeader class="head">
-                    <IonCardTitle color="light" className="title">
-                      Promos
-                    </IonCardTitle>
-                  </IonCardHeader>
-                  <IonCardContent>
-                    <IonGrid>
-                      <IonRow class="ion-justify-content-center ion-text-center ion-align-items-center">
-                        <IonCol size="12" sizeMd="8">
-                          <IonSearchbar
-                            placeholder="Search for a promotion"
-                            onIonChange={(e: CustomEvent) =>
-                              searchHandle(e.detail.value)
-                            }
-                          />
-                        </IonCol>
-                      </IonRow>
-                      <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
-                        <IonCol>
-                          <IonButton
-                            size="default"
-                            fill="clear"
-                            onClick={() => addPromo()}
-                            color="danger"
-                          >
-                            <IonIcon
-                              icon={addCircleOutline}
-                              slot="start"
-                              size="large"
-                            ></IonIcon>
-                            Add
-                          </IonButton>
-                          <IonButton fill="clear" size="default" color="dark">
-                            <IonIcon
-                              icon={filterOutline}
-                              slot="start"
-                              size="large"
-                            ></IonIcon>
-                            Filter
-                          </IonButton>
-                        </IonCol>
-                      </IonRow>
-                      <IonRow></IonRow>
-                      <IonRow>
-                        {" "}
-                        {promos.length === 0 ? (
-                          <div>Loading...</div>
-                        ) : (
-                          promos.map((promo: any, i) => {
-                            {
-                              return (
-                                <IonCol
-                                  size="12"
-                                  sizeMd="6"
-                                  class=" ion-text-center"
+        <IonGrid>
+          <IonRow class="ion-align-items-center">
+            <IonCol></IonCol>
+            <IonCol size="12" sizeMd="10">
+              <IonCard class="neum">
+                <IonCardHeader class="head">
+                  <IonCardTitle color="light" className="title">
+                    Promos
+                  </IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                  <IonGrid>
+                    <IonRow class="ion-justify-content-center ion-text-center ion-align-items-center">
+                      <IonCol size="12" sizeMd="8">
+                        <IonSearchbar
+                          placeholder="Search for a promotion"
+                          onIonChange={(e: CustomEvent) =>
+                            searchHandle(e.detail.value)
+                          }
+                        />
+                      </IonCol>
+                    </IonRow>
+                    <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
+                      <IonCol>
+                        <IonButton
+                          size="default"
+                          fill="clear"
+                          onClick={() => addPromo()}
+                          color="danger"
+                        >
+                          <IonIcon
+                            icon={addCircleOutline}
+                            slot="start"
+                            size="large"
+                          ></IonIcon>
+                          Add
+                        </IonButton>
+                        <IonButton fill="clear" size="default" color="dark">
+                          <IonIcon
+                            icon={filterOutline}
+                            slot="start"
+                            size="large"
+                          ></IonIcon>
+                          Filter
+                        </IonButton>
+                      </IonCol>
+                    </IonRow>
+                    <IonRow></IonRow>
+                    <IonRow>
+                      {" "}
+                      {promos.length === 0 ? (
+                        <div>Loading...</div>
+                      ) : (
+                        promos.map((promo: any, i) => {
+                          {
+                            return (
+                              <IonCol
+                                size="12"
+                                sizeMd="6"
+                                class=" ion-text-center"
+                              >
+                                <Anime
+                                  opacity={[0, 1]}
+                                  duration={2000}
+                                  easing="easeOutElastic"
                                 >
                                   <IonCard class="shadow ion-text-center">
                                     <IonCardHeader class="ion-margin-bottom">
@@ -244,22 +248,22 @@ const Promo: React.FC = () => {
                                         </IonButton>
                                       </IonList>
                                     </IonCardContent>
-                                  </IonCard>{" "}
-                                </IonCol>
-                              );
-                            }
-                          })
-                        )}
-                      </IonRow>
-                    </IonGrid>
-                  </IonCardContent>
-                </IonCard>
-              </IonCol>
+                                  </IonCard>
+                                </Anime>
+                              </IonCol>
+                            );
+                          }
+                        })
+                      )}
+                    </IonRow>
+                  </IonGrid>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
 
-              <IonCol></IonCol>
-            </IonRow>
-          </IonGrid>
-        </Anime>
+            <IonCol></IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
