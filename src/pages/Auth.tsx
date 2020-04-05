@@ -22,6 +22,9 @@ import {
   IonPopover,
   IonList,
   IonLabel,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
 } from "@ionic/react";
 import React, { useState } from "react";
 import Anime from "react-anime";
@@ -31,6 +34,7 @@ import {
   notificationsCircleOutline,
   addCircleOutline,
   calendarOutline,
+  removeCircleOutline,
 } from "ionicons/icons";
 import axios from "axios";
 import "./Auth.css";
@@ -107,14 +111,30 @@ const Auth: React.FC = () => {
               }
             >
               <IonList>
-                <IonItem>
-                  <IonLabel>Invite to a team</IonLabel>
-                  <IonIcon icon={addCircleOutline}></IonIcon>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>Assigment deadline</IonLabel>
-                  <IonIcon icon={calendarOutline}></IonIcon>
-                </IonItem>
+                <IonItemSliding>
+                  <IonItem>
+                    <IonLabel>Team invite</IonLabel>
+                    <IonIcon icon={addCircleOutline}></IonIcon>
+                  </IonItem>
+
+                  <IonItemOptions side="end">
+                    <IonItemOption color="danger" expandable>
+                      Delete
+                    </IonItemOption>
+                  </IonItemOptions>
+                </IonItemSliding>
+                <IonItemSliding>
+                  <IonItem lines="none">
+                    <IonLabel>Assigment deadline</IonLabel>
+                    <IonIcon icon={calendarOutline}></IonIcon>
+                  </IonItem>
+
+                  <IonItemOptions side="end">
+                    <IonItemOption color="danger" expandable>
+                      Delete
+                    </IonItemOption>
+                  </IonItemOptions>
+                </IonItemSliding>
               </IonList>
             </IonPopover>
           </IonButtons>

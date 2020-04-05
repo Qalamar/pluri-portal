@@ -15,6 +15,9 @@
   --color: var(--ion-color-dark);
   --backdrop-opacity: 60%;
 }
+ion-popover {
+  --min-width: 290px !important;
+}
 
 ion-card-header {
   width: 100%;
