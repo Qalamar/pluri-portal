@@ -27,7 +27,7 @@ export const addStudent = (
     email: email,
     userName: userName,
     password: password,
-    promotion: promotion
+    promotion: promotion,
   };
 
   return axios.post(studentsUrl, student);
@@ -52,7 +52,7 @@ export const modifyStudent = (
     email: email,
     userName: userName,
     password: password,
-    promotion: promotion
+    promotion: promotion,
   };
   return axios.put(studentsUrl + "/" + id, student);
 };
@@ -96,7 +96,7 @@ export const addTeacher = (
     userName: userName,
     password: password,
     grade: grade,
-    specialty: specialty
+    specialty: specialty,
   };
 
   return axios.post(teachersUrl, teacher);
@@ -123,7 +123,7 @@ export const modifyTeacher = (
     userName: userName,
     password: password,
     grade: grade,
-    specialty: specialty
+    specialty: specialty,
   };
 
   return axios.put(teachersUrl + "/" + id, teacher);
@@ -147,8 +147,8 @@ export const getPromotions = () => {
 export const addPromotion = (
   cP: string,
   c: string,
-  l: number,  
-  aY: Date,
+  l: string,
+  aY: string,
   sC: string
 ) => {
   const promotion = {
@@ -156,11 +156,12 @@ export const addPromotion = (
     cycle: c,
     level: l,
     academicYear: aY,
-    specialtyCode: sC
+    specialtyCode: sC,
   };
-
+};
+/*
   return axios.post(promotionUrl, promotion);
-  /*
+ 
   export const addPromotion = (
   Id :number,
   cP: string,
@@ -201,17 +202,13 @@ export const modifyPromotion = (
   return axios.put(promotionUrl + "/" + Id, promotion);
 };
 
-export const deletePromotion = (id: number) => {
-  return axios.delete(promotionUrl + "/" + id);
-};
-  */
-
+*/
 export const modifyPromotion = (
   id: number,
   cP: string,
   c: string,
-  l: number,
-  aY: Date,
+  l: string,
+  aY: string,
   sC: string
 ) => {
   const promotion = {
@@ -219,7 +216,7 @@ export const modifyPromotion = (
     cycle: c,
     level: l,
     academicYear: aY,
-    specialtyCode: sC
+    specialtyCode: sC,
   };
 
   return axios.put(promotionUrl + "/" + id, promotion);
@@ -237,7 +234,7 @@ export const addSpecialty = (sC: number, sN: string, d: string) => {
   const specialty = {
     specialtyCode: sC,
     specialtyName: sN,
-    description: d
+    description: d,
   };
 
   return axios.post(specialtyUrl, specialty);
@@ -252,7 +249,7 @@ export const modifySpecialty = (
   const specialty = {
     specialtyCode: sC,
     specialtyName: sN,
-    description: d
+    description: d,
   };
 
   return axios.put(specialtyUrl + "/" + id, specialty);
@@ -262,36 +259,30 @@ export const deleteSpecialty = (id: number) => {
   return axios.delete(specialtyUrl + "/" + id);
 };
 
-export const register = (
-  email : string,
-  password : string
-) => {
+export const register = (email: string, password: string) => {
   const newUser = {
-    email : email,
-    password : password
-  }
+    email: email,
+    password: password,
+  };
 
   return axios({
-    method : 'POST',
-    url : url+'register',
-    data : newUser
-  })
-}
+    method: "POST",
+    url: url + "register",
+    data: newUser,
+  });
+};
 
 // this function (if successful) will return an accessToken property in reponse.data (expiration 1 hour)
-export const login = (
-  email : string,
-  password : string,
-) => {
+export const login = (email: string, password: string) => {
   const login = {
-    email : email,
-    password : password
+    email: email,
+    password: password,
   };
 
   //TODO : the url will be changed when integrating with the real backend
   return axios({
-    method : 'POST',
-    url : url+'login',
-    data : login
+    method: "POST",
+    url: url + "login",
+    data: login,
   });
-}
+};

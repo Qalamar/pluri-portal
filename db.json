@@ -49,7 +49,16 @@
       "id": 2
     }
   ],
-  "promotion": [],
+  "promotion": [
+    {
+      "codePromotion": "1CS",
+      "cycle": "Secondary",
+      "level": "1",
+      "academicYear": "2019-2020",
+      "specialtyCode": "ISI",
+      "id": 1
+    }
+  ],
   "specialty": [],
   "users": [
     {
