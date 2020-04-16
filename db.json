@@ -1,65 +1,108 @@
 {
   "student": [
     {
-      "firstName": "Moussa",
-      "lastName": "Khodja",
-      "dateOfBirth": "2020-03-18T18:29:05.647Z",
-      "placeOfBirth": "",
-      "email": "",
-      "userName": "",
+      "firstName": "modified",
+      "lastName": "",
+      "username": "",
       "password": "",
-      "promotion": "",
+      "email": "",
+      "birthday": "2020-04-16T16:01:12.544Z",
+      "birthPlace": "",
+      "promo": 1,
+      "currentYear": "",
       "id": 1
     },
     {
-      "firstName": "Ahmed",
-      "lastName": "Ahmed",
-      "dateOfBirth": "2020-03-18T18:29:26.439Z",
-      "placeOfBirth": "",
-      "email": "",
-      "userName": "",
+      "firstName": "new",
+      "lastName": "",
+      "username": "",
       "password": "",
-      "promotion": "",
+      "email": "",
+      "birthday": "2020-04-16T15:54:26.766Z",
+      "birthPlace": "",
+      "promo": 1,
+      "currentYear": "",
       "id": 2
     }
   ],
   "teacher": [
     {
-      "firstName": "moussa",
-      "lastName": "khodjab",
-      "dateOfBirth": "2020-03-18T18:29:11.895Z",
-      "placeOfBirth": "",
-      "email": "",
+      "firstName": "modified",
+      "lastName": "",
       "userName": "",
       "password": "",
+      "email": "",
+      "birthPlace": "",
+      "speciality": "",
       "grade": "",
-      "specialty": "",
-      "id": 1
+      "currentYear": "",
+      "id": 2
     },
     {
-      "firstName": "tariq",
-      "lastName": "hamritb",
-      "dateOfBirth": "2020-03-18T18:29:18.015Z",
-      "placeOfBirth": "",
-      "email": "",
+      "firstName": "",
+      "lastName": "",
       "userName": "",
       "password": "",
+      "email": "",
+      "birthPlace": "",
+      "speciality": "",
       "grade": "",
-      "specialty": "",
-      "id": 2
+      "currentYear": "",
+      "id": 3
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "",
+      "id": 4
+    },
+    {
+      "firstName": "new",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "",
+      "id": 5
+    },
+    {
+      "firstName": "new",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "",
+      "id": 6
     }
   ],
   "promotion": [
     {
-      "codePromotion": "1CS",
-      "cycle": "Secondary",
-      "level": "1",
-      "academicYear": "2019-2020",
-      "specialtyCode": "ISI",
+      "cycle": "modified",
+      "year": "",
+      "specialityName": "",
+      "description": "",
       "id": 1
+    },
+    {
+      "cycle": "new",
+      "year": "",
+      "specialityName": "",
+      "description": "",
+      "id": 2
     }
   ],
-  "specialty": [],
   "users": [
     {
       "id": 1,

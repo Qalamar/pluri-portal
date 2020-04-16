@@ -1,0 +1,11 @@
+{
+    "/users/student/add" : "/student",
+    "/users/professor/add" : "/teacher",
+    "/promo/add" : "/promotion",
+    "/promo/modify/:id" : "/promotion/:id",
+    "/users/professor/modify/:id" : "/teacher/:id",
+    "/users/student/modify/:id" : "/student/:id",
+    "/users/students" : "/student",
+    "/users/professors" : "/teacher",
+    "/promo/promos" : "/promotion"
+}

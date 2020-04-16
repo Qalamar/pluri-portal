@@ -33,6 +33,12 @@ import * as api from './utils/api';
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");
+  api.modifyPromotion(1, 'modified', '', '', '')
+  .then(res => console.log(res));
+  api.modifyStudent(1, 'modified', '', '', '', '', new Date(), '', 1, '')
+  .then(res => console.log(res));
+  api.modifyTeacher(2, 'modified', '', '', '', '', '', '', '', '', )
+  .then(res => console.log(res))
   return (
     <IonApp>
       <IonReactRouter>
