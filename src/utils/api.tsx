@@ -161,8 +161,7 @@ export const addPromotionTest = (
 
 export const addPromotion = (
   Id :number,
- 
-  d:string,
+ d:string,
   c: string,
   l: string,  
   sC: string,
@@ -172,8 +171,8 @@ export const addPromotion = (
   const promotion = {    
     cycle: c,
     level: l,
+    specialityName: sC,
     description:d,
-    specialityCode: sC,
     minTeamMembers:minT,
     maxTeamMembers:maxT,
   };
@@ -195,8 +194,8 @@ export const modifyPromotion = (
     id :Id,
     cycle: c,
     level: l,
-    description:d,
      specialityCode: sC,
+    description:d,
     minTeamMembers:minT,
     maxTeamMembers:maxT,
   };
