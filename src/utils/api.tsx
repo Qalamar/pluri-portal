@@ -4,7 +4,7 @@ const url = "http://localhost:3000/";
 const studentsUrl = "http://localhost:3000/student";
 const teachersUrl = "http://localhost:3000/teacher";
 const promotionUrl = "http://localhost:3000/promotion";
-const specialtyUrl = "http://localhost:3000/specialty";
+const teamUrl = "http://localhost:3000/team";
 
 const apiUrl = 'http://bragdonilyes.pythonanywhere.com/';
 /**
@@ -160,56 +160,55 @@ export const addPromotionTest = (
 
 
 export const addPromotion = (
-  cycle : string,
-  year : string,
-  specialityName : string,
-  description : string
+  Id :number,
+ 
+  d:string,
+  c: string,
+  l: string,  
+  sC: string,
+  minT:number,
+  maxT:number,
 ) => {
-  const promotion = {
-    cycle : cycle,
-    year : year,
-    specialityName : specialityName,
-    description : description
-  }
+  const promotion = {    
+    cycle: c,
+    level: l,
+    description:d,
+    specialityCode: sC,
+    minTeamMembers:minT,
+    maxTeamMembers:maxT,
+  };
 
   return axios.post(url+'promo/add', promotion);
-}
-// export const addPromotion = (
-//   cP: string,
-//   c: string,
-//   d: string,
-//   l: string,
-//   aY: string,
-//   sC: string
-// ) => {
-//   const promotion = {
-//     codePromotion: cP,
-//     description: d,
-//     cycle: c,
-//     level: l,
-//     academicYear: aY,
-//     specialtyCode: sC,
-//   };
-// };
+};
+
+
 export const modifyPromotion = (
-  id : number,
-  cycle : string,
-  year : string,
-  specialityName : string,
-  description : string
+  Id: number,
+  d:string,
+  c: string,
+  l: string,
+ sC: string,
+  minT:number,
+  maxT:number,
 ) => {
   const promotion = {
-    cycle : cycle,
-    year : year,
-    specialityName : specialityName,
-    description : description
-  }
+    id :Id,
+    cycle: c,
+    level: l,
+    description:d,
+     specialityCode: sC,
+    minTeamMembers:minT,
+    maxTeamMembers:maxT,
+  };
 
   return axios.put(url+'promo/modify/'+id, promotion);
 };
 
 export const deletePromotion = (id: number) => {
   return axios.delete(url+'promo/modify/'+id);
+};
+export const getTeams = () => {
+  return axios.get(teamUrl);
 };
 
 export const register = (email: string, password: string) => {
@@ -223,6 +222,27 @@ export const register = (email: string, password: string) => {
     url: url + "register",
     data: newUser,
   });
+};
+export const addTeam=(nm:string,rd:boolean)=>{
+  const Team={
+  name:nm,
+  readiness:rd,
+  
+  };
+  return axios.post(teamUrl,Team);
+};
+export const modifyTeam=(id:number,name:string,readiness:boolean)=>{
+  const Team={
+  id:id,
+  name:name,
+  readiness:readiness
+
+  };
+  return axios.put(teamUrl,Team);
+};
+
+export const deleteTeam=(id:number)=>{
+  return axios.delete(teamUrl+"/"+id);
 };
 
 // this function (if successful) will return an accessToken property in reponse.data (expiration 1 hour)
