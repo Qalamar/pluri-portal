@@ -4,6 +4,8 @@ import Auth from "./pages/Auth";
 import Projects from "./pages/Projects";
 import Users from "./pages/Users";
 import Promo from "./pages/Promo";
+import Teams from "./pages/Teams";
+import MyTeam from "./pages/Student/MyTeam";
 import React, { useState } from "react";
 import { IonApp, IonRouterOutlet, IonSplitPane, IonButton } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -54,6 +56,8 @@ const App: React.FC = () => {
             <Route path="/projects" component={Projects} exact={true} />
             <Route path="/users" component={Users} exact={true} />
             <Route path="/promo" component={Promo} exact={true} />
+            <Route path="/myteam" component={MyTeam} exact={true} />
+            <Route path="/teams" component={Teams} exact={true} />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
