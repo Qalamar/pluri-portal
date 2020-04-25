@@ -5,7 +5,7 @@ import Projects from "./pages/Projects";
 import Users from "./pages/Users";
 import Promo from "./pages/Promo";
 import Teams from "./pages/Teams";
-import MyTeam from "./pages/Student/MyTeam";
+import MyTeam from "./Student/MyTeam";
 import React, { useState } from "react";
 import { IonApp, IonRouterOutlet, IonSplitPane, IonButton } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -35,12 +35,6 @@ import * as api from './utils/api';
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");
-  api.modifyPromotion(1, 'modified', '', '', '')
-  .then(res => console.log(res));
-  api.modifyStudent(1, 'modified', '', '', '', '', new Date(), '', 1, '')
-  .then(res => console.log(res));
-  api.modifyTeacher(2, 'modified', '', '', '', '', '', '', '', '', )
-  .then(res => console.log(res))
   return (
     <IonApp>
       <IonReactRouter>

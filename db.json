@@ -1,5 +1,4 @@
 {
-  {
   "student": [
     {
       "firstName": "badra souhila",
@@ -13,7 +12,7 @@
       "isLeader": false,
       "team": "Pfe",
       "id": 0
-    }
+    },
     {
       "id": 1,
       "firstName": "Ilyes Zakaria",
@@ -97,14 +96,12 @@
     }
   ],
   "team": [
-    
     {
       "id": 1,
       "name": "Pfe",
       "readiness": false
     }
-  ]
-}
+  ],
   "teacher": [
     {
       "firstName": "modified",
@@ -165,22 +162,6 @@
       "grade": "",
       "currentYear": "",
       "id": 6
-    }
-  ],
-  "promotion": [
-    {
-      "cycle": "modified",
-      "year": "",
-      "specialityName": "",
-      "description": "",
-      "id": 1
-    },
-    {
-      "cycle": "new",
-      "year": "",
-      "specialityName": "",
-      "description": "",
-      "id": 2
     }
   ],
   "users": [

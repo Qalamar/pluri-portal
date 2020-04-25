@@ -37,9 +37,11 @@ import {
   removeCircleOutline,
 } from "ionicons/icons";
 import axios from "axios";
+import NotificationArea from '../components/NotificationArea'
 import "./Auth.css";
 
 const Auth: React.FC = () => {
+
   const [showPopover, setShowPopover] = useState<{
     open: boolean;
     event: Event | undefined;
@@ -99,10 +101,11 @@ const Auth: React.FC = () => {
               <IonIcon
                 slot="icon-only"
                 class="icons"
-                size="large"
+                size="small"
                 icon={notificationsCircleOutline}
               />
             </IonButton>
+
             <IonPopover
               isOpen={showPopover.open}
               event={showPopover.event}
@@ -110,33 +113,10 @@ const Auth: React.FC = () => {
                 setShowPopover({ open: false, event: undefined })
               }
             >
-              <IonList>
-                <IonItemSliding>
-                  <IonItem>
-                    <IonLabel>Team invite</IonLabel>
-                    <IonIcon icon={addCircleOutline}></IonIcon>
-                  </IonItem>
+              <NotificationArea />
 
-                  <IonItemOptions side="end">
-                    <IonItemOption color="danger" expandable>
-                      Delete
-                    </IonItemOption>
-                  </IonItemOptions>
-                </IonItemSliding>
-                <IonItemSliding>
-                  <IonItem lines="none">
-                    <IonLabel>Assigment deadline</IonLabel>
-                    <IonIcon icon={calendarOutline}></IonIcon>
-                  </IonItem>
-
-                  <IonItemOptions side="end">
-                    <IonItemOption color="danger" expandable>
-                      Delete
-                    </IonItemOption>
-                  </IonItemOptions>
-                </IonItemSliding>
-              </IonList>
             </IonPopover>
+
           </IonButtons>
         </IonToolbar>
       </IonHeader>
