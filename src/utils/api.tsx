@@ -230,14 +230,14 @@ export const addTeam=(nm:string,rd:boolean)=>{
   };
   return axios.post(teamUrl,Team);
 };
-export const modifyTeam=(id:number,name:string,readiness:boolean)=>{
+export const modifyTeam=(Id:number,nm:string,rd:boolean)=>{
   const Team={
-  id:id,
-  name:name,
-  readiness:readiness
+  id:Id,
+  name:nm,
+  readiness:rd
 
   };
-  return axios.put(teamUrl,Team);
+   return axios.put(teamUrl+ "/" + id,Team);
 };
 
 export const deleteTeam=(id:number)=>{
