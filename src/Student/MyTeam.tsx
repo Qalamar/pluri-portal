@@ -203,7 +203,7 @@ renderCount++;
                       student.promotion,
                       true,
                       Team.name);
-    api.addTeam(Team.id,Team.name,Team.readiness);
+    api.addTeam(Team.name,Team.readiness);
     } 
     else setShowAlert1(true);
    };
