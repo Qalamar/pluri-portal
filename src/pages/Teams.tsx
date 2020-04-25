@@ -283,6 +283,7 @@ const getMembers=(TeamName:string)=>{
                             }
                           })
                         )}
+                       <IonCol></IonCol>
                       </IonRow>
                     </IonGrid>
                   </IonCardContent>
