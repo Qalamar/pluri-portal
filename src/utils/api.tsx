@@ -19,7 +19,7 @@ export const addStudent = (
   birthday: Date,
   birthPlace: string,
   promo: number,
-  currentYear : string
+  currentYear: string
 ) => {
   // the  id will be generated automatically  by json-server
   const student = {
@@ -31,14 +31,14 @@ export const addStudent = (
     birthday: birthday,
     birthPlace: birthPlace,
     promo: promo,
-    currentYear : currentYear
+    currentYear: currentYear
   };
 
-  return axios.post(url+'users/student/add', student);
+  return axios.post(url + 'users/student/add', student);
 };
 
 export const modifyStudent = (
-  id : number,
+  id: number,
   fName: string,
   lName: string,
   userName: string,
@@ -46,8 +46,8 @@ export const modifyStudent = (
   email: string,
   birthday: Date,
   birthPlace: string,
-  promo: number,
-  currentYear : string
+  promo: string,
+  currentYear: string
 ) => {
   const student = {
     firstName: fName,
@@ -58,21 +58,21 @@ export const modifyStudent = (
     birthday: birthday,
     birthPlace: birthPlace,
     promo: promo,
-    currentYear : currentYear
+    currentYear: currentYear
   };
-   
-  return axios.put(url+'users/student/modify/'+id, student);
+
+  return axios.put(url + 'users/student/modify/' + id, student);
 }
 
 
 
 export const getStudents = () => {
 
-  return axios.get(url+'users/students');
+  return axios.get(url + 'users/students');
 };
 
 export const deleteStudent = (id: number) => {
-  return axios.delete(url+'users/student/modify/'+id);
+  return axios.delete(url + 'users/student/modify/' + id);
 };
 
 export const addTeacher = (
@@ -81,10 +81,10 @@ export const addTeacher = (
   userName: string,
   password: string,
   email: string,
-  birthPlace : string,
-  speciality : string,
-  grade : string,
-  currentYear : string
+  birthPlace: string,
+  speciality: string,
+  grade: string,
+  currentYear: string
 ) => {
   //the id will be generated automatically
   const teacher = {
@@ -96,23 +96,23 @@ export const addTeacher = (
     birthPlace: birthPlace,
     speciality: speciality,
     grade: grade,
-    currentYear : currentYear
+    currentYear: currentYear
   };
 
-  return axios.post(url+'users/professor/add', teacher);
+  return axios.post(url + 'users/professor/add', teacher);
 };
 
 export const modifyTeacher = (
-  id : number,
+  id: number,
   fName: string,
   lName: string,
   userName: string,
   password: string,
   email: string,
-  birthPlace : string,
-  speciality : string,
-  grade : string,
-  currentYear : string
+  birthPlace: string,
+  speciality: string,
+  grade: string,
+  currentYear: string
 ) => {
   const teacher = {
     firstName: fName,
@@ -123,88 +123,88 @@ export const modifyTeacher = (
     birthPlace: birthPlace,
     speciality: speciality,
     grade: grade,
-    currentYear : currentYear
+    currentYear: currentYear
   };
 
-  return axios.put(url+'users/professor/modify/'+id, teacher);
+  return axios.put(url + 'users/professor/modify/' + id, teacher);
 }
 
 export const getTeachers = () => {
 
-  return axios.get(url+'users/professors');
+  return axios.get(url + 'users/professors');
 };
 
 export const deleteTeacher = (id: number) => {
-  return axios.delete(url+'users/professor/modify/'+id);
+  return axios.delete(url + 'users/professor/modify/' + id);
 };
 
 export const getPromotions = () => {
-  return axios.get(url+'promo/promos');
+  return axios.get(url + 'promo/promos');
 };
 
 export const addPromotionTest = (
-  cycle : string,
-  year : string,
-  specialityName : string,
-  description : string
-  ) => {
+  cycle: string,
+  year: string,
+  specialityName: string,
+  description: string
+) => {
   const promotion = {
-    cycle : cycle,
-    year : year,
-    specialityName : specialityName,
-    description : description
+    cycle: cycle,
+    year: year,
+    specialityName: specialityName,
+    description: description
   };
 
-  return axios.post(apiUrl+'promo/add/', promotion);
+  return axios.post(apiUrl + 'promo/add/', promotion);
 };
 
 
 export const addPromotion = (
-  Id :number,
- d:string,
+  Id: number,
+  d: string,
   c: string,
-  l: string,  
+  l: string,
   sC: string,
-  minT:number,
-  maxT:number,
+  minT: number,
+  maxT: number,
 ) => {
-  const promotion = {    
+  const promotion = {
     cycle: c,
     level: l,
     specialityName: sC,
-    description:d,
-    minTeamMembers:minT,
-    maxTeamMembers:maxT,
+    description: d,
+    minTeamMembers: minT,
+    maxTeamMembers: maxT,
   };
 
-  return axios.post(url+'promo/add', promotion);
+  return axios.post(url + 'promo/add', promotion);
 };
 
 
 export const modifyPromotion = (
   Id: number,
-  d:string,
+  d: string,
   c: string,
   l: string,
- sC: string,
-  minT:number,
-  maxT:number,
+  sC: string,
+  minT: number,
+  maxT: number,
 ) => {
   const promotion = {
-    id :Id,
+    id: Id,
     cycle: c,
     level: l,
-     specialityCode: sC,
-    description:d,
-    minTeamMembers:minT,
-    maxTeamMembers:maxT,
+    specialityCode: sC,
+    description: d,
+    minTeamMembers: minT,
+    maxTeamMembers: maxT,
   };
 
-  return axios.put(url+'promo/modify/'+id, promotion);
+  return axios.put(url + 'promo/modify/' + Id, promotion);
 };
 
 export const deletePromotion = (id: number) => {
-  return axios.delete(url+'promo/modify/'+id);
+  return axios.delete(url + 'promo/modify/' + id);
 };
 export const getTeams = () => {
   return axios.get(teamUrl);
@@ -222,26 +222,26 @@ export const register = (email: string, password: string) => {
     data: newUser,
   });
 };
-export const addTeam=(nm:string,rd:boolean)=>{
-  const Team={
-  name:nm,
-  readiness:rd,
-  
-  };
-  return axios.post(teamUrl,Team);
-};
-export const modifyTeam=(Id:number,nm:string,rd:boolean)=>{
-  const Team={
-  id:Id,
-  name:nm,
-  readiness:rd
+export const addTeam = (nm: string, rd: boolean) => {
+  const Team = {
+    name: nm,
+    readiness: rd,
 
   };
-   return axios.put(teamUrl+ "/" + id,Team);
+  return axios.post(teamUrl, Team);
+};
+export const modifyTeam = (Id: number, nm: string, rd: boolean) => {
+  const Team = {
+    id: Id,
+    name: nm,
+    readiness: rd
+
+  };
+  return axios.put(teamUrl + "/" + Id, Team);
 };
 
-export const deleteTeam=(id:number)=>{
-  return axios.delete(teamUrl+"/"+id);
+export const deleteTeam = (id: number) => {
+  return axios.delete(teamUrl + "/" + id);
 };
 
 // this function (if successful) will return an accessToken property in reponse.data (expiration 1 hour)
