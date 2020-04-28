@@ -258,3 +258,43 @@ export const login = (email: string, password: string) => {
     data: login,
   });
 };
+export const getStudentspromo=()=>{
+let url =apiUrl+'users/students';
+return axios.get(url);
+}
+export const getMembersTeam=(id :number)=>
+{
+  let url=apiUrl+'users/team/'+id;
+return axios.get(url);
+}
+/* Invite student post +get */
+export const postInviteStudent=(id:number)=>{
+  let url=apiUrl+'users/invite/'+id;
+  return axios.post(url);
+}
+export const getInviteStudent=(id:number)=>{
+  let url=apiUrl+'users/invite/'+id;
+  return axios.get(url);
+}
+/* return:All invites sent to the member who issued the request */
+export const getInvited=()=>
+{
+let url=apiUrl+'users/invited';
+return axios.get(url);
+}
+export const getInvite=(idInv:number)=>{
+  let url=apiUrl+'users/invites/'+idInv;
+  return axios.get(url);
+}
+export const modifyInvite=(idInv:number,idSender:number,idReceiver:number,accept:boolean,reject:boolean)=>{
+  const invite={
+    id:idInv,
+    sender:idSender,
+    receiver:idReceiver,
+    acc:accept,
+    rej:reject
+  };
+  let url=apiUrl+'users/invites/'+idInv;
+  return axios.put(url,invite);
+
+};
