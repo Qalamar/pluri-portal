@@ -50,7 +50,7 @@ let TEAMS:Team[]=[];
 
 
  
-const useStateWithLocalStorage = (localStorageKey :string)=> {
+/*const useStateWithLocalStorage = (localStorageKey :string)=> {
   var storage=localStorage.getItem(localStorageKey);
   var array=[];
   if (storage!==null) array=JSON.parse(storage);
@@ -65,7 +65,7 @@ const useStateWithLocalStorage = (localStorageKey :string)=> {
   }, [value]);
  
   return [value, setValue];
-};
+};*/
  
 const MyTeam: React.FC = observer(() => {
 /* this is just an example to test */
@@ -111,9 +111,9 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
   const [isOpen,setIsOpen]=useState(false);
   const[showModal,setShowModal]=useState(false);
   const[ready,setReady]=useState(false);
-  const [value, setValue] = useStateWithLocalStorage(
+ /* const [value, setValue] = useStateWithLocalStorage(
     'myInvited'
-  );
+  );*/
 const [invited,setInvited]=useState<Invite[]>([]); //for member how issued the request
   
   const showError = (_fieldName: string) => {
@@ -236,10 +236,10 @@ useEffect(() => {
 const getInvited=async()=>{
 let res=await axios.get("/invited");
 let data=res.data;
-let j=JSON.stringify(data);
-if(data.length!==0)
-localStorage.setItem('myInvited',data);
-setValue(data);
+//let j=JSON.stringify(data);
+//if(data.length!==0)
+//localStorage.setItem('myInvited',data);
+//setValue(data);
 setInvited(data);
 
 };
@@ -256,11 +256,11 @@ const getStudent=(id:number)=>{
    }
    return student;
 };
-const convert=()=>{
+/*const convert=()=>{
 var keys=Object.values(value);;
 console.log(value);
 console.log(keys);
-};
+};*/
 
   const onSubmit=()=>{
     let i:number ;
