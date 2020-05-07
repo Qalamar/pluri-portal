@@ -5,6 +5,9 @@ const studentsUrl = "http://localhost:3000/student";
 const teachersUrl = "http://localhost:3000/teacher";
 const promotionUrl = "http://localhost:3000/promotion";
 const teamUrl = "http://localhost:3000/team";
+const invitesUrl="http://localhost:3000/invites"; //all invites 
+const inviteUrl="http://localhost:3000/invite"; //forinvitestudent
+const invitedUrl="http://localhost:3000/invited"; 
 
 const apiUrl = 'http://bragdonilyes.pythonanywhere.com/';
 /**
@@ -269,21 +272,21 @@ return axios.get(url);
 }
 /* Invite student post +get */
 export const postInviteStudent=(id:number)=>{
-  let url=apiUrl+'users/invite/'+id;
+  let url=inviteUrl+id;
   return axios.post(url);
 }
 export const getInviteStudent=(id:number)=>{
-  let url=apiUrl+'users/invite/'+id;
+  let url=+'users/invite/'+id;
   return axios.get(url);
 }
 /* return:All invites sent to the member who issued the request */
 export const getInvited=()=>
 {
-let url=apiUrl+'users/invited';
-return axios.get(url);
+
+return axios.get(invitedUrl);
 }
 export const getInvite=(idInv:number)=>{
-  let url=apiUrl+'users/invites/'+idInv;
+  let url=invitesUrl'+idInv;
   return axios.get(url);
 }
 export const modifyInvite=(idInv:number,idSender:number,idReceiver:number,accept:boolean,reject:boolean)=>{
@@ -294,7 +297,7 @@ export const modifyInvite=(idInv:number,idSender:number,idReceiver:number,accept
     acc:accept,
     rej:reject
   };
-  let url=apiUrl+'users/invites/'+idInv;
+  let url=invitesUrl+idInv;
   return axios.put(url,invite);
 
 };
