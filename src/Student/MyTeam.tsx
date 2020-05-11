@@ -54,6 +54,7 @@ const useStateWithLocalStorage = (localStorageKey :string)=> {
   var storage=localStorage.getItem(localStorageKey);
   var array=[];
   if (storage!=null) array=JSON.parse(storage);
+
   const [value, setValue] = React.useState(
      array|| []
   );
@@ -97,8 +98,7 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
 
   
   const [teams,setTeams]=useState<Team[]>([]);
-  const [invites,setInvites]=useState<Invite[]>([]);
-  
+  const [invites,setInvites]=useState<Invite[]>([]); 
   const[createTeam,setCreateTeam]=useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showAlert1, setShowAlert1] = useState(false);
@@ -111,10 +111,12 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
   const [isOpen,setIsOpen]=useState(false);
   const[showModal,setShowModal]=useState(false);
   const[ready,setReady]=useState(false);
- /const [value, setValue] = useStateWithLocalStorage(
+ const [value, setValue] = useStateWithLocalStorage(
     'myInvited'
   );
-const [invited,setInvited]=useState<Invite[]>(value); //for member how issued the request
+ 
+
+const [invited,setInvited]=useState<any[]>(value); //for member how issued the request
   
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
@@ -234,14 +236,23 @@ useEffect(() => {
  return tab;   
 };
 const getInvited=async()=>{
-let res=await axios.get("/invited");
+let res=await axios.get("/invited");                         
 let data=res.data;
-let j=JSON.stringify(data);
+let i:number=0;
+let value:any[]=[];
+for(i=0;i<data.length;i++){
+   value[i]=data[i];
+   value[i].sender=getStudent(value[i].sender);
+};
 if(data.length!==0){
-localStorage.setItem('myInvited',data);
-setValue(data);
-setInvited(data);
+let j=JSON.stringify(value);
+console.log("jjjjjjjjjj",j);
+localStorage.setItem('myInvited',j);
+setValue(value);
+console.log(value)
+setInvited(value);
 }
+
 };
 const getStudent=(id:number)=>{
    
@@ -256,6 +267,11 @@ const getStudent=(id:number)=>{
    }
    return student;
 };
+/*const convert=()=>{
+var keys=Object.values(value);;
+console.log(value);
+console.log(keys);
+};*/
 
   const onSubmit=()=>{
     let i:number ;
@@ -395,28 +411,29 @@ const getStudent=(id:number)=>{
              <IonContent class="ion-padding ion-text-center">
                {invited.length===0 ?(
               <div>
-              <h1>
+                <h1>
               YOU DON'T HAVE INVITES !
-              </h1>
+              </h1>            
+              
                </div>):(
                  <div>
                   
                 {
-                  invited.map((inv:Invite,i)=>{
+                  invited.map((inv:any,i)=>{
                   return (
                     <div>
                       {inv.rejected===false && (
                   <IonCard  class="shadow">
                     <IonCardHeader className="header">
                     <IonTitle color="light" class="title ion-padding">
-                      {getStudent(inv.sender).team}
+                      {inv.sender.team}
                     </IonTitle>
                     </IonCardHeader >
                     <IonCardContent>                     
                       <IonItem>
                         <IonIcon icon={personOutline} slot="start" ></IonIcon>
                         <h2>
-                        {getStudent(inv.sender).lastName} {getStudent(inv.sender).firstName}</h2>
+                        {inv.sender.lastName} {inv.sender.firstName}</h2>
                         <IonButtons slot="end" class="ion-justify-content-center">                         
                         <IonButton
                         color="dark"
@@ -444,7 +461,7 @@ const getStudent=(id:number)=>{
                             inv.receiver,
                             true,
                             inv.rejected);
-                            student.team=getStudent(inv.sender).team;
+                            student.team=inv.sender.team;
                             api.modifyStudent(student.id,
                               student.firstName,
                               student.lastName,
@@ -457,8 +474,8 @@ const getStudent=(id:number)=>{
                               student.isLeader,
                               student.team
                               );
-                              setShowModal(false);
-                              
+                              localStorage.clear();
+                              setShowModal(false);  
                          }}
                         >
                            <IonIcon slot="end" icon={checkmarkOutline}></IonIcon>
@@ -594,10 +611,10 @@ const getStudent=(id:number)=>{
           size="default"
           type="button"
           className="but"
-          onClick={()=>{           
-          getInvited();
-          setShowModal(true);
-          localStorage.clear(); 
+          onClick={()=>{
+            getInvited()           
+            setShowModal(true);
+            console.log("cliquite",invited);
           }}
 
           >
