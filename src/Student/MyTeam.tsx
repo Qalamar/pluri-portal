@@ -50,10 +50,10 @@ let TEAMS:Team[]=[];
 
 
  
-/*const useStateWithLocalStorage = (localStorageKey :string)=> {
+const useStateWithLocalStorage = (localStorageKey :string)=> {
   var storage=localStorage.getItem(localStorageKey);
   var array=[];
-  if (storage!==null) array=JSON.parse(storage);
+  if (storage!=null) array=JSON.parse(storage);
   const [value, setValue] = React.useState(
      array|| []
   );
@@ -65,7 +65,7 @@ let TEAMS:Team[]=[];
   }, [value]);
  
   return [value, setValue];
-};*/
+};
  
 const MyTeam: React.FC = observer(() => {
 /* this is just an example to test */
@@ -111,10 +111,10 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
   const [isOpen,setIsOpen]=useState(false);
   const[showModal,setShowModal]=useState(false);
   const[ready,setReady]=useState(false);
- /* const [value, setValue] = useStateWithLocalStorage(
+ /const [value, setValue] = useStateWithLocalStorage(
     'myInvited'
-  );*/
-const [invited,setInvited]=useState<Invite[]>([]); //for member how issued the request
+  );
+const [invited,setInvited]=useState<Invite[]>(value); //for member how issued the request
   
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
@@ -236,12 +236,12 @@ useEffect(() => {
 const getInvited=async()=>{
 let res=await axios.get("/invited");
 let data=res.data;
-//let j=JSON.stringify(data);
-//if(data.length!==0)
-//localStorage.setItem('myInvited',data);
-//setValue(data);
+let j=JSON.stringify(data);
+if(data.length!==0){
+localStorage.setItem('myInvited',data);
+setValue(data);
 setInvited(data);
-
+}
 };
 const getStudent=(id:number)=>{
    
@@ -256,11 +256,6 @@ const getStudent=(id:number)=>{
    }
    return student;
 };
-/*const convert=()=>{
-var keys=Object.values(value);;
-console.log(value);
-console.log(keys);
-};*/
 
   const onSubmit=()=>{
     let i:number ;
@@ -400,7 +395,6 @@ console.log(keys);
              <IonContent class="ion-padding ion-text-center">
                {invited.length===0 ?(
               <div>
-
               <h1>
               YOU DON'T HAVE INVITES !
               </h1>
@@ -463,6 +457,7 @@ console.log(keys);
                               student.isLeader,
                               student.team
                               );
+                              setShowModal(false);
                               
                          }}
                         >
@@ -600,9 +595,9 @@ console.log(keys);
           type="button"
           className="but"
           onClick={()=>{           
-            getInvited();
-            convert();
-            setShowModal(true);
+          getInvited();
+          setShowModal(true);
+          localStorage.clear(); 
           }}
 
           >
