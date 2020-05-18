@@ -22,18 +22,23 @@ import {
   IonList,
   IonInput,
   IonAlert,
-  
+   IonDatetime, 
+  IonChip
 } from "@ionic/react";
 import React, { useEffect, useState, } from "react";
 import "./MyTeam.css";
-
+import Report from "./reportComponent"; 
 import {
    personOutline,
   chevronForwardOutline,
   mailOutline,
   codeOutline,
   closeOutline,
-  checkmarkOutline
+  checkmarkOutline,
+  calendarOutline,
+    downloadOutline,
+    documentTextOutline,
+    addCircleOutline
 } from "ionicons/icons";
 
 import { observer } from "mobx-react";
@@ -43,7 +48,7 @@ import {useTeam , Invite,Student,Team,useStudent} from "../../utils/Interfaces" 
 import Anime from "react-anime";
 import axios from "axios";
 import * as api from "../../utils/api";
-
+import {reportModal} from "../../stores/Store";
 let TEAM:Team ; //for a  team
 let inviteButton:boolean[]=[]; //for invited button 
 let TEAMS:Team[]=[];
@@ -80,8 +85,8 @@ const {student}=useStudent({
   userName:" ",
   password:" ",
   promotion:"1SC",
-  isLeader:false,
-  team:"", 
+  isLeader:true,
+  team:"test", 
   })
   /* this const for creation */
 const{Team}=useTeam({
@@ -96,7 +101,6 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
   mode: "onChange"
 });
 
-  
   const [teams,setTeams]=useState<Team[]>([]);
   const [invites,setInvites]=useState<Invite[]>([]); 
   const[createTeam,setCreateTeam]=useState(false);
@@ -114,9 +118,12 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
  const [value, setValue] = useStateWithLocalStorage(
     'myInvited'
   );
- 
-
 const [invited,setInvited]=useState<any[]>(value); //for member how issued the request
+const [pdf,setPdf]=useState(null);
+const [showReport,setShowReport]=useState(reportModal);
+const [selectedDate, setSelectedDate] = useState<string>("");
+    const [fill,setFill]=useState(false);
+    const [file, setFile] = useState();
   
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
@@ -154,6 +161,10 @@ const [invited,setInvited]=useState<any[]>(value); //for member how issued the r
     setminTeamMembers(data[i].minTeamMembers);
   }
     
+  };
+  const HandlerFile=(e:any)=>{
+    setPdf(e.target.files[0]);
+    console.log(pdf);
   };
   const getTeams=async()=>{
     let res = await axios.get("/team");
@@ -267,11 +278,6 @@ const getStudent=(id:number)=>{
    }
    return student;
 };
-/*const convert=()=>{
-var keys=Object.values(value);;
-console.log(value);
-console.log(keys);
-};*/
 
   const onSubmit=()=>{
     let i:number ;
@@ -307,6 +313,32 @@ console.log(keys);
     } 
     else setShowAlert1(true);
    };
+     const onChange = (e: any) => {
+        setFile(e.target.files[0]);
+        console.log(e.target.files[0]);
+        setFill(true);
+      };
+      const onSubmit1 = () => {
+         
+        let form_data = new FormData();
+        //var blob=new Blob([file],{type:"application/pdf"})
+        form_data.append('Report',file,'test');  
+        console.log(form_data.getAll('Report'));  
+        
+        let b ={
+            form:form_data,
+            daate:new Date()
+        } 
+        let url = "http://localhost:3000/report/";
+        axios
+          .post(url, b)
+          .then((res) => {
+            console.log(res.data);
+            setShowReport(false);
+          })
+          .catch((err) => console.log(err));
+      };
+      
         return (
      
     <IonPage>
@@ -329,6 +361,88 @@ console.log(keys);
                 message={'This Team Name Already Exists'}
                 buttons={['OK']}
       /> 
+      <IonModal
+      isOpen={showReport}
+      onDidDismiss={() => setShowReport(reportModal)}  
+      id="MODAL"
+      >
+      <IonContent>
+          <form onSubmit={handleSubmit(()=>onSubmit1())} style={{ padding: 10 , margin:20}}>
+        <IonLabel >
+          <h1>Report Informations </h1>
+        </IonLabel>
+        <IonItem>
+        <IonIcon slot="start" icon={calendarOutline}></IonIcon>
+          <IonLabel>Date</IonLabel>
+          <Controller
+          as={
+       <IonDatetime displayFormat="DD/MM/YYYY" value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)}></IonDatetime>         
+    }
+    control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("date", selected.detail.value);           
+              return selected.detail.value;
+            }}
+            name="date"
+            rules={{
+              required: true,              
+            }}
+    />  
+       </IonItem>
+       {showError("date")}
+        <IonItem>
+        <IonIcon slot="start" icon={documentTextOutline}></IonIcon>
+           {fill===true?(<IonLabel>{file.name}</IonLabel>)
+           :(
+            <IonLabel>Pdf Report </IonLabel> 
+           )}
+          
+         <Controller
+         as={  
+        <div className="upload-btn-wrapper">           
+        <IonButton fill="clear" size="default" color="dark">
+                          <IonIcon
+                            icon={downloadOutline}
+                            slot="end"
+                            size="large"
+                          ></IonIcon>
+                          
+                        </IonButton>
+  <input type="file" name="myfile" accept="application/pdf" onChange={onChange}/>
+   </div>
+   }
+   control={control}
+            onChangeName="onIonChange"
+            name="report"
+           
+    />  
+       </IonItem>
+          
+        <IonButtons class="ion-justify-content-center ion-margin-top">
+          <IonButton
+            color="danger"
+            fill="outline"
+            type="button"
+            onClick={()=>setShowReport(false)}
+          >
+            Cancel
+          </IonButton>
+          <IonButton
+            color="dark"
+            type="submit"
+            fill="outline"
+           onClick={(e)=>console.log(file)}
+           disabled={selectedDate.length !==0|| fill===false}
+          >
+            Submit
+          </IonButton>
+        </IonButtons>
+        </form>
+        </IonContent>
+
+    )
+      </IonModal>
       <IonModal
       isOpen={createTeam}
       onDidDismiss={() => setCreateTeam(false)}>
@@ -408,7 +522,7 @@ console.log(keys);
       <IonModal
           isOpen={showModal}
           onDidDismiss={() => setShowModal(false)}>
-             <IonContent class="ion-padding ion-text-center">
+             <IonContent class=" ion-text-center">
                {invited.length===0 ?(
               <div>
                 <h1>
@@ -431,10 +545,12 @@ console.log(keys);
                     </IonCardHeader >
                     <IonCardContent>                     
                       <IonItem>
-                        <IonIcon icon={personOutline} slot="start" ></IonIcon>
+                        
                         <h2>
                         {inv.sender.lastName} {inv.sender.firstName}</h2>
-                        <IonButtons slot="end" class="ion-justify-content-center">                         
+                        &nbsp;
+                        &nbsp;
+                        <IonButtons slot="end">                         
                         <IonButton
                         color="dark"
                         size="default"
@@ -587,11 +703,9 @@ console.log(keys);
         </IonToolbar>
         
       </IonHeader>
-           <IonContent >
-          
+           <IonContent >        
             <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
-         <IonGrid> 
-          
+         <IonGrid>         
           {student.team.length===0 ?(  
          /* for students that don't have a team yet*/          
          <IonRow class="ion-align-items-center container">
@@ -616,7 +730,6 @@ console.log(keys);
             setShowModal(true);
             console.log("cliquite",invited);
           }}
-
           >
           See Invites
           <IonIcon icon={mailOutline} />
@@ -627,8 +740,7 @@ console.log(keys);
              getTeams();
           }}          
            slot="start" className="but" color="danger" size="default" type="button"
-           
-           >
+            >
              Get Created 
             <IonIcon icon={chevronForwardOutline} />            
            </IonButton>
@@ -636,8 +748,7 @@ console.log(keys);
            </IonList>
            </IonCol>
            <IonCol></IonCol>         
-           </IonRow>
-         
+           </IonRow>       
            ):( 
              /* for The Leader that has a team */
            <IonRow>
@@ -645,7 +756,7 @@ console.log(keys);
                </IonCol>
            <IonCol
             size="12"
-              sizeMd="6"
+              sizeMd="10"
               class=" ion-text-center"> 
               
               {student.isLeader===true ?(              
@@ -659,7 +770,11 @@ console.log(keys);
                     <strong>{student.team}</strong>
                   </IonCardTitle>
                 </IonCardHeader>
-                <IonCardContent>  
+    
+                <IonCardContent>
+                    <IonGrid>
+                      <IonRow >
+                        <IonCol size="12" sizeMd="6"> 
                 <IonItem class="ion-text-center">
                                   <IonLabel>
                                     <strong>Team Members</strong>
@@ -675,7 +790,8 @@ console.log(keys);
                     }
                     )
                   }
-                  
+            
+
                   {ready===false &&(
                    <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
                   <IonButton 
@@ -704,7 +820,30 @@ console.log(keys);
                   </IonButton> 
                   </IonButtons> 
                   )}
-                                                 
+                 </IonCol>
+                 <IonCol size="12" sizeMd="6"> 
+                 <IonItem class="ion-text-center">
+                                  <IonLabel>
+                                    <strong>Reports</strong>
+                                  </IonLabel>
+                                </IonItem>
+                  
+                                <IonButton
+                            size="default"
+                            fill="clear"
+                            onClick={() => setShowReport(true)}
+                            color="danger"
+                          >
+                            <IonIcon
+                              icon={addCircleOutline}
+                              slot="start"
+                              size="large"
+                            ></IonIcon>
+                            Add A Report
+                          </IonButton>
+                 </IonCol>
+                 </IonRow>
+                 </IonGrid>                             
                 </IonCardContent>
                 
                 </IonCard>
