@@ -48,12 +48,9 @@ import {useTeam , Invite,Student,Team,useStudent} from "../../utils/Interfaces" 
 import Anime from "react-anime";
 import axios from "axios";
 import * as api from "../../utils/api";
-import {reportModal} from "../../stores/Store";
 let TEAM:Team ; //for a  team
 let inviteButton:boolean[]=[]; //for invited button 
 let TEAMS:Team[]=[];
-
-
  
 const useStateWithLocalStorage = (localStorageKey :string)=> {
   var storage=localStorage.getItem(localStorageKey);
@@ -120,7 +117,7 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
   );
 const [invited,setInvited]=useState<any[]>(value); //for member how issued the request
 const [pdf,setPdf]=useState(null);
-const [showReport,setShowReport]=useState(reportModal);
+const [showReport,setShowReport]=useState(false);
 const [selectedDate, setSelectedDate] = useState<string>("");
     const [fill,setFill]=useState(false);
     const [file, setFile] = useState();
@@ -363,7 +360,7 @@ const getStudent=(id:number)=>{
       /> 
       <IonModal
       isOpen={showReport}
-      onDidDismiss={() => setShowReport(reportModal)}  
+      onDidDismiss={() => setShowReport(false)}  
       id="MODAL"
       >
       <IonContent>
