@@ -21,6 +21,9 @@
     padding-left:20%;
     
     }
+    .btn{
+        background-image:url("../../images/arrow-upload-icon.png") ;
+    }
 .header{
     width: 100%;
     height: 90px;
@@ -36,7 +39,22 @@
     align-items: center;
     justify-content: center;
   }
-  .close.md{
-      margin-top:40%;
+   
+
+  .upload-btn-wrapper input[type=file] {
+    font-size: 200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
   }
- 
+
+
+#MODAL .modal-wrapper{
+    height: 50%;
+    border-radius: 5%;
+    position: absolute; 
+    display: block;  
+    
+}
+
