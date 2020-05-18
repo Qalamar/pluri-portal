@@ -11,6 +11,9 @@ class Variables {
   }, {
     Desciption: 'Another notification',
     Icon: 'addCircleOutline'
-  }];
+  },{
+  Desciption:'Send The Report',
+  Icon:'megaPhoneOutline'
+}];
 }
 export const store = new Variables();
