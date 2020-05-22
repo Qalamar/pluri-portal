@@ -77,3 +77,31 @@ export const useStudent = (overrides?: Partial<Student>): StudentState => {
   });
   return { student, setStudent };
 };
+export interface Invite {
+  id:number,
+  sender:number;
+  receiver:number;
+  accepted:boolean;
+  rejected:boolean;
+}
+export interface inviteState{
+  invite:Invite,
+  setInvite:React.Dispatch<React.SetStateAction<Invite>>;
+}
+export  const useInvite = (overrides?: Partial<Invite>): inviteState => {
+  const defaultInvite: Invite= {
+   id:0,
+   sender:0,
+   receiver:0,
+   accepted:false,
+   rejected:false
+
+
+  };
+  const [invite, setInvite] = useState<Invite>({
+...defaultInvite,
+...overrides,
+
+}); 
+return {invite,setInvite};
+}
