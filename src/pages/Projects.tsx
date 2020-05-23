@@ -70,15 +70,15 @@ const Projects: React.FC = () => {
               </IonCardTitle>
               <IonItem color="dark">
                 {" "}
-                <img alt="" src={require("../images/screenshots/tty1.jpg")} />
+                <img alt="" src={require("../images/background.png")} />
               </IonItem>
               <IonItemDivider color="dark"></IonItemDivider>
               <IonItem color="dark">
-                <img alt="" src={require("../images/screenshots/tty2.jpg")} />
+                <img alt="" src={require("../images/background.png")}  />
               </IonItem>
               <IonItemDivider color="dark"></IonItemDivider>
               <IonItem color="dark">
-                <img alt="" src={require("../images/screenshots/tty3.jpg")} />
+                <img alt="" src={require("../images/background.png")}  />
               </IonItem>
             </IonCard>
             <IonButton
@@ -111,7 +111,7 @@ const Projects: React.FC = () => {
                               <img
                                 alt=""
                                 className="img-round"
-                                src={require("../images/icons/tinygiantr.png")}
+                                src={require("../images/background.png")}
                               />
                             </IonCardHeader>
                             <IonCardTitle color="dark" className="ion-padding">
@@ -181,7 +181,7 @@ const Projects: React.FC = () => {
                               <img
                                 alt=""
                                 className="img-round"
-                                src={require("../images/icons/smartsort.png")}
+                                src={require("../images/background.png")}
                               />
                             </IonCardHeader>
                             <IonCardTitle color="dark" className="ion-padding">
