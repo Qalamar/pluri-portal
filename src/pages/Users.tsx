@@ -37,6 +37,7 @@ import UserForm from "../components/UserForm";
 import { addStudent, modifyStudent, getStudents } from "../utils/API";
 import "./Users.css";
 import Anime from "react-anime";
+import Toolbar from "../components/Toolbar";
 
 const Users: React.FC = observer(() => {
   const [students, setstudents] = useState([]);
@@ -63,16 +64,7 @@ const Users: React.FC = observer(() => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>
-            <strong>USERS</strong>
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Toolbar page={"Users"} />
       <IonContent>
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <UserForm />

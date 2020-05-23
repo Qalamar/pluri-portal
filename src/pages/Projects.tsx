@@ -33,22 +33,14 @@ import {
 import Image, { Shimmer } from "react-shimmer";
 import "./Projects.css";
 import Anime from "react-anime";
+import Toolbar from "../components/Toolbar";
 
 const Projects: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>
-            <strong>PROJECTS</strong>
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Toolbar page={"Projects"} />
       <IonContent>
         <IonModal
           cssClass="popup"

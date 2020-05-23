@@ -17,8 +17,10 @@ import {
   peopleCircleOutline,
   lockClosedOutline,
   schoolOutline,
-  peopleOutline
+  peopleOutline,
 } from "ionicons/icons";
+import { store } from "../stores/Store";
+
 import "./Menu.css";
 
 interface MenuProps extends RouteComponentProps {
@@ -62,12 +64,16 @@ const appPages: AppPage[] = [
     url: "/Teams",
     iosIcon: peopleOutline,
     mdIcon: peopleOutline,
-
-  }
+  },
 ];
 
 const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
   const [selected, setSelected] = useState([true, false, false, false, false]);
+
+  useEffect(() => {
+    store.page = selectedPage;
+    console.log(selectedPage);
+  }, []);
 
   return (
     <IonMenu contentId="main" type="overlay">
@@ -130,9 +136,10 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               routerDirection="none"
               lines="none"
               detail={false}
-            >  <IonIcon slot="start" icon={appPages[4].iosIcon} />
+            >
+              {" "}
+              <IonIcon slot="start" icon={appPages[4].iosIcon} />
               <IonLabel>{appPages[4].title}</IonLabel>
-
             </IonItem>
           </IonMenuToggle>
         </IonList>

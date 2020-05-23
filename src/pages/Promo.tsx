@@ -33,6 +33,7 @@ import PromoForm from "../components/PromoForm";
 import PromoFormEditing from "../components/PromoFormEditing";
 import { addCircleOutline, filterOutline } from "ionicons/icons";
 import * as api from "../utils/API";
+import Toolbar from "../components/Toolbar";
 
 export interface promotion {
   id: number;
@@ -81,17 +82,7 @@ const Promo: React.FC = () => {
   };
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-
-          <IonTitle>
-            <strong>Promos</strong>
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Toolbar page={"Promotions"} />
 
       <IonContent class="bg">
         <IonToast
@@ -134,156 +125,154 @@ const Promo: React.FC = () => {
           ]}
         />
 
-        <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
-          <IonGrid>
-            <IonRow class="ion-align-items-center">
-              <IonCol></IonCol>
-              <IonCol size="12" sizeMd="10">
-                <IonCard class="neum">
-                  <IonCardHeader class="head">
-                    <IonCardTitle color="light" className="title">
-                      Promos
-                    </IonCardTitle>
-                  </IonCardHeader>
-                  <IonCardContent>
-                    <IonGrid>
-                      <IonRow class="ion-justify-content-center ion-text-center ion-align-items-center">
-                        <IonCol size="12" sizeMd="8">
-                          <IonSearchbar
-                            placeholder="Search for a promotion"
-                            onIonChange={(e: CustomEvent) =>
-                              searchHandle(e.detail.value)
-                            }
-                          />
-                        </IonCol>
-                      </IonRow>
-                      <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
-                        <IonCol>
-                          <IonButton
-                            size="default"
-                            fill="clear"
-                            onClick={() => addPromo()}
-                            color="danger"
-                          >
-                            <IonIcon
-                              icon={addCircleOutline}
-                              slot="start"
-                              size="large"
-                            ></IonIcon>
-                            Add
-                          </IonButton>
-                          <IonButton fill="clear" size="default" color="dark">
-                            <IonIcon
-                              icon={filterOutline}
-                              slot="start"
-                              size="large"
-                            ></IonIcon>
-                            Filter
-                          </IonButton>
-                        </IonCol>
-                      </IonRow>
-                      <IonRow></IonRow>
-                      <IonRow>
-                        {" "}
-                        {promos.length === 0 ? (
-                          <div>Loading...</div>
-                        ) : (
-                          promos.map((promo: any, i) => {
-                            {
-                              return (
-                                <IonCol
-                                  size="12"
-                                  sizeMd="6"
-                                  class=" ion-text-center"
-                                >
-                                  <IonCard class="shadow ion-text-center">
-                                    <IonCardHeader class="ion-margin-bottom">
-                                      <IonCardTitle
-                                        color="light"
-                                        className="ion-padding title"
+        <IonGrid>
+          <IonRow class="ion-align-items-center">
+            <IonCol></IonCol>
+            <IonCol size="12" sizeMd="10">
+              <IonCard class="neum">
+                <IonCardHeader class="head">
+                  <IonCardTitle color="light" className="title">
+                    Promos
+                  </IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                  <IonGrid>
+                    <IonRow class="ion-justify-content-center ion-text-center ion-align-items-center">
+                      <IonCol size="12" sizeMd="8">
+                        <IonSearchbar
+                          placeholder="Search for a promotion"
+                          onIonChange={(e: CustomEvent) =>
+                            searchHandle(e.detail.value)
+                          }
+                        />
+                      </IonCol>
+                    </IonRow>
+                    <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
+                      <IonCol>
+                        <IonButton
+                          size="default"
+                          fill="clear"
+                          onClick={() => addPromo()}
+                          color="danger"
+                        >
+                          <IonIcon
+                            icon={addCircleOutline}
+                            slot="start"
+                            size="large"
+                          ></IonIcon>
+                          Add
+                        </IonButton>
+                        <IonButton fill="clear" size="default" color="dark">
+                          <IonIcon
+                            icon={filterOutline}
+                            slot="start"
+                            size="large"
+                          ></IonIcon>
+                          Filter
+                        </IonButton>
+                      </IonCol>
+                    </IonRow>
+                    <IonRow></IonRow>
+                    <IonRow>
+                      {" "}
+                      {promos.length === 0 ? (
+                        <div>Loading...</div>
+                      ) : (
+                        promos.map((promo: any, i) => {
+                          {
+                            return (
+                              <IonCol
+                                size="12"
+                                sizeMd="6"
+                                class=" ion-text-center"
+                              >
+                                <IonCard class="shadow ion-text-center">
+                                  <IonCardHeader class="ion-margin-bottom">
+                                    <IonCardTitle
+                                      color="light"
+                                      className="ion-padding title"
+                                    >
+                                      <strong>
+                                        {promo.level}
+                                        {promo.cycle}
+                                        {promo.specialityCode.localeCompare(
+                                          ""
+                                        ) !== 0 && (
+                                          <strong>
+                                            {" "}
+                                            -{promo.specialityCode}-{" "}
+                                          </strong>
+                                        )}
+                                      </strong>
+                                    </IonCardTitle>
+                                  </IonCardHeader>
+                                  {promo.cycle.localeCompare("CPI") === 0 ? (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>Preparatory</IonLabel>
+                                    </IonChip>
+                                  ) : (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>Secondary</IonLabel>
+                                    </IonChip>
+                                  )}
+                                  {promo.minTeamMembers != 0 && (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>
+                                        Min Team Members : &nbsp;
+                                        {promo.minTeamMembers}{" "}
+                                      </IonLabel>
+                                    </IonChip>
+                                  )}
+                                  {promo.maxTeamMembers != 0 && (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>
+                                        Max Team Members : &nbsp;
+                                        {promo.maxTeamMembers}{" "}
+                                      </IonLabel>
+                                    </IonChip>
+                                  )}
+                                  <IonCardContent>
+                                    <IonText>{promo.description}</IonText>
+
+                                    <IonList>
+                                      <IonButton
+                                        onClick={() => edit(promo)}
+                                        target="_blank"
+                                        color="danger"
                                       >
-                                        <strong>
-                                          {promo.level}
-                                          {promo.cycle}
-                                          {promo.specialityCode.localeCompare(
-                                            ""
-                                          ) !== 0 && (
-                                            <strong>
-                                              {" "}
-                                              -{promo.specialityCode}-{" "}
-                                            </strong>
-                                          )}
-                                        </strong>
-                                      </IonCardTitle>
-                                    </IonCardHeader>
-                                    {promo.cycle.localeCompare("CPI") === 0 ? (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>Preparatory</IonLabel>
-                                      </IonChip>
-                                    ) : (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>Secondary</IonLabel>
-                                      </IonChip>
-                                    )}
-                                    {promo.minTeamMembers != 0 && (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>
-                                          Min Team Members : &nbsp;
-                                          {promo.minTeamMembers}{" "}
+                                        <IonLabel class="ion-margin">
+                                          Edit
                                         </IonLabel>
-                                      </IonChip>
-                                    )}
-                                    {promo.maxTeamMembers != 0 && (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>
-                                          Max Team Members : &nbsp;
-                                          {promo.maxTeamMembers}{" "}
+                                      </IonButton>
+                                      <IonButton
+                                        onClick={() => {
+                                          setId(promo.id);
+                                          setShowAlert(true);
+                                        }}
+                                        target="_blank"
+                                        color="dark"
+                                      >
+                                        <IonLabel class="ion-margin">
+                                          Delete
                                         </IonLabel>
-                                      </IonChip>
-                                    )}
-                                    <IonCardContent>
-                                      <IonText>{promo.description}</IonText>
+                                      </IonButton>
+                                    </IonList>
+                                  </IonCardContent>
+                                </IonCard>{" "}
+                              </IonCol>
+                            );
+                          }
+                        })
+                      )}
+                    </IonRow>
+                  </IonGrid>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
 
-                                      <IonList>
-                                        <IonButton
-                                          onClick={() => edit(promo)}
-                                          target="_blank"
-                                          color="danger"
-                                        >
-                                          <IonLabel class="ion-margin">
-                                            Edit
-                                          </IonLabel>
-                                        </IonButton>
-                                        <IonButton
-                                          onClick={() => {
-                                            setId(promo.id);
-                                            setShowAlert(true);
-                                          }}
-                                          target="_blank"
-                                          color="dark"
-                                        >
-                                          <IonLabel class="ion-margin">
-                                            Delete
-                                          </IonLabel>
-                                        </IonButton>
-                                      </IonList>
-                                    </IonCardContent>
-                                  </IonCard>{" "}
-                                </IonCol>
-                              );
-                            }
-                          })
-                        )}
-                      </IonRow>
-                    </IonGrid>
-                  </IonCardContent>
-                </IonCard>
-              </IonCol>
-
-              <IonCol></IonCol>
-            </IonRow>
-          </IonGrid>
-        </Anime>
+            <IonCol></IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
