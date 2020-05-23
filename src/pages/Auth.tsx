@@ -37,11 +37,10 @@ import {
   removeCircleOutline,
 } from "ionicons/icons";
 import axios from "axios";
-import NotificationArea from '../components/NotificationArea'
+import NotificationArea from "../components/NotificationArea";
 import "./Auth.css";
 
 const Auth: React.FC = () => {
-
   const [showPopover, setShowPopover] = useState<{
     open: boolean;
     event: Event | undefined;
@@ -67,7 +66,7 @@ const Auth: React.FC = () => {
     e.preventDefault();
     console.log(image);
     let form_data = new FormData();
-    form_data.append("image", image, "Test");
+    form_data.append("image", "Test");
     let url = "http://localhost:3000/employees/";
     axios
       .post(url, form_data, {
@@ -114,9 +113,7 @@ const Auth: React.FC = () => {
               }
             >
               <NotificationArea />
-
             </IonPopover>
-
           </IonButtons>
         </IonToolbar>
       </IonHeader>

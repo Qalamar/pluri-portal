@@ -21,10 +21,11 @@ import {
   IonButton,
   IonModal,
   IonItemDivider,
-  IonChip
+  IonChip,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { linkOutline, imageOutline, logoGithub } from "ionicons/icons";
+import Image, { Shimmer } from "react-shimmer";
 import "./Projects.css";
 import Anime from "react-anime";
 
@@ -74,11 +75,11 @@ const Projects: React.FC = () => {
               </IonItem>
               <IonItemDivider color="dark"></IonItemDivider>
               <IonItem color="dark">
-                <img alt="" src={require("../images/background.png")}  />
+                <img alt="" src={require("../images/background.png")} />
               </IonItem>
               <IonItemDivider color="dark"></IonItemDivider>
               <IonItem color="dark">
-                <img alt="" src={require("../images/background.png")}  />
+                <img alt="" src={require("../images/background.png")} />
               </IonItem>
             </IonCard>
             <IonButton
@@ -108,11 +109,13 @@ const Projects: React.FC = () => {
                         <IonCol size="12" sizeMd="6">
                           <IonCard class="shadow ion-text-center">
                             <IonCardHeader>
-                              <img
-                                alt=""
-                                className="img-round"
-                                src={require("../images/background.png")}
-                              />
+                              <div className="img-round">
+                                {/* <Image
+                                  src="https://source.unsplash.com/random/800x600"
+                                  fallback={<Shimmer width={64} height={64} />}
+                                /> */}
+                                <Shimmer height={100} width={100} />
+                              </div>
                             </IonCardHeader>
                             <IonCardTitle color="dark" className="ion-padding">
                               <strong>Example project</strong>
@@ -181,7 +184,8 @@ const Projects: React.FC = () => {
                               <img
                                 alt=""
                                 className="img-round"
-                                src={require("../images/background.png")}
+                                loading="lazy"
+                                src="https://i.picsum.photos/id/893/2080/1440.jpg"
                               />
                             </IonCardHeader>
                             <IonCardTitle color="dark" className="ion-padding">

@@ -20,13 +20,13 @@ import {
   IonButton,
   IonSearchbar,
   IonModal,
-  IonItem
+  IonItem,
 } from "@ionic/react";
 import React, { useEffect, useState, useReducer } from "react";
 import {
   personCircleOutline,
   addCircleOutline,
-  filterOutline
+  filterOutline,
 } from "ionicons/icons";
 
 import axios from "axios";
@@ -34,7 +34,7 @@ import { observer } from "mobx-react";
 import styled from "styled-components";
 import { store } from "../stores/Store";
 import UserForm from "../components/UserForm";
-import { addStudent, modifyStudent, getStudents } from "../utils/api";
+import { addStudent, modifyStudent, getStudents } from "../utils/API";
 import "./Users.css";
 import Anime from "react-anime";
 

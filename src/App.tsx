@@ -5,7 +5,7 @@ import Projects from "./pages/Projects";
 import Users from "./pages/Users";
 import Promo from "./pages/Promo";
 import Teams from "./pages/Teams";
-import MyTeam from "./Student/MyTeam";
+import MyTeam from "./student/MyTeam";
 import React, { useState } from "react";
 import { IonApp, IonRouterOutlet, IonSplitPane, IonButton } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -30,8 +30,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
-import * as api from './utils/api';
-
+import * as api from "./utils/API";
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");

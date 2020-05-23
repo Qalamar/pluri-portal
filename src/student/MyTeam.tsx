@@ -53,7 +53,7 @@ import {
 } from "../utils/Interfaces";
 import Anime from "react-anime";
 import axios from "axios";
-import * as api from "../utils/api";
+import * as api from "../utils/API";
 let TEAM: Team; //for a  team
 let inviteButton: boolean[] = []; //for invited button
 let TEAMS: Team[] = [];
@@ -305,10 +305,11 @@ const MyTeam: React.FC = observer(() => {
     console.log(e.target.files[0]);
     setFill(true);
   };
-  const onSubmit1 = () => {
+  const onSubmit1 = (file: any) => {
+    file.preventDefault();
     let form_data = new FormData();
     //var blob=new Blob([file],{type:"application/pdf"})
-    form_data.append("Report", file, "test");
+    form_data.append("Report", file);
     console.log(form_data.getAll("Report"));
 
     let b = {
@@ -352,7 +353,7 @@ const MyTeam: React.FC = observer(() => {
       >
         <IonContent>
           <form
-            onSubmit={handleSubmit(() => onSubmit1())}
+            onSubmit={handleSubmit(() => onSubmit1(file))}
             style={{ padding: 10, margin: 20 }}
           >
             <IonLabel>
@@ -385,7 +386,7 @@ const MyTeam: React.FC = observer(() => {
             <IonItem>
               <IonIcon slot="start" icon={documentTextOutline}></IonIcon>
               {fill === true ? (
-                <IonLabel>{file.name}</IonLabel>
+                <IonLabel>{file}</IonLabel>
               ) : (
                 <IonLabel>Pdf Report </IonLabel>
               )}
