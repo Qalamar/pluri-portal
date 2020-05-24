@@ -29,20 +29,32 @@ import {
   imageOutline,
   logoGithub,
   personCircleOutline,
+  addCircleOutline,
+  filterOutline,
 } from "ionicons/icons";
 import Image, { Shimmer } from "react-shimmer";
 import "./Projects.css";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
+import ProjectForm from "../components/ProjectForm";
+import { observer } from "mobx-react";
 
-const Projects: React.FC = () => {
+const Projects: React.FC = observer(() => {
   const [showModal, setShowModal] = useState(false);
+
+  const addProject = () => {
+    setShowModal(true);
+  };
 
   return (
     <IonPage>
       <Toolbar page={"Projects"} />
+      <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+        <ProjectForm />
+        <div>Hey</div>
+      </IonModal>
       <IonContent>
-        <IonModal
+        {/* <IonModal
           cssClass="popup"
           isOpen={showModal}
           onDidDismiss={() => setShowModal(false)}
@@ -87,8 +99,10 @@ const Projects: React.FC = () => {
               Close Preview
             </IonButton>
           </IonContent>
+        </IonModal> */}
+        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+          <ProjectForm />
         </IonModal>
-
         <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
           <IonGrid>
             <IonRow class="ion-align-items-center">
@@ -102,6 +116,36 @@ const Projects: React.FC = () => {
                   </IonCardHeader>
                   <IonCardContent>
                     <IonGrid>
+                      <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
+                        <IonCol>
+                          <IonButton
+                            onClick={() => addProject()}
+                            size="default"
+                            fill="clear"
+                            color="danger"
+                          >
+                            <IonIcon
+                              icon={addCircleOutline}
+                              slot="start"
+                              size="large"
+                            ></IonIcon>
+                            Add
+                          </IonButton>
+                          <IonButton
+                            onClick={() => addProject()}
+                            fill="clear"
+                            size="default"
+                            color="dark"
+                          >
+                            <IonIcon
+                              icon={filterOutline}
+                              slot="start"
+                              size="large"
+                            ></IonIcon>
+                            Filter
+                          </IonButton>
+                        </IonCol>
+                      </IonRow>
                       <IonRow>
                         <IonCol size="12" sizeMd="6" sizeLg="4">
                           <IonCard class="shadow ion-text-center">
@@ -251,6 +295,6 @@ const Projects: React.FC = () => {
       </IonContent>
     </IonPage>
   );
-};
+});
 
 export default Projects;

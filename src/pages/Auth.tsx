@@ -71,8 +71,6 @@ const Auth: React.FC = () => {
   const showProfile = () => {
     axios.get("/employees?id=1").then(function (response) {
       let data = response.data;
-
-      // handle success
       console.log(data[0].email);
     });
   };
@@ -172,7 +170,7 @@ const Auth: React.FC = () => {
         <IonGrid>
           <IonRow class="ion-align-items-center container">
             <IonCol></IonCol>
-            <IonCol size="12" sizeMd="5">
+            <IonCol size="12" sizeMd="7" sizeLg="4">
               <IonCard class="ion-text-center shadow">
                 <IonCardHeader>
                   <IonTitle color="light" class="title ion-padding">

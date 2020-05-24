@@ -138,7 +138,8 @@ const Users: React.FC = observer(() => {
                               return (
                                 <IonCol
                                   size="12"
-                                  sizeMd="3"
+                                  sizeMd="4"
+                                  sizeLg="3"
                                   class=" ion-text-center"
                                 >
                                   <Anime
