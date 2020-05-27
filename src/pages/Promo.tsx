@@ -22,7 +22,7 @@ import {
   IonIcon,
   IonAlert,
   IonToast,
-  IonText
+  IonText,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
@@ -32,16 +32,17 @@ import { store } from "../stores/Store";
 import PromoForm from "../components/PromoForm";
 import PromoFormEditing from "../components/PromoFormEditing";
 import { addCircleOutline, filterOutline } from "ionicons/icons";
-import * as api from "../utils/api";
+import * as api from "../utils/API";
+import Toolbar from "../components/Toolbar";
 
 export interface promotion {
   id: number;
-  codePromotion: string;
-  description:string;
+  description: string;
   cycle: string;
   level: string;
-  academicYear: string;
-  specialtyCode: string;
+  specialityCode: string;
+  minTeamMembers: number;
+  maxTeamMembers: number;
 }
 
 const Promo: React.FC = () => {
@@ -52,19 +53,20 @@ const Promo: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [editpromo, setEditpromo] = useState<promotion>({
     id: 0,
-    codePromotion: "",
-    description:"",
+    description: "",
     cycle: "",
     level: "",
-    academicYear: "",
-    specialtyCode: "",
+    specialityCode: "",
+    minTeamMembers: 0,
+    maxTeamMembers: 0,
   });
+
   const [showToast, setshowToast] = useState(false);
   const addPromo = () => {
     setShowModal(true);
   };
   const getPromos = async () => {
-    let res = await api.getPromotions();
+    let res = await axios.get("/promotion");
     let data = res.data;
     setpromos(data);
   };
@@ -80,17 +82,7 @@ const Promo: React.FC = () => {
   };
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-
-          <IonTitle>
-            <strong>Promos</strong>
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Toolbar page={"Promotions"} />
 
       <IonContent class="bg">
         <IonToast
@@ -194,66 +186,79 @@ const Promo: React.FC = () => {
                                 sizeMd="6"
                                 class=" ion-text-center"
                               >
-                                <Anime
-                                  opacity={[0, 1]}
-                                  duration={2000}
-                                  easing="easeOutElastic"
-                                >
-                                  <IonCard class="shadow ion-text-center">
-                                    <IonCardHeader class="ion-margin-bottom">
-                                      <IonCardTitle
-                                        color="light"
-                                        className="ion-padding title"
+                                <IonCard class="shadow ion-text-center">
+                                  <IonCardHeader class="ion-margin-bottom">
+                                    <IonCardTitle
+                                      color="light"
+                                      className="ion-padding title"
+                                    >
+                                      <strong>
+                                        {promo.level}
+                                        {promo.cycle}
+                                        {promo.specialityCode.localeCompare(
+                                          ""
+                                        ) !== 0 && (
+                                          <strong>
+                                            {" "}
+                                            -{promo.specialityCode}-{" "}
+                                          </strong>
+                                        )}
+                                      </strong>
+                                    </IonCardTitle>
+                                  </IonCardHeader>
+                                  {promo.cycle.localeCompare("CPI") === 0 ? (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>Preparatory</IonLabel>
+                                    </IonChip>
+                                  ) : (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>Secondary</IonLabel>
+                                    </IonChip>
+                                  )}
+                                  {promo.minTeamMembers != 0 && (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>
+                                        Min Team Members : &nbsp;
+                                        {promo.minTeamMembers}{" "}
+                                      </IonLabel>
+                                    </IonChip>
+                                  )}
+                                  {promo.maxTeamMembers != 0 && (
+                                    <IonChip outline={true} color="dark">
+                                      <IonLabel>
+                                        Max Team Members : &nbsp;
+                                        {promo.maxTeamMembers}{" "}
+                                      </IonLabel>
+                                    </IonChip>
+                                  )}
+                                  <IonCardContent>
+                                    <IonText>{promo.description}</IonText>
+
+                                    <IonList>
+                                      <IonButton
+                                        onClick={() => edit(promo)}
+                                        target="_blank"
+                                        color="danger"
                                       >
-                                        <strong>{promo.codePromotion}</strong>
-                                      </IonCardTitle>
-                                    </IonCardHeader>
-
-                                    <IonChip outline={true} color="dark">
-                                      <IonLabel>{promo.level} </IonLabel>
-                                    </IonChip>
-                                    <IonChip outline={true} color="dark">
-                                      <IonLabel>{promo.cycle}</IonLabel>
-                                    </IonChip>
-                                    <IonChip outline={true} color="dark">
-                                      <IonLabel>{promo.academicYear}</IonLabel>
-                                    </IonChip>
-                                    {promo.specialityCode !== "" && (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>
-                                          {promo.specialtyCode}
+                                        <IonLabel class="ion-margin">
+                                          Edit
                                         </IonLabel>
-                                      </IonChip>
-                                    )}
-
-                                    <IonCardContent>
-                                      <IonText>{promo.description}</IonText>
-                                      <IonList>
-                                        <IonButton
-                                          onClick={() => edit(promo)}
-                                          target="_blank"
-                                          color="danger"
-                                        >
-                                          <IonLabel class="ion-margin">
-                                            Edit
-                                          </IonLabel>
-                                        </IonButton>
-                                        <IonButton
-                                          onClick={() => {
-                                            setId(promo.id);
-                                            setShowAlert(true);
-                                          }}
-                                          target="_blank"
-                                          color="dark"
-                                        >
-                                          <IonLabel class="ion-margin">
-                                            Delete
-                                          </IonLabel>
-                                        </IonButton>
-                                      </IonList>
-                                    </IonCardContent>
-                                  </IonCard>
-                                </Anime>
+                                      </IonButton>
+                                      <IonButton
+                                        onClick={() => {
+                                          setId(promo.id);
+                                          setShowAlert(true);
+                                        }}
+                                        target="_blank"
+                                        color="dark"
+                                      >
+                                        <IonLabel class="ion-margin">
+                                          Delete
+                                        </IonLabel>
+                                      </IonButton>
+                                    </IonList>
+                                  </IonCardContent>
+                                </IonCard>{" "}
                               </IonCol>
                             );
                           }

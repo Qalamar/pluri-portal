@@ -20,13 +20,13 @@ import {
   IonButton,
   IonSearchbar,
   IonModal,
-  IonItem
+  IonItem,
 } from "@ionic/react";
 import React, { useEffect, useState, useReducer } from "react";
 import {
   personCircleOutline,
   addCircleOutline,
-  filterOutline
+  filterOutline,
 } from "ionicons/icons";
 
 import axios from "axios";
@@ -34,9 +34,10 @@ import { observer } from "mobx-react";
 import styled from "styled-components";
 import { store } from "../stores/Store";
 import UserForm from "../components/UserForm";
-import { addStudent, modifyStudent, getStudents } from "../utils/api";
+import { addStudent, modifyStudent, getStudents } from "../utils/API";
 import "./Users.css";
 import Anime from "react-anime";
+import Toolbar from "../components/Toolbar";
 
 const Users: React.FC = observer(() => {
   const [students, setstudents] = useState([]);
@@ -63,16 +64,7 @@ const Users: React.FC = observer(() => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>
-            <strong>USERS</strong>
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Toolbar page={"Users"} />
       <IonContent>
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <UserForm />
@@ -146,7 +138,8 @@ const Users: React.FC = observer(() => {
                               return (
                                 <IonCol
                                   size="12"
-                                  sizeMd="3"
+                                  sizeMd="4"
+                                  sizeLg="3"
                                   class=" ion-text-center"
                                 >
                                   <Anime

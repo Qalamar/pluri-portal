@@ -9,7 +9,7 @@ import {
   IonToast,
   IonSelectOption,
   IonButtons,
-  IonAlert,
+  IonAlert
 } from "@ionic/react";
 import {
   calendarOutline,
@@ -18,15 +18,18 @@ import {
   layersOutline,
   constructOutline,
   clipboardOutline,
+  trendingDownOutline,
+  trendingUpOutline
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import "./PromoForm.css";
-import * as api from "../utils/api";
+import * as api from "../utils/API";
 import { promotion } from "../pages/Promo";
 
 let renderCount = 0;
+
 
 export interface Promo {
   promo: promotion;
@@ -39,12 +42,12 @@ interface PromoState {
 export const usePromo = (overrides?: Partial<promotion>): PromoState => {
   const defaultPromo: promotion = {
     id: 0,
-    codePromotion: "",
     description: "",
     cycle: "",
     level: "",
-    academicYear: "",
-    specialtyCode: "",
+    specialityCode: "",
+    minTeamMembers: 0,
+    maxTeamMembers: 0,
   };
   const [promot, setPromo] = useState<promotion>({
     ...defaultPromo,
@@ -53,18 +56,20 @@ export const usePromo = (overrides?: Partial<promotion>): PromoState => {
   return { promot, setPromo };
 };
 const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
+
   const { promot } = usePromo({
     id: promo.id,
-    codePromotion: promo.codePromotion,
     description: promo.description,
     cycle: promo.cycle,
     level: promo.level,
-    academicYear: promo.academicYear,
-    specialtyCode: promo.specialtyCode,
+
+    specialityCode: promo.specialityCode,
+    minTeamMembers: promo.minTeamMembers,
+    maxTeamMembers: promo.maxTeamMembers
   });
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...promot },
-    mode: "onChange",
+    mode: "onChange"
   });
   renderCount++;
 
@@ -73,6 +78,7 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
   const [SelectCycle, setCycle] = useState<string>();
   const [SelectSpeciality, setSpeciality] = useState<string>();
 
+
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
     return error ? (
@@ -80,6 +86,7 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
         {error.message || "Field Is Required"}
       </div>
     ) : null;
+
   };
   return (
     <IonContent color="dark">
@@ -92,61 +99,38 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
       <IonAlert
         isOpen={showAlert}
         onDidDismiss={() => setShowAlert(false)}
-        message={"Do you Confirm your demand ?"}
+        message={'Do you Confirm your demand ?'}
         buttons={[
           {
-            text: "Cancel",
-            role: "cancel",
-            cssClass: "secondary",
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
             handler: () => {
-              console.log("cancel");
-            },
+              console.log('cancel');
+            }
           },
           {
-            text: "Save",
+            text: 'Save',
             handler: () => {
-              api.modifyPromotion(
-                promot.id,
-                promot.codePromotion,
+              api.modifyPromotion(promot.id,
+
                 promot.description,
                 promot.cycle,
                 promot.level,
-                promot.academicYear,
-                promot.specialtyCode
+
+                promot.specialityCode,
+                promot.minTeamMembers,
+                promot.maxTeamMembers
               );
               setshowToast(true);
-            },
-          },
+            }
+          }
         ]}
       />
-      <form
-        onSubmit={handleSubmit(() => setShowAlert(true))}
-        style={{ padding: 20, margin: 30, height: "auto" }}
-      >
+      <form onSubmit={handleSubmit(() => setShowAlert(true))} style={{ padding: 20, margin: 30, height: 'auto' }} >
         <IonLabel color="light">
           <h1>Information About Promotion </h1>
         </IonLabel>
-        <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={codeOutline}></IonIcon>
-          <Controller
-            as={IonInput}
-            placeholder="Code Promo"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("CodePromo", selected.detail.value);
-              promot.codePromotion = selected.detail.value;
-
-              return selected.detail.value;
-            }}
-            name="codePromotion"
-            rules={{
-              required: true,
-              minLength: { value: 2, message: "Must be 2 chars long" },
-            }}
-          />
-        </IonItem>
-        {showError("codePromotion")}
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={clipboardOutline}></IonIcon>
           <Controller
@@ -176,12 +160,12 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
               <IonSelect
                 value={SelectCycle}
                 placeholder="Select One"
-                onIonChange={(e) => setCycle(e.detail.value)}
+                onIonChange={e => setCycle(e.detail.value)}
               >
-                <IonSelectOption value="Preparatory">
+                <IonSelectOption value="CPI">
                   Preparatory
-                </IonSelectOption>
-                <IonSelectOption value="Secondary">Secondary</IonSelectOption>
+                  </IonSelectOption>
+                <IonSelectOption value="SC">Secondary</IonSelectOption>
               </IonSelect>
             }
             control={control}
@@ -193,11 +177,12 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
             }}
             name="cycle"
             rules={{
-              required: true,
+              required: true
             }}
           />
           {showError("cycle")}
         </IonItem>
+
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
           <Controller
@@ -215,34 +200,11 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
               required: true,
               pattern: {
                 value: /^[1-9]$/i,
-                message: "invalid Level",
-              },
+                message: "invalid Level"
+              }
             }}
           />
           {showError("level")}
-        </IonItem>
-        <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={calendarOutline}></IonIcon>
-          <Controller
-            as={IonInput}
-            placeholder="Academic Year"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("AcademicYear", selected.detail.value);
-              promot.academicYear = selected.detail.value;
-              return selected.detail.value;
-            }}
-            name="academicYear"
-            rules={{
-              required: true,
-              pattern: {
-                value: /^20[0-9][0-9]-20[0-9][0-9]$/i,
-                message: "Academic year must be 20xx-20xx",
-              },
-            }}
-          />
-          {showError("academicYear")}
         </IonItem>
         <IonItem color="dark">
           <IonLabel>Speciality</IonLabel>
@@ -252,10 +214,8 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
               <IonSelect
                 value={SelectSpeciality}
                 placeholder="Select One"
-                onIonChange={(e) => setSpeciality(e.detail.value)}
-              >
-                {" "}
-                <IonSelectOption value="">None</IonSelectOption>
+                onIonChange={e => setSpeciality(e.detail.value)}
+              >   <IonSelectOption value="">None</IonSelectOption>
                 <IonSelectOption value="ISI">ISI</IonSelectOption>
                 <IonSelectOption value="SIW">SIW</IonSelectOption>
               </IonSelect>
@@ -264,16 +224,70 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log(selected.detail.value);
-              promot.specialtyCode = selected.detail.value;
+              promot.specialityCode = selected.detail.value;
               return selected.detail.value;
             }}
             name="specialityCode"
             rules={{
-              required: false,
+              required: false
             }}
           />
           {showError("specialityCode")}
-        </IonItem>{" "}
+        </IonItem>
+        <br />
+        <IonLabel color="light">
+          <h2>Team Members  </h2>
+        </IonLabel>
+        <IonItem color="dark" class="">
+          <IonIcon slot="start" icon={trendingDownOutline}></IonIcon>
+          <Controller
+            as={IonInput}
+            placeholder="Min Team Members"
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("minTeamMembers", selected.detail.value);
+              promot.minTeamMembers = selected.detail.value;
+              return selected.detail.value;
+
+            }}
+            name="minTeamMembers"
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "invalid Number"
+              }
+            }}
+          />
+          {showError("minTeamMembers")}
+        </IonItem>
+        <IonItem color="dark" class="">
+          <IonIcon slot="start" icon={trendingUpOutline}></IonIcon>
+          <Controller
+            as={IonInput}
+            placeholder="Max Team Members"
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("maxTeamMembers", selected.detail.value);
+              promot.maxTeamMembers = selected.detail.value;
+              return selected.detail.value;
+
+            }}
+            name="maxTeamMembers"
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "invalid Number"
+              }
+            }}
+          />
+          {showError("maxTeamMembers")}
+        </IonItem>
+
+        {" "}
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton
             color="danger"
@@ -284,7 +298,7 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
             }}
           >
             Reset Form
-          </IonButton>
+            </IonButton>
           <IonButton
             color="light"
             type="submit"
@@ -292,10 +306,11 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
             disabled={formState.dirty === false}
           >
             Save
-          </IonButton>
+            </IonButton>
         </IonButtons>
       </form>
     </IonContent>
   );
-});
+}
+);
 export default PromoFormEditing;

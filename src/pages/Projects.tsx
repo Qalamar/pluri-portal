@@ -21,30 +21,40 @@ import {
   IonButton,
   IonModal,
   IonItemDivider,
-  IonChip
+  IonChip,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { linkOutline, imageOutline, logoGithub } from "ionicons/icons";
+import {
+  linkOutline,
+  imageOutline,
+  logoGithub,
+  personCircleOutline,
+  addCircleOutline,
+  filterOutline,
+} from "ionicons/icons";
+import Image, { Shimmer } from "react-shimmer";
 import "./Projects.css";
 import Anime from "react-anime";
+import Toolbar from "../components/Toolbar";
+import ProjectForm from "../components/ProjectForm";
+import { observer } from "mobx-react";
 
-const Projects: React.FC = () => {
+const Projects: React.FC = observer(() => {
   const [showModal, setShowModal] = useState(false);
+
+  const addProject = () => {
+    setShowModal(true);
+  };
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>
-            <strong>PROJECTS</strong>
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Toolbar page={"Projects"} />
+      <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+        <ProjectForm />
+        <div>Hey</div>
+      </IonModal>
       <IonContent>
-        <IonModal
+        {/* <IonModal
           cssClass="popup"
           isOpen={showModal}
           onDidDismiss={() => setShowModal(false)}
@@ -70,15 +80,15 @@ const Projects: React.FC = () => {
               </IonCardTitle>
               <IonItem color="dark">
                 {" "}
-                <img alt="" src={require("../images/screenshots/tty1.jpg")} />
+                <img alt="" src={require("../images/background.png")} />
               </IonItem>
               <IonItemDivider color="dark"></IonItemDivider>
               <IonItem color="dark">
-                <img alt="" src={require("../images/screenshots/tty2.jpg")} />
+                <img alt="" src={require("../images/background.png")} />
               </IonItem>
               <IonItemDivider color="dark"></IonItemDivider>
               <IonItem color="dark">
-                <img alt="" src={require("../images/screenshots/tty3.jpg")} />
+                <img alt="" src={require("../images/background.png")} />
               </IonItem>
             </IonCard>
             <IonButton
@@ -89,8 +99,10 @@ const Projects: React.FC = () => {
               Close Preview
             </IonButton>
           </IonContent>
+        </IonModal> */}
+        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+          <ProjectForm />
         </IonModal>
-
         <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
           <IonGrid>
             <IonRow class="ion-align-items-center">
@@ -104,144 +116,168 @@ const Projects: React.FC = () => {
                   </IonCardHeader>
                   <IonCardContent>
                     <IonGrid>
+                      <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
+                        <IonCol>
+                          <IonButton
+                            onClick={() => addProject()}
+                            size="default"
+                            fill="clear"
+                            color="danger"
+                          >
+                            <IonIcon
+                              icon={addCircleOutline}
+                              slot="start"
+                              size="large"
+                            ></IonIcon>
+                            Add
+                          </IonButton>
+                          <IonButton
+                            onClick={() => addProject()}
+                            fill="clear"
+                            size="default"
+                            color="dark"
+                          >
+                            <IonIcon
+                              icon={filterOutline}
+                              slot="start"
+                              size="large"
+                            ></IonIcon>
+                            Filter
+                          </IonButton>
+                        </IonCol>
+                      </IonRow>
                       <IonRow>
-                        <IonCol size="12" sizeMd="6">
+                        <IonCol size="12" sizeMd="6" sizeLg="4">
                           <IonCard class="shadow ion-text-center">
                             <IonCardHeader>
-                              <img
-                                alt=""
-                                className="img-round"
-                                src={require("../images/icons/tinygiantr.png")}
-                              />
+                              <IonCardTitle
+                                color="light"
+                                className="ion-padding project"
+                              >
+                                E-Health
+                              </IonCardTitle>
                             </IonCardHeader>
-                            <IonCardTitle color="dark" className="ion-padding">
-                              <strong>Example project</strong>
-                            </IonCardTitle>
+                            <div className="ion-padding"></div>
                             <IonChip outline={true} color="dark">
-                              <IonLabel>Construct2</IonLabel>
+                              <IonLabel>1CS</IonLabel>
                             </IonChip>
                             <IonChip color="dark" outline={true}>
-                              <IonLabel>HTML5</IonLabel>
+                              <IonLabel>MySQL</IonLabel>
                             </IonChip>
                             <IonChip color="dark" outline={true}>
-                              <IonLabel>Canvas</IonLabel>
+                              <IonLabel>Security</IonLabel>
                             </IonChip>
                             <IonChip color="dark" outline={true}>
-                              <IonLabel>Javascript</IonLabel>
+                              <IonLabel>Mobile</IonLabel>
                             </IonChip>
-                            <IonChip color="dark" outline={true}>
-                              <IonLabel>Cordova</IonLabel>
-                            </IonChip>
+
                             <IonCardContent>
-                              <IonText>A puzzle-platformer 2D game.</IonText>
-                              <IonList>
-                                <IonButton
-                                  href="https://thetinygiant.netlify.com/"
-                                  target="_blank"
-                                  color="danger"
-                                >
-                                  <IonIcon icon={linkOutline}></IonIcon>
-                                  <IonLabel class="ion-margin">Demo</IonLabel>
-                                </IonButton>
+                              <IonText>
+                                A project concerning the ongoing COVID-19
+                                pandemic directed towards the younger population
+                                (Children)
+                              </IonText>
+                              <IonList class="ion-padding-top">
                                 <IonButton
                                   color="dark"
                                   onClick={() => setShowModal(true)}
                                 >
                                   <IonIcon icon={imageOutline}></IonIcon>
                                   <IonLabel class="ion-margin">
-                                    Preview
+                                    Documents
                                   </IonLabel>
                                 </IonButton>
-                                <IonItem class="ion-text-center">
-                                  <IonLabel>
-                                    <strong>Information</strong>
+                                <IonItem
+                                  lines="none"
+                                  class="ion-text-center ion-padding-top"
+                                >
+                                  <IonLabel class="ion-margin">
+                                    <h1>
+                                      <strong>Authors</strong>
+                                    </h1>
                                   </IonLabel>
                                 </IonItem>
                                 <IonItem class="ion-text-center">
-                                  <IonLabel>
-                                    Cross-platform support: iOS, Android and Web
-                                    portals.
-                                  </IonLabel>
+                                  <IonIcon
+                                    size="large"
+                                    icon={personCircleOutline}
+                                  ></IonIcon>
+                                  <IonLabel>Bacha Bragdy</IonLabel>
                                 </IonItem>
-                                <IonItem class="ion-text-center">
-                                  <IonLabel>
-                                    +150.000 sessions across all platforms.
-                                  </IonLabel>
-                                </IonItem>
-                                <IonItem class="ion-text-center">
-                                  <IonLabel>Nominated for 5 awards.</IonLabel>
+                                <IonItem lines="none" class="ion-text-center">
+                                  <IonIcon
+                                    size="large"
+                                    icon={personCircleOutline}
+                                  ></IonIcon>
+                                  <IonLabel>MCZ Dono</IonLabel>
                                 </IonItem>
                               </IonList>
                             </IonCardContent>
                           </IonCard>
                         </IonCol>
-                        <IonCol size="12" sizeMd="6">
+                        <IonCol size="12" sizeMd="6" sizeLg="4">
                           <IonCard class="shadow ion-text-center">
                             <IonCardHeader>
-                              <img
-                                alt=""
-                                className="img-round"
-                                src={require("../images/icons/smartsort.png")}
-                              />
+                              <IonCardTitle
+                                color="light"
+                                className="ion-padding project"
+                              >
+                                E-Health
+                              </IonCardTitle>
                             </IonCardHeader>
-                            <IonCardTitle color="dark" className="ion-padding">
-                              <strong>Smart Sort: Gallery</strong>
-                            </IonCardTitle>
+                            <div className="ion-padding"></div>
                             <IonChip outline={true} color="dark">
-                              <IonLabel>Java</IonLabel>
+                              <IonLabel>1CS</IonLabel>
                             </IonChip>
                             <IonChip color="dark" outline={true}>
-                              <IonLabel>Glide</IonLabel>
+                              <IonLabel>MySQL</IonLabel>
                             </IonChip>
                             <IonChip color="dark" outline={true}>
-                              <IonLabel>Android Studio</IonLabel>
+                              <IonLabel>Security</IonLabel>
                             </IonChip>
                             <IonChip color="dark" outline={true}>
-                              <IonLabel>Material UI</IonLabel>
+                              <IonLabel>Mobile</IonLabel>
                             </IonChip>
 
                             <IonCardContent>
                               <IonText>
-                                Picture management and organization tool.{" "}
-                                <br></br>
-                                This project was done under the context of
-                                pluridisciplinary projects as a part of ESI-SBA
-                                (University) Curriculum.
+                                A project concerning the ongoing COVID-19
+                                pandemic directed towards the younger population
+                                (Children)
                               </IonText>
-
-                              <IonList>
-                                <IonButton
-                                  href="https://play.google.com/store/apps/details?id=com.esi.smartsort"
-                                  target="_blank"
-                                  color="danger"
-                                >
-                                  <IonIcon icon={linkOutline}></IonIcon>
-                                  <IonLabel class="ion-margin">Demo</IonLabel>
-                                </IonButton>
-
+                              <IonList class="ion-padding-top">
                                 <IonButton
                                   color="dark"
-                                  href="https://github.com/Qalamar/smart-sort-gallery"
-                                  target="_blank"
+                                  onClick={() => setShowModal(true)}
                                 >
-                                  <IonIcon icon={logoGithub}></IonIcon>
-                                  <IonLabel class="ion-margin">Code</IonLabel>
+                                  <IonIcon icon={imageOutline}></IonIcon>
+                                  <IonLabel class="ion-margin">
+                                    Documents
+                                  </IonLabel>
                                 </IonButton>
-                                <IonItem class="ion-text-center">
-                                  <IonLabel>
-                                    <strong>Information</strong>
+                                <IonItem
+                                  lines="none"
+                                  class="ion-text-center ion-padding-top"
+                                >
+                                  <IonLabel class="ion-margin">
+                                    <h1>
+                                      <strong>Authors</strong>
+                                    </h1>
                                   </IonLabel>
                                 </IonItem>
                                 <IonItem class="ion-text-center">
-                                  <IonLabel>
-                                    Search & Gallery directly in-app
-                                  </IonLabel>
+                                  <IonIcon
+                                    size="large"
+                                    icon={personCircleOutline}
+                                  ></IonIcon>
+                                  <IonLabel>Bacha Bragdy</IonLabel>
                                 </IonItem>
-                                <IonItem class="ion-text-center">
-                                  <IonLabel>Tag and sort pictures</IonLabel>
-                                </IonItem>
-                                <IonItem class="ion-text-center">
-                                  <IonLabel>Attach notes</IonLabel>
+                                <IonItem lines="none" class="ion-text-center">
+                                  <IonIcon
+                                    size="large"
+                                    icon={personCircleOutline}
+                                  ></IonIcon>
+                                  <IonLabel>MCZ Dono</IonLabel>
                                 </IonItem>
                               </IonList>
                             </IonCardContent>
@@ -259,6 +295,6 @@ const Projects: React.FC = () => {
       </IonContent>
     </IonPage>
   );
-};
+});
 
 export default Projects;
