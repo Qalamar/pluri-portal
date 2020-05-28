@@ -54,7 +54,7 @@
     },
     {
       "id": 4,
-      "firstName": "Khoudja",
+      "firstName": "khodja",
       "lastName": "Moussa",
       "dateOfBirth": "2020-04-16T16:01:12.544Z",
       "placeOfBirth": " ",
@@ -68,31 +68,18 @@
   ],
   "promotion": [
     {
-      "id": 1,
-      "description": "b,mmm",
-      "cycle": "SC",
-      "level": "1",
-      "specialityCode": "",
-      "minTeamMembers": "5",
-      "maxTeamMembers": "6"
+      "cycle": "modified",
+      "year": "",
+      "specialityName": "",
+      "description": "",
+      "id": 1
     },
     {
-      "id": 2,
-      "description": "2",
-      "cycle": "SC",
-      "level": "2",
-      "specialityCode": "ISI",
-      "minTeamMembers": "4",
-      "maxTeamMembers": "5"
-    },
-    {
-      "id": 3,
-      "description": "nsvd,.m.",
-      "cycle": "CPI",
-      "level": "2",
-      "specialityCode": "",
-      "minTeamMembers": "5",
-      "maxTeamMembers": "6"
+      "cycle": "new",
+      "year": "",
+      "specialityName": "",
+      "description": "",
+      "id": 2
     }
   ],
   "team": [
@@ -162,22 +149,71 @@
       "grade": "",
       "currentYear": "",
       "id": 6
-    }
-  ],
-  "promotion": [
-    {
-      "cycle": "modified",
-      "year": "",
-      "specialityName": "",
-      "description": "",
-      "id": 1
     },
     {
-      "cycle": "new",
-      "year": "",
-      "specialityName": "",
-      "description": "",
-      "id": 2
+      "firstName": "",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthday": "2020-05-28T02:21:13.102Z",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "bla",
+      "id": 7
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthday": "2020-05-28T02:22:25.633Z",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "bla",
+      "id": 8
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthday": "2020-05-28T02:26:43.724Z",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "bla",
+      "id": 9
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthday": "2020-05-28T02:26:53.684Z",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "bla",
+      "id": 10
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "email": "",
+      "birthday": "2020-05-28T02:39:31.728Z",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "bla",
+      "id": 11
     }
   ],
   "users": [
