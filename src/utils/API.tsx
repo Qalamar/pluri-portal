@@ -21,7 +21,7 @@ export const addStudent = (
   email: string,
   birthday: Date,
   birthPlace: string,
-  promo: number,
+  promo: string,
   currentYear: string,
   isLeader : boolean,
   team : string

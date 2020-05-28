@@ -28,6 +28,7 @@ import { useForm, Controller } from "react-hook-form";
 import Anime from "react-anime";
 import axios from "axios";
 import "./UserForm.css";
+import * as api from "../utils/API"
 
 let renderCount = 0;
 let initialValues = {
@@ -72,21 +73,48 @@ const UserForm: React.FC = observer(() => {
 
   const onSubmit = (data: any) => {
     setData(data);
-    axios
-      .post("/students", {
-        first_name: capitalizeFirstLetter(data.firstName),
-        last_name: data.lastName.toUpperCase(),
-        class: data.class,
-        email: data.email,
-        gender: data.gender,
-        promo: data.promo
-      })
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    if(data.class === "Student") 
+      api.addStudent(
+        data.firstName,
+        data.lastName,
+        "",
+        "",
+        data.email,
+        new Date(),
+        "",
+        data.promo,
+        "",
+        false,
+        ""
+      )
+    else //data.class === Teacher
+        api.addTeacher(
+          data.firstName,
+          data.lastName,
+          "",
+          "",
+          data.email,
+          new Date(),
+          "",
+          "",
+          "",
+          ""
+        )
+    // axios
+    //   .post("/students", {
+    //     first_name: capitalizeFirstLetter(data.firstName),
+    //     last_name: data.lastName.toUpperCase(),
+    //     class: data.class,
+    //     email: data.email,
+    //     gender: data.gender,
+    //     promo: data.promo
+    //   })
+    //   .then(function(response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
   };
 
   return (

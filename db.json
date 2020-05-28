@@ -64,6 +64,20 @@
       "promotion": "1SC",
       "isLeader": false,
       "team": "Pfe"
+    },
+    {
+      "firstName": "omar",
+      "lastName": "omar",
+      "username": "",
+      "password": "",
+      "email": "omar@yahoo.com",
+      "birthday": "2020-05-28T03:07:59.825Z",
+      "birthPlace": "",
+      "promo": "1CS",
+      "currentYear": "",
+      "isLeader": false,
+      "team": "",
+      "id": 5
     }
   ],
   "promotion": [
@@ -214,6 +228,19 @@
       "grade": "",
       "currentYear": "bla",
       "id": 11
+    },
+    {
+      "firstName": "omar",
+      "lastName": "omar",
+      "userName": "",
+      "password": "",
+      "email": "omar@yahoo.com",
+      "birthday": "2020-05-28T03:11:25.962Z",
+      "birthPlace": "",
+      "speciality": "",
+      "grade": "",
+      "currentYear": "",
+      "id": 12
     }
   ],
   "users": [
