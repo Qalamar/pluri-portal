@@ -23,7 +23,7 @@ import { observer } from "mobx-react";
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import "./PromoForm.css";
-import * as api  from "../utils/api";
+import * as api  from "../utils/API";
 import axios from "axios";
 import {promotion} from "../pages/Promo";
 import {usePromo} from "../components/PromoFormEditing";
