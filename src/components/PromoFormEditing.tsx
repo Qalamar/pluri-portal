@@ -25,7 +25,7 @@ import {
   import React, { useState } from "react";
   import { useForm, Controller } from "react-hook-form";
   import "./PromoForm.css";
-  import * as api from "../utils/api";
+  import * as api from "../utils/API";
   import {promotion } from "../pages/Promo";
 
   let renderCount = 0;
