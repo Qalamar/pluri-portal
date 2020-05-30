@@ -88,17 +88,7 @@ const Promo: React.FC= () => {
   return (
     <IonPage>
         <Toolbar page={"Promos"} />
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-
-          <IonTitle>
-            <strong>Promos</strong>
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    
 
       <IonContent class="bg">
       <IonToast
