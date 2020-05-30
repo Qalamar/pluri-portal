@@ -23,8 +23,7 @@ export const addStudent = (
   birthPlace: string,
   promo: number,
   currentYear: string,
-  isLeader : boolean,
-  team : number
+  note : number
 ) => {
   // the  id will be generated automatically  by json-server
   const student = {
@@ -37,8 +36,7 @@ export const addStudent = (
     birthPlace: birthPlace,
     promo: promo,
     currentYear: currentYear,
-    isLeader : isLeader,
-    team : team
+    note:note
   };
 
   return axios.post(url + "users/student/add", student);
@@ -54,8 +52,7 @@ export const modifyStudent = (
   password: string,
   email: string,
   promo: number,
-  isLeader: boolean,
-  team: number
+  note: number
 ) => {
   const student = {
     firstName: fName,
@@ -66,8 +63,7 @@ export const modifyStudent = (
     birthday: birthday,
     birthPlace: birthPlace,
     promo: promo,
-    isLeader: isLeader,
-    team: team,
+    note:note
   };
 
   return axios.put(url + "users/student/modify/" + id, student);
