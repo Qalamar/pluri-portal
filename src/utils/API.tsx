@@ -21,10 +21,10 @@ export const addStudent = (
   email: string,
   birthday: Date,
   birthPlace: string,
-  promo: string,
+  promo: number,
   currentYear: string,
   isLeader : boolean,
-  team : string
+  team : number
 ) => {
   // the  id will be generated automatically  by json-server
   const student = {
@@ -53,9 +53,9 @@ export const modifyStudent = (
   userName: string,
   password: string,
   email: string,
-  promo: string,
+  promo: number,
   isLeader: boolean,
-  team: string
+  team: number
 ) => {
   const student = {
     firstName: fName,
@@ -158,6 +158,7 @@ export const addPromotionTest = (
   description: string,
   minTeamMembers : number,
   maxTeamMembers : number,
+  maxProject:number
 ) => {
   const promotion = {
     cycle: cycle,
@@ -165,7 +166,8 @@ export const addPromotionTest = (
     speciality: speciality,
     description: description,
     minTeamMembers : minTeamMembers,
-    maxTeamMembers : maxTeamMembers
+    maxTeamMembers : maxTeamMembers,
+    maxProjects:maxProjects
   };
 
   return axios.post(apiUrl + "promo/add/", promotion);
@@ -178,6 +180,7 @@ export const addPromotion = (
   description: string,
   minTeamMembers : number,
   maxTeamMembers : number,
+  maxProject:number
 ) => {
   const promotion = {
     cycle: cycle,
@@ -186,6 +189,7 @@ export const addPromotion = (
     description: description,
     minTeamMembers : minTeamMembers,
     maxTeamMembers : maxTeamMembers,
+    maxProjects:maxProjects
   };
 
   return axios.post(url + "promo/add", promotion);
@@ -199,6 +203,7 @@ export const modifyPromotion = (
   description: string,
   minTeamMembers : number,
   maxTeamMembers : number,
+  maxProjects:number
 ) => {
   const promotion = {
     cycle: cycle,
@@ -207,6 +212,7 @@ export const modifyPromotion = (
     description: description,
     minTeamMembers : minTeamMembers,
     maxTeamMembers : maxTeamMembers,
+    maxProjects:maxProjects
   };
 
   return axios.put(url + "promo/modify/" + Id, promotion);
