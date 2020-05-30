@@ -40,7 +40,8 @@ interface TeamState {
     password:string,
     promotion:number
     isLeader:boolean,
-    note:number
+    note:number,team:number
+                 
               }
 export interface sTudent {
     student:Student,
@@ -62,7 +63,7 @@ export  const useStudent = (overrides?: Partial<Student>): StudentState => {
     password:"",
     promotion:0,
     isLeader:false,
-    note:0,
+    note:0,team:0
   };
   const [student, setStudent] = useState<Student>({
 ...defaultStudent,
