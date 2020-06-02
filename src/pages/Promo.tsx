@@ -32,7 +32,7 @@ import { store } from "../stores/Store";
 import PromoForm from "../components/PromoForm";
 import PromoFormEditing from "../components/PromoFormEditing";
 import { addCircleOutline, filterOutline } from "ionicons/icons";
-import * as api from "../utils/api";
+import * as api from "../utils/API";
 import Toolbar from "../components/Toolbar";
 
 export interface promotion {
