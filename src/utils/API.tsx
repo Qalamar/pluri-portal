@@ -154,7 +154,7 @@ export const addPromotionTest = (
   description: string,
   minTeamMembers : number,
   maxTeamMembers : number,
-  maxProject:number
+  maxProjects:number
 ) => {
   const promotion = {
     cycle: cycle,
@@ -176,7 +176,7 @@ export const addPromotion = (
   description: string,
   minTeamMembers : number,
   maxTeamMembers : number,
-  maxProject:number
+  maxProjects:number
 ) => {
   const promotion = {
     cycle: cycle,
