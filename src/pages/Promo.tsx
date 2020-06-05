@@ -39,8 +39,8 @@ export interface promotion {
   id:number,
   description :string;
   cycle:string;
-  level:string;
-  specialityCode:string;
+  year:string;
+  specialityName:string;
   minTeamMembers:number;
   maxTeamMembers:number;
   maxProjects:number;
@@ -58,8 +58,8 @@ const Promo: React.FC= () => {
     id:0,
     description:"",
     cycle:"",
-    level:"",
-    specialityCode:"",
+    year:"",
+    specialityName:"",
     minTeamMembers:0,
     maxTeamMembers:0,
     maxProjects:0,
@@ -199,9 +199,9 @@ const Promo: React.FC= () => {
                                       color="light"
                                       className="ion-padding title"
                                     >
-                                      <strong>{promo.level}{promo.cycle}
-                                      {promo.specialityCode.localeCompare("")!==0 &&(
-                                        <strong> -{promo.specialityCode}- </strong>
+                                      <strong>{promo.year}{promo.cycle}
+                                      {promo.specialityName.localeCompare("")!==0 &&(
+                                        <strong> -{promo.specialityName}- </strong>
                                       )}
                                       </strong>
                                     </IonCardTitle>
