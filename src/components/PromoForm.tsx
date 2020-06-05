@@ -16,8 +16,6 @@ import {
   layersOutline,
   constructOutline,
   clipboardOutline,  
-  trendingDownOutline,
-  trendingUpOutline
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState, useEffect } from "react";
@@ -59,7 +57,7 @@ const PromoForm: React.FC = observer(() => {
 
     
   const getPromos = async () => {
-    let res = await axios.get("/promotion");
+    let res = await axios.get("/promo/promos");
     let data = res.data;
     setpromos(data);
   };
@@ -96,8 +94,7 @@ const PromoForm: React.FC = observer(() => {
                    promot.cycle,
                    promot.level,
                    promot.specialityCode,
-                   promot.minTeamMembers,
-                   promot.maxTeamMembers);
+                   );
                    
    setshowToast(true);
  }
@@ -232,81 +229,6 @@ const PromoForm: React.FC = observer(() => {
          
         </IonItem>
         <br/>
-        <IonLabel color="light">
-          <h2>Team Members  </h2>
-        </IonLabel>
-        <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={trendingDownOutline}></IonIcon>
-        <Controller
-            as={IonInput}
-            placeholder="Min Team Members"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("minTeamMembers", selected.detail.value);
-              promot.minTeamMembers=selected.detail.value;
-             return selected.detail.value;
-              
-            }}
-            name="minTeamMembers"
-            rules={{
-              required: true,
-              pattern: {
-                value: /^[0-9]+$/i,
-                message: "invalid Number"
-              }
-            }}
-          />
-        {showError("minTeamMembers")}
-        </IonItem>
-        <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={trendingUpOutline}></IonIcon>
-        <Controller
-            as={IonInput}
-            placeholder="Max Team Members"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("maxTeamMembers", selected.detail.value);
-              promot.maxTeamMembers=selected.detail.value;
-             return selected.detail.value;
-              
-            }}
-            name="maxTeamMembers"
-            rules={{
-              required: true,
-              pattern: {
-                value: /^[0-9]+$/i,
-                message: "invalid Number"
-              }
-            }}
-          />
-        {showError("maxTeamMembers")}
-        </IonItem>
-        <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={trendingUpOutline}></IonIcon>
-        <Controller
-            as={IonInput}
-            placeholder="Max Projects"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("maxProjects", selected.detail.value);
-              promot.maxTeamMembers=selected.detail.value;
-             return selected.detail.value;             
-            }}
-            name="maxProjects"
-            rules={{
-              required: true,
-              pattern: {
-                value: /^[0-9]+$/i,
-                message: "invalid Number"
-              }
-            }}
-          />
-        {showError("maxProjects")}
-        </IonItem>
-        {" "}
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton
             color="danger"
