@@ -106,19 +106,10 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
   const [showToast, setshowToast] = useState(false);
   const [showToast1, setshowToast1] = useState(false);
   const[students,setStudents]=useState<studentSecure[]>([]); 
-  const[studenT,setStudenT]=useState<studentSecure>({
-    id:0,
-  firstName:"",
-  lastName:"",
-  promotion:0,
-  isLeader:false,
-  team:0,
-  });
   const[promos,setPromos]=useState<promotion[]>([]);
   const[myTeam,setMyTeam]=useState<Team>(Team);
   const[teams,setTeams]=useState<Team[]>([]);
   const[maxTeamMembers,setmaxTeamMembers]=useState<number>(0);
- let s:number[]=[];
   const[minTeamMembers,setminTeamMembers]=useState<number>(0);
   const [isOpen,setIsOpen]=useState(false);
   const[showModal,setShowModal]=useState(false);
@@ -170,7 +161,7 @@ const [senders,setsenders]=useState<any[]>([]);
   };
  
   const getTeams=async()=>{
-    let res = await axios.get("/users/teams");
+    let res = await axios.get("/users/team");
     let data = res.data;
     setTeams(data);
   
@@ -214,21 +205,21 @@ useEffect(() => {
    }, []);
     
    const getMyTeam=async()=>{
-    let res=await axios.get("/myTeam");                         
+    let res=await axios.get('/users/myteam');                         
     let data=res.data;
     console.log(data);
     let d=data[0];
     setMyTeam(d);
    };
  const getMembers=async()=>{
-  let res=await axios.get("/myTeamMembers");                         
+  let res=await axios.get("/users/team"+myTeam.id);                         
   let data=res.data;
   setGetMembersTeam(data);
 
 };
 const getInvited=async()=>{
 let table:any=[]; 
-let res=await axios.get("/invited");                         
+let res=await axios.get('/users/invited');                         
 let data=res.data;
 console.log(data);
 setInviteD(data);
@@ -255,7 +246,6 @@ let student=res1.data; //I bring the student
 const Storage=()=>{
   let i:number=0;
 let value:any[]=[];
-
 if(inviteD.length!==0){
   let j=JSON.stringify(senders);
   console.log("LocaleStorage",j);
@@ -744,7 +734,7 @@ if(inviteD.length!==0){
                            color="danger"
                            onClick={()=>{   
                             getTeams();                
-                             api.ValidateTeam();
+                             api.ValidateTeam(Team.id);
                              setReady(true);
                            }}
                                   disabled={getMembersTeam.length<minTeamMembers-1}   //-1 is the leader
