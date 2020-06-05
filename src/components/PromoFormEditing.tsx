@@ -44,8 +44,8 @@ export interface Promo {
         id:0,
      description:"",
      cycle:"",
-     level:"",
-     specialityCode:"",
+     year:"",
+     specialityName:"",
      minTeamMembers: 0,
      maxTeamMembers:0,
      maxProjects:0,
@@ -62,8 +62,8 @@ export interface Promo {
       id:promo.id,
       description:promo.description,
       cycle:promo.cycle,
-      level:promo.level,     
-      specialityCode:promo.specialityCode,
+      year:promo.year,     
+      specialityName:promo.specialityName,
       minTeamMembers:promo.minTeamMembers,
       maxTeamMembers:promo.maxTeamMembers,
       maxProjects:promo.maxProjects
@@ -113,14 +113,14 @@ export interface Promo {
             {
               text: 'Save',
               handler: () =>{
-              api.modifyPromotion(promot.id,                               
+              api.modifyPromotion(promot.id,                                
                                  promot.description,
                                  promot.cycle,
-                                 promot.level,                                
-                                 promot.specialityCode,,
+                                 promot.year,                               
+                                 promot.specialityName,
                                  promot.minTeamMembers,
                                  promot.maxTeamMembers,
-                                 promot.maxProjects                              
+                                 promot.maxProjects
                                  );
                 setshowToast(true);
               }
@@ -187,24 +187,24 @@ export interface Promo {
             <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
             <Controller
               as={IonInput}
-              placeholder="Level"
+              placeholder="year"
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
-                promot.level=selected.detail.value;
+                promot.year=selected.detail.value;
                
                 return selected.detail.value;
               }}
-              name="level"
+              name="year"
               rules={{
                 required: true,
                 pattern: {
                   value: /^[1-9]$/i,
-                  message: "invalid Level"
+                  message: "invalid year"
                 }
               }}
             />
-            {showError("level")}
+            {showError("year")}
           </IonItem>
           <IonItem color="dark">
             <IonLabel>Speciality</IonLabel>
@@ -224,15 +224,15 @@ export interface Promo {
               onChangeName="onIonChange"
               onChange={([selected]) => {
                 console.log(selected.detail.value);
-               promot.specialityCode=selected.detail.value;
+               promot.specialityName=selected.detail.value;
                 return selected.detail.value;
               }}
-              name="specialityCode"
+              name="specialityName"
               rules={{
                 required: false
               }}
             />
-            {showError("specialityCode")}
+            {showError("specialityName")}
           </IonItem>
           <br/>
         <IonLabel color="light">
@@ -253,6 +253,7 @@ export interface Promo {
             }}
             name="minTeamMembers"
             rules={{
+             
               pattern: {
                 value: /^[0-9]+$/i,
                 message: "invalid Number"
@@ -276,6 +277,7 @@ export interface Promo {
             }}
             name="maxTeamMembers"
             rules={{
+              
               pattern: {
                 value: /^[0-9]+$/i,
                 message: "invalid Number"
@@ -293,11 +295,12 @@ export interface Promo {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log("maxProjects", selected.detail.value);
-              promot.maxTeamMembers=selected.detail.value;
+              promot.maxProjects=selected.detail.value;
              return selected.detail.value;             
             }}
             name="maxProjects"
             rules={{
+              
               pattern: {
                 value: /^[0-9]+$/i,
                 message: "invalid Number"
