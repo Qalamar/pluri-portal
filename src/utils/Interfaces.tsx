@@ -4,7 +4,8 @@ export interface Team {
     id:number,
     name:string,
     readiness:boolean,
-    project:number
+    project:number,
+    noteAvg:number
   } 
 export interface TeamInterface {
   TeamIn:Team;
@@ -20,6 +21,7 @@ interface TeamState {
     name:"",
     readiness:false,
     project:0,
+    noteAvg:0
     
       };
       const [Team, setTeam] = useState<Team>({
