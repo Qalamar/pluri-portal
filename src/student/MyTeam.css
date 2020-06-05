@@ -13,6 +13,7 @@
 
 .t{
     font-size: xx-large;
+    padding-left:10%;
    
 }
 
@@ -37,8 +38,36 @@
     align-items: center;
     justify-content: center;
   }
-   
-
+  .report{
+    width: 100%;
+    height:200px;
+    background-image: url("../images/report.jpg");
+    background-size: cover;
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;      
+  }
+  .team{
+    width: 100%;
+    
+    background-image: url("../images/Capture.PNG");
+    background-size: cover;
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;    
+  }
   .upload-btn-wrapper input[type=file] {
     font-size: 200px;
     position: absolute;
@@ -49,10 +78,15 @@
 
 
 #MODAL .modal-wrapper{
-    height: 50%;
+    height: 55%;
     border-radius: 5%;
     position: absolute; 
     display: block;  
     
+}
+.createTeam{
+   
+    margin:0%;
+   
 }
 
