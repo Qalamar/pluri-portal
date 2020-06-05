@@ -15,7 +15,7 @@ import {
   speedometerOutline,
   layersOutline,
   constructOutline,
-  clipboardOutline,  
+  clipboardOutline, 
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState, useEffect } from "react";
@@ -30,8 +30,8 @@ let renderCount = 0;
 let initialValues = {
   rangeInfo: -100,
   cycle: "",
-  level:"",
-  specialityCode: "",
+  year:"",
+  specialityName: "",
   description:"",
  }; 
 const PromoForm: React.FC = observer(() => {
@@ -39,8 +39,8 @@ const PromoForm: React.FC = observer(() => {
     id :0,
   description:"",
   cycle: "",
-  level: "",
-  specialityCode: "",
+  year: "",
+  specialityName: "",
 
   });
   const { control, handleSubmit, formState, reset, errors } = useForm({
@@ -81,9 +81,9 @@ const PromoForm: React.FC = observer(() => {
   getPromos();
     for (i=0;i<promos.length;i++){
        value=promos[i];
-      if(promot.level.localeCompare(value.level)===0
+      if(promot.year.localeCompare(value.year)===0
       &&(promot.cycle.localeCompare(value.cycle)===0)
-      && (promot.specialityCode.localeCompare(value.specialityCode)===0)
+      && (promot.specialityName.localeCompare(value.specialityName)===0)
       ) 
           include=true;
           }
@@ -92,8 +92,8 @@ const PromoForm: React.FC = observer(() => {
    api.addPromotion(promot.id,                
                    promot.description,
                    promot.cycle,
-                   promot.level,
-                   promot.specialityCode,
+                   promot.year,
+                   promot.specialityName,
                    );
                    
    setshowToast(true);
@@ -177,25 +177,25 @@ const PromoForm: React.FC = observer(() => {
           <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
           <Controller
             as={IonInput}
-            placeholder="Level"
+            placeholder="year"
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("Level", selected.detail.value);
-              promot.level=selected.detail.value;
+              console.log("year", selected.detail.value);
+              promot.year=selected.detail.value;
              
               return selected.detail.value;
             }}
-            name="level"
+            name="year"
             rules={{
               required: true,
               pattern: {
                 value: /^[1-9]$/i,
-                message: "invalid Level"
+                message: "invalid year"
               }
             }}
           />
-          {showError("level")}
+          {showError("year")}
         </IonItem>
         <IonItem color="dark">
           <IonLabel>Speciality</IonLabel>
@@ -216,16 +216,16 @@ const PromoForm: React.FC = observer(() => {
             onChangeName="onIonChange"
             onChange={([selected]) => {
               console.log(selected.detail.value);
-              promot.specialityCode=selected.detail.value;
+              promot.specialityName=selected.detail.value;
              
               return selected.detail.value;
             }}
-            name="specialityCode"
+            name="specialityName"
             rules={{
               required: false
             }}
           />
-          {showError("specialityCode")}
+          {showError("specialityName")}
          
         </IonItem>
         <br/>
