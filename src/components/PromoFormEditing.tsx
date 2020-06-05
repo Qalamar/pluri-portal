@@ -113,15 +113,14 @@ export interface Promo {
             {
               text: 'Save',
               handler: () =>{
-              api.modifyPromotion(promot.id,
-                                 
+              api.modifyPromotion(promot.id,                               
                                  promot.description,
                                  promot.cycle,
-                                 promot.level,
-                                 
-                                 promot.specialityCode,
+                                 promot.level,                                
+                                 promot.specialityCode,,
                                  promot.minTeamMembers,
-                                 promot.maxTeamMembers
+                                 promot.maxTeamMembers,
+                                 promot.maxProjects                              
                                  );
                 setshowToast(true);
               }
@@ -254,7 +253,6 @@ export interface Promo {
             }}
             name="minTeamMembers"
             rules={{
-              required: true,
               pattern: {
                 value: /^[0-9]+$/i,
                 message: "invalid Number"
@@ -278,7 +276,6 @@ export interface Promo {
             }}
             name="maxTeamMembers"
             rules={{
-              required: true,
               pattern: {
                 value: /^[0-9]+$/i,
                 message: "invalid Number"
@@ -301,7 +298,6 @@ export interface Promo {
             }}
             name="maxProjects"
             rules={{
-              required: true,
               pattern: {
                 value: /^[0-9]+$/i,
                 message: "invalid Number"
