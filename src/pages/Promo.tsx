@@ -71,7 +71,7 @@ const Promo: React.FC= () => {
     setShowModal(true);
   };
   const getPromos = async () => {
-    let res = await axios.get("/promotion");
+    let res = await axios.get("/promos/add");
     let data = res.data;
     setpromos(data);
   };
