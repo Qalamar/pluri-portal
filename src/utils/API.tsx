@@ -312,7 +312,7 @@ export const deleteProject=(id:number)=>{
 }
 export const AccRejProject=(id:number,status:string)=>
 {
-  return axios.put(url+'pfe/modify/'+id,status);
+  return axios.put(url+'pfe/evaluate/'+id,status);
 };
 // this function (if successful) will return an accessToken property in reponse.data (expiration 1 hour)
 export const login = (email: string, password: string) => {
