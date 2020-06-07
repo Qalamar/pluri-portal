@@ -1,8 +1,6 @@
 import {
   IonButtons,
   IonContent,
-  IonHeader,
-  IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -19,26 +17,14 @@ import {
   IonButton,
   IonModal,
   IonInput,
-  IonPopover,
-  IonList,
-  IonLabel,
-  IonItemSliding,
-  IonItemOptions,
-  IonItemOption,
-  IonSelect,
-  IonSelectOption,
+  
 } from "@ionic/react";
 import React, { useState } from "react";
 import Anime from "react-anime";
 import {
   mailOutline,
-  lockClosedOutline,
-  notificationsCircleOutline,
-  addCircleOutline,
-  calendarOutline,
-  removeCircleOutline,
   personCircleOutline,
-  personOutline,
+  keyOutline
 } from "ionicons/icons";
 import axios from "axios";
 import NotificationArea from "../components/NotificationArea";
@@ -48,13 +34,20 @@ import { useForm, Controller } from "react-hook-form";
 
 let initialValues = {
   rangeInfo: -100,
-  firstName: "",
-  lastName: "",
-  gender: "",
-  class: "",
-  email: "",
-  promo: "",
+  email:"",
+  userName:"",
+  password:""
 };
+interface login {
+  email:string,
+  userName:string,
+  password:string
+}
+let Log:login={
+  email:"",
+  userName:"",
+  password:""
+}
 
 const Auth: React.FC = () => {
   const [showPopover, setShowPopover] = useState<{
@@ -111,13 +104,10 @@ const Auth: React.FC = () => {
 
   const onSubmit = (data: any) => {
     axios
-      .post("/students", {
-        first_name: data.firstName,
-        last_name: data.lastName.toUpperCase(),
-        class: data.class,
+      .post("/login", {
         email: data.email,
-        gender: data.gender,
-        promo: data.promo,
+        userName: data.userName,
+        password: data.password,
       })
       .then(function (response) {
         console.log(response);
@@ -170,7 +160,7 @@ const Auth: React.FC = () => {
         <IonGrid>
           <IonRow class="ion-align-items-center container">
             <IonCol></IonCol>
-            <IonCol size="12" sizeMd="7" sizeLg="4">
+            <IonCol size="12" sizeMd="7" sizeLg="5">
               <IonCard class="ion-text-center shadow">
                 <IonCardHeader>
                   <IonTitle color="light" class="title ion-padding">
@@ -180,7 +170,7 @@ const Auth: React.FC = () => {
 
                 <IonCardContent class="ion-padding ion-text-center">
                   <form
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit(()=>onSubmit(Log))}
                     style={{ padding: 38 }}
                   >
                     <IonItem>
@@ -192,6 +182,7 @@ const Auth: React.FC = () => {
                         control={control}
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
+                          Log.email=selected.detail.value;
                           return selected.detail.value;
                         }}
                         name="email"
@@ -213,62 +204,51 @@ const Auth: React.FC = () => {
 
                       <Controller
                         as={IonInput}
-                        placeholder="First Name"
-                        className="firstCapital"
+                        placeholder="UserName"
                         control={control}
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
-                          console.log("firstName", selected.detail.value);
+                          console.log("UserName", selected.detail.value);
+                          Log.userName=selected.detail.value;
                           return selected.detail.value;
                         }}
-                        name="firstName"
+                        name="userName"
                         rules={{
                           required: true,
-                          minLength: {
-                            value: 4,
-                            message: "Must be 4 chars long",
-                          },
                         }}
                       />
                     </IonItem>
-                    {showError("firstName")}
+                    {showError("userName")}
                     <IonItem class="ion-margin-bottom">
-                      <IonIcon slot="start" icon={personOutline}></IonIcon>
-                      <IonLabel>Role</IonLabel>
+                      <IonIcon slot="start" icon={keyOutline}></IonIcon>
+                     
                       <Controller
-                        as={
-                          <IonSelect>
-                            <IonSelectOption value="student">
-                              Student
-                            </IonSelectOption>
-                            <IonSelectOption value="teacher">
-                              Techer
-                            </IonSelectOption>
-                            <IonSelectOption value="other">
-                              Other
-                            </IonSelectOption>
-                          </IonSelect>
-                        }
+                        as={IonInput}
+                        type="password"
+                        placeholder="Password"
                         control={control}
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
-                          console.log(selected.detail.value);
-                          setRole(selected.detail.value);
+                          console.log("Password", selected.detail.value);
+                          Log.password=selected.detail.value;
                           return selected.detail.value;
                         }}
-                        name="gender"
+                        
+                        name="password"
                         rules={{ required: true }}
                       />
                     </IonItem>
-                  </form>
-
-                  <IonButton
+                    {showError("password")}
+                    <IonButton
                     color="dark"
                     type="submit"
                     disabled={formState.isValid === false}
                   >
                     Login
                   </IonButton>
+                  </form>
+
+                  
                 </IonCardContent>
               </IonCard>
             </IonCol>
@@ -279,5 +259,4 @@ const Auth: React.FC = () => {
     </IonPage>
   );
 };
-
 export default Auth;
