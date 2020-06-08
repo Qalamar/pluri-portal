@@ -77,7 +77,7 @@ export interface Promo {
     const [showAlert, setShowAlert] = useState(false);
     const [showToast, setshowToast] = useState(false);
     const [SelectCycle, setCycle] = useState<string>();
-    const [SelectSpeciality, setSpeciality] = useState<string>();
+    const [SelectYear, setYear] = useState<string>();
    
    
     const showError = (_fieldName: string) => {
@@ -182,57 +182,54 @@ export interface Promo {
             />
             {showError("cycle")}
           </IonItem>
-  
           <IonItem color="dark" class="">
-            <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
-            <Controller
-              as={IonInput}
-              placeholder="year"
-              control={control}
-              onChangeName="onIonChange"
-              onChange={([selected]) => {
-                promot.year=selected.detail.value;
-               
-                return selected.detail.value;
-              }}
-              name="year"
-              rules={{
-                required: true,
-                pattern: {
-                  value: /^[1-9]$/i,
-                  message: "invalid year"
-                }
-              }}
-            />
-            {showError("year")}
-          </IonItem>
-          <IonItem color="dark">
-            <IonLabel>Speciality</IonLabel>
-            <IonIcon slot="start" icon={constructOutline}></IonIcon>
-            <Controller
-              as={
-                <IonSelect
-                  value={SelectSpeciality}
-                  placeholder="Select One"
-                  onIonChange={e => setSpeciality(e.detail.value)}
-                >   <IonSelectOption value="">None</IonSelectOption>
-                  <IonSelectOption value="ISI">ISI</IonSelectOption>
-                  <IonSelectOption value="SIW">SIW</IonSelectOption>
-                </IonSelect>
-              }
-              control={control}
-              onChangeName="onIonChange"
-              onChange={([selected]) => {
-                console.log(selected.detail.value);
-               promot.specialityName=selected.detail.value;
-                return selected.detail.value;
-              }}
-              name="specialityName"
-              rules={{
-                required: false
-              }}
-            />
-            {showError("specialityName")}
+          <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
+          <IonLabel>Year</IonLabel>
+          <Controller
+            as={ <IonSelect
+              value={SelectYear}
+              placeholder="Select One"
+              onIonChange={e => setYear(e.detail.value)}
+            > 
+              <IonSelectOption value="1" > First 1 </IonSelectOption>
+              <IonSelectOption value="2">Second 2</IonSelectOption>
+              <IonSelectOption value="3">Third 3</IonSelectOption>
+            </IonSelect>}
+            placeholder="year"
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("year", selected.detail.value);
+              promot.year=selected.detail.value;
+             
+              return selected.detail.value;
+            }}
+            name="year"
+            rules={{
+              required: true,
+            }}
+          />
+          {showError("year")}
+        </IonItem>
+        <IonItem color="dark">
+          <IonIcon slot="start" icon={constructOutline}></IonIcon>
+          <Controller
+            as={IonInput}  
+            placeholder="Speciality"         
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log(selected.detail.value);
+              promot.specialityName=selected.detail.value;
+             
+              return selected.detail.value;
+            }}
+            name="specialityName"
+            rules={{
+              required: false
+            }}
+          />
+          {showError("specialityName")}
           </IonItem>
           <br/>
         <IonLabel color="light">
