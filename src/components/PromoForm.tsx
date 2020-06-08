@@ -21,7 +21,7 @@ import { observer } from "mobx-react";
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import "./PromoForm.css";
-import * as api  from "../utils/API";
+import * as api  from "../utils/api";
 import axios from "axios";
 import {promotion} from "../pages/Promo";
 import {usePromo} from "../components/PromoFormEditing";
@@ -50,7 +50,7 @@ const PromoForm: React.FC = observer(() => {
   renderCount++;
   const [showToast, setshowToast] = useState(false);
   const [SelectCycle, setCycle] = useState<string>();
-  const [SelectSpeciality, setSpeciality] = useState<string>();
+  const [SelectYear, setYear] = useState<string>();
   const [promos,setpromos]=useState([]);
   const [showAlert,setshowAlert] =useState(false);  
 
@@ -175,8 +175,17 @@ const PromoForm: React.FC = observer(() => {
 
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
+          <IonLabel>Year</IonLabel>
           <Controller
-            as={IonInput}
+            as={ <IonSelect
+              value={SelectYear}
+              placeholder="Select One"
+              onIonChange={e => setYear(e.detail.value)}
+            > 
+              <IonSelectOption value="1" > First 1 </IonSelectOption>
+              <IonSelectOption value="2">Second 2</IonSelectOption>
+              <IonSelectOption value="3">Third 3</IonSelectOption>
+            </IonSelect>}
             placeholder="year"
             control={control}
             onChangeName="onIonChange"
@@ -189,29 +198,15 @@ const PromoForm: React.FC = observer(() => {
             name="year"
             rules={{
               required: true,
-              pattern: {
-                value: /^[1-9]$/i,
-                message: "invalid year"
-              }
             }}
           />
           {showError("year")}
         </IonItem>
         <IonItem color="dark">
-          <IonLabel>Speciality</IonLabel>
           <IonIcon slot="start" icon={constructOutline}></IonIcon>
           <Controller
-            as={
-              <IonSelect
-                value={SelectSpeciality}
-                placeholder="Select One"
-                onIonChange={e => setSpeciality(e.detail.value)}
-              > 
-                <IonSelectOption value="" > None</IonSelectOption>
-                <IonSelectOption value="ISI">ISI</IonSelectOption>
-                <IonSelectOption value="SIW">SIW</IonSelectOption>
-              </IonSelect>
-            }
+            as={IonInput}  
+            placeholder="Speciality"         
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
