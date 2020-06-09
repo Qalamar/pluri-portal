@@ -136,4 +136,35 @@ export  const useInvite = (overrides?: Partial<Invite>): inviteState => {
 
 }); 
 return {invite,setInvite};
+};
+    export interface project {
+  id:number,
+  title:string,
+  domain:string,
+  tools:string,
+  requiredDocuments:string,
+  document:FormData,
+  promo:number
+};
+interface projectState {
+  Project: project;
+  setProject: React.Dispatch<React.SetStateAction<project>>;
 }
+
+export  const useProject = (overrides?: Partial<project>): projectState => {
+    const defaultProject: project= {
+      id:-99,
+      title:"",
+      domain:"",
+      tools:"",
+      requiredDocuments:"",
+      document:new FormData(),
+      promo:-99
+  
+    };
+    const [Project, setProject] = useState<project>({
+  ...defaultProject,
+  ...overrides,
+}); 
+ return {Project, setProject };
+  };
