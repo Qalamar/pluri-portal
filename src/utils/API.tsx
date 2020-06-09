@@ -277,12 +277,12 @@ export const register = (email: string, password: string) => {
     data: newUser,
   });
 };
-export const addProject=(formdata:FormData,title:string,domain:string,requiredDoc:string,document:string)=>
+export const addProject=(title:string,domain:string,tools:string,requiredDoc:string,document:FormData)=>
 {
- let project={
-    formdata:formdata,
+ const project={
     title:title,
     domain:domain,
+    tools:tools,
     requiredDocuments:requiredDoc,
     document:document
   };
@@ -297,11 +297,13 @@ export const getProject=(id:number)=>{
 export const modifyProject=(id:number,
   title:string,
   domain:string,
+  tools:string,
   requiredDoc:string,
-  document:string)=>{
+  document:FormData)=>{
     let project={
       title:title,
       domain:domain,
+      tools:tools,
       requiredDocuments: requiredDoc,
       document:document
     }
