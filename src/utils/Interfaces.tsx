@@ -40,7 +40,8 @@ interface TeamState {
     email:string,
     userName:string,
     password:string,
-    promotion:number
+    promotion:number,
+    currentYear:string,
     isLeader:boolean,
     note:number,team:number
                  
@@ -64,6 +65,7 @@ export  const useStudent = (overrides?: Partial<Student>): StudentState => {
     userName:"",
     password:"",
     promotion:0,
+    currentYear:"2019/2020",
     isLeader:false,
     note:0,team:0
   };
