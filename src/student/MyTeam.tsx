@@ -41,10 +41,10 @@ import {
 import { observer } from "mobx-react";
 import {promotion} from "../pages/Promo";
 import { useForm, Controller } from "react-hook-form";
-import {useTeam , Invite,Team,useStudent,studentSecure} from "../utils/Interfaces" ;
+import {useTeam , Invite,Team,useStudent,studentSecure,Student} from "../utils/Interfaces" ;
 import Anime from "react-anime";
 import axios from "axios";
-import * as api from "../utils/api";
+import * as api from "../utils/API";
 
 import Toolbar from "../components/Toolbar";
 
@@ -79,6 +79,7 @@ const {student}=useStudent({
   userName:" ",
   password:" ",
   promotion:5,
+  currentYear:"2019/2020",
   isLeader:true, 
   note:15.15,
   team:-99,
@@ -98,7 +99,7 @@ const { control, handleSubmit, formState, reset, errors } = useForm({
   mode: "onChange"
 });
   
-  const [getMembersTeam,setGetMembersTeam]=useState<studentSecure[]>([]);
+  const [getMembersTeam,setGetMembersTeam]=useState<Student[]>([]);
   const [invites,setInvites]=useState<Invite[]>([]); 
   const[createTeam,setCreateTeam]=useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -161,14 +162,14 @@ const [senders,setsenders]=useState<any[]>([]);
   };
  
   const getTeams=async()=>{
-    let res = await axios.get("/users/team");
+    let res = await axios.get("/users/teams");
     let data = res.data;
     setTeams(data);
   
   
   };
   const getInvites=async()=>{
-    let res = await axios.get("/invites");
+    let res = await axios.get("/users/invites");
     let data = res.data;
     setInvites(data);
 
@@ -198,24 +199,34 @@ useEffect(() => {
     getStudents();
     getPromos(); 
     getTeams();
-    getInvites();
-    getMembers();
-    getMyTeam();
-    getInvited();
+   // getInvites();  
+    getMyTeam(); 
+   
+   // getInvited();
    }, []);
     
    const getMyTeam=async()=>{
     let res=await axios.get('/users/myteam');                         
     let data=res.data;
     console.log(data);
+    if (data.length!==0){
     let d=data[0];
-    setMyTeam(d);
+    setMyTeam(d); 
+    console.log(d.id);
+    getMembers(d.id);}
    };
- const getMembers=async()=>{
-  let res=await axios.get("/users/team"+myTeam.id);                         
+ const getMembers=async(idTeam:number)=>{
+   if (myTeam.id>=0) {
+  let res=await axios.get("/users/team/"+myTeam.id);                         
   let data=res.data;
   setGetMembersTeam(data);
-
+   }
+   else {
+    let res=await axios.get("/users/team/"+idTeam);                         
+    let data=res.data;
+    setGetMembersTeam(data);
+   };
+  
 };
 const getInvited=async()=>{
 let table:any=[]; 
@@ -227,11 +238,10 @@ let i:number=0;
 //this process to store the complete Sender (id,firstName,...) on LocaleStorage
   for(i=0;i<data.length;i++){
     let j=data[i].sender;
-let res1 =await axios.get("/students/"+j);
+let res1 =await axios.get("/users/students/"+j);
 let student=res1.data; //I bring the student
-   let res2=await axios.get("/teams/"+student.team);
+   let res2=await axios.get("/users/teams/"+student.team);
    let data2=res2.data;
-   
    table[i]={
      invitation:data[i],
      sender:student,
@@ -256,6 +266,7 @@ if(inviteD.length!==0){
 };
 
   const onSubmit=()=>{
+    console.log(Team);
     let i:number ;
     let val =Team;
     let include :boolean;
@@ -263,7 +274,9 @@ if(inviteD.length!==0){
     include=false;
      getTeams();
     while(include===false && i<teams.length){
+      
       val=teams[i];
+      
       if (Team.name.localeCompare(val.name)===0) include =true;
       i++;
     }
@@ -283,8 +296,23 @@ if(inviteD.length!==0){
                       student.note
                      );
     api.addTeam(Team.name);
-    setCreateTeam(false);
-    getMyTeam();
+    axios.post('/users/myteam',{
+      name:Team.name,
+      readiness:false,
+      project:Team.project,
+      noteAvg:Team.noteAvg
+    }).then (function(res){
+       setCreateTeam(false);
+       setMyTeam({
+         id:0,
+         name:Team.name,
+         readiness:false,
+         project:-99,
+         noteAvg:-99     });
+         student.isLeader=true;
+       
+    });
+    
     } 
     else setShowAlert1(true);
    };
@@ -523,8 +551,7 @@ if(inviteD.length!==0){
                     </IonTitle>
                     </IonCardHeader >
                     <IonCardContent>                     
-                      <IonItem>
-                        
+                      <IonItem>                      
                         <h2>
                         {inv.sender.lastName} {inv.sender.firstName}</h2>
                         &nbsp;
@@ -535,11 +562,11 @@ if(inviteD.length!==0){
                         size="default"
                         type="button"
                         
-                        onClick={()=>{api.modifyInvite(inv.id,
-                                                      inv.sender.id,
-                                                      inv.receiver,
-                                                      inv.accepted,
-                                                      true);
+                        onClick={()=>{             axios.put('users/invites/'+inv.invitation.id,{
+                                                      sender:inv.sender.id,
+                                                      receiver:inv.invitation.receiver,
+                                                      accepted:inv.invitation.accepted,
+                                                      rejected:true});
                                                     getInvited();}}
                         >
                           <IonIcon slot="end" icon={closeOutline}></IonIcon>
@@ -551,13 +578,28 @@ if(inviteD.length!==0){
                          type="button"
                         
                           onClick={()=>{
-                          api.modifyInvite(inv.id,
-                            inv.sender,
-                            inv.receiver,
-                            true,
-                            inv.rejected);     
-                              localStorage.clear();                          
-                              setShowModal(false);  
+                            axios.put('users/invites/'+inv.invitation.id,{
+                              sender:inv.sender.id,
+                              receiver:inv.invitation.receiver,
+                              accepted:true,
+                              rejected:false})
+                              .then(function (response) {
+                                console.log(response);
+                                localStorage.clear();
+                                setShowModal(false);
+                                student.team=inv.team.id;
+                                axios.post('/users/myteam',{
+                                  id:inv.team.id,
+                                  name:inv.team.name,
+                                  readiness:inv.team.readiness,
+                                  noteAvg:inv.team.noteAvg,
+                                  project:inv.team.project
+                                });
+                                setMyTeam(inv.team);                               
+                                getMembers(inv.team.id);
+                              });
+                             
+                               
                          }}
                         >
                            <IonIcon slot="end" icon={checkmarkOutline}></IonIcon>
@@ -733,8 +775,9 @@ if(inviteD.length!==0){
                            target="_blank"
                            color="danger"
                            onClick={()=>{   
-                            getTeams();                
-                             api.ValidateTeam(Team.id);
+                            getTeams(); 
+                            getMyTeam();                
+                             api.ValidateTeam(myTeam.id);
                              setReady(true);
                            }}
                                   disabled={getMembersTeam.length<minTeamMembers-1}   //-1 is the leader
@@ -776,8 +819,8 @@ if(inviteD.length!==0){
                                      </IonItem>
                                     
                          { 
-                         getMembersTeam.map((s: studentSecure,i) => {
-                           if (s.id!==student.id)
+                         getMembersTeam.map((s: Student,i) => {
+                           if (s.firstName.localeCompare(student.firstName)!==0 &&s.lastName.localeCompare(student.lastName)!==0)
                            return (
                            <IonItem class="ion-text-center"> {s.lastName} {s.firstName}
                             </IonItem>
@@ -828,7 +871,7 @@ if(inviteD.length!==0){
                       <IonCardHeader className="team"></IonCardHeader>
                       <IonCardContent>
                         { 
-                    getMembersTeam.map((s: studentSecure,i) => {
+                    getMembersTeam.map((s: Student,i) => {
                       if (s.isLeader===true)
                       return (
                       <div>
@@ -837,7 +880,8 @@ if(inviteD.length!==0){
                                     <strong>Team Leader</strong>
                                   </IonLabel>
                                 </IonItem>
-                         <IonItem> {s.lastName} {s.firstName}
+                         <IonItem class="ion-text-center"> 
+                         <IonLabel> {s.lastName} {s.firstName} </IonLabel>
                        </IonItem>
                        </div>
                       );
@@ -846,21 +890,22 @@ if(inviteD.length!==0){
                   }
                                             
                     
-                  {getMembersTeam.length > 2 &&(
-                    
+                  {getMembersTeam.length >= 2 &&(
+                    <div>
                     <IonItem class="ion-text-center">
                     <IonLabel>
                       <strong>Team Members</strong>
                     </IonLabel>
                   </IonItem>
-                  )}
+                   <IonItem class="ion-text-center">  <IonLabel>{student.lastName} {student.firstName}</IonLabel></IonItem>
+                  </div>)}
                   { 
-                    getMembersTeam.map((s: studentSecure,i) => {
+                    getMembersTeam.map((s: Student,i) => {
 
                       if (s.isLeader===false)
                       return (
-                      
-                         <IonItem> {s.lastName} {s.firstName}
+                        
+                         <IonItem class="ion-text-center">  <IonLabel>{s.lastName} {s.firstName}</IonLabel>
                        </IonItem>
                      
                       );
