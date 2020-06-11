@@ -20,7 +20,7 @@ import React, { useEffect, useState, useReducer } from "react";
 import Anime from "react-anime";
 import axios from "axios";
 import Toolbar from "../components/Toolbar";
-import * as api from "../utils/api" ;
+import * as api from "../utils/API" ;
 import {
   filterOutline, 
   personOutline,
