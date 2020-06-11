@@ -56,7 +56,7 @@
   .team{
     width: 100%;
     
-    background-image: url("../images/Capture.PNG");
+    background-image: url("../images/background.png");
     background-size: cover;
     display: -webkit-flexbox;
     display: -ms-flexbox;
