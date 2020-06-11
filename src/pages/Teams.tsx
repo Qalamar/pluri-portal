@@ -1,11 +1,6 @@
-import {
-  IonButtons,
+import { 
   IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar,
+  IonPage, 
   IonGrid,
   IonRow,
   IonCol,
@@ -16,10 +11,8 @@ import {
   IonIcon,
   IonLabel,
   IonChip,
-  IonText,
   IonButton,
   IonSearchbar,
-  IonList,
   IonModal,
   IonItem
 } from "@ionic/react";
@@ -27,7 +20,7 @@ import React, { useEffect, useState, useReducer } from "react";
 import Anime from "react-anime";
 import axios from "axios";
 import Toolbar from "../components/Toolbar";
-
+import * as api from "../utils/api" ;
 import {
   filterOutline, 
   personOutline,
@@ -46,9 +39,11 @@ let size:number=0;
   const[teams,setTeams]=useState([]);
   const[students,setStudents]=useState<Student[]>([]);
   const [isOpen, setisOpen] = useState(false);
+  const[promos,setPromos]=useState<any[]>([]);
+  const[members,setMembers]=useState<Student[]>([]);
   const{Team}=useTeam();
     const getTeams = async () => {
-  let res = await axios.get("/team");
+  let res = await axios.get("/users/teams");
   let data = res.data;
   setTeams(data);
 };
@@ -56,11 +51,38 @@ const getUsers = async () => {
   let res = await axios.get("/student");
   let data = res.data;
   setStudents(data);
- /* console.log(data);*/
+ 
 };
+const getPromos = async () => {
+  let res = await axios.get("/promo/promos");
+
+  let data = res.data;
+  console.log(data);
+  setPromos(data);
+ 
+};
+const getPromo=(idPromo:number|undefined)=>{
+  let i:number=0;
+  let stop:boolean=false;
+  let val:any=0;
+  console.log(promos);
+ while(i<promos.length && stop===false){
+   val=promos[i];
+   console.log(val);
+   if (val.id===idPromo) 
+   {
+     stop=true;
+     val=val.year+val.cycle;
+   }
+   i++;
+ };
+ 
+ return val;
+}
 useEffect(() => {
   getTeams();
   getUsers();
+  getPromos();
 }, []);
 const getMembers=(idTeam:number)=>{
   let j:number=0;
@@ -131,8 +153,7 @@ const getMembers=(idTeam:number)=>{
                       {s.lastName} {s.firstName}
                       </IonLabel>
                     </IonItem>
-                      );
-            
+                      );           
             }
             )
              }
@@ -189,7 +210,7 @@ const getMembers=(idTeam:number)=>{
                           teams.map((team: any,i) => {
                            { value= getMembers(team.id);    
                              size=value.length;
-                              console.log(value);                                            
+                                                                       
                             return (
                              
                               <IonCol
@@ -209,7 +230,7 @@ const getMembers=(idTeam:number)=>{
                                   </IonCardHeader>
                                   <IonChip>
                                     <IonLabel>
-                                    {value.pop()?.promotion}                                    
+                                    {getPromo(value.pop()?.promotion)}                                    
                                     </IonLabel>
                                     </IonChip>
                                    
@@ -229,15 +250,8 @@ const getMembers=(idTeam:number)=>{
                                       &nbsp;
                                        {size}    
                                       </IonLabel> 
-                                    )}
-                                    
-                                                                     
-                                   </IonChip>
-                                  
-                                  
-                                   
-                         
-                               
+                                    )}                                                                                                     
+                                   </IonChip>                                                   
                                <IonCardContent>
                                      
                                       
@@ -245,9 +259,9 @@ const getMembers=(idTeam:number)=>{
                                         Team.id=team.id;
                                         Team.name=team.name;
                                         Team.readiness=team.readiness;
-                                        //console.log(Team);
+                                        
                                         value=getMembers(team.id);
-                                        console.log(value);
+                                        
                                         setisOpen(true);
                                         }
                                        }target="_blank" color="danger">
