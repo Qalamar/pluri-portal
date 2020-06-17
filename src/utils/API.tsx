@@ -23,7 +23,7 @@ export const addStudent = (
   birthPlace: string,
   promo: number,
   currentYear: string,
-  note : number
+  note: number
 ) => {
   // the  id will be generated automatically  by json-server
   const student = {
@@ -36,7 +36,7 @@ export const addStudent = (
     birthPlace: birthPlace,
     promo: promo,
     currentYear: currentYear,
-    note:note
+    note: note,
   };
 
   return axios.post(url + "users/student/add", student);
@@ -63,7 +63,7 @@ export const modifyStudent = (
     birthday: birthday,
     birthPlace: birthPlace,
     promo: promo,
-    note:note
+    note: note,
   };
 
   return axios.put(url + "users/student/modify/" + id, student);
@@ -83,7 +83,7 @@ export const addTeacher = (
   userName: string,
   password: string,
   email: string,
-  birthday : Date,
+  birthday: Date,
   birthPlace: string,
   speciality: string,
   grade: string,
@@ -96,7 +96,7 @@ export const addTeacher = (
     userName: userName,
     password: password,
     email: email,
-    birthday : birthday,
+    birthday: birthday,
     birthPlace: birthPlace,
     speciality: speciality,
     grade: grade,
@@ -113,7 +113,7 @@ export const modifyTeacher = (
   userName: string,
   password: string,
   email: string,
-  birthday : Date,
+  birthday: Date,
   birthPlace: string,
   speciality: string,
   grade: string,
@@ -125,7 +125,7 @@ export const modifyTeacher = (
     userName: userName,
     password: password,
     email: email,
-    birthday : birthday,
+    birthday: birthday,
     birthPlace: birthPlace,
     speciality: speciality,
     grade: grade,
@@ -146,125 +146,122 @@ export const deleteTeacher = (id: number) => {
 export const getPromotions = () => {
   return axios.get(url + "/promo/promos");
 };
-import axios from "axios";
 
-const url = "http://localhost:3000";
 export const addPromotion = (
-    Id :number, 
-    d:string,
-    c: string,
-    l: string,
-    sC: string,
-    
-  ) => {
-    const promotion = {
-     
-      id:Id, 
-      cycle: c,
-      year: l, 
-      specialityName: sC,
-      description:d,
-    
-    };
-  
-    return axios.post(url+'/promo/add/', promotion);
+  Id: number,
+  d: string,
+  c: string,
+  l: string,
+  sC: string
+) => {
+  const promotion = {
+    id: Id,
+    cycle: c,
+    year: l,
+    specialityName: sC,
+    description: d,
   };
-  export const modifyPromotion = (
-    Id: number,
-    d:string,
-    c: string,
-    l: string,
-   sC: string,
-    minT:number,
-    maxT:number,
-    maxP:number
-  ) => {
-    const promotion = {
-     description:d,
-      cycle: c,
-      year: l,
-       specialityName: sC,
-      minTeamMembers:minT,
-      maxTeamMembers:maxT,
-      maxProjects:maxP
-    };
-    modifyPromotionSetup(Id,minT,maxT,maxP);
-    return axios.put(url+"/promo/modify/"+Id, promotion);
+
+  return axios.post(url + "/promo/add/", promotion);
+};
+export const modifyPromotion = (
+  Id: number,
+  d: string,
+  c: string,
+  l: string,
+  sC: string,
+  minT: number,
+  maxT: number,
+  maxP: number
+) => {
+  const promotion = {
+    description: d,
+    cycle: c,
+    year: l,
+    specialityName: sC,
+    minTeamMembers: minT,
+    maxTeamMembers: maxT,
+    maxProjects: maxP,
   };
-  export const modifyPromotionSetup = (
-    Id:number,
-    minT:number,
-    maxT:number,
-    maxP:number
-  ) => {
-    const promotion = {
-      minTeamMembers:minT,
-      maxTeamMembers:maxT,
-      maxProjects:maxP
-    };
-    return axios.put(url+'/promo/setup/'+ Id, promotion);
+  modifyPromotionSetup(Id, minT, maxT, maxP);
+  return axios.put(url + "/promo/modify/" + Id, promotion);
+};
+export const modifyPromotionSetup = (
+  Id: number,
+  minT: number,
+  maxT: number,
+  maxP: number
+) => {
+  const promotion = {
+    minTeamMembers: minT,
+    maxTeamMembers: maxT,
+    maxProjects: maxP,
   };
-  export const deletePromotion = (id: number) => {
-    return axios.delete(url + "/promo/modify/" + id);
+  return axios.put(url + "/promo/setup/" + Id, promotion);
+};
+export const deletePromotion = (id: number) => {
+  return axios.delete(url + "/promo/modify/" + id);
+};
+/**************************************************************/
+
+export const getTeams = () => {
+  return axios.get(url + "/users/team");
+};
+export const getTeam = (id: number) => {
+  return axios.get(url + "/users/team/" + id);
+};
+export const addTeam = (nm: string) => {
+  let team = {
+    name: nm,
   };
-  /**************************************************************/ 
-  export const getTeams = () => {
-    return axios.get(url+'/users/team');
-  };
-  export const getTeam=(id:number)=>{
-    return axios.get(url+'/users/team/'+id);
-  };
-  export const addTeam=(nm:string)=>{
-    let team={
-      name:nm
-    }
-    return axios.post(url+'/users/team',team);
-  };
-  export const ValidateTeam=(idTeam:number)=>{
-    return axios.post(url+'/users/validate/'+idTeam,true);
-  };
-    export const getMembersTeam=(id :number)=>
-    {
-    return axios.get(url+'/users/team/'+id);
-    
-  };
- /* export const deleteTeam=(id:number)=>{
+  return axios.post(url + "/users/team", team);
+};
+export const ValidateTeam = (idTeam: number) => {
+  return axios.post(url + "/users/validate/" + idTeam, true);
+};
+export const getMembersTeam = (id: number) => {
+  return axios.get(url + "/users/team/" + id);
+};
+/* export const deleteTeam=(id:number)=>{
     return axios.delete(url+'users/team/'+id);
   };*/
 
-  /*****************************************************/
-  export const getStudentspromo=()=>{
-    return axios.get(url+'/users/students');
-    }
- /********************************************* */
- export const postInviteStudent=(id:number)=>{ //Id receiver
-  
-    return axios.post(url+'/users/student/invite/'+id);
-  }
-  export const getStudentInvited=(idStudent:number)=>{
-      
-    return axios.get(url+"/users/student/invite/"+idStudent);
- }; 
- export const getInvited=()=>
-  {
-  return axios.get(url+"/users/invited");
+/*****************************************************/
+export const getStudentspromo = () => {
+  return axios.get(url + "/users/students");
+};
+/********************************************* */
+export const postInviteStudent = (id: number) => {
+  //Id receiver
+
+  return axios.post(url + "/users/student/invite/" + id);
+};
+export const getStudentInvited = (idStudent: number) => {
+  return axios.get(url + "/users/student/invite/" + idStudent);
+};
+export const getInvited = () => {
+  return axios.get(url + "/users/invited");
+};
+export const getInvite = (idInv: number) => {
+  return axios.get(url + "/users/invites/" + idInv);
+};
+export const modifyInvite = (
+  idInv: number,
+  idSender: number,
+  idReceiver: number,
+  accept: boolean,
+  reject: boolean
+) => {
+  const invite = {
+    sender: idSender,
+    receiver: idReceiver,
+    accepted: accept,
+    rejected: reject,
   };
-  export const getInvite=(idInv:number)=>{
-  
-    return axios.get(url+'/users/invites/'+idInv);
-  }
-  export const modifyInvite=(idInv:number,idSender:number,idReceiver:number,accept:boolean,reject:boolean)=>{
-    const invite={
-      sender:idSender,
-      receiver:idReceiver,
-      accepted:accept,
-      rejected:reject
-    };
-    
-    return axios.put(url+'/users/invites/'+idInv,invite);
-  
-  };
-    
+
+  return axios.put(url + "/users/invites/" + idInv, invite);
+};
+
 export const register = (email: string, password: string) => {
   const newUser = {
     email: email,
@@ -277,44 +274,50 @@ export const register = (email: string, password: string) => {
     data: newUser,
   });
 };
-export const addProject=(title:string,domain:string,tools:string,requiredDoc:string,document:FormData)=>
-{
- const project={
-    title:title,
-    domain:domain,
-    tools:tools,
-    requiredDocuments:requiredDoc,
-    document:document
+export const addProject = (
+  title: string,
+  domain: string,
+  tools: string,
+  requiredDoc: string,
+  document: FormData
+) => {
+  const project = {
+    title: title,
+    domain: domain,
+    tools: tools,
+    requiredDocuments: requiredDoc,
+    document: document,
   };
-  return axios.post(url+'/pfe/add/',project);
+  return axios.post(url + "/pfe/add/", project);
 };
-export const getProjects=()=>{
-return axios.get(url+'/pfe/projects');
+export const getProjects = () => {
+  return axios.get(url + "/pfe/projects");
 };
-export const getProject=(id:number)=>{
-  return axios.get(url+'/pfe/modify/'+id);
+export const getProject = (id: number) => {
+  return axios.get(url + "/pfe/modify/" + id);
 };
-export const modifyProject=(id:number,
-  title:string,
-  domain:string,
-  tools:string,
-  requiredDoc:string,
-  document:FormData)=>{
-    let project={
-      title:title,
-      domain:domain,
-      tools:tools,
-      requiredDocuments: requiredDoc,
-      document:document
-    }
-  return axios.put(url+'/pfe/modify/'+id,project);
-}
-export const deleteProject=(id:number)=>{
-  return axios.delete(url+'/pfe/modify/'+id);
-}
-export const AccRejProject=(id:number,status:string)=>
-{
-  return axios.put(url+'/pfe/evaluate/'+id,status);
+export const modifyProject = (
+  id: number,
+  title: string,
+  domain: string,
+  tools: string,
+  requiredDoc: string,
+  document: FormData
+) => {
+  let project = {
+    title: title,
+    domain: domain,
+    tools: tools,
+    requiredDocuments: requiredDoc,
+    document: document,
+  };
+  return axios.put(url + "/pfe/modify/" + id, project);
+};
+export const deleteProject = (id: number) => {
+  return axios.delete(url + "/pfe/modify/" + id);
+};
+export const AccRejProject = (id: number, status: string) => {
+  return axios.put(url + "/pfe/evaluate/" + id, status);
 };
 // this function (if successful) will return an accessToken property in reponse.data (expiration 1 hour)
 export const login = (email: string, password: string) => {
@@ -330,4 +333,3 @@ export const login = (email: string, password: string) => {
     data: login,
   });
 };
-
