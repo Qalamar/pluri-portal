@@ -5,8 +5,9 @@ import Projects from "./pages/Projects";
 import Users from "./pages/Users";
 import Promo from "./pages/Promo";
 import Teams from "./pages/Teams";
+import Home from "./pages/Homepage";
 import MyTeam from "./student/MyTeam";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IonApp, IonRouterOutlet, IonSplitPane, IonButton } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -33,19 +34,28 @@ import { store } from "./stores/Store";
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");
+
+  const isAuth = () => {
+    var session = JSON.parse(localStorage.getItem("Auth")!);
+    if (session != null) {
+      store.isAuth.access = session.state;
+      store.isAuth.state = session.state;
+      return true;
+    }
+  };
   return (
     <IonApp>
       <IonReactRouter>
-        {store.isAuth.state ? (
+        {isAuth() ? (
           <IonSplitPane contentId="main">
             <Menu selectedPage={selectedPage} />
             <IonRouterOutlet id="main">
               <Route
                 path="/"
-                render={() => <Redirect to="/auth" />}
+                render={() => <Redirect to="/home" />}
                 exact={true}
               />
-              <Route path="/auth" component={Auth} exact={true} />
+              <Route path="/home" component={Home} exact={true} />
               <Route path="/projects" component={Projects} exact={true} />
               <Route path="/users" component={Users} exact={true} />
               <Route path="/promo" component={Promo} exact={true} />
@@ -56,6 +66,11 @@ const App: React.FC = () => {
         ) : (
           <IonRouterOutlet id="main">
             <Route path="/auth" component={Auth} exact={true} />
+            <Route
+              path="/"
+              render={() => <Redirect to="/auth" />}
+              exact={true}
+            />
           </IonRouterOutlet>
         )}
       </IonReactRouter>

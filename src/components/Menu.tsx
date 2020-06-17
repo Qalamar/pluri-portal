@@ -36,8 +36,8 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: "Authentication",
-    url: "/auth",
+    title: "Home",
+    url: "/home",
     iosIcon: lockClosedOutline,
     mdIcon: lockClosedOutline,
   },
@@ -86,7 +86,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
             <IonItem
               onClick={() => setSelected([true, false, false, false, false])}
               className={selected[0] ? "selected" : ""}
-              routerLink={"/auth"}
+              routerLink={"/home"}
               routerDirection="none"
               lines="none"
               detail={false}

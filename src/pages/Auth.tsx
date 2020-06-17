@@ -17,6 +17,7 @@ import {
   IonButton,
   IonModal,
   IonInput,
+  IonLabel,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import Anime from "react-anime";
@@ -27,6 +28,7 @@ import Toolbar from "../components/Toolbar";
 import "./Auth.css";
 import { useForm, Controller } from "react-hook-form";
 import { store } from "../stores/Store";
+import { useHistory } from "react-router-dom";
 
 let initialValues = {
   rangeInfo: -100,
@@ -55,6 +57,7 @@ const Auth: React.FC = () => {
   });
 
   const [isOpen, setisOpen] = useState(false);
+  const [logged, setLogged] = useState(false);
   const [role, setRole] = useState<string>("student");
 
   useEffect(() => {
@@ -104,9 +107,9 @@ const Auth: React.FC = () => {
       <div style={{ color: "red" }}>{error.message || "Field Is Required"}</div>
     ) : null;
   };
-
+  const history = useHistory();
   const onSubmit = (data: any) => {
-    axios
+    /*  axios
       .post("/login", {
         email: data.email,
         userName: data.userName,
@@ -118,7 +121,15 @@ const Auth: React.FC = () => {
       })
       .catch(function (error) {
         console.log(error);
-      });
+      }); */
+    // Awaiting API Changes
+    store.isAuth.state = true;
+    // Check permissions from the token
+    store.isAuth.access = "admin";
+    setLogged(true);
+    history.push("/projects");
+    localStorage.setItem("Auth", JSON.stringify(store.isAuth));
+    window.location.reload();
   };
 
   return (
@@ -177,6 +188,9 @@ const Auth: React.FC = () => {
                     onSubmit={handleSubmit(() => onSubmit(Log))}
                     style={{ padding: 38 }}
                   >
+                    <IonLabel>
+                      Use any combination for now, logging as an admin
+                    </IonLabel>
                     <IonItem>
                       <IonIcon slot="start" icon={mailOutline}></IonIcon>
                       <Controller
@@ -200,7 +214,7 @@ const Auth: React.FC = () => {
                       />
                     </IonItem>
                     {showError("email")}
-                    <IonItem class="">
+                    {/* <IonItem class="">
                       <IonIcon
                         slot="start"
                         icon={personCircleOutline}
@@ -222,7 +236,7 @@ const Auth: React.FC = () => {
                         }}
                       />
                     </IonItem>
-                    {showError("userName")}
+                    {showError("userName")} */}
                     <IonItem class="ion-margin-bottom">
                       <IonIcon slot="start" icon={keyOutline}></IonIcon>
 

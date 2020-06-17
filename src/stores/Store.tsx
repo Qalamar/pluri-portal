@@ -4,7 +4,7 @@ import { useState } from "react";
 class Variables {
   @observable searchList = "";
   @observable isAuth = {
-    state: true,
+    state: false,
     access: "admin",
   };
   @observable page = "Authentication";
