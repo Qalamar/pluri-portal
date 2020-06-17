@@ -29,29 +29,35 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-
+import { store } from "./stores/Store";
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");
   return (
     <IonApp>
       <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu selectedPage={selectedPage} />
+        {store.isAuth.state ? (
+          <IonSplitPane contentId="main">
+            <Menu selectedPage={selectedPage} />
+            <IonRouterOutlet id="main">
+              <Route
+                path="/"
+                render={() => <Redirect to="/auth" />}
+                exact={true}
+              />
+              <Route path="/auth" component={Auth} exact={true} />
+              <Route path="/projects" component={Projects} exact={true} />
+              <Route path="/users" component={Users} exact={true} />
+              <Route path="/promo" component={Promo} exact={true} />
+              <Route path="/myteam" component={MyTeam} exact={true} />
+              <Route path="/teams" component={Teams} exact={true} />
+            </IonRouterOutlet>
+          </IonSplitPane>
+        ) : (
           <IonRouterOutlet id="main">
-            <Route
-              path="/"
-              render={() => <Redirect to="/auth" />}
-              exact={true}
-            />
             <Route path="/auth" component={Auth} exact={true} />
-            <Route path="/projects" component={Projects} exact={true} />
-            <Route path="/users" component={Users} exact={true} />
-            <Route path="/promo" component={Promo} exact={true} />
-            <Route path="/myteam" component={MyTeam} exact={true} />
-            <Route path="/teams" component={Teams} exact={true} />
           </IonRouterOutlet>
-        </IonSplitPane>
+        )}
       </IonReactRouter>
     </IonApp>
   );

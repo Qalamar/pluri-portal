@@ -52,6 +52,7 @@ export const modifyStudent = (
   password: string,
   email: string,
   promo: number,
+  isLeader: boolean,
   note: number
 ) => {
   const student = {

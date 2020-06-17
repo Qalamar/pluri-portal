@@ -17,37 +17,33 @@ import {
   IonButton,
   IonModal,
   IonInput,
-  
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Anime from "react-anime";
-import {
-  mailOutline,
-  personCircleOutline,
-  keyOutline
-} from "ionicons/icons";
+import { mailOutline, personCircleOutline, keyOutline } from "ionicons/icons";
 import axios from "axios";
 import NotificationArea from "../components/NotificationArea";
 import Toolbar from "../components/Toolbar";
 import "./Auth.css";
 import { useForm, Controller } from "react-hook-form";
+import { store } from "../stores/Store";
 
 let initialValues = {
   rangeInfo: -100,
-  email:"",
-  userName:"",
-  password:""
+  email: "",
+  userName: "",
+  password: "",
 };
 interface login {
-  email:string,
-  userName:string,
-  password:string
+  email: string;
+  userName: string;
+  password: string;
 }
-let Log:login={
-  email:"",
-  userName:"",
-  password:""
-}
+let Log: login = {
+  email: "",
+  userName: "",
+  password: "",
+};
 
 const Auth: React.FC = () => {
   const [showPopover, setShowPopover] = useState<{
@@ -60,6 +56,13 @@ const Auth: React.FC = () => {
 
   const [isOpen, setisOpen] = useState(false);
   const [role, setRole] = useState<string>("student");
+
+  useEffect(() => {
+    const rest = JSON.parse(localStorage.getItem("Auth")!);
+    !(rest === null)
+      ? (store.isAuth.state = true)
+      : (store.isAuth.state = false);
+  }, []);
 
   const showProfile = () => {
     axios.get("/employees?id=1").then(function (response) {
@@ -111,6 +114,7 @@ const Auth: React.FC = () => {
       })
       .then(function (response) {
         console.log(response);
+        localStorage.setItem("Auth", JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -170,7 +174,7 @@ const Auth: React.FC = () => {
 
                 <IonCardContent class="ion-padding ion-text-center">
                   <form
-                    onSubmit={handleSubmit(()=>onSubmit(Log))}
+                    onSubmit={handleSubmit(() => onSubmit(Log))}
                     style={{ padding: 38 }}
                   >
                     <IonItem>
@@ -182,7 +186,7 @@ const Auth: React.FC = () => {
                         control={control}
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
-                          Log.email=selected.detail.value;
+                          Log.email = selected.detail.value;
                           return selected.detail.value;
                         }}
                         name="email"
@@ -209,7 +213,7 @@ const Auth: React.FC = () => {
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
                           console.log("UserName", selected.detail.value);
-                          Log.userName=selected.detail.value;
+                          Log.userName = selected.detail.value;
                           return selected.detail.value;
                         }}
                         name="userName"
@@ -221,7 +225,7 @@ const Auth: React.FC = () => {
                     {showError("userName")}
                     <IonItem class="ion-margin-bottom">
                       <IonIcon slot="start" icon={keyOutline}></IonIcon>
-                     
+
                       <Controller
                         as={IonInput}
                         type="password"
@@ -230,25 +234,22 @@ const Auth: React.FC = () => {
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
                           console.log("Password", selected.detail.value);
-                          Log.password=selected.detail.value;
+                          Log.password = selected.detail.value;
                           return selected.detail.value;
                         }}
-                        
                         name="password"
                         rules={{ required: true }}
                       />
                     </IonItem>
                     {showError("password")}
                     <IonButton
-                    color="dark"
-                    type="submit"
-                    disabled={formState.isValid === false}
-                  >
-                    Login
-                  </IonButton>
+                      color="dark"
+                      type="submit"
+                      disabled={formState.isValid === false}
+                    >
+                      Login
+                    </IonButton>
                   </form>
-
-                  
                 </IonCardContent>
               </IonCard>
             </IonCol>

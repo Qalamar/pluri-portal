@@ -289,7 +289,7 @@ const MyTeam: React.FC = observer(() => {
         student.userName,
         student.password,
         student.promotion,
-        // true,
+        true,
         student.note
       );
       api.addTeam(Team.name);

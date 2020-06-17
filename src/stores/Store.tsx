@@ -3,6 +3,10 @@ import { useState } from "react";
 
 class Variables {
   @observable searchList = "";
+  @observable isAuth = {
+    state: true,
+    access: "admin",
+  };
   @observable page = "Authentication";
   @observable Notifications = [
     {
