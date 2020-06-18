@@ -1,43 +1,34 @@
 import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonGrid,
-  IonRow,
-  IonCol,
+  IonButton,
   IonCard,
+  IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent,
+  IonChip,
+  IonCol,
+  IonContent,
+  IonGrid,
   IonIcon,
-  IonList,
   IonItem,
   IonLabel,
-  IonText,
-  IonButton,
+  IonList,
   IonModal,
-  IonItemDivider,
-  IonChip,
+  IonPage,
+  IonRow,
+  IonText,
 } from "@ionic/react";
-import React, { useState } from "react";
 import {
-  linkOutline,
-  imageOutline,
-  logoGithub,
-  personCircleOutline,
   addCircleOutline,
   filterOutline,
+  imageOutline,
+  personCircleOutline,
 } from "ionicons/icons";
-import Image, { Shimmer } from "react-shimmer";
-import "./Projects.css";
-import Anime from "react-anime";
-import Toolbar from "../components/Toolbar";
-import ProjectForm from "../components/ProjectForm";
 import { observer } from "mobx-react";
+import React, { useState } from "react";
+import Anime from "react-anime";
+import ProjectForm from "../components/ProjectForm";
+import Toolbar from "../components/Toolbar";
+import "./Projects.css";
 
 const Projects: React.FC = observer(() => {
   const [showModal, setShowModal] = useState(false);

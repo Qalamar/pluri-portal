@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
 import {
-  IonHeader,
-  IonToolbar,
-  IonButtons,
-  IonMenuButton,
-  IonTitle,
   IonButton,
+  IonButtons,
+  IonHeader,
   IonIcon,
+  IonMenuButton,
   IonPopover,
+  IonTitle,
+  IonToolbar,
 } from "@ionic/react";
 import { notificationsCircleOutline } from "ionicons/icons";
-import NotificationArea from "./NotificationArea";
-import { store } from "../stores/Store";
 import { observer } from "mobx-react";
+import React, { useState } from "react";
+import NotificationArea from "./NotificationArea";
 
 interface PageProps {
   page: string;

@@ -145,7 +145,7 @@ export const deleteTeacher = (id: number) => {
 };
 
 export const getPromotions = () => {
-  return axios.get(url + "/promo/promos");
+  return axios.get(url + "/promos");
 };
 
 export const addPromotion = (
@@ -163,7 +163,7 @@ export const addPromotion = (
     description: d,
   };
 
-  return axios.post(url + "/promo/add/", promotion);
+  return axios.post(url + "promo/", promotion);
 };
 export const modifyPromotion = (
   Id: number,
@@ -185,7 +185,7 @@ export const modifyPromotion = (
     maxProjects: maxP,
   };
   modifyPromotionSetup(Id, minT, maxT, maxP);
-  return axios.put(url + "/promo/modify/" + Id, promotion);
+  return axios.put(url + "promo/" + Id, promotion);
 };
 export const modifyPromotionSetup = (
   Id: number,
@@ -198,10 +198,10 @@ export const modifyPromotionSetup = (
     maxTeamMembers: maxT,
     maxProjects: maxP,
   };
-  return axios.put(url + "/promo/setup/" + Id, promotion);
+  return axios.put(url + "promo/" + Id, promotion);
 };
 export const deletePromotion = (id: number) => {
-  return axios.delete(url + "/promo/modify/" + id);
+  return axios.delete(url + "promo/" + id);
 };
 /**************************************************************/
 

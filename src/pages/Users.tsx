@@ -1,43 +1,35 @@
 import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonGrid,
-  IonRow,
-  IonCol,
+  IonButton,
   IonCard,
+  IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent,
-  IonIcon,
-  IonLabel,
   IonChip,
-  IonText,
-  IonButton,
-  IonSearchbar,
-  IonModal,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonIcon,
   IonItem,
+  IonLabel,
+  IonModal,
+  IonPage,
+  IonRow,
+  IonSearchbar,
+  IonText,
 } from "@ionic/react";
-import React, { useEffect, useState, useReducer } from "react";
+import axios from "axios";
 import {
-  personCircleOutline,
   addCircleOutline,
   filterOutline,
+  personCircleOutline,
 } from "ionicons/icons";
-
-import axios from "axios";
 import { observer } from "mobx-react";
-import styled from "styled-components";
-import { store } from "../stores/Store";
-import UserForm from "../components/UserForm";
-import { addStudent, modifyStudent, getStudents } from "../utils/API";
-import "./Users.css";
+import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
+import UserForm from "../components/UserForm";
+import { store } from "../stores/Store";
+import "./Users.css";
 
 const Users: React.FC = observer(() => {
   const [students, setstudents] = useState([]);

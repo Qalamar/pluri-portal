@@ -1,34 +1,17 @@
 import {
-  IonButtons,
-  IonContent,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonCardTitle,
   IonCard,
-  IonCardHeader,
   IonCardContent,
-  IonIcon,
-  IonItem,
-  IonText,
-  IonButton,
-  IonModal,
-  IonInput,
-  IonLabel,
+  IonCardHeader,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonPage,
+  IonRow,
+  IonTitle,
 } from "@ionic/react";
-import React, { useState, useEffect } from "react";
-import Anime from "react-anime";
-import { mailOutline, personCircleOutline, keyOutline } from "ionicons/icons";
-import axios from "axios";
-import NotificationArea from "../components/NotificationArea";
+import React, { useState } from "react";
 import Toolbar from "../components/Toolbar";
 import "./Auth.css";
-import { useForm, Controller } from "react-hook-form";
-import { store } from "../stores/Store";
-import { useHistory } from "react-router-dom";
 
 const Homepage: React.FC = () => {
   const [showPopover, setShowPopover] = useState<{

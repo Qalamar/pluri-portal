@@ -1,59 +1,56 @@
 import {
+  IonAlert,
+  IonButton,
   IonButtons,
-  IonContent,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonGrid,
-  IonRow,
-  IonCol,
   IonCard,
+  IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent,
-  IonIcon,
-  IonLabel,
-  IonToast,
-  IonButton,
-  IonModal,
-  IonItem,
-  IonList,
-  IonInput,
-  IonAlert,
+  IonCol,
+  IonContent,
   IonDatetime,
+  IonGrid,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonModal,
+  IonPage,
+  IonRow,
+  IonTitle,
+  IonToast,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
-import "./MyTeam.css";
+import axios from "axios";
 import {
-  personOutline,
+  addCircleOutline,
+  calendarOutline,
+  checkmarkOutline,
   chevronForwardOutline,
+  closeOutline,
+  codeOutline,
+  documentTextOutline,
+  downloadOutline,
   mailOutline,
   personAddOutline,
-  codeOutline,
-  closeOutline,
-  checkmarkOutline,
-  calendarOutline,
-  downloadOutline,
-  documentTextOutline,
-  addCircleOutline,
+  personOutline,
 } from "ionicons/icons";
-
 import { observer } from "mobx-react";
+import React, { useEffect, useState } from "react";
+import Anime from "react-anime";
+import { Controller, useForm } from "react-hook-form";
+import Toolbar from "../components/Toolbar";
 import { promotion } from "../pages/Promo";
-import { useForm, Controller } from "react-hook-form";
+import * as api from "../utils/API";
 import {
-  useTeam,
   Invite,
+  Student,
+  studentSecure,
   Team,
   useStudent,
-  studentSecure,
-  Student,
+  useTeam,
 } from "../utils/Interfaces";
-import Anime from "react-anime";
-import axios from "axios";
-import * as api from "../utils/API";
-
-import Toolbar from "../components/Toolbar";
+import "./MyTeam.css";
 
 let inviteButton: boolean[] = []; //for invited button
 const useStateWithLocalStorage = (localStorageKey: string) => {

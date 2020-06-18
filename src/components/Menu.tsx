@@ -9,18 +9,17 @@ import {
   IonMenuToggle,
   IonNote,
 } from "@ionic/react";
-import React, { useState, useEffect } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   archiveOutline,
   archiveSharp,
-  peopleCircleOutline,
   lockClosedOutline,
-  schoolOutline,
+  peopleCircleOutline,
   peopleOutline,
+  schoolOutline,
 } from "ionicons/icons";
+import React, { useEffect, useState } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { store } from "../stores/Store";
-
 import "./Menu.css";
 
 interface MenuProps extends RouteComponentProps {

@@ -1,18 +1,8 @@
-import React, { useState } from "react";
-import {
-  IonPopover,
-  IonList,
-  IonItemSliding,
-  IonItem,
-  IonLabel,
-  IonIcon,
-  IonItemOptions,
-  IonItemOption,
-} from "@ionic/react";
-import { addCircleOutline, calendarOutline } from "ionicons/icons";
+import { IonList } from "@ionic/react";
+import React from "react";
 import { store } from "../stores/Store";
-import NotificationItem from "./NotificationItem";
 import { NotificationInterface } from "../utils/Interfaces";
+import NotificationItem from "./NotificationItem";
 
 const NotificationArea: React.FC = () => {
   return (

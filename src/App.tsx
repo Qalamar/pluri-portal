@@ -1,36 +1,31 @@
-import Menu from "./components/Menu";
-
-import Auth from "./pages/Auth";
-import Projects from "./pages/Projects";
-import Users from "./pages/Users";
-import Promo from "./pages/Promo";
-import Teams from "./pages/Teams";
-import Home from "./pages/Homepage";
-import MyTeam from "./student/MyTeam";
-import React, { useState, useEffect } from "react";
-import { IonApp, IonRouterOutlet, IonSplitPane, IonButton } from "@ionic/react";
+import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { Redirect, Route, Switch } from "react-router-dom";
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
-
+import "@ionic/react/css/display.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/float-elements.css";
 /* Basic CSS for apps built with Ionic */
 import "@ionic/react/css/normalize.css";
-import "@ionic/react/css/structure.css";
-import "@ionic/react/css/typography.css";
-
 /* Optional CSS utils that can be commented out */
 import "@ionic/react/css/padding.css";
-import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/structure.css";
 import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
-import "@ionic/react/css/flex-utils.css";
-import "@ionic/react/css/display.css";
-
+import "@ionic/react/css/typography.css";
+import React, { useState } from "react";
+import { Redirect, Route } from "react-router-dom";
+import Menu from "./components/Menu";
+import Auth from "./pages/Auth";
+import Home from "./pages/Homepage";
+import Projects from "./pages/Projects";
+import Promo from "./pages/Promo";
+import Teams from "./pages/Teams";
+import Users from "./pages/Users";
+import { store } from "./stores/Store";
+import MyTeam from "./student/MyTeam";
 /* Theme variables */
 import "./theme/variables.css";
-import { store } from "./stores/Store";
 
 const App: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState("");

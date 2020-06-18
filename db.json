@@ -64,36 +64,18 @@
       "promotion": "1SC",
       "isLeader": false,
       "team": "Pfe"
-    },
-    {
-      "firstName": "omar",
-      "lastName": "omar",
-      "username": "",
-      "password": "",
-      "email": "omar@yahoo.com",
-      "birthday": "2020-05-28T03:07:59.825Z",
-      "birthPlace": "",
-      "promo": "1CS",
-      "currentYear": "",
-      "isLeader": false,
-      "team": "",
-      "id": 5
     }
   ],
-  "promotion": [
+  "promo": [
     {
-      "cycle": "modified",
-      "year": "",
+      "description": "New2",
+      "cycle": "CPI",
+      "year": "1",
       "specialityName": "",
-      "description": "",
-      "id": 1
-    },
-    {
-      "cycle": "new",
-      "year": "",
-      "specialityName": "",
-      "description": "",
-      "id": 2
+      "minTeamMembers": "4",
+      "maxTeamMembers": "6",
+      "maxProjects": "2",
+      "id": 3
     }
   ],
   "team": [

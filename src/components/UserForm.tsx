@@ -1,34 +1,31 @@
 import {
+  IonButton,
+  IonButtons,
   IonContent,
   IonIcon,
+  IonInput,
   IonItem,
   IonLabel,
-  IonInput,
-  IonRadioGroup,
   IonRadio,
+  IonRadioGroup,
   IonSelect,
   IonSelectOption,
-  IonButton,
   IonToast,
-  IonButtons
 } from "@ionic/react";
-import { observer } from "mobx-react";
-import React, { useState } from "react";
 import {
-  peopleCircleOutline,
-  schoolOutline,
-  personCircleOutline,
+  briefcaseOutline,
   mailOutline,
   maleFemaleOutline,
-  briefcaseOutline,
-  walkOutline
+  peopleCircleOutline,
+  personCircleOutline,
+  schoolOutline,
+  walkOutline,
 } from "ionicons/icons";
-import { store } from "../stores/Store";
-import { useForm, Controller } from "react-hook-form";
-import Anime from "react-anime";
-import axios from "axios";
+import { observer } from "mobx-react";
+import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as api from "../utils/API";
 import "./UserForm.css";
-import * as api from "../utils/API"
 
 let renderCount = 0;
 let initialValues = {
@@ -38,13 +35,13 @@ let initialValues = {
   gender: "",
   class: "",
   email: "",
-  promo: ""
+  promo: "",
 };
 
 const UserForm: React.FC = observer(() => {
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...initialValues },
-    mode: "onChange"
+    mode: "onChange",
   });
 
   const [data, setData] = useState();
@@ -75,7 +72,7 @@ const UserForm: React.FC = observer(() => {
 
   const onSubmit = (data: any) => {
     setData(data);
-    if(data.class === "Student") 
+    if (data.class === "Student")
       api.addStudent(
         data.firstName,
         data.lastName,
@@ -87,20 +84,21 @@ const UserForm: React.FC = observer(() => {
         data.promo,
         data.currentYear,
         0
-      )
-    else //data.class === Teacher
-        api.addTeacher(
-          data.firstName,
-          data.lastName,
-          data.userName,
-          data.password,
-          data.email,
-          data.birthday,
-          data.birthPlace,
-          data.speciality,
-          data.grade,
-          data.currentYear
-        )
+      );
+    //data.class === Teacher
+    else
+      api.addTeacher(
+        data.firstName,
+        data.lastName,
+        data.userName,
+        data.password,
+        data.email,
+        data.birthday,
+        data.birthPlace,
+        data.speciality,
+        data.grade,
+        data.currentYear
+      );
     // axios
     //   .post("/students", {
     //     first_name: capitalizeFirstLetter(data.firstName),
@@ -134,12 +132,22 @@ const UserForm: React.FC = observer(() => {
         <Controller
           as={
             <IonRadioGroup>
-              <IonItem color="dark" onClick={() => {setRole('student')}}>
+              <IonItem
+                color="dark"
+                onClick={() => {
+                  setRole("student");
+                }}
+              >
                 <IonIcon slot="start" icon={schoolOutline}></IonIcon>
                 <IonLabel>Student</IonLabel>
                 <IonRadio value="Student" />
               </IonItem>
-              <IonItem color="dark" onClick={() => {setRole('professor')}}>
+              <IonItem
+                color="dark"
+                onClick={() => {
+                  setRole("professor");
+                }}
+              >
                 <IonIcon slot="start" icon={briefcaseOutline}></IonIcon>
                 <IonLabel>Teacher</IonLabel>
                 <IonRadio value="Teacher" />
@@ -171,7 +179,7 @@ const UserForm: React.FC = observer(() => {
             name="firstName"
             rules={{
               required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
+              minLength: { value: 4, message: "Must be 4 chars long" },
             }}
           />
         </IonItem>
@@ -192,7 +200,7 @@ const UserForm: React.FC = observer(() => {
             name="lastName"
             rules={{
               required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
+              minLength: { value: 4, message: "Must be 4 chars long" },
             }}
           />
         </IonItem>
@@ -213,7 +221,7 @@ const UserForm: React.FC = observer(() => {
             name="userName"
             rules={{
               required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
+              minLength: { value: 4, message: "Must be 4 chars long" },
             }}
           />
         </IonItem>
@@ -234,7 +242,7 @@ const UserForm: React.FC = observer(() => {
             name="password"
             rules={{
               required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
+              minLength: { value: 4, message: "Must be 4 chars long" },
             }}
           />
         </IonItem>
@@ -255,8 +263,8 @@ const UserForm: React.FC = observer(() => {
               required: true,
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "invalid email address"
-              }
+                message: "invalid email address",
+              },
             }}
           />
         </IonItem>
@@ -277,7 +285,7 @@ const UserForm: React.FC = observer(() => {
             name="birthday"
             rules={{
               required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
+              minLength: { value: 4, message: "Must be 4 chars long" },
             }}
           />
         </IonItem>
@@ -298,7 +306,7 @@ const UserForm: React.FC = observer(() => {
             name="birthPlace"
             rules={{
               required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
+              minLength: { value: 4, message: "Must be 4 chars long" },
             }}
           />
         </IonItem>
@@ -326,32 +334,32 @@ const UserForm: React.FC = observer(() => {
         <IonLabel color="light">
           <h1>Role</h1>
         </IonLabel>
-        {role == 'student' && (
-        <IonItem color="dark" class="ion-margin-bottom">
-          <IonIcon slot="start" icon={walkOutline}></IonIcon>
-          <IonLabel>Promotion</IonLabel>
-          <Controller
-            as={
-              <IonSelect placeholder="Select One">
-                <IonSelectOption value="1CPI">1CPI</IonSelectOption>
-                <IonSelectOption value="2CPI">2CPI</IonSelectOption>
-                <IonSelectOption value="1CS">1CS</IonSelectOption>
-                <IonSelectOption value="2CS-SIW">2CS-SIW</IonSelectOption>
-                <IonSelectOption value="2CS-ISI">2CS-ISI</IonSelectOption>
-                <IonSelectOption value="3CS-SIW">3CS-SIW</IonSelectOption>
-                <IonSelectOption value="3CS-ISI">3CS-ISI</IonSelectOption>
-              </IonSelect>
-            }
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log(selected.detail.value);
-              return selected.detail.value;
-            }}
-            name="promo"
-            rules={{ required: true }}
-          />
-        </IonItem>
+        {role == "student" && (
+          <IonItem color="dark" class="ion-margin-bottom">
+            <IonIcon slot="start" icon={walkOutline}></IonIcon>
+            <IonLabel>Promotion</IonLabel>
+            <Controller
+              as={
+                <IonSelect placeholder="Select One">
+                  <IonSelectOption value="1CPI">1CPI</IonSelectOption>
+                  <IonSelectOption value="2CPI">2CPI</IonSelectOption>
+                  <IonSelectOption value="1CS">1CS</IonSelectOption>
+                  <IonSelectOption value="2CS-SIW">2CS-SIW</IonSelectOption>
+                  <IonSelectOption value="2CS-ISI">2CS-ISI</IonSelectOption>
+                  <IonSelectOption value="3CS-SIW">3CS-SIW</IonSelectOption>
+                  <IonSelectOption value="3CS-ISI">3CS-ISI</IonSelectOption>
+                </IonSelect>
+              }
+              control={control}
+              onChangeName="onIonChange"
+              onChange={([selected]) => {
+                console.log(selected.detail.value);
+                return selected.detail.value;
+              }}
+              name="promo"
+              rules={{ required: true }}
+            />
+          </IonItem>
         )}
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
@@ -369,58 +377,58 @@ const UserForm: React.FC = observer(() => {
             name="currentYear"
             rules={{
               required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
+              minLength: { value: 4, message: "Must be 4 chars long" },
             }}
           />
         </IonItem>
         {showError("userName")}
-        {role == 'professor' && (
-        <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
+        {role == "professor" && (
+          <IonItem color="dark" class="">
+            <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
 
-          <Controller
-            as={IonInput}
-            placeholder="Speciality"
-            className="firstCapital"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("speciality", selected.detail.value);
-              return selected.detail.value;
-            }}
-            name="speciality"
-            rules={{
-              required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" }
-            }}
-          />
-        </IonItem>
+            <Controller
+              as={IonInput}
+              placeholder="Speciality"
+              className="firstCapital"
+              control={control}
+              onChangeName="onIonChange"
+              onChange={([selected]) => {
+                console.log("speciality", selected.detail.value);
+                return selected.detail.value;
+              }}
+              name="speciality"
+              rules={{
+                required: true,
+                minLength: { value: 4, message: "Must be 4 chars long" },
+              }}
+            />
+          </IonItem>
         )}
         {showError("speciality")}
-        {role == 'professor' && (
-        <IonItem color="dark" class="ion-margin-bottom">
-          <IonIcon slot="start" icon={briefcaseOutline}></IonIcon>
-          <IonLabel>Grade</IonLabel>
-          <Controller
-            as={
-              <IonSelect placeholder="Select One">
-                <IonSelectOption value="Pr">Pr</IonSelectOption>
-                <IonSelectOption value="MCA">MCA</IonSelectOption>
-                <IonSelectOption value="MCB">MCB</IonSelectOption>
-                <IonSelectOption value="MAA">MAA</IonSelectOption>
-                <IonSelectOption value="MAB">MAB</IonSelectOption>
-              </IonSelect>
-            }
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log(selected.detail.value);
-              return selected.detail.value;
-            }}
-            name="grade"
-            rules={{ required: true }}
-          />
-        </IonItem>
+        {role == "professor" && (
+          <IonItem color="dark" class="ion-margin-bottom">
+            <IonIcon slot="start" icon={briefcaseOutline}></IonIcon>
+            <IonLabel>Grade</IonLabel>
+            <Controller
+              as={
+                <IonSelect placeholder="Select One">
+                  <IonSelectOption value="Pr">Pr</IonSelectOption>
+                  <IonSelectOption value="MCA">MCA</IonSelectOption>
+                  <IonSelectOption value="MCB">MCB</IonSelectOption>
+                  <IonSelectOption value="MAA">MAA</IonSelectOption>
+                  <IonSelectOption value="MAB">MAB</IonSelectOption>
+                </IonSelect>
+              }
+              control={control}
+              onChangeName="onIonChange"
+              onChange={([selected]) => {
+                console.log(selected.detail.value);
+                return selected.detail.value;
+              }}
+              name="grade"
+              rules={{ required: true }}
+            />
+          </IonItem>
         )}
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton
