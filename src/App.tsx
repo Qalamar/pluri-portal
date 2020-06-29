@@ -24,6 +24,7 @@ import Teams from "./pages/Teams";
 import Users from "./pages/Users";
 import { store } from "./stores/Store";
 import MyTeam from "./student/MyTeam";
+
 /* Theme variables */
 import "./theme/variables.css";
 

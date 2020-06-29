@@ -21,25 +21,22 @@ import axios from "axios";
 import { keyOutline, mailOutline } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import Toolbar from "../components/Toolbar";
+import * as api from "../utils/API";
 import { store } from "../stores/Store";
+import { useHistory } from "react-router-dom";
 import "./Auth.css";
 
 let initialValues = {
-  rangeInfo: -100,
   email: "",
-  userName: "",
   password: "",
 };
 interface login {
   email: string;
-  userName: string;
   password: string;
 }
 let Log: login = {
   email: "",
-  userName: "",
   password: "",
 };
 
@@ -53,8 +50,6 @@ const Auth: React.FC = () => {
   });
 
   const [isOpen, setisOpen] = useState(false);
-  const [logged, setLogged] = useState(false);
-  const [role, setRole] = useState<string>("student");
 
   useEffect(() => {
     const rest = JSON.parse(localStorage.getItem("Auth")!);
@@ -103,8 +98,12 @@ const Auth: React.FC = () => {
       <div style={{ color: "red" }}>{error.message || "Field Is Required"}</div>
     ) : null;
   };
+
   const history = useHistory();
+
   const onSubmit = (data: any) => {
+    let mail = data.email;
+    let pass = data.password;
     /*  axios
       .post("/login", {
         email: data.email,
@@ -119,13 +118,8 @@ const Auth: React.FC = () => {
         console.log(error);
       }); */
     // Awaiting API Changes
-    store.isAuth.state = true;
-    // Check permissions from the token
-    store.isAuth.access = "admin";
-    setLogged(true);
-    history.push("/projects");
-    localStorage.setItem("Auth", JSON.stringify(store.isAuth));
-    window.location.reload();
+    api.userLogin(mail, pass);
+    history.push("/home");
   };
 
   return (
@@ -252,6 +246,13 @@ const Auth: React.FC = () => {
                       />
                     </IonItem>
                     {showError("password")}
+                    <IonButton
+                      color="success"
+                      type="submit"
+                      // disabled={formState.isValid === false}
+                    >
+                      Register
+                    </IonButton>
                     <IonButton
                       color="dark"
                       type="submit"

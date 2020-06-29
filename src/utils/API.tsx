@@ -1,4 +1,7 @@
 import axios from "axios";
+import { resizeOutline } from "ionicons/icons";
+import { store } from "../stores/Store";
+import { useHistory } from "react-router-dom";
 
 const url = "http://localhost:3000/";
 const studentsUrl = "http://localhost:3000/student";
@@ -146,6 +149,37 @@ export const deleteTeacher = (id: number) => {
 
 export const getPromotions = () => {
   return axios.get(url + "/promos");
+};
+
+export const userLogin = async (email: string, password: string) => {
+  try {
+    const res = await axios.post(apiUrl + "users/login/", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      email: email,
+      password: password,
+    });
+    // .then();
+    console.log(res.data);
+    localStorage.setItem("Token", JSON.stringify(res.data));
+    store.isAuth.state = true;
+    // Check permissions from the token
+    switch (res.data.token.slice(-1)) {
+      case "0":
+        store.isAuth.access = "0";
+        break;
+      case "1":
+        store.isAuth.access = "1";
+      default:
+        store.isAuth.access = "2";
+        break;
+    }
+    localStorage.setItem("Auth", JSON.stringify(store.isAuth));
+    window.location.reload();
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
 
 export const addPromotion = (

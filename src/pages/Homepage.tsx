@@ -9,9 +9,10 @@ import {
   IonRow,
   IonTitle,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Toolbar from "../components/Toolbar";
 import "./Auth.css";
+import * as api from "../utils/API";
 
 const Homepage: React.FC = () => {
   const [showPopover, setShowPopover] = useState<{
@@ -21,6 +22,8 @@ const Homepage: React.FC = () => {
     open: false,
     event: undefined,
   });
+
+  useEffect(() => {}, []);
 
   const [isOpen, setisOpen] = useState(false);
 
