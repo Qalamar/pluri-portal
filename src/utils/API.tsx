@@ -1,7 +1,5 @@
 import axios from "axios";
-import { resizeOutline } from "ionicons/icons";
 import { store } from "../stores/Store";
-import { useHistory } from "react-router-dom";
 
 const url = "http://localhost:3000/";
 const studentsUrl = "http://localhost:3000/student";
@@ -175,6 +173,9 @@ export const userLogin = async (email: string, password: string) => {
         store.isAuth.access = "2";
         break;
     }
+    store.isAuth.token = res.data.token;
+    store.isAuth.id = res.data.userId;
+
     localStorage.setItem("Auth", JSON.stringify(store.isAuth));
     window.location.reload();
   } catch (error) {
@@ -182,23 +183,36 @@ export const userLogin = async (email: string, password: string) => {
   }
 };
 
-export const addPromotion = (
-  Id: number,
-  d: string,
-  c: string,
-  l: string,
-  sC: string
+export const addPromotion = async (
+  cycle: string,
+  year: string,
+  specialityName: string,
+  description: string,
+  minTeamMembers: number,
+  maxTeamMembers: number,
+  maxTeamsInProject: number
 ) => {
-  const promotion = {
-    id: Id,
-    cycle: c,
-    year: l,
-    specialityName: sC,
-    description: d,
-  };
-
-  return axios.post(url + "promo/", promotion);
+  try {
+    const res = await axios.post(apiUrl + "promo/add/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      cycle: cycle,
+      year: year,
+      specialityName: specialityName,
+      description: description,
+      minTeamMembers: minTeamMembers,
+      maxTeamMembers: maxTeamMembers,
+      maxTeamsInProject: maxTeamsInProject,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
+
 export const modifyPromotion = (
   Id: number,
   d: string,

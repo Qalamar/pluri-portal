@@ -85,13 +85,12 @@ const PromoForm: React.FC = observer(() => {
     }
 
     if (include === false) {
-      api.addPromotion(
-        promot.id,
+      /*  api.addPromotion(
         promot.description,
         promot.cycle,
         promot.year,
         promot.specialityName
-      );
+      ); */
 
       setshowToast(true);
     } else setshowAlert(true);

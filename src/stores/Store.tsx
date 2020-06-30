@@ -5,6 +5,8 @@ class Variables {
   @observable isAuth = {
     state: false,
     access: "admin",
+    token: "",
+    id: "",
   };
   @observable page = "Authentication";
   @observable Notifications = [

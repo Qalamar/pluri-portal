@@ -26,8 +26,6 @@ import { promotion } from "../pages/Promo";
 import * as api from "../utils/API";
 import "./PromoForm.css";
 
-let renderCount = 0;
-
 export interface Promo {
   promo: promotion;
 }
@@ -68,7 +66,6 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
     defaultValues: { ...promot },
     mode: "onChange",
   });
-  renderCount++;
 
   const [showAlert, setShowAlert] = useState(false);
   const [showToast, setshowToast] = useState(false);
