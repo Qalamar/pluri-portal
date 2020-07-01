@@ -20,7 +20,7 @@ export const addStudent = (
   userName: string,
   password: string,
   email: string,
-  birthday: Date,
+  birthday: string,
   birthPlace: string,
   promo: number,
   currentYear: string,
@@ -47,7 +47,7 @@ export const modifyStudent = (
   id: number,
   fName: string,
   lName: string,
-  birthday: Date,
+  birthday: string,
   birthPlace: string,
   userName: string,
   password: string,
@@ -85,7 +85,7 @@ export const addTeacher = (
   userName: string,
   password: string,
   email: string,
-  birthday: Date,
+  birthday: string,
   birthPlace: string,
   speciality: string,
   grade: string,
@@ -115,7 +115,7 @@ export const modifyTeacher = (
   userName: string,
   password: string,
   email: string,
-  birthday: Date,
+  birthday: string,
   birthPlace: string,
   speciality: string,
   grade: string,
@@ -143,10 +143,6 @@ export const getTeachers = () => {
 
 export const deleteTeacher = (id: number) => {
   return axios.delete(url + "users/professor/modify/" + id);
-};
-
-export const getPromotions = () => {
-  return axios.get(url + "/promos");
 };
 
 export const userLogin = async (email: string, password: string) => {
@@ -178,6 +174,21 @@ export const userLogin = async (email: string, password: string) => {
 
     localStorage.setItem("Auth", JSON.stringify(store.isAuth));
     window.location.reload();
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const getPromotions = async () => {
+  try {
+    const res = await axios.get(apiUrl + "promo/promos/", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // .then();
+    console.log(res.data);
+    store.promos = res.data;
   } catch (error) {
     return console.log(error.response.request);
   }

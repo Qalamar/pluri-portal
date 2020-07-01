@@ -7,6 +7,15 @@ export interface Team {
   project: number;
   noteAvg: number;
 }
+export interface Promotion {
+  cycle: string;
+  year: string;
+  specialityName: string;
+  description: string;
+  minTeamMembers: number;
+  maxTeamMembers: number;
+  maxTeamsInProject: number;
+}
 export interface TeamInterface {
   TeamIn: Team;
 }
@@ -34,7 +43,7 @@ export interface Student {
   id: number;
   firstName: string;
   lastName: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   placeOfBirth: string;
   email: string;
   userName: string;
@@ -61,7 +70,7 @@ export const useStudent = (overrides?: Partial<Student>): StudentState => {
     id: 0,
     firstName: "",
     lastName: "",
-    dateOfBirth: new Date(),
+    dateOfBirth: "",
     placeOfBirth: "",
     email: "",
     userName: "",

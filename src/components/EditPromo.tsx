@@ -51,7 +51,7 @@ export const usePromo = (overrides?: Partial<promotion>): PromoState => {
   });
   return { promot, setPromo };
 };
-const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
+const EditPromo: React.FC<Promo> = observer(({ promo }) => {
   const { promot } = usePromo({
     id: promo.id,
     description: promo.description,
@@ -320,4 +320,4 @@ const PromoFormEditing: React.FC<Promo> = observer(({ promo }) => {
     </IonContent>
   );
 });
-export default PromoFormEditing;
+export default EditPromo;

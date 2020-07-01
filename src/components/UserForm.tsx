@@ -11,6 +11,7 @@ import {
   IonSelect,
   IonSelectOption,
   IonToast,
+  IonDatetime,
 } from "@ionic/react";
 import {
   briefcaseOutline,
@@ -70,6 +71,8 @@ const UserForm: React.FC = observer(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  const [selectedDate, setSelectedDate] = useState<string>("2012-12-15");
+
   const onSubmit = (data: any) => {
     setData(data);
     if (data.class === "Student")
@@ -79,7 +82,7 @@ const UserForm: React.FC = observer(() => {
         data.userName,
         data.password,
         data.email,
-        data.birthday,
+        selectedDate,
         data.birthPlace,
         data.promo,
         data.currentYear,
@@ -93,7 +96,7 @@ const UserForm: React.FC = observer(() => {
         data.userName,
         data.password,
         data.email,
-        data.birthday,
+        selectedDate,
         data.birthPlace,
         data.speciality,
         data.grade,
@@ -272,24 +275,14 @@ const UserForm: React.FC = observer(() => {
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
 
-          <Controller
-            as={IonInput}
-            placeholder="Birthday"
-            className="firstCapital"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("userName", selected.detail.value);
-              return selected.detail.value;
-            }}
-            name="birthday"
-            rules={{
-              required: true,
-              minLength: { value: 4, message: "Must be 4 chars long" },
-            }}
-          />
+          <IonDatetime
+            id="dynamicDisabled"
+            displayFormat="YYYY MM DD"
+            value={selectedDate}
+            onIonChange={(e) => setSelectedDate(e.detail.value!)}
+          ></IonDatetime>
         </IonItem>
-        {showError("birthday")}
+
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
 

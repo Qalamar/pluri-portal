@@ -74,7 +74,7 @@ const MyTeam: React.FC = observer(() => {
     id: 0,
     firstName: "Ilyes ",
     lastName: "bacha ",
-    dateOfBirth: new Date(),
+    dateOfBirth: "",
     placeOfBirth: " ",
     email: "i.bacha@esi-sba.dz",
     userName: " ",

@@ -2,6 +2,7 @@ import { observable } from "mobx";
 
 class Variables {
   @observable searchList = "";
+  @observable promos = [];
   @observable isAuth = {
     state: false,
     access: "admin",

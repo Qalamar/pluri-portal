@@ -23,8 +23,8 @@ import axios from "axios";
 import { addCircleOutline, filterOutline } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
-import PromoForm from "../components/PromoForm";
-import PromoFormEditing from "../components/PromoFormEditing";
+import AddPromo from "../components/AddPromo";
+import EditPromo from "../components/EditPromo";
 import Toolbar from "../components/Toolbar";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
@@ -65,13 +65,13 @@ const Promo: React.FC = () => {
   const getPromos = async () => {
     let res = await axios.get("/promo/");
     let data = res.data;
-    setpromos(data);
   };
   const searchHandle = (input: string) => {
     store.searchList = input;
   };
   useEffect(() => {
-    getPromos();
+    api.getPromotions();
+    setpromos(store.promos);
   }, []);
   const edit = (promos: promotion) => {
     setEditpromo(promos);
@@ -88,14 +88,14 @@ const Promo: React.FC = () => {
           duration={400}
         />
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-          <PromoForm />
+          <AddPromo />
         </IonModal>
 
         <IonModal
           isOpen={showModalEditing}
           onDidDismiss={() => setShowModalEditing(false)}
         >
-          <PromoFormEditing promo={editpromo} />
+          <EditPromo promo={editpromo} />
         </IonModal>
         <IonAlert
           isOpen={showAlert}

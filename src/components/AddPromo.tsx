@@ -17,29 +17,36 @@ import {
   constructOutline,
   layersOutline,
   speedometerOutline,
+  trendingDownOutline,
+  trendingUpOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { usePromo } from "../components/PromoFormEditing";
+import { usePromo } from "./EditPromo";
 import { promotion } from "../pages/Promo";
 import * as api from "../utils/API";
+import { Promotion } from "../utils/Interfaces";
 import "./PromoForm.css";
 
 let initialValues = {
-  rangeInfo: -100,
   cycle: "",
   year: "",
   specialityName: "",
   description: "",
+  minTeamMembers: 0,
+  maxTeamMembers: 0,
+  maxProjects: 0,
 };
-const PromoForm: React.FC = observer(() => {
+const AddPromo: React.FC = observer(() => {
   const { promot } = usePromo({
-    id: 0,
-    description: "",
     cycle: "",
     year: "",
     specialityName: "",
+    description: "",
+    minTeamMembers: 0,
+    maxTeamMembers: 0,
+    maxProjects: 0,
   });
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...initialValues },
@@ -48,17 +55,9 @@ const PromoForm: React.FC = observer(() => {
   const [showToast, setshowToast] = useState(false);
   const [SelectCycle, setCycle] = useState<string>();
   const [SelectYear, setYear] = useState<string>();
-  const [promos, setpromos] = useState([]);
   const [showAlert, setshowAlert] = useState(false);
 
-  const getPromos = async () => {
-    let res = await axios.get("/promo/");
-    let data = res.data;
-    setpromos(data);
-  };
-  useEffect(() => {
-    getPromos();
-  }, []);
+  useEffect(() => {}, []);
 
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
@@ -69,32 +68,17 @@ const PromoForm: React.FC = observer(() => {
     ) : null;
   };
   const onSubmit = () => {
-    let i;
-    let value: promotion;
-    let include: boolean;
-    include = false;
-    getPromos();
-    for (i = 0; i < promos.length; i++) {
-      value = promos[i];
-      if (
-        promot.year.localeCompare(value.year) === 0 &&
-        promot.cycle.localeCompare(value.cycle) === 0 &&
-        promot.specialityName.localeCompare(value.specialityName) === 0
-      )
-        include = true;
-    }
+    api.addPromotion(
+      promot.cycle,
+      promot.year,
+      promot.specialityName,
+      promot.description,
+      promot.minTeamMembers,
+      promot.maxTeamMembers,
+      promot.maxProjects
+    );
 
-    if (include === false) {
-      /*  api.addPromotion(
-        promot.description,
-        promot.cycle,
-        promot.year,
-        promot.specialityName
-      ); */
-
-      setshowToast(true);
-    } else setshowAlert(true);
-    getPromos();
+    setshowToast(true);
   };
 
   return (
@@ -168,7 +152,6 @@ const PromoForm: React.FC = observer(() => {
           />
           {showError("cycle")}
         </IonItem>
-
         <IonItem color="dark" class="">
           <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
           <IonLabel>Year</IonLabel>
@@ -179,9 +162,9 @@ const PromoForm: React.FC = observer(() => {
                 placeholder="Select One"
                 onIonChange={(e) => setYear(e.detail.value)}
               >
-                <IonSelectOption value="1"> First 1 </IonSelectOption>
-                <IonSelectOption value="2">Second 2</IonSelectOption>
-                <IonSelectOption value="3">Third 3</IonSelectOption>
+                <IonSelectOption value="1st"> First 1 </IonSelectOption>
+                <IonSelectOption value="2nd">Second 2</IonSelectOption>
+                <IonSelectOption value="3rd">Third 3</IonSelectOption>
               </IonSelect>
             }
             placeholder="year"
@@ -221,6 +204,75 @@ const PromoForm: React.FC = observer(() => {
           {showError("specialityName")}
         </IonItem>
         <br />
+        <IonLabel color="light">
+          <h2>Team Members </h2>
+        </IonLabel>
+        <IonItem color="dark" class="">
+          <IonIcon slot="start" icon={trendingDownOutline}></IonIcon>
+          <Controller
+            as={IonInput}
+            placeholder="Min Team Members"
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("minTeamMembers", selected.detail.value);
+              promot.minTeamMembers = selected.detail.value;
+              return selected.detail.value;
+            }}
+            name="minTeamMembers"
+            rules={{
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "invalid Number",
+              },
+            }}
+          />
+          {showError("minTeamMembers")}
+        </IonItem>
+        <IonItem color="dark" class="">
+          <IonIcon slot="start" icon={trendingUpOutline}></IonIcon>
+          <Controller
+            as={IonInput}
+            placeholder="Max Team Members"
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("maxTeamMembers", selected.detail.value);
+              promot.maxTeamMembers = selected.detail.value;
+              return selected.detail.value;
+            }}
+            name="maxTeamMembers"
+            rules={{
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "invalid Number",
+              },
+            }}
+          />
+          {showError("maxTeamMembers")}
+        </IonItem>
+        <IonItem color="dark" class="">
+          <IonIcon slot="start" icon={trendingUpOutline}></IonIcon>
+          <Controller
+            as={IonInput}
+            placeholder="Max Projects"
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("maxProjects", selected.detail.value);
+              promot.maxProjects = selected.detail.value;
+              return selected.detail.value;
+            }}
+            name="maxProjects"
+            rules={{
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "invalid Number",
+              },
+            }}
+          />
+          {showError("maxProjects")}
+        </IonItem>{" "}
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton
             color="danger"
@@ -246,4 +298,4 @@ const PromoForm: React.FC = observer(() => {
     </IonContent>
   );
 });
-export default PromoForm;
+export default AddPromo;
