@@ -276,7 +276,7 @@ const MyTeam: React.FC = observer(() => {
     if (include === false) {
       student.isLeader = true;
       setshowToast(true);
-      api.modifyStudent(
+      /*  api.modifyStudent(
         student.id,
         student.firstName,
         student.lastName,
@@ -287,8 +287,7 @@ const MyTeam: React.FC = observer(() => {
         student.password,
         student.promotion,
         true,
-        student.note
-      );
+      ); */
       api.addTeam(Team.name);
       axios
         .post("/users/myteam", {
@@ -665,7 +664,7 @@ const MyTeam: React.FC = observer(() => {
                           setShowAlert(true);
                         else {
                           inviteButton[i] = true;
-                          api.postInviteStudent(s.id);
+                          // api.postInviteStudent(s.id);
                           setshowToast1(true);
                         }
                       }}
@@ -767,7 +766,7 @@ const MyTeam: React.FC = observer(() => {
                                   onClick={() => {
                                     getTeams();
                                     getMyTeam();
-                                    api.ValidateTeam(myTeam.id);
+                                    //api.ValidateTeam(myTeam.id);
                                     setReady(true);
                                   }}
                                   disabled={

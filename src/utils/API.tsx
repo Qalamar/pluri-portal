@@ -11,108 +11,177 @@ const inviteUrl = "http://localhost:3000/invite"; //forinvitestudent
 const invitedUrl = "http://localhost:3000/invited";
 
 const apiUrl = "http://bragdonilyes.pythonanywhere.com/";
-/**
- * these functions return a promise so you can deal with response as you like
- */
-export const addStudent = (
-  fName: string,
-  lName: string,
-  userName: string,
-  password: string,
-  email: string,
-  birthday: string,
-  birthPlace: string,
-  promo: number,
-  currentYear: string,
-  note: number
-) => {
-  // the  id will be generated automatically  by json-server
-  const student = {
-    firstName: fName,
-    lastName: lName,
-    username: userName,
-    password: password,
-    email: email,
-    birthday: birthday,
-    birthPlace: birthPlace,
-    promo: promo,
-    currentYear: currentYear,
-    note: note,
-  };
 
-  return axios.post(url + "users/student/add", student);
-};
-
-export const modifyStudent = (
-  id: number,
-  fName: string,
-  lName: string,
-  birthday: string,
-  birthPlace: string,
-  userName: string,
-  password: string,
-  email: string,
-  promo: number,
-  isLeader: boolean,
-  note: number
-) => {
-  const student = {
-    firstName: fName,
-    lastName: lName,
-    username: userName,
-    password: password,
-    email: email,
-    birthday: birthday,
-    birthPlace: birthPlace,
-    promo: promo,
-    note: note,
-  };
-
-  return axios.put(url + "users/student/modify/" + id, student);
-};
+/*********** Student calls ***************************************************/
 
 export const getStudents = () => {
-  return axios.get(url + "users/students");
+  return axios.get(url + "users/students/all");
+};
+
+export const addStudent = async (
+  firstName: string,
+  lastName: string,
+  username: string,
+  password: string,
+  email: string,
+  birthday: string,
+  birthPlace: string,
+  promo: number,
+  currentYear: string
+) => {
+  try {
+    const res = await axios.post(apiUrl + "users/student/add/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday,
+      birthPlace: birthPlace,
+      promo: promo,
+      currentYear: currentYear,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const getStudent = async (id: number) => {
+  try {
+    const res = await axios.get(apiUrl + `users/student/invite/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const getInvites = async () => {
+  try {
+    const res = await axios.get(apiUrl + `users/invited/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const handleInvites = async (
+  id: number,
+  acccepted: string,
+  rejected: string,
+  sender: number,
+  receiver: number
+) => {
+  try {
+    const res = await axios.put(apiUrl + `users/invites/${id}/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      acccepted: acccepted,
+      rejected: rejected,
+      sender: sender,
+      receiver: receiver,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const inviteStudent = async (id: number) => {
+  try {
+    const res = await axios.post(apiUrl + `users/student/invite/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
 
 export const deleteStudent = (id: number) => {
-  return axios.delete(url + "users/student/modify/" + id);
+  return axios.delete(apiUrl + `users/student/delete/${id}`);
 };
 
-export const addTeacher = (
-  fName: string,
-  lName: string,
-  userName: string,
-  password: string,
-  email: string,
-  birthday: string,
-  birthPlace: string,
-  speciality: string,
-  grade: string,
-  currentYear: string
-) => {
-  //the id will be generated automatically
-  const teacher = {
-    firstName: fName,
-    lastName: lName,
-    userName: userName,
-    password: password,
-    email: email,
-    birthday: birthday,
-    birthPlace: birthPlace,
-    speciality: speciality,
-    grade: grade,
-    currentYear: currentYear,
-  };
-
-  return axios.post(url + "users/professor/add", teacher);
-};
-
-export const modifyTeacher = (
+export const modifyStudent = async (
   id: number,
-  fName: string,
-  lName: string,
-  userName: string,
+  firstName: string,
+  lastName: string,
+  username: string,
+  password: string,
+  email: string,
+  birthday: string,
+  birthPlace: string,
+  promo: number,
+  currentYear: string
+) => {
+  try {
+    const res = await axios.patch(apiUrl + `users/student/modify/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday,
+      birthPlace: birthPlace,
+      promo: promo,
+      currentYear: currentYear,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const getStudentTeam = async () => {
+  try {
+    const res = await axios.get(apiUrl + "users/myteam/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+/*********** Professor calls ***************************************************/
+
+export const addProfessor = async (
+  firstName: string,
+  lastName: string,
+  username: string,
   password: string,
   email: string,
   birthday: string,
@@ -121,29 +190,81 @@ export const modifyTeacher = (
   grade: string,
   currentYear: string
 ) => {
-  const teacher = {
-    firstName: fName,
-    lastName: lName,
-    userName: userName,
-    password: password,
-    email: email,
-    birthday: birthday,
-    birthPlace: birthPlace,
-    speciality: speciality,
-    grade: grade,
-    currentYear: currentYear,
-  };
-
-  return axios.put(url + "users/professor/modify/" + id, teacher);
+  try {
+    const res = await axios.post(apiUrl + "users/professor/add/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday,
+      birthPlace: birthPlace,
+      speciality: speciality,
+      grade: grade,
+      currentYear: currentYear,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
 
-export const getTeachers = () => {
-  return axios.get(url + "users/professors");
+export const modifyProfessor = async (
+  id: number,
+  firstName: string,
+  lastName: string,
+  username: string,
+  password: string,
+  email: string,
+  birthday: string,
+  birthPlace: string,
+  speciality: string,
+  grade: string,
+  currentYear: string
+) => {
+  try {
+    const res = await axios.patch(
+      apiUrl +
+        `users/professor/modify/${id}/
+    `,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${store.isAuth.token}`,
+        },
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        password: password,
+        email: email,
+        birthday: birthday,
+        birthPlace: birthPlace,
+        speciality: speciality,
+        grade: grade,
+        currentYear: currentYear,
+      }
+    );
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
 
-export const deleteTeacher = (id: number) => {
-  return axios.delete(url + "users/professor/modify/" + id);
+export const deleteProfessor = (id: number) => {
+  return axios.delete(apiUrl + `users/professor/delete/${id}`);
 };
+
+export const getProffessors = () => {
+  return axios.get(url + "users/professors/all");
+};
+
+/*********** Authentication ***************************************************/
 
 export const userLogin = async (email: string, password: string) => {
   try {
@@ -178,6 +299,8 @@ export const userLogin = async (email: string, password: string) => {
     return console.log(error.response.request);
   }
 };
+
+/*********** Promotions ***************************************************/
 
 export const getPromotions = async () => {
   try {
@@ -224,172 +347,136 @@ export const addPromotion = async (
   }
 };
 
-export const modifyPromotion = (
-  Id: number,
-  d: string,
-  c: string,
-  l: string,
-  sC: string,
-  minT: number,
-  maxT: number,
-  maxP: number
+export const setupPromotion = async (
+  id: number,
+  cycle: string,
+  year: string,
+  specialityName: string,
+  description: string,
+  minTeamMembers: number,
+  maxTeamMembers: number,
+  maxTeamsInProject: number
 ) => {
-  const promotion = {
-    description: d,
-    cycle: c,
-    year: l,
-    specialityName: sC,
-    minTeamMembers: minT,
-    maxTeamMembers: maxT,
-    maxProjects: maxP,
-  };
-  modifyPromotionSetup(Id, minT, maxT, maxP);
-  return axios.put(url + "promo/" + Id, promotion);
+  try {
+    const res = await axios.put(apiUrl + `promo/setup/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      minTeamMembers: minTeamMembers,
+      maxTeamMembers: maxTeamMembers,
+      maxTeamsInProject: maxTeamsInProject,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
-export const modifyPromotionSetup = (
-  Id: number,
-  minT: number,
-  maxT: number,
-  maxP: number
+
+export const modifyPromotion = async (
+  id: number,
+  cycle: string,
+  year: string,
+  specialityName: string,
+  description: string,
+  minTeamMembers: number,
+  maxTeamMembers: number,
+  maxTeamsInProject: number
 ) => {
-  const promotion = {
-    minTeamMembers: minT,
-    maxTeamMembers: maxT,
-    maxProjects: maxP,
-  };
-  return axios.put(url + "promo/" + Id, promotion);
+  try {
+    const res = await axios.patch(
+      apiUrl +
+        `promo/modify/${id}/
+    `,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${store.isAuth.token}`,
+        },
+        cycle: cycle,
+        year: year,
+        specialityName: specialityName,
+        description: description,
+        minTeamMembers: minTeamMembers,
+        maxTeamMembers: maxTeamMembers,
+        maxTeamsInProject: maxTeamsInProject,
+      }
+    );
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
+
+export const getStudentPromo = async () => {
+  try {
+    const res = await axios.post(apiUrl + "users/students", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
 export const deletePromotion = (id: number) => {
-  return axios.delete(url + "promo/" + id);
+  return axios.delete(apiUrl + `promo/${id}`);
 };
 /**************************************************************/
 
-export const getTeams = () => {
-  return axios.get(url + "/users/team");
+export const addTeam = async (name: string) => {
+  try {
+    const res = await axios.post(apiUrl + "users/teams/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      name: name,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
-export const getTeam = (id: number) => {
-  return axios.get(url + "/users/team/" + id);
+
+export const getCurrentTeam = async (id: number) => {
+  try {
+    const res = await axios.get(apiUrl + `users/team/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
-export const addTeam = (nm: string) => {
-  let team = {
-    name: nm,
-  };
-  return axios.post(url + "/users/team", team);
+
+export const validateTeam = async (id: number, readiness: boolean) => {
+  try {
+    const res = await axios.post(apiUrl + `users/team/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      readiness: readiness,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
-export const ValidateTeam = (idTeam: number) => {
-  return axios.post(url + "/users/validate/" + idTeam, true);
-};
-export const getMembersTeam = (id: number) => {
-  return axios.get(url + "/users/team/" + id);
-};
-/* export const deleteTeam=(id:number)=>{
-    return axios.delete(url+'users/team/'+id);
-  };*/
 
 /*****************************************************/
-export const getStudentspromo = () => {
-  return axios.get(url + "/users/students");
-};
+
 /********************************************* */
-export const postInviteStudent = (id: number) => {
-  //Id receiver
-
-  return axios.post(url + "/users/student/invite/" + id);
-};
-export const getStudentInvited = (idStudent: number) => {
-  return axios.get(url + "/users/student/invite/" + idStudent);
-};
-export const getInvited = () => {
-  return axios.get(url + "/users/invited");
-};
-export const getInvite = (idInv: number) => {
-  return axios.get(url + "/users/invites/" + idInv);
-};
-export const modifyInvite = (
-  idInv: number,
-  idSender: number,
-  idReceiver: number,
-  accept: boolean,
-  reject: boolean
-) => {
-  const invite = {
-    sender: idSender,
-    receiver: idReceiver,
-    accepted: accept,
-    rejected: reject,
-  };
-
-  return axios.put(url + "/users/invites/" + idInv, invite);
-};
-
-export const register = (email: string, password: string) => {
-  const newUser = {
-    email: email,
-    password: password,
-  };
-
-  return axios({
-    method: "POST",
-    url: url + "register",
-    data: newUser,
-  });
-};
-export const addProject = (
-  title: string,
-  domain: string,
-  tools: string,
-  requiredDoc: string,
-  document: FormData
-) => {
-  const project = {
-    title: title,
-    domain: domain,
-    tools: tools,
-    requiredDocuments: requiredDoc,
-    document: document,
-  };
-  return axios.post(url + "/pfe/add/", project);
-};
-export const getProjects = () => {
-  return axios.get(url + "/pfe/projects");
-};
-export const getProject = (id: number) => {
-  return axios.get(url + "/pfe/modify/" + id);
-};
-export const modifyProject = (
-  id: number,
-  title: string,
-  domain: string,
-  tools: string,
-  requiredDoc: string,
-  document: FormData
-) => {
-  let project = {
-    title: title,
-    domain: domain,
-    tools: tools,
-    requiredDocuments: requiredDoc,
-    document: document,
-  };
-  return axios.put(url + "/pfe/modify/" + id, project);
-};
-export const deleteProject = (id: number) => {
-  return axios.delete(url + "/pfe/modify/" + id);
-};
-export const AccRejProject = (id: number, status: string) => {
-  return axios.put(url + "/pfe/evaluate/" + id, status);
-};
-// this function (if successful) will return an accessToken property in reponse.data (expiration 1 hour)
-export const login = (email: string, password: string) => {
-  const login = {
-    email: email,
-    password: password,
-  };
-
-  //TODO : the url will be changed when integrating with the real backend
-  return axios({
-    method: "POST",
-    url: url + "login",
-    data: login,
-  });
-};

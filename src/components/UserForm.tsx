@@ -85,14 +85,13 @@ const UserForm: React.FC = observer(() => {
         selectedDate,
         data.birthPlace,
         data.promo,
-        data.currentYear,
-        0
+        data.currentYear
       );
     //data.class === Teacher
-    else
-      api.addTeacher(
-        data.firstName,
-        data.lastName,
+    //  else
+    /* api.addTeacher(
+        capitalizeFirstLetter(data.firstName),
+        data.lastName.toUpperCase(),
         data.userName,
         data.password,
         data.email,
@@ -101,22 +100,7 @@ const UserForm: React.FC = observer(() => {
         data.speciality,
         data.grade,
         data.currentYear
-      );
-    // axios
-    //   .post("/students", {
-    //     first_name: capitalizeFirstLetter(data.firstName),
-    //     last_name: data.lastName.toUpperCase(),
-    //     class: data.class,
-    //     email: data.email,
-    //     gender: data.gender,
-    //     promo: data.promo
-    //   })
-    //   .then(function(response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+      ); */
   };
 
   return (
