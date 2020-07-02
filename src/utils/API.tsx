@@ -479,4 +479,137 @@ export const validateTeam = async (id: number, readiness: boolean) => {
 
 /*****************************************************/
 
+export const addProject = async (
+  title: string,
+  domain: string,
+  tools: string,
+  requiredDocuments: string,
+  Document: FormData,
+  promo: 3
+) => {
+  try {
+    const res = await axios.post(apiUrl + "pfe/add/", {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      title: title,
+      domain: domain,
+      tools: tools,
+      requiredDocuments: requiredDocuments,
+      Document: Document,
+      promo: promo,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const getProjects = async () => {
+  try {
+    const res = await axios.get(apiUrl + "pfe/projects/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const getProject = async (id: number) => {
+  try {
+    const res = await axios.get(apiUrl + `pfe/modify/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const modifyProject = async (
+  id: number,
+  title: string,
+  domain: string,
+  tools: string,
+  requiredDocuments: string,
+  Document: FormData,
+  promo: 3
+) => {
+  try {
+    const res = await axios.patch(apiUrl + `pfe/modify/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      title: title,
+      domain: domain,
+      tools: tools,
+      requiredDocuments: requiredDocuments,
+      Document: Document,
+      promo: promo,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const deleteProject = async (id: number) => {
+  try {
+    const res = await axios.delete(apiUrl + `pfe/modify/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const handleProject = async (id: number, status: string) => {
+  try {
+    const res = await axios.patch(apiUrl + `pfe/evaluate/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      status: status,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const acceptedProject = async () => {
+  try {
+    const res = await axios.get(apiUrl + "pfe/acceptedprojects/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
 /********************************************* */
