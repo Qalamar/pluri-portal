@@ -28,6 +28,7 @@ import EditPromo from "../components/EditPromo";
 import Toolbar from "../components/Toolbar";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
+import { observer } from "mobx-react";
 import "./Promo.css";
 
 export interface promotion {
@@ -38,10 +39,10 @@ export interface promotion {
   specialityName: string;
   minTeamMembers: number;
   maxTeamMembers: number;
-  maxProjects: number;
+  maxTeamsInProject: number;
 }
 
-const Promo: React.FC = () => {
+const Promo: React.FC = observer(() => {
   const [Id, setId] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showModalEditing, setShowModalEditing] = useState(false);
@@ -55,24 +56,25 @@ const Promo: React.FC = () => {
     specialityName: "",
     minTeamMembers: 0,
     maxTeamMembers: 0,
-    maxProjects: 0,
+    maxTeamsInProject: 0,
   });
 
   const [showToast, setshowToast] = useState(false);
   const addPromo = () => {
     setShowModal(true);
   };
-  const getPromos = async () => {
-    let res = await axios.get("/promo/");
-    let data = res.data;
-  };
   const searchHandle = (input: string) => {
     store.searchList = input;
   };
   useEffect(() => {
-    api.getPromotions();
-    setpromos(store.promos);
+    async function fetchPromotion() {
+      await api.getPromotions();
+      setpromos(store.promos);
+    }
+    fetchPromotion();
+    console.log(promos);
   }, []);
+
   const edit = (promos: promotion) => {
     setEditpromo(promos);
     setShowModalEditing(true);
@@ -173,10 +175,10 @@ const Promo: React.FC = () => {
                       <IonRow></IonRow>
                       <IonRow>
                         {" "}
-                        {promos.length === 0 ? (
+                        {store.promos.length === 0 ? (
                           <div>Loading...</div>
                         ) : (
-                          promos.map((promo: any, i) => {
+                          store.promos.map((promo: any) => {
                             {
                               return (
                                 <IonCol
@@ -185,7 +187,7 @@ const Promo: React.FC = () => {
                                   class=" ion-text-center"
                                 >
                                   <IonCard
-                                    key={i + 1}
+                                    key={promo.id}
                                     class="shadow ion-text-center"
                                   >
                                     <IonCardHeader class="ion-margin-bottom">
@@ -232,11 +234,11 @@ const Promo: React.FC = () => {
                                         </IonLabel>
                                       </IonChip>
                                     )}
-                                    {promo.maxProjects !== 0 && (
+                                    {promo.maxTeamsInProject !== 0 && (
                                       <IonChip outline={true} color="dark">
                                         <IonLabel>
                                           Max Projects &nbsp;
-                                          {promo.maxProjects}{" "}
+                                          {promo.maxTeamsInProject}{" "}
                                         </IonLabel>
                                       </IonChip>
                                     )}
@@ -254,7 +256,7 @@ const Promo: React.FC = () => {
                                           </IonLabel>
                                         </IonButton>
                                         <IonButton
-                                          key={i + 1}
+                                          key={promo.id}
                                           onClick={() => {
                                             setId(promo.id);
                                             setShowAlert(true);
@@ -287,6 +289,6 @@ const Promo: React.FC = () => {
       </IonContent>
     </IonPage>
   );
-};
+});
 
 export default Promo;

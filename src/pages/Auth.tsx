@@ -52,18 +52,16 @@ const Auth: React.FC = () => {
   const [isOpen, setisOpen] = useState(false);
 
   useEffect(() => {
-    const rest = JSON.parse(localStorage.getItem("Auth")!);
-    !(rest === null)
-      ? (store.isAuth.state = true)
-      : (store.isAuth.state = false);
+    /*     const rest = JSON.parse(localStorage.getItem("Auth")!);
+    if (rest === null) store.isAuth.state = false;
+    else {
+      store.isAuth.access = rest.access;
+      store.isAuth.token = rest.token;
+      store.isAuth.id = rest.id;
+      console.log(store.isAuth.token);
+    } */
   }, []);
 
-  const showProfile = () => {
-    axios.get("/employees?id=1").then(function (response) {
-      let data = response.data;
-      console.log(data[0].email);
-    });
-  };
   const [image, setimage] = useState();
   const handleImageChange = (e: any) => {
     setimage(e.target.files[0]);

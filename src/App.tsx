@@ -27,17 +27,21 @@ import MyTeam from "./student/MyTeam";
 
 /* Theme variables */
 import "./theme/variables.css";
+import { observer } from "mobx-react";
 
-const App: React.FC = () => {
+const App: React.FC = observer(() => {
   const [selectedPage, setSelectedPage] = useState("");
 
   const isAuth = () => {
     var session = JSON.parse(localStorage.getItem("Auth")!);
     if (session != null) {
-      store.isAuth.access = session.state;
+      store.isAuth.access = session.access;
       store.isAuth.state = session.state;
+      store.isAuth.token = session.token;
+      store.isAuth.id = session.id;
+      console.log("this is the token " + store.isAuth.token);
       return true;
-    }
+    } else return false;
   };
   return (
     <IonApp>
@@ -62,16 +66,12 @@ const App: React.FC = () => {
         ) : (
           <IonRouterOutlet id="main">
             <Route path="/auth" component={Auth} exact={true} />
-            <Route
-              path="/"
-              render={() => <Redirect to="/auth" />}
-              exact={true}
-            />
+            <Redirect to="/auth" />
           </IonRouterOutlet>
         )}
       </IonReactRouter>
     </IonApp>
   );
-};
+});
 
 export default App;

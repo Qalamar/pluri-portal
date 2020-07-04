@@ -43,7 +43,7 @@ export const usePromo = (overrides?: Partial<promotion>): PromoState => {
     specialityName: "",
     minTeamMembers: 0,
     maxTeamMembers: 0,
-    maxProjects: 0,
+    maxTeamsInProject: 0,
   };
   const [promot, setPromo] = useState<promotion>({
     ...defaultPromo,
@@ -60,7 +60,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
     specialityName: promo.specialityName,
     minTeamMembers: promo.minTeamMembers,
     maxTeamMembers: promo.maxTeamMembers,
-    maxProjects: promo.maxProjects,
+    maxTeamsInProject: promo.maxTeamsInProject,
   });
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...promot },
@@ -104,15 +104,16 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           {
             text: "Save",
             handler: () => {
+              console.log(promot);
               api.modifyPromotion(
                 promot.id,
-                promot.description,
                 promot.cycle,
                 promot.year,
                 promot.specialityName,
+                promot.description,
                 promot.minTeamMembers,
                 promot.maxTeamMembers,
-                promot.maxProjects
+                promot.maxTeamsInProject
               );
               setshowToast(true);
             },
@@ -185,9 +186,9 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
                 placeholder="Select One"
                 onIonChange={(e) => setYear(e.detail.value)}
               >
-                <IonSelectOption value="1"> First 1 </IonSelectOption>
-                <IonSelectOption value="2">Second 2</IonSelectOption>
-                <IonSelectOption value="3">Third 3</IonSelectOption>
+                <IonSelectOption value="1st"> First 1 </IonSelectOption>
+                <IonSelectOption value="2nd">Second 2</IonSelectOption>
+                <IonSelectOption value="3rd">Third 3</IonSelectOption>
               </IonSelect>
             }
             placeholder="year"
@@ -282,11 +283,11 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("maxProjects", selected.detail.value);
-              promot.maxProjects = selected.detail.value;
+              console.log("maxTeamsInProject", selected.detail.value);
+              promot.maxTeamsInProject = selected.detail.value;
               return selected.detail.value;
             }}
-            name="maxProjects"
+            name="maxTeamsInProject"
             rules={{
               pattern: {
                 value: /^[0-9]+$/i,
@@ -294,7 +295,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
               },
             }}
           />
-          {showError("maxProjects")}
+          {showError("maxTeamsInProject")}
         </IonItem>{" "}
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton

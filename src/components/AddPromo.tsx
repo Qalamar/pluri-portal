@@ -36,7 +36,7 @@ let initialValues = {
   description: "",
   minTeamMembers: 0,
   maxTeamMembers: 0,
-  maxProjects: 0,
+  maxTeamsInProject: 0,
 };
 const AddPromo: React.FC = observer(() => {
   const { promot } = usePromo({
@@ -46,7 +46,7 @@ const AddPromo: React.FC = observer(() => {
     description: "",
     minTeamMembers: 0,
     maxTeamMembers: 0,
-    maxProjects: 0,
+    maxTeamsInProject: 0,
   });
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...initialValues },
@@ -75,7 +75,7 @@ const AddPromo: React.FC = observer(() => {
       promot.description,
       promot.minTeamMembers,
       promot.maxTeamMembers,
-      promot.maxProjects
+      promot.maxTeamsInProject
     );
 
     setshowToast(true);
@@ -259,11 +259,11 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("maxProjects", selected.detail.value);
-              promot.maxProjects = selected.detail.value;
+              console.log("maxTeamsInProject", selected.detail.value);
+              promot.maxTeamsInProject = selected.detail.value;
               return selected.detail.value;
             }}
-            name="maxProjects"
+            name="maxTeamsInProject"
             rules={{
               pattern: {
                 value: /^[0-9]+$/i,
@@ -271,7 +271,7 @@ const AddPromo: React.FC = observer(() => {
               },
             }}
           />
-          {showError("maxProjects")}
+          {showError("maxTeamsInProject")}
         </IonItem>{" "}
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton

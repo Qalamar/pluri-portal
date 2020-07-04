@@ -176,6 +176,21 @@ export const getStudentTeam = async () => {
   }
 };
 
+export const getStudentPromo = async () => {
+  try {
+    const res = await axios.post(apiUrl + "users/students", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
 /*********** Professor calls ***************************************************/
 
 export const addProfessor = async (
@@ -277,7 +292,6 @@ export const userLogin = async (email: string, password: string) => {
     });
     // .then();
     console.log(res.data);
-    localStorage.setItem("Token", JSON.stringify(res.data));
     store.isAuth.state = true;
     // Check permissions from the token
     switch (res.data.token.slice(-1)) {
@@ -290,9 +304,10 @@ export const userLogin = async (email: string, password: string) => {
         store.isAuth.access = "2";
         break;
     }
-    store.isAuth.token = res.data.token;
+    let token = res.data.token.substring(0, res.data.token.length - 1);
+    store.isAuth.token = token;
     store.isAuth.id = res.data.userId;
-
+    console.log(store.isAuth);
     localStorage.setItem("Auth", JSON.stringify(store.isAuth));
     window.location.reload();
   } catch (error) {
@@ -327,10 +342,10 @@ export const addPromotion = async (
   maxTeamsInProject: number
 ) => {
   try {
-    const res = await axios.post(apiUrl + "promo/add/", {
+    const res = await axios.post(apiUrl + "promo/add", {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       cycle: cycle,
       year: year,
@@ -410,9 +425,9 @@ export const modifyPromotion = async (
   }
 };
 
-export const getStudentPromo = async () => {
+export const deletePromotion = async (id: number) => {
   try {
-    const res = await axios.post(apiUrl + "users/students", {
+    const res = await axios.delete(apiUrl + `promo/modify/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
@@ -425,9 +440,6 @@ export const getStudentPromo = async () => {
   }
 };
 
-export const deletePromotion = (id: number) => {
-  return axios.delete(apiUrl + `promo/${id}`);
-};
 /**************************************************************/
 
 export const addTeam = async (name: string) => {

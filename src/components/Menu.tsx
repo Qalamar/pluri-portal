@@ -71,7 +71,6 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
 
   useEffect(() => {
     store.page = selectedPage;
-    console.log(selectedPage);
   }, []);
 
   return (
