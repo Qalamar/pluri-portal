@@ -275,8 +275,20 @@ export const deleteProfessor = (id: number) => {
   return axios.delete(apiUrl + `users/professor/delete/${id}`);
 };
 
-export const getProffessors = () => {
-  return axios.get(url + "users/professors/all");
+export const getProffessors = async () => {
+  try {
+    const res = await axios.get(apiUrl + "users/professors/all", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+    store.teachers = res.data;
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
 
 /*********** Authentication ***************************************************/
@@ -341,12 +353,10 @@ export const addPromotion = async (
   maxTeamMembers: number,
   maxTeamsInProject: number
 ) => {
-  try {
-    const res = await axios.post(apiUrl + "promo/add", {
-      headers: {
-        Authorization: `Token ${store.isAuth.token}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+  axios({
+    method: "post",
+    url: apiUrl + "promo/add/",
+    data: {
       cycle: cycle,
       year: year,
       specialityName: specialityName,
@@ -354,12 +364,20 @@ export const addPromotion = async (
       minTeamMembers: minTeamMembers,
       maxTeamMembers: maxTeamMembers,
       maxTeamsInProject: maxTeamsInProject,
+    },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${store.isAuth.token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response.response.request);
     });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
 };
 
 export const setupPromotion = async (
@@ -399,30 +417,34 @@ export const modifyPromotion = async (
   maxTeamMembers: number,
   maxTeamsInProject: number
 ) => {
-  try {
-    const res = await axios.patch(
+  axios({
+    method: "patch",
+    url:
       apiUrl +
-        `promo/modify/${id}/
+      `promo/modify/${id}/
     `,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${store.isAuth.token}`,
-        },
-        cycle: cycle,
-        year: year,
-        specialityName: specialityName,
-        description: description,
-        minTeamMembers: minTeamMembers,
-        maxTeamMembers: maxTeamMembers,
-        maxTeamsInProject: maxTeamsInProject,
-      }
-    );
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
+    data: {
+      cycle: cycle,
+      year: year,
+      specialityName: specialityName,
+      description: description,
+      minTeamMembers: minTeamMembers,
+      maxTeamMembers: maxTeamMembers,
+      maxTeamsInProject: maxTeamsInProject,
+    },
+    headers: {
+      "Content-Type": `application/json`,
+      Authorization: `Token ${store.isAuth.token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response.response.request);
+    });
 };
 
 export const deletePromotion = async (id: number) => {
@@ -491,19 +513,56 @@ export const validateTeam = async (id: number, readiness: boolean) => {
 
 /*****************************************************/
 
-export const addProject = async (
-  title: string,
-  domain: string,
-  tools: string,
-  requiredDocuments: string,
-  Document: FormData,
-  promo: 3
-) => {
-  try {
+export const addProject = async (data: FormData) => {
+  axios({
+    method: "post",
+    url: apiUrl + "pfe/add/",
+    data: data,
+    headers: {
+      "Content-Type": `multipart/form-data`,
+      Authorization: `Token 392aebf1ef65ecf669c6c50d008168f20d2fbc367897be2fda153b05fa2400a4`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response.response.request);
+    });
+
+  /* axios
+    .post(
+      apiUrl + "pfe/add/",
+      {
+        title: title,
+        domain: domain,
+        professor: professor,
+        tools: tools,
+        requiredDocuments: requiredDocuments,
+        Document: formData,
+        promo: promo,
+      },
+      {
+        headers: {
+          "Content-Type": `multipart/form-data`,
+          Authorization: `Token 1d4fbeecb37f6b8ea5c5882e2d65d5a812b832000222b06904e90041735df76d`,
+        },
+      }
+    )
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error.response.request);
+    }); */
+
+  /* try {
     const res = await axios.post(apiUrl + "pfe/add/", {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Token ${store.isAuth.token}`,
+        Authorization: `Token 1d4fbeecb37f6b8ea5c5882e2d65d5a812b832000222b06904e90041735df76d`,
       },
       title: title,
       domain: domain,
@@ -516,7 +575,7 @@ export const addProject = async (
     console.log(res.data);
   } catch (error) {
     return console.log(error.response.request);
-  }
+  } */
 };
 
 export const getProjects = async () => {

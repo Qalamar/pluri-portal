@@ -18,6 +18,11 @@ import {
   speedometerOutline,
   trendingDownOutline,
   trendingUpOutline,
+  timeOutline,
+  albumsOutline,
+  personCircleOutline,
+  peopleCircleOutline,
+  ellipsisHorizontalOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
@@ -115,6 +120,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
                 promot.maxTeamMembers,
                 promot.maxTeamsInProject
               );
+              api.getPromotions();
               setshowToast(true);
             },
           },
@@ -122,32 +128,8 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
       />
       <form
         onSubmit={handleSubmit(() => setShowAlert(true))}
-        style={{ padding: 20, margin: 30, height: "auto" }}
+        style={{ padding: 10, margin: 15, height: "auto" }}
       >
-        <IonLabel color="light">
-          <h1>Information About Promotion </h1>
-        </IonLabel>
-        <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={clipboardOutline}></IonIcon>
-          <Controller
-            as={IonInput}
-            placeholder="Description"
-            className="firstCapital"
-            control={control}
-            onChangeName="onIonChange"
-            onChange={([selected]) => {
-              console.log("Description", selected.detail.value);
-              promot.description = selected.detail.value;
-
-              return selected.detail.value;
-            }}
-            name="description"
-            rules={{
-              required: true,
-            }}
-          />
-        </IonItem>
-        {showError("description")}
         <IonItem color="dark">
           <IonLabel>Cycle</IonLabel>
           <IonIcon slot="start" icon={layersOutline}></IonIcon>
@@ -155,7 +137,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             as={
               <IonSelect
                 value={SelectCycle}
-                placeholder="Select One"
+                placeholder="CPI/SC"
                 onIonChange={(e) => setCycle(e.detail.value)}
               >
                 <IonSelectOption value="CPI">Preparatory</IonSelectOption>
@@ -167,6 +149,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             onChange={([selected]) => {
               console.log(selected.detail.value);
               promot.cycle = selected.detail.value;
+
               return selected.detail.value;
             }}
             name="cycle"
@@ -177,21 +160,21 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           {showError("cycle")}
         </IonItem>
         <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={speedometerOutline}></IonIcon>
+          <IonIcon slot="start" icon={timeOutline}></IonIcon>
           <IonLabel>Year</IonLabel>
           <Controller
             as={
               <IonSelect
                 value={SelectYear}
-                placeholder="Select One"
+                placeholder="Year"
                 onIonChange={(e) => setYear(e.detail.value)}
               >
-                <IonSelectOption value="1st"> First 1 </IonSelectOption>
+                <IonSelectOption value="1st">First 1 </IonSelectOption>
                 <IonSelectOption value="2nd">Second 2</IonSelectOption>
                 <IonSelectOption value="3rd">Third 3</IonSelectOption>
               </IonSelect>
             }
-            placeholder="year"
+            placeholder="Year"
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
@@ -208,7 +191,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           {showError("year")}
         </IonItem>
         <IonItem color="dark">
-          <IonIcon slot="start" icon={constructOutline}></IonIcon>
+          <IonIcon slot="start" icon={albumsOutline}></IonIcon>
           <Controller
             as={IonInput}
             placeholder="Speciality"
@@ -227,15 +210,35 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           />
           {showError("specialityName")}
         </IonItem>
-        <br />
-        <IonLabel color="light">
-          <h2>Team Members </h2>
-        </IonLabel>
         <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={trendingDownOutline}></IonIcon>
+          <IonIcon slot="start" icon={clipboardOutline}></IonIcon>
           <Controller
             as={IonInput}
-            placeholder="Min Team Members"
+            placeholder="Description"
+            className="firstCapital"
+            control={control}
+            onChangeName="onIonChange"
+            onChange={([selected]) => {
+              console.log("Description", selected.detail.value);
+              promot.description = selected.detail.value;
+
+              return selected.detail.value;
+            }}
+            name="description"
+            rules={{
+              required: false,
+            }}
+          />
+          {showError("description")}
+        </IonItem>
+        {/*  <IonLabel color="light">
+          <h1>Team Members</h1>
+        </IonLabel> */}
+        <IonItem color="dark" class="">
+          <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
+          <Controller
+            as={IonInput}
+            placeholder="Minimum team members"
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
@@ -254,10 +257,11 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           {showError("minTeamMembers")}
         </IonItem>
         <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={trendingUpOutline}></IonIcon>
+          <IonIcon slot="start" icon={peopleCircleOutline}></IonIcon>
+
           <Controller
             as={IonInput}
-            placeholder="Max Team Members"
+            placeholder="Maximum team members"
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
@@ -275,11 +279,15 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           />
           {showError("maxTeamMembers")}
         </IonItem>
+        {/*  <br></br>
+        <IonLabel color="light">
+          <h1>Project teams</h1>
+        </IonLabel> */}
         <IonItem color="dark" class="">
-          <IonIcon slot="start" icon={trendingUpOutline}></IonIcon>
+          <IonIcon slot="start" icon={ellipsisHorizontalOutline}></IonIcon>
           <Controller
             as={IonInput}
-            placeholder="Max Projects"
+            placeholder="Teams per project"
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
@@ -300,6 +308,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton
             color="danger"
+            class="ion-padding-horizontal"
             fill="outline"
             type="button"
             onClick={() => {
@@ -312,9 +321,10 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             color="light"
             type="submit"
             fill="outline"
-            disabled={formState.dirty === false}
+            onClick={() => console.log(promot)}
+            disabled={formState.isValid === false}
           >
-            Save
+            Submit
           </IonButton>
         </IonButtons>
       </form>

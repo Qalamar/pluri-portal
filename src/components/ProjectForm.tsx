@@ -322,7 +322,7 @@ const ProjectForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log(selected.detail.value);
+              console.log(files);
               return selected.detail.value;
             }}
             name="document"

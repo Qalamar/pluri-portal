@@ -18,9 +18,15 @@ import {
   IonSearchbar,
   IonText,
   IonToast,
+  IonItem,
 } from "@ionic/react";
 import axios from "axios";
-import { addCircleOutline, filterOutline } from "ionicons/icons";
+import {
+  addCircleOutline,
+  filterOutline,
+  closeCircleOutline,
+  closeOutline,
+} from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import AddPromo from "../components/AddPromo";
@@ -90,6 +96,17 @@ const Promo: React.FC = observer(() => {
           duration={400}
         />
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+          <div className="ion-text-end">
+            <IonButton
+              class="ion-text-end"
+              color="dark"
+              fill="clear"
+              onClick={() => setShowModal(false)}
+            >
+              <IonIcon color="dark" slot="end" icon={closeOutline} />
+              Dismiss
+            </IonButton>
+          </div>
           <AddPromo />
         </IonModal>
 
@@ -97,12 +114,23 @@ const Promo: React.FC = observer(() => {
           isOpen={showModalEditing}
           onDidDismiss={() => setShowModalEditing(false)}
         >
+          <div className="ion-text-end">
+            <IonButton
+              class="ion-text-end"
+              color="dark"
+              fill="clear"
+              onClick={() => setShowModalEditing(false)}
+            >
+              <IonIcon color="dark" slot="end" icon={closeOutline} />
+              Dismiss
+            </IonButton>
+          </div>
           <EditPromo promo={editpromo} />
         </IonModal>
         <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
-          message={"Do you Confirm your demand ?"}
+          message={"Confirm?"}
           buttons={[
             {
               text: "Cancel",
@@ -173,7 +201,7 @@ const Promo: React.FC = observer(() => {
                         </IonCol>
                       </IonRow>
                       <IonRow></IonRow>
-                      <IonRow>
+                      <IonRow class="ion-justify-content-center">
                         {" "}
                         {store.promos.length === 0 ? (
                           <div>Loading...</div>
@@ -182,9 +210,10 @@ const Promo: React.FC = observer(() => {
                             {
                               return (
                                 <IonCol
-                                  size="12"
-                                  sizeMd="6"
-                                  class=" ion-text-center"
+                                  size="10"
+                                  sizeSm="6"
+                                  sizeMd="4"
+                                  class="ion-text-center"
                                 >
                                   <IonCard
                                     key={promo.id}
@@ -196,32 +225,32 @@ const Promo: React.FC = observer(() => {
                                         className="ion-padding title"
                                       >
                                         <strong>
-                                          {promo.year}
+                                          {promo.year.charAt(0)}
                                           {promo.cycle}
-                                          {promo.specialityName.localeCompare(
-                                            ""
-                                          ) !== 0 && (
-                                            <strong>
-                                              {" "}
-                                              -{promo.specialityName}-{" "}
-                                            </strong>
-                                          )}
                                         </strong>
                                       </IonCardTitle>
                                     </IonCardHeader>
                                     {promo.cycle.localeCompare("CPI") === 0 ? (
-                                      <IonChip outline={true} color="dark">
+                                      <IonChip outline={false} color="primary">
                                         <IonLabel>Preparatory</IonLabel>
                                       </IonChip>
                                     ) : (
-                                      <IonChip outline={true} color="dark">
+                                      <IonChip outline={false} color="primary">
                                         <IonLabel>Secondary</IonLabel>
+                                      </IonChip>
+                                    )}
+                                    {promo.specialityName.localeCompare("") !==
+                                      0 && (
+                                      <IonChip outline={true} color="dark">
+                                        <IonLabel>
+                                          {promo.specialityName}
+                                        </IonLabel>
                                       </IonChip>
                                     )}
                                     {promo.minTeamMembers !== 0 && (
                                       <IonChip outline={true} color="dark">
                                         <IonLabel>
-                                          Min Team Members &nbsp;
+                                          Min Members &nbsp;
                                           {promo.minTeamMembers}{" "}
                                         </IonLabel>
                                       </IonChip>
@@ -229,7 +258,7 @@ const Promo: React.FC = observer(() => {
                                     {promo.maxTeamMembers !== 0 && (
                                       <IonChip outline={true} color="dark">
                                         <IonLabel>
-                                          Max Team Members &nbsp;
+                                          Max Members &nbsp;
                                           {promo.maxTeamMembers}{" "}
                                         </IonLabel>
                                       </IonChip>

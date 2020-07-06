@@ -29,17 +29,21 @@ import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
 import UserForm from "../components/UserForm";
 import { store } from "../stores/Store";
+import * as api from "../utils/API";
+
 import "./Users.css";
 
-const Users: React.FC = observer(() => {
-  const [students, setstudents] = useState([]);
+const Techers: React.FC = observer(() => {
+  const [teachers, setTeachers] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const getUsers = async () => {
-    let res = await axios.get("/student");
-    let data = res.data;
-    setstudents(data);
-    console.log(data);
+    async function fetchPromotion() {
+      await api.getProffessors();
+      setTeachers(store.teachers);
+    }
+    fetchPromotion();
+    console.log(teachers);
   };
 
   const searchHandle = (input: string) => {
@@ -56,7 +60,7 @@ const Users: React.FC = observer(() => {
 
   return (
     <IonPage>
-      <Toolbar page={"Users"} />
+      <Toolbar page={"Teachers"} />
       <IonContent>
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <UserForm />
@@ -68,7 +72,7 @@ const Users: React.FC = observer(() => {
               <IonCard class="neum">
                 <IonCardHeader class="ion-text-center ion-padding">
                   <IonCardTitle color="light" className="title">
-                    Users
+                    Teachers
                   </IonCardTitle>
                 </IonCardHeader>
 
@@ -117,10 +121,10 @@ const Users: React.FC = observer(() => {
                       </IonCol>
                     </IonRow>
                     <IonRow>
-                      {students.length === 0 ? (
+                      {teachers.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
-                        students.map((e: any, i) => {
+                        teachers.map((e: any, i) => {
                           {
                             if (
                               e.firstName
@@ -184,4 +188,4 @@ const Users: React.FC = observer(() => {
   );
 });
 
-export default Users;
+export default Techers;

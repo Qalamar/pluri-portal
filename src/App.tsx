@@ -21,7 +21,7 @@ import Home from "./pages/Homepage";
 import Projects from "./pages/Projects";
 import Promo from "./pages/Promo";
 import Teams from "./pages/Teams";
-import Users from "./pages/Users";
+import Techers from "./pages/Teachers";
 import { store } from "./stores/Store";
 import MyTeam from "./student/MyTeam";
 
@@ -57,7 +57,7 @@ const App: React.FC = observer(() => {
               />
               <Route path="/home" component={Home} exact={true} />
               <Route path="/projects" component={Projects} exact={true} />
-              <Route path="/users" component={Users} exact={true} />
+              <Route path="/teachers" component={Techers} exact={true} />
               <Route path="/promo" component={Promo} exact={true} />
               <Route path="/myteam" component={MyTeam} exact={true} />
               <Route path="/teams" component={Teams} exact={true} />

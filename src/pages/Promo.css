@@ -25,3 +25,8 @@ ion-card-header {
   text-shadow: 0px 0px 5px rgb(18, 17, 18, 0.2);
   font-weight: bold;
 }
+
+ion-modal {
+  min-height: 700px !important;
+  --border-width: 100px !important;
+}

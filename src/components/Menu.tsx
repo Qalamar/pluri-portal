@@ -41,8 +41,8 @@ const appPages: AppPage[] = [
     mdIcon: lockClosedOutline,
   },
   {
-    title: "Users",
-    url: "/users",
+    title: "Teachers",
+    url: "/teachers",
     iosIcon: peopleCircleOutline,
     mdIcon: peopleCircleOutline,
   },
@@ -95,7 +95,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
             <IonItem
               onClick={() => setSelected([false, true, false, false, false])}
               className={selected[1] ? "selected" : ""}
-              routerLink={"/users"}
+              routerLink={"/teachers"}
               routerDirection="none"
               lines="none"
               detail={false}

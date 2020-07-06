@@ -22,8 +22,21 @@ const Homepage: React.FC = () => {
     open: false,
     event: undefined,
   });
-
-  useEffect(() => {}, []);
+  let formData = new FormData();
+  useEffect(() => {
+    formData.append("title", "world");
+    formData.append("domain", "world");
+    formData.append("professor", "world");
+    formData.append("tools", "world");
+    formData.append("requiredDocuments", "world");
+    formData.append("promo", "7");
+    formData.append(
+      "Document",
+      new Blob(["test payload"], { type: "text/csv" })
+    );
+    //api.addProject(formData);
+    console.log("done");
+  }, []);
 
   const [isOpen, setisOpen] = useState(false);
 
