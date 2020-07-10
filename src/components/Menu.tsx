@@ -16,6 +16,7 @@ import {
   personCircleOutline,
   readerOutline,
   schoolOutline,
+  informationOutline,
 } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
@@ -35,10 +36,10 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: "Home",
-    url: "/home",
-    iosIcon: homeOutline,
-    mdIcon: homeOutline,
+    title: "About",
+    url: "/about",
+    iosIcon: informationOutline,
+    mdIcon: informationOutline,
   },
   {
     title: "Teachers",
@@ -84,8 +85,12 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Ahmed Ahmed</IonListHeader>
-          <IonNote>1CS - Student</IonNote>
+          {store.isAuth.access === "0" && (
+            <>
+              <IonListHeader>Admin</IonListHeader>{" "}
+              <IonNote>All privileges granted</IonNote>
+            </>
+          )}
 
           <IonMenuToggle autoHide={false}>
             <IonItem
@@ -93,7 +98,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
                 setSelected([true, false, false, false, false, false])
               }
               className={selected[0] ? "selected" : ""}
-              routerLink={"/home"}
+              routerLink={"/about"}
               routerDirection="none"
               lines="none"
               detail={false}
@@ -141,11 +146,11 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               <IonIcon slot="start" icon={appPages[3].iosIcon} />
               <IonLabel>{appPages[3].title}</IonLabel>
             </IonItem>
-            <IonItem
+            {/*  <IonItem
               onClick={() => {
                 setSelected([false, false, false, false, true, false]);
               }}
-              className={selected[4] ? "selected" : ""}
+              className={selected[  4] ? "selected" : ""}
               routerLink={"/Teams"}
               routerDirection="none"
               lines="none"
@@ -154,7 +159,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               {" "}
               <IonIcon slot="start" icon={appPages[4].iosIcon} />
               <IonLabel>{appPages[4].title}</IonLabel>
-            </IonItem>
+            </IonItem> */}
             <IonItem
               onClick={() =>
                 setSelected([false, false, false, false, false, true])

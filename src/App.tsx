@@ -51,10 +51,10 @@ const App: React.FC = observer(() => {
             <IonRouterOutlet id="main">
               <Route
                 path="/"
-                render={() => <Redirect to="/home" />}
+                render={() => <Redirect to="/about" />}
                 exact={true}
               />
-              <Route path="/home" component={Home} exact={true} />
+              <Route path="/about" component={Home} exact={true} />
               <Route path="/projects" component={Projects} exact={true} />
               <Route path="/teachers" component={Techers} exact={true} />
               <Route path="/students" component={Students} exact={true} />

@@ -2,32 +2,30 @@ import {
   IonCard,
   IonCardContent,
   IonCardHeader,
+  IonChip,
   IonCol,
   IonContent,
   IonGrid,
+  IonIcon,
+  IonLabel,
   IonPage,
   IonRow,
   IonTitle,
-  IonProgressBar,
-  IonLabel,
-  IonItem,
-  IonChip,
-  IonIcon,
 } from "@ionic/react";
+import {
+  logoIonic,
+  logoReact,
+  personCircleOutline,
+  server,
+} from "ionicons/icons";
 import React from "react";
 import Toolbar from "../components/Toolbar";
 import "./Auth.css";
-import {
-  logoReact,
-  logoIonic,
-  server,
-  personCircleOutline,
-} from "ionicons/icons";
 
 const Homepage: React.FC = () => {
   return (
     <IonPage>
-      <Toolbar page={"Home"} />
+      <Toolbar page={"About"} />
       <IonContent>
         <IonGrid>
           <IonRow class="ion-align-items-center ">
@@ -48,7 +46,7 @@ const Homepage: React.FC = () => {
                         <IonLabel>
                           Project portal is an academic platform for teachers
                           and students , allowing project submission, preview
-                          and attrubition.
+                          and attribution.
                         </IonLabel>
                       </IonCol>
                     </IonRow>

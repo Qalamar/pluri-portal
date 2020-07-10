@@ -242,17 +242,21 @@ const Projects: React.FC = observer(() => {
 
                                       <IonCardContent>
                                         <div className="ion-text-center">
-                                          {/*  <IonButton
-                                            class="ion-text-end"
-                                            color="dark"
-                                            onClick={() => edit(e)}
-                                          >
-                                            <IonIcon
-                                              slot="end"
-                                              icon={createOutline}
-                                            />
-                                            EDIT
-                                          </IonButton> */}
+                                          {e.document != null && (
+                                            <a href={e.docuemt} target="_blank">
+                                              <IonButton
+                                                class="ion-text-end"
+                                                color="dark"
+                                                //onClick={() => edit(e)}
+                                              >
+                                                <IonIcon
+                                                  slot="end"
+                                                  icon={createOutline}
+                                                />
+                                                Documents
+                                              </IonButton>
+                                            </a>
+                                          )}
                                           <IonButton
                                             class="ion-text-end"
                                             color="danger"

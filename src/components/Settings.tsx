@@ -18,53 +18,50 @@ import {
 import React from "react";
 
 const Settings: React.FC = () => {
+  const logout = () => {
+    localStorage.removeItem("Auth");
+    window.location.reload();
+  };
   return (
     <div>
       <IonList>
         <IonItem>
           <IonSegment
             color="dark"
-            value="friends"
+            value="light"
             //onIonChange={(e) => console.log("Segment selected", e.detail.value)}
           >
-            <IonSegmentButton value="friends">
+            <IonSegmentButton value="dark">
               <IonIcon size="large" icon={contrastOutline} />
               <IonLabel>Dark</IonLabel>
             </IonSegmentButton>
-            <IonSegmentButton value="enemies">
+            <IonSegmentButton value="light">
               <IonIcon size="large" icon={sunnyOutline} />
 
               <IonLabel>Light</IonLabel>
             </IonSegmentButton>
           </IonSegment>
         </IonItem>
-        <IonItem lines="none">
-          <IonLabel>Contact us</IonLabel>
-          <IonIcon size="large" icon={mailOutline} />
-        </IonItem>
-        <IonItem lines="none">
-          <IonLabel>Check the code</IonLabel>
-          <IonIcon size="large" icon={logoGithub} />
-        </IonItem>
+        <a href="https://github.com/Qalamar/project-portal" target="_blank">
+          {" "}
+          <IonItem lines="none">
+            <IonLabel>Check the code</IonLabel>
+            <IonIcon size="large" icon={logoGithub} />
+          </IonItem>
+        </a>
+
         <IonItem lines="none">
           <IonButtons class="ion-text-center">
-            <IonButton
-              color="dark"
-              fill="outline"
-              //  onClick={() => edit(promo)}
-            >
+            <IonButton color="dark" fill="outline" onClick={() => logout()}>
               <IonIcon slot="end" icon={closeOutline} />
               LOGOUT
             </IonButton>
-            <IonButton
-              class=" ion-padding-start"
-              color="dark"
-              fill="outline"
-              //  onClick={() => edit(promo)}
-            >
-              <IonIcon slot="end" icon={mailOutline} />
-              CONTACT
-            </IonButton>
+            <a href="mailto:contact@tariqhamrit.com" target="_blank">
+              <IonButton class=" ion-padding-start" color="dark" fill="outline">
+                <IonIcon slot="end" icon={mailOutline} />
+                CONTACT
+              </IonButton>
+            </a>
           </IonButtons>
         </IonItem>
       </IonList>

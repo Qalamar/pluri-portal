@@ -111,7 +111,6 @@ const Auth: React.FC = () => {
                       <IonText color="light">Simple Modal</IonText>
                     </IonCol>
                   </IonRow>
-
                   <IonRow>
                     <IonCol class="ion-text-center ion-margin-top ion-align-items-baseline"></IonCol>
                   </IonRow>
@@ -146,7 +145,8 @@ const Auth: React.FC = () => {
                     style={{ padding: 38 }}
                   >
                     <IonLabel>
-                      Use any combination for now, logging as an admin
+                      <strong>Email:</strong> throwaway@test.com <br></br>
+                      <strong>Password:</strong> throwaway1@
                     </IonLabel>
                     <IonItem>
                       <IonIcon slot="start" icon={mailOutline}></IonIcon>
