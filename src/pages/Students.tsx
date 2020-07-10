@@ -241,7 +241,7 @@ const Students: React.FC = observer(() => {
 
                                       <IonCardContent>
                                         <div className="ion-text-center">
-                                          <IonButton
+                                          {/*  <IonButton
                                             class="ion-text-end"
                                             color="dark"
                                             onClick={() => edit(e)}
@@ -251,7 +251,7 @@ const Students: React.FC = observer(() => {
                                               icon={createOutline}
                                             />
                                             EDIT
-                                          </IonButton>
+                                          </IonButton> */}
                                           <IonButton
                                             class="ion-text-end"
                                             color="danger"
