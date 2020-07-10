@@ -17,14 +17,12 @@ import {
   IonText,
   IonTitle,
 } from "@ionic/react";
-import axios from "axios";
 import { keyOutline, mailOutline } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import Toolbar from "../components/Toolbar";
 import * as api from "../utils/API";
-import { store } from "../stores/Store";
-import { useHistory } from "react-router-dom";
 import "./Auth.css";
 
 let initialValues = {
@@ -41,14 +39,6 @@ let Log: login = {
 };
 
 const Auth: React.FC = () => {
-  const [showPopover, setShowPopover] = useState<{
-    open: boolean;
-    event: Event | undefined;
-  }>({
-    open: false,
-    event: undefined,
-  });
-
   const [isOpen, setisOpen] = useState(false);
 
   useEffect(() => {
@@ -58,32 +48,11 @@ const Auth: React.FC = () => {
       store.isAuth.access = rest.access;
       store.isAuth.token = rest.token;
       store.isAuth.id = rest.id;
-      console.log(store.isAuth.token);
+      
     } */
   }, []);
 
   const [image, setimage] = useState();
-  const handleImageChange = (e: any) => {
-    setimage(e.target.files[0]);
-  };
-
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault();
-  //   console.log(image);
-  //   let form_data = new FormData();
-  //   form_data.append("image", "Test");
-  //   let url = "http://localhost:3000/employees/";
-  //   axios
-  //     .post(url, form_data, {
-  //       headers: {
-  //         "content-type": "multipart/form-data",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...initialValues },
@@ -109,11 +78,11 @@ const Auth: React.FC = () => {
         password: data.password,
       })
       .then(function (response) {
-        console.log(response);
+        
         localStorage.setItem("Auth", JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        
       }); */
     // Awaiting API Changes
     api.userLogin(mail, pass);
@@ -214,7 +183,7 @@ const Auth: React.FC = () => {
                         control={control}
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
-                          console.log("UserName", selected.detail.value);
+                          
                           Log.userName = selected.detail.value;
                           return selected.detail.value;
                         }}
@@ -235,7 +204,6 @@ const Auth: React.FC = () => {
                         control={control}
                         onChangeName="onIonChange"
                         onChange={([selected]) => {
-                          console.log("Password", selected.detail.value);
                           Log.password = selected.detail.value;
                           return selected.detail.value;
                         }}

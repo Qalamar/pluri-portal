@@ -13,6 +13,7 @@ import "@ionic/react/css/structure.css";
 import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
+import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import Menu from "./components/Menu";
@@ -20,14 +21,12 @@ import Auth from "./pages/Auth";
 import Home from "./pages/Homepage";
 import Projects from "./pages/Projects";
 import Promo from "./pages/Promo";
-import Teams from "./pages/Teams";
+import Students from "./pages/Students";
 import Techers from "./pages/Teachers";
+import Teams from "./pages/Teams";
 import { store } from "./stores/Store";
-import MyTeam from "./student/MyTeam";
-
-/* Theme variables */
+//import MyTeam from "./student/MyTeam";
 import "./theme/variables.css";
-import { observer } from "mobx-react";
 
 const App: React.FC = observer(() => {
   const [selectedPage, setSelectedPage] = useState("");
@@ -39,7 +38,7 @@ const App: React.FC = observer(() => {
       store.isAuth.state = session.state;
       store.isAuth.token = session.token;
       store.isAuth.id = session.id;
-      console.log("this is the token " + store.isAuth.token);
+
       return true;
     } else return false;
   };
@@ -58,9 +57,11 @@ const App: React.FC = observer(() => {
               <Route path="/home" component={Home} exact={true} />
               <Route path="/projects" component={Projects} exact={true} />
               <Route path="/teachers" component={Techers} exact={true} />
+              <Route path="/students" component={Students} exact={true} />
               <Route path="/promo" component={Promo} exact={true} />
-              <Route path="/myteam" component={MyTeam} exact={true} />
+              {/* <Route path="/myteam" component={MyTeam} exact={true} /> */}
               <Route path="/teams" component={Teams} exact={true} />
+              <Route path="/auth" component={Home} exact={true} />
             </IonRouterOutlet>
           </IonSplitPane>
         ) : (

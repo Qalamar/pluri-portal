@@ -6,8 +6,7 @@
   font-size: 7em;
   height: 9em;
   size: 5em;
-  scale: 1.5;
-  transform: scale(1.6);
+  scale: 1.2;
 }
 
 .popup {
@@ -38,7 +37,7 @@ ion-card-title {
   margin: 0 auto;
 }
 .title {
-  font-size: 4em;
+  font-size: 3.5em;
   border-radius: 1px;
   text-shadow: 0px 0px 5px rgb(18, 17, 18, 0.2);
   font-weight: bold;

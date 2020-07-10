@@ -2,20 +2,24 @@ import axios from "axios";
 import { store } from "../stores/Store";
 
 const url = "http://localhost:3000/";
-const studentsUrl = "http://localhost:3000/student";
-const teachersUrl = "http://localhost:3000/teacher";
-const promotionUrl = "http://localhost:3000/promotion";
-const teamUrl = "http://localhost:3000/team";
-const invitesUrl = "http://localhost:3000/invites"; //all invites
-const inviteUrl = "http://localhost:3000/invite"; //forinvitestudent
-const invitedUrl = "http://localhost:3000/invited";
-
 const apiUrl = "http://bragdonilyes.pythonanywhere.com/";
 
 /*********** Student calls ***************************************************/
 
-export const getStudents = () => {
-  return axios.get(url + "users/students/all");
+export const getStudents = async () => {
+  try {
+    const res = await axios.get(apiUrl + "users/students/all", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+    store.students = res.data;
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
 
 export const addStudent = async (
@@ -29,12 +33,10 @@ export const addStudent = async (
   promo: number,
   currentYear: string
 ) => {
-  try {
-    const res = await axios.post(apiUrl + "users/student/add/", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
+  axios({
+    method: "post",
+    url: apiUrl + "users/student/add/",
+    data: {
       firstName: firstName,
       lastName: lastName,
       username: username,
@@ -44,12 +46,20 @@ export const addStudent = async (
       birthPlace: birthPlace,
       promo: promo,
       currentYear: currentYear,
+    },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${store.isAuth.token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response.response.request);
     });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
 };
 
 export const getStudent = async (id: number) => {
@@ -67,9 +77,9 @@ export const getStudent = async (id: number) => {
   }
 };
 
-export const getInvites = async () => {
+export const deleteStudent = async (id: number) => {
   try {
-    const res = await axios.get(apiUrl + `users/invited/`, {
+    const res = await axios.delete(apiUrl + `users/student/delete/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
@@ -80,50 +90,6 @@ export const getInvites = async () => {
   } catch (error) {
     return console.log(error.response.request);
   }
-};
-
-export const handleInvites = async (
-  id: number,
-  acccepted: string,
-  rejected: string,
-  sender: number,
-  receiver: number
-) => {
-  try {
-    const res = await axios.put(apiUrl + `users/invites/${id}/`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-      acccepted: acccepted,
-      rejected: rejected,
-      sender: sender,
-      receiver: receiver,
-    });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
-};
-
-export const inviteStudent = async (id: number) => {
-  try {
-    const res = await axios.post(apiUrl + `users/student/invite/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
-};
-
-export const deleteStudent = (id: number) => {
-  return axios.delete(apiUrl + `users/student/delete/${id}`);
 };
 
 export const modifyStudent = async (
@@ -161,36 +127,6 @@ export const modifyStudent = async (
   }
 };
 
-export const getStudentTeam = async () => {
-  try {
-    const res = await axios.get(apiUrl + "users/myteam/", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
-};
-
-export const getStudentPromo = async () => {
-  try {
-    const res = await axios.post(apiUrl + "users/students", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
-};
-
 /*********** Professor calls ***************************************************/
 
 export const addProfessor = async (
@@ -205,12 +141,10 @@ export const addProfessor = async (
   grade: string,
   currentYear: string
 ) => {
-  try {
-    const res = await axios.post(apiUrl + "users/professor/add/", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
+  axios({
+    method: "post",
+    url: apiUrl + "users/professor/add/",
+    data: {
       firstName: firstName,
       lastName: lastName,
       username: username,
@@ -221,12 +155,20 @@ export const addProfessor = async (
       speciality: speciality,
       grade: grade,
       currentYear: currentYear,
+    },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${store.isAuth.token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response.response.request);
     });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
 };
 
 export const modifyProfessor = async (
@@ -271,8 +213,19 @@ export const modifyProfessor = async (
   }
 };
 
-export const deleteProfessor = (id: number) => {
-  return axios.delete(apiUrl + `users/professor/delete/${id}`);
+export const deleteProfessor = async (id: number) => {
+  try {
+    const res = await axios.delete(apiUrl + `users/professor/delete/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
 };
 
 export const getProffessors = async () => {
@@ -327,7 +280,7 @@ export const userLogin = async (email: string, password: string) => {
   }
 };
 
-/*********** Promotions ***************************************************/
+/*********** Promotions *******************************************************/
 
 export const getPromotions = async () => {
   try {
@@ -462,7 +415,126 @@ export const deletePromotion = async (id: number) => {
   }
 };
 
-/**************************************************************/
+/*********** Project calls ***************************************************/
+
+export const addProject = async (data: FormData) => {
+  axios({
+    method: "post",
+    url: apiUrl + "pfe/add/",
+    data: data,
+    headers: {
+      "Content-Type": `multipart/form-data`,
+      Authorization: `Token ${store.isAuth.token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response.response.request);
+    });
+};
+
+export const getProjects = async () => {
+  try {
+    const res = await axios.get(apiUrl + "pfe/projects/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+    store.projects = res.data;
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const getProject = async (id: number) => {
+  try {
+    const res = await axios.get(apiUrl + `pfe/modify/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const modifyProject = async (id: number, data: FormData) => {
+  axios({
+    method: "patch",
+    url: apiUrl + `pfe/modify/${id}`,
+    data: data,
+    headers: {
+      "Content-Type": `multipart/form-data`,
+      Authorization: `Token ${store.isAuth.token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response.response.request);
+    });
+};
+
+export const deleteProject = async (id: number) => {
+  try {
+    const res = await axios.delete(apiUrl + `pfe/delete/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const handleProject = async (id: number, status: string) => {
+  try {
+    const res = await axios.patch(apiUrl + `pfe/evaluate/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+      status: status,
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+export const acceptedProject = async () => {
+  try {
+    const res = await axios.get(apiUrl + "pfe/acceptedprojects/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${store.isAuth.token}`,
+      },
+    });
+    // .then();
+    console.log(res.data);
+  } catch (error) {
+    return console.log(error.response.request);
+  }
+};
+
+/*********** Team calls ******************************************************/
 
 export const addTeam = async (name: string) => {
   try {
@@ -511,76 +583,11 @@ export const validateTeam = async (id: number, readiness: boolean) => {
   }
 };
 
-/*****************************************************/
+/*********** Invites calls ***************************************************/
 
-export const addProject = async (data: FormData) => {
-  axios({
-    method: "post",
-    url: apiUrl + "pfe/add/",
-    data: data,
-    headers: {
-      "Content-Type": `multipart/form-data`,
-      Authorization: `Token 392aebf1ef65ecf669c6c50d008168f20d2fbc367897be2fda153b05fa2400a4`,
-    },
-  })
-    .then(function (response) {
-      //handle success
-      console.log(response);
-    })
-    .catch(function (response) {
-      //handle error
-      console.log(response.response.request);
-    });
-
-  /* axios
-    .post(
-      apiUrl + "pfe/add/",
-      {
-        title: title,
-        domain: domain,
-        professor: professor,
-        tools: tools,
-        requiredDocuments: requiredDocuments,
-        Document: formData,
-        promo: promo,
-      },
-      {
-        headers: {
-          "Content-Type": `multipart/form-data`,
-          Authorization: `Token 1d4fbeecb37f6b8ea5c5882e2d65d5a812b832000222b06904e90041735df76d`,
-        },
-      }
-    )
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error.response.request);
-    }); */
-
-  /* try {
-    const res = await axios.post(apiUrl + "pfe/add/", {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Token 1d4fbeecb37f6b8ea5c5882e2d65d5a812b832000222b06904e90041735df76d`,
-      },
-      title: title,
-      domain: domain,
-      tools: tools,
-      requiredDocuments: requiredDocuments,
-      Document: Document,
-      promo: promo,
-    });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  } */
-};
-
-export const getProjects = async () => {
+export const getInvites = async () => {
   try {
-    const res = await axios.get(apiUrl + "pfe/projects/", {
+    const res = await axios.get(apiUrl + `users/invited/`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
@@ -593,42 +600,23 @@ export const getProjects = async () => {
   }
 };
 
-export const getProject = async (id: number) => {
-  try {
-    const res = await axios.get(apiUrl + `pfe/modify/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
-    console.log(res.data);
-  } catch (error) {
-    return console.log(error.response.request);
-  }
-};
-
-export const modifyProject = async (
+export const handleInvites = async (
   id: number,
-  title: string,
-  domain: string,
-  tools: string,
-  requiredDocuments: string,
-  Document: FormData,
-  promo: 3
+  acccepted: string,
+  rejected: string,
+  sender: number,
+  receiver: number
 ) => {
   try {
-    const res = await axios.patch(apiUrl + `pfe/modify/${id}`, {
+    const res = await axios.put(apiUrl + `users/invites/${id}/`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
       },
-      title: title,
-      domain: domain,
-      tools: tools,
-      requiredDocuments: requiredDocuments,
-      Document: Document,
-      promo: promo,
+      acccepted: acccepted,
+      rejected: rejected,
+      sender: sender,
+      receiver: receiver,
     });
     // .then();
     console.log(res.data);
@@ -637,9 +625,9 @@ export const modifyProject = async (
   }
 };
 
-export const deleteProject = async (id: number) => {
+export const inviteStudent = async (id: number) => {
   try {
-    const res = await axios.delete(apiUrl + `pfe/modify/${id}`, {
+    const res = await axios.post(apiUrl + `users/student/invite/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
@@ -652,14 +640,13 @@ export const deleteProject = async (id: number) => {
   }
 };
 
-export const handleProject = async (id: number, status: string) => {
+export const getStudentTeam = async () => {
   try {
-    const res = await axios.patch(apiUrl + `pfe/evaluate/${id}`, {
+    const res = await axios.get(apiUrl + "users/myteam/", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
       },
-      status: status,
     });
     // .then();
     console.log(res.data);
@@ -668,9 +655,9 @@ export const handleProject = async (id: number, status: string) => {
   }
 };
 
-export const acceptedProject = async () => {
+export const getStudentPromo = async () => {
   try {
-    const res = await axios.get(apiUrl + "pfe/acceptedprojects/", {
+    const res = await axios.post(apiUrl + "users/students", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${store.isAuth.token}`,
@@ -682,5 +669,3 @@ export const acceptedProject = async () => {
     return console.log(error.response.request);
   }
 };
-
-/********************************************* */

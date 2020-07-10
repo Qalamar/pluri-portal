@@ -12,17 +12,13 @@ import {
   IonToast,
 } from "@ionic/react";
 import {
-  clipboardOutline,
-  constructOutline,
-  layersOutline,
-  speedometerOutline,
-  trendingDownOutline,
-  trendingUpOutline,
-  timeOutline,
   albumsOutline,
-  personCircleOutline,
-  peopleCircleOutline,
+  clipboardOutline,
   ellipsisHorizontalOutline,
+  layersOutline,
+  peopleCircleOutline,
+  personCircleOutline,
+  timeOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
@@ -102,14 +98,11 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             text: "Cancel",
             role: "cancel",
             cssClass: "secondary",
-            handler: () => {
-              console.log("cancel");
-            },
+            handler: () => {},
           },
           {
             text: "Save",
             handler: () => {
-              console.log(promot);
               api.modifyPromotion(
                 promot.id,
                 promot.cycle,
@@ -147,7 +140,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log(selected.detail.value);
               promot.cycle = selected.detail.value;
 
               return selected.detail.value;
@@ -178,7 +170,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("year", selected.detail.value);
               promot.year = selected.detail.value;
 
               return selected.detail.value;
@@ -198,7 +189,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log(selected.detail.value);
               promot.specialityName = selected.detail.value;
 
               return selected.detail.value;
@@ -219,7 +209,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("Description", selected.detail.value);
               promot.description = selected.detail.value;
 
               return selected.detail.value;
@@ -242,7 +231,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("minTeamMembers", selected.detail.value);
               promot.minTeamMembers = selected.detail.value;
               return selected.detail.value;
             }}
@@ -265,7 +253,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("maxTeamMembers", selected.detail.value);
               promot.maxTeamMembers = selected.detail.value;
               return selected.detail.value;
             }}
@@ -291,7 +278,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("maxTeamsInProject", selected.detail.value);
               promot.maxTeamsInProject = selected.detail.value;
               return selected.detail.value;
             }}
@@ -309,19 +295,18 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           <IonButton
             color="danger"
             class="ion-padding-horizontal"
-            fill="outline"
             type="button"
             onClick={() => {
               reset(promo);
             }}
           >
-            Reset Form
+            Reset
           </IonButton>
           <IonButton
             color="light"
             type="submit"
-            fill="outline"
-            onClick={() => console.log(promot)}
+            //onClick={() => console.log(promot)}
+
             disabled={formState.isValid === false}
           >
             Submit

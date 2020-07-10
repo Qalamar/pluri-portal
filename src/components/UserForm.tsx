@@ -146,7 +146,6 @@ const UserForm: React.FC = observer(() => {
           rules={{ required: true }}
           onChangeName="onIonChange"
           onChange={([selected]) => {
-            console.log(selected.detail.value);
             return selected.detail.value;
           }}
         />
@@ -160,7 +159,6 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("firstName", selected.detail.value);
               return selected.detail.value;
             }}
             name="firstName"
@@ -181,7 +179,6 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("lastName", selected.detail.value);
               return selected.detail.value;
             }}
             name="lastName"
@@ -202,7 +199,6 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("userName", selected.detail.value);
               return selected.detail.value;
             }}
             name="userName"
@@ -223,7 +219,6 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("password", selected.detail.value);
               return selected.detail.value;
             }}
             name="password"
@@ -277,7 +272,6 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("birthPlace", selected.detail.value);
               return selected.detail.value;
             }}
             name="birthPlace"
@@ -301,7 +295,6 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log(selected.detail.value);
               return selected.detail.value;
             }}
             name="gender"
@@ -330,7 +323,6 @@ const UserForm: React.FC = observer(() => {
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
-                console.log(selected.detail.value);
                 return selected.detail.value;
               }}
               name="promo"
@@ -348,7 +340,6 @@ const UserForm: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("cuurentYear", selected.detail.value);
               return selected.detail.value;
             }}
             name="currentYear"
@@ -370,7 +361,6 @@ const UserForm: React.FC = observer(() => {
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
-                console.log("speciality", selected.detail.value);
                 return selected.detail.value;
               }}
               name="speciality"
@@ -399,7 +389,6 @@ const UserForm: React.FC = observer(() => {
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
-                console.log(selected.detail.value);
                 return selected.detail.value;
               }}
               name="grade"
@@ -410,18 +399,16 @@ const UserForm: React.FC = observer(() => {
         <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
           <IonButton
             color="danger"
-            fill="outline"
             type="button"
             onClick={() => {
               reset(initialValues);
             }}
           >
-            Reset Form
+            Reset
           </IonButton>
           <IonButton
             color="light"
             type="submit"
-            fill="outline"
             onClick={() => setshowToast(true)}
             disabled={formState.isValid === false}
           >

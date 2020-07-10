@@ -10,11 +10,11 @@ import {
   IonNote,
 } from "@ionic/react";
 import {
-  archiveOutline,
-  archiveSharp,
-  lockClosedOutline,
+  albumsOutline,
+  homeOutline,
   peopleCircleOutline,
-  peopleOutline,
+  personCircleOutline,
+  readerOutline,
   schoolOutline,
 } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
@@ -37,32 +37,39 @@ const appPages: AppPage[] = [
   {
     title: "Home",
     url: "/home",
-    iosIcon: lockClosedOutline,
-    mdIcon: lockClosedOutline,
+    iosIcon: homeOutline,
+    mdIcon: homeOutline,
   },
   {
     title: "Teachers",
     url: "/teachers",
-    iosIcon: peopleCircleOutline,
-    mdIcon: peopleCircleOutline,
+    iosIcon: schoolOutline,
+    mdIcon: schoolOutline,
   },
+
   {
     title: "Projects",
     url: "/projects",
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp,
+    iosIcon: readerOutline,
+    mdIcon: readerOutline,
   },
   {
     title: "Promos",
     url: "/Promo",
-    iosIcon: schoolOutline,
-    mdIcon: schoolOutline,
+    iosIcon: albumsOutline,
+    mdIcon: albumsOutline,
   },
   {
     title: "Teams",
     url: "/Teams",
-    iosIcon: peopleOutline,
-    mdIcon: peopleOutline,
+    iosIcon: peopleCircleOutline,
+    mdIcon: peopleCircleOutline,
+  },
+  {
+    title: "Students",
+    url: "/students",
+    iosIcon: personCircleOutline,
+    mdIcon: personCircleOutline,
   },
 ];
 
@@ -82,7 +89,9 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
 
           <IonMenuToggle autoHide={false}>
             <IonItem
-              onClick={() => setSelected([true, false, false, false, false])}
+              onClick={() =>
+                setSelected([true, false, false, false, false, false])
+              }
               className={selected[0] ? "selected" : ""}
               routerLink={"/home"}
               routerDirection="none"
@@ -93,7 +102,9 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               <IonLabel>{appPages[0].title}</IonLabel>
             </IonItem>
             <IonItem
-              onClick={() => setSelected([false, true, false, false, false])}
+              onClick={() =>
+                setSelected([false, true, false, false, false, false])
+              }
               className={selected[1] ? "selected" : ""}
               routerLink={"/teachers"}
               routerDirection="none"
@@ -103,8 +114,11 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               <IonIcon slot="start" icon={appPages[1].iosIcon} />
               <IonLabel>{appPages[1].title}</IonLabel>
             </IonItem>
+
             <IonItem
-              onClick={() => setSelected([false, false, true, false, false])}
+              onClick={() =>
+                setSelected([false, false, true, false, false, false])
+              }
               className={selected[2] ? "selected" : ""}
               routerLink={"/projects"}
               routerDirection="none"
@@ -115,7 +129,9 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               <IonLabel>{appPages[2].title}</IonLabel>
             </IonItem>
             <IonItem
-              onClick={() => setSelected([false, false, false, true, false])}
+              onClick={() =>
+                setSelected([false, false, false, true, false, false])
+              }
               className={selected[3] ? "selected" : ""}
               routerLink={"/Promo"}
               routerDirection="none"
@@ -127,7 +143,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
             </IonItem>
             <IonItem
               onClick={() => {
-                setSelected([false, false, false, false, true]);
+                setSelected([false, false, false, false, true, false]);
               }}
               className={selected[4] ? "selected" : ""}
               routerLink={"/Teams"}
@@ -138,6 +154,19 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
               {" "}
               <IonIcon slot="start" icon={appPages[4].iosIcon} />
               <IonLabel>{appPages[4].title}</IonLabel>
+            </IonItem>
+            <IonItem
+              onClick={() =>
+                setSelected([false, false, false, false, false, true])
+              }
+              className={selected[5] ? "selected" : ""}
+              routerLink={"/students"}
+              routerDirection="none"
+              lines="none"
+              detail={false}
+            >
+              <IonIcon slot="start" icon={appPages[5].iosIcon} />
+              <IonLabel>{appPages[5].title}</IonLabel>
             </IonItem>
           </IonMenuToggle>
         </IonList>

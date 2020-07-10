@@ -8,10 +8,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { notificationsCircleOutline } from "ionicons/icons";
+import { settingsSharp } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
-import NotificationArea from "./NotificationArea";
+import Settings from "./Settings";
 
 interface PageProps {
   page: string;
@@ -46,8 +46,8 @@ const Toolbar: React.FC<PageProps> = observer(({ page }) => {
             <IonIcon
               slot="icon-only"
               class="icons"
-              size="small"
-              icon={notificationsCircleOutline}
+              size="large"
+              icon={settingsSharp}
             />
           </IonButton>
 
@@ -58,7 +58,7 @@ const Toolbar: React.FC<PageProps> = observer(({ page }) => {
               setShowPopover({ open: false, event: undefined })
             }
           >
-            <NotificationArea />
+            <Settings />
           </IonPopover>
         </IonButtons>
       </IonToolbar>

@@ -11,30 +11,20 @@ import {
   IonSelectOption,
   IonToast,
 } from "@ionic/react";
-import axios from "axios";
 import {
-  clipboardOutline,
-  constructOutline,
-  layersOutline,
-  speedometerOutline,
-  trendingDownOutline,
-  trendingUpOutline,
-  addCircleOutline,
-  personOutline,
-  personCircleOutline,
-  peopleCircleOutline,
-  timeOutline,
   albumsOutline,
-  ellipsisHorizontalCircleOutline,
+  clipboardOutline,
   ellipsisHorizontalOutline,
+  layersOutline,
+  peopleCircleOutline,
+  personCircleOutline,
+  timeOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { usePromo } from "./EditPromo";
-import { promotion } from "../pages/Promo";
 import * as api from "../utils/API";
-import { Promotion } from "../utils/Interfaces";
+import { usePromo } from "./EditPromo";
 import "./PromoForm.css";
 
 let initialValues = {
@@ -76,7 +66,6 @@ const AddPromo: React.FC = observer(() => {
     ) : null;
   };
   const onSubmit = () => {
-    console.log(promot);
     api.addPromotion(
       promot.cycle,
       promot.year,
@@ -125,7 +114,6 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log(selected.detail.value);
               promot.cycle = selected.detail.value;
 
               return selected.detail.value;
@@ -156,7 +144,6 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("year", selected.detail.value);
               promot.year = selected.detail.value;
 
               return selected.detail.value;
@@ -176,7 +163,6 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log(selected.detail.value);
               promot.specialityName = selected.detail.value;
 
               return selected.detail.value;
@@ -197,7 +183,6 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("Description", selected.detail.value);
               promot.description = selected.detail.value;
 
               return selected.detail.value;
@@ -220,7 +205,6 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("minTeamMembers", selected.detail.value);
               promot.minTeamMembers = selected.detail.value;
               return selected.detail.value;
             }}
@@ -243,7 +227,6 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("maxTeamMembers", selected.detail.value);
               promot.maxTeamMembers = selected.detail.value;
               return selected.detail.value;
             }}
@@ -269,7 +252,6 @@ const AddPromo: React.FC = observer(() => {
             control={control}
             onChangeName="onIonChange"
             onChange={([selected]) => {
-              console.log("maxTeamsInProject", selected.detail.value);
               promot.maxTeamsInProject = selected.detail.value;
               return selected.detail.value;
             }}
@@ -287,19 +269,17 @@ const AddPromo: React.FC = observer(() => {
           <IonButton
             color="danger"
             class="ion-padding-horizontal"
-            fill="outline"
             type="button"
             onClick={() => {
               reset(initialValues);
             }}
           >
-            Reset Form
+            Reset
           </IonButton>
           <IonButton
             color="light"
             type="submit"
-            fill="outline"
-            onClick={() => console.log(promot)}
+            //onClick={() => console.log(promot)}
             disabled={formState.isValid === false}
           >
             Submit

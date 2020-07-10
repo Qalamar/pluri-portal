@@ -4,6 +4,8 @@ class Variables {
   @observable searchList = "";
   @observable promos = [];
   @observable teachers = [];
+  @observable students = [];
+  @observable projects = [];
   @observable isAuth = {
     state: false,
     access: "admin",

@@ -49,17 +49,17 @@ const Teams: React.FC = observer(() => {
     let res = await axios.get("/promo/promos");
 
     let data = res.data;
-    console.log(data);
+
     setPromos(data);
   };
   const getPromo = (idPromo: number | undefined) => {
     let i: number = 0;
     let stop: boolean = false;
     let val: any = 0;
-    console.log(promos);
+
     while (i < promos.length && stop === false) {
       val = promos[i];
-      console.log(val);
+
       if (val.id === idPromo) {
         stop = true;
         val = val.year + val.cycle;
@@ -78,12 +78,12 @@ const Teams: React.FC = observer(() => {
     let j: number = 0;
     let i: number;
     let tab: Student[] = [];
-    for (i = 0; i < students.length; i++) {
+    /*  for (i = 0; i < students.length; i++) {
       if (students[i].team === idTeam) {
         tab[j] = students[i];
         j++;
       }
-    }
+    } */
     return tab;
   };
 
@@ -107,7 +107,7 @@ const Teams: React.FC = observer(() => {
             </IonLabel>
           </IonItem>
 
-          {value.map((s: Student, i) => {
+          {/*   {value.map((s: Student, i) => {
             if (s.isLeader === true)
               return (
                 <IonItem color="dark" class="Mem">
@@ -116,7 +116,7 @@ const Teams: React.FC = observer(() => {
                   </IonLabel>
                 </IonItem>
               );
-          })}
+          })} */}
           <br />
           {value.length !== 1 && (
             <div>
@@ -130,14 +130,14 @@ const Teams: React.FC = observer(() => {
               </IonItem>
 
               {value.map((s: Student, i) => {
-                if (s.isLeader === false)
+                /*      if (s.isLeader === false)
                   return (
                     <IonItem color="dark" class="Mem">
                       <IonLabel>
                         {s.lastName} {s.firstName}
                       </IonLabel>
                     </IonItem>
-                  );
+                  ); */
               })}
             </div>
           )}
@@ -210,7 +210,7 @@ const Teams: React.FC = observer(() => {
                                       </IonCardHeader>
                                       <IonChip>
                                         <IonLabel>
-                                          {getPromo(value.pop()?.promotion)}
+                                          {/* {getPromo(value.pop()?.promotion)} */}
                                         </IonLabel>
                                       </IonChip>
 

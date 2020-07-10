@@ -16,6 +16,24 @@ export interface Promotion {
   maxTeamMembers: number;
   maxTeamsInProject: number;
 }
+export interface Project {
+  id: number;
+  title: string;
+  domain: string;
+  professor: string;
+  tools: string;
+  requiredDocuments: string;
+  promo: string;
+}
+
+export interface TeacherInterface {
+  id: number;
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+}
+
 export interface TeamInterface {
   TeamIn: Team;
 }
@@ -43,16 +61,9 @@ export interface Student {
   id: number;
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
-  placeOfBirth: string;
   email: string;
   userName: string;
   password: string;
-  promotion: number;
-  currentYear: string;
-  isLeader: boolean;
-  note: number;
-  team: number;
 }
 export interface sTudent {
   student: Student;
@@ -61,25 +72,15 @@ export interface StudentState {
   student: Student;
   setStudent: React.Dispatch<React.SetStateAction<Student>>;
 }
-export interface NotificationInterface {
-  Desciption: string;
-  Icon: string;
-}
+
 export const useStudent = (overrides?: Partial<Student>): StudentState => {
   const defaultStudent: Student = {
     id: 0,
     firstName: "",
     lastName: "",
-    dateOfBirth: "",
-    placeOfBirth: "",
     email: "",
     userName: "",
     password: "",
-    promotion: 0,
-    currentYear: "2019/2020",
-    isLeader: false,
-    note: 0,
-    team: 0,
   };
   const [student, setStudent] = useState<Student>({
     ...defaultStudent,

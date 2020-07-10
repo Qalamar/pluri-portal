@@ -52,6 +52,13 @@ import {
 } from "../utils/Interfaces";
 import "./MyTeam.css";
 
+function MyTeam() {
+  return <div></div>;
+}
+
+export default MyTeam;
+
+/* 
 let inviteButton: boolean[] = []; //for invited button
 const useStateWithLocalStorage = (localStorageKey: string) => {
   var storage = localStorage.getItem(localStorageKey);
@@ -69,7 +76,7 @@ const useStateWithLocalStorage = (localStorageKey: string) => {
 };
 
 const MyTeam: React.FC = observer(() => {
-  /* this is just an example to test */
+
   const { student } = useStudent({
     id: 0,
     firstName: "Ilyes ",
@@ -85,7 +92,7 @@ const MyTeam: React.FC = observer(() => {
     note: 15.15,
     team: -99,
   });
-  /* this const for creation */
+
   const { Team } = useTeam({
     id: -99,
     name: "",
@@ -133,7 +140,7 @@ const MyTeam: React.FC = observer(() => {
     ) : null;
   };
   const getStudents = async () => {
-    /*students on the same promo*/
+
     let res = await axios.get("/users/students");
     let data = res.data;
     setStudents(data);
@@ -287,7 +294,7 @@ const MyTeam: React.FC = observer(() => {
         student.password,
         student.promotion,
         true,
-      ); */
+      ); 
       api.addTeam(Team.name);
       axios
         .post("/users/myteam", {
@@ -423,7 +430,6 @@ const MyTeam: React.FC = observer(() => {
             <IonButtons class="ion-justify-content-center ion-margin-top">
               <IonButton
                 color="danger"
-                fill="outline"
                 type="button"
                 onClick={() => {
                   setShowReport(false);
@@ -435,7 +441,6 @@ const MyTeam: React.FC = observer(() => {
               <IonButton
                 color="dark"
                 type="submit"
-                fill="outline"
                 onClick={(e) => console.log(file)}
                 disabled={selectedDate.length !== 0 || fill === false}
               >
@@ -694,7 +699,7 @@ const MyTeam: React.FC = observer(() => {
         <Anime opacity={[0, 1]} duration={2000} easing="easeOutElastic">
           <IonGrid>
             {myTeam.id < 0 ? (
-              /* for students that don't have a team yet*/
+             
 
               <IonRow class="ion-align-items-center container">
                 <IonCol></IonCol>
@@ -798,7 +803,7 @@ const MyTeam: React.FC = observer(() => {
                           </IonRow>
                         )}
                         {student.isLeader ===
-                        true /* for The Leader that has a team */ ? (
+                        true ? (
                           <IonRow>
                             {getMembersTeam.length !== 1 && (
                               <IonCol size="12" sizeMd="6">
@@ -933,3 +938,4 @@ const MyTeam: React.FC = observer(() => {
   );
 });
 export default MyTeam;
+ */

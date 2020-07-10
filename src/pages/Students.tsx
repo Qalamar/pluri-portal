@@ -23,49 +23,47 @@ import {
   closeOutline,
   createOutline,
   filterOutline,
+  personCircleOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
-import AddProject from "../components/AddProject";
-import EditProject from "../components/EditProject";
+import AddStudent from "../components/AddStudent";
+import EditStudent from "../components/EditStudent";
 import Toolbar from "../components/Toolbar";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
-import "./Projects.css";
+import "./Users.css";
 
-const Projects: React.FC = observer(() => {
-  const [projects, setProjects] = useState([]);
+const Students: React.FC = observer(() => {
+  const [students, setStudents] = useState([]);
   const [Id, setId] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showToast, setshowToast] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const [project, setProject] = useState({
+  const [student, setStudent] = useState({
     id: 0,
-    title: "",
-    domain: "",
-    professor: "",
-    tools: "",
-    requiredDocuments: "",
-    promo: "",
+    firstName: "",
+    lastName: "",
+    userName: "",
+    password: "",
+    email: "",
   });
   const edit = (data: any) => {
-    project.id = data.id;
-    project.title = data.title;
-    project.domain = data.domain;
-    project.professor = data.professor;
-    project.tools = data.tools;
-    project.requiredDocuments = data.requiredDocuments;
-    project.promo = data.promo;
-
+    student.id = data.id;
+    student.firstName = data.firstName;
+    student.lastName = data.lastName;
+    student.userName = data.userName;
+    student.email = data.email;
+    student.password = data.password;
     setShowEdit(true);
   };
 
   const getUsers = async () => {
     async function fetchPromotion() {
-      await api.getProjects();
-      setProjects(store.projects);
+      await api.getStudents();
+      setStudents(store.students);
     }
     fetchPromotion();
   };
@@ -84,7 +82,7 @@ const Projects: React.FC = observer(() => {
 
   return (
     <IonPage>
-      <Toolbar page={"Projects"} />
+      <Toolbar page={"Students"} />
       <IonContent>
         <IonAlert
           isOpen={showAlert}
@@ -101,7 +99,7 @@ const Projects: React.FC = observer(() => {
               cssClass: "del",
               text: "Delete",
               handler: () => {
-                api.deleteProject(Id);
+                api.deleteStudent(Id);
                 setshowToast(true);
               },
             },
@@ -125,7 +123,7 @@ const Projects: React.FC = observer(() => {
               Dismiss
             </IonButton>
           </div>
-          <AddProject />
+          <AddStudent />
         </IonModal>
         <IonModal isOpen={showEdit} onDidDismiss={() => setShowEdit(false)}>
           <div className="ion-text-end">
@@ -139,7 +137,7 @@ const Projects: React.FC = observer(() => {
               Dismiss
             </IonButton>
           </div>
-          <EditProject data={project} />
+          <EditStudent student={student} />
         </IonModal>
         <IonGrid>
           <IonRow class="ion-align-items-center">
@@ -147,7 +145,7 @@ const Projects: React.FC = observer(() => {
               <IonCard class="neum">
                 <IonCardHeader class="ion-text-center ion-padding">
                   <IonCardTitle color="light" className="title">
-                    Projects
+                    Students
                   </IonCardTitle>
                 </IonCardHeader>
 
@@ -196,13 +194,13 @@ const Projects: React.FC = observer(() => {
                       </IonCol>
                     </IonRow>
                     <IonRow>
-                      {projects.length === 0 ? (
+                      {students.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
-                        projects.map((e: any, i) => {
+                        students.map((e: any, i) => {
                           {
                             if (
-                              e.title
+                              e.firstName
                                 .toLowerCase()
                                 .includes(store.searchList.toLowerCase())
                             )
@@ -223,21 +221,22 @@ const Projects: React.FC = observer(() => {
                                       class="shadow ion-text-center"
                                     >
                                       <IonCardHeader>
-                                        <IonCardTitle
+                                        <IonIcon
+                                          icon={personCircleOutline}
+                                          class="ico"
                                           color="light"
-                                          className="title"
-                                        >
-                                          {e.domain}
-                                        </IonCardTitle>
+                                        ></IonIcon>
                                       </IonCardHeader>
                                       <IonCardTitle
                                         color="dark"
                                         className="ion-padding "
                                       >
-                                        <IonLabel>{e.tools}</IonLabel>
+                                        <strong>
+                                          {e.firstName + " " + e.lastName}
+                                        </strong>
                                       </IonCardTitle>
                                       <IonChip outline={false} color="dark">
-                                        <IonLabel>{e.title}</IonLabel>
+                                        <IonLabel>{e.email}</IonLabel>
                                       </IonChip>
 
                                       <IonCardContent>
@@ -289,4 +288,4 @@ const Projects: React.FC = observer(() => {
   );
 });
 
-export default Projects;
+export default Students;

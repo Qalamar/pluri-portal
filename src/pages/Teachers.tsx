@@ -1,4 +1,5 @@
 import {
+  IonAlert,
   IonButton,
   IonCard,
   IonCardContent,
@@ -15,27 +16,39 @@ import {
   IonPage,
   IonRow,
   IonSearchbar,
-  IonText,
+  IonToast,
 } from "@ionic/react";
-import axios from "axios";
 import {
   addCircleOutline,
+  closeOutline,
+  createOutline,
   filterOutline,
   personCircleOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
+import AddTeacher from "../components/AddTeacher";
+import EditTeacher from "../components/EditTeacher";
 import Toolbar from "../components/Toolbar";
-import UserForm from "../components/UserForm";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
-
 import "./Users.css";
 
 const Techers: React.FC = observer(() => {
   const [teachers, setTeachers] = useState([]);
+  const [Id, setId] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showToast, setshowToast] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [teacher, setTeacher] = useState({
+    id: 0,
+    firstName: "",
+    lastName: "",
+    password: "",
+    email: "",
+  });
 
   const getUsers = async () => {
     async function fetchPromotion() {
@@ -43,7 +56,6 @@ const Techers: React.FC = observer(() => {
       setTeachers(store.teachers);
     }
     fetchPromotion();
-    console.log(teachers);
   };
 
   const searchHandle = (input: string) => {
@@ -54,6 +66,16 @@ const Techers: React.FC = observer(() => {
     setShowModal(true);
   };
 
+  const edit = (data: any) => {
+    teacher.id = data.id;
+    teacher.firstName = data.firstName;
+    teacher.lastName = data.lastName;
+    teacher.email = data.email;
+    teacher.password = data.password;
+
+    setShowEdit(true);
+  };
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -62,10 +84,61 @@ const Techers: React.FC = observer(() => {
     <IonPage>
       <Toolbar page={"Teachers"} />
       <IonContent>
-        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-          <UserForm />
-        </IonModal>
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          message={"Confirm?"}
+          buttons={[
+            {
+              text: "Cancel",
+              role: "cancel",
 
+              handler: () => {},
+            },
+            {
+              cssClass: "del",
+              text: "Delete",
+              handler: () => {
+                api.deleteProfessor(Id);
+                setshowToast(true);
+              },
+            },
+          ]}
+        />
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setshowToast(false)}
+          message="Deleted"
+          duration={400}
+        />
+        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+          <div className="ion-text-end">
+            <IonButton
+              class="ion-text-end"
+              color="dark"
+              fill="clear"
+              onClick={() => setShowModal(false)}
+            >
+              <IonIcon color="dark" slot="end" icon={closeOutline} />
+              Dismiss
+            </IonButton>
+          </div>
+          <AddTeacher />
+        </IonModal>
+        <IonModal isOpen={showEdit} onDidDismiss={() => setShowEdit(false)}>
+          <div className="ion-text-end">
+            <IonButton
+              class="ion-text-end"
+              color="dark"
+              fill="clear"
+              onClick={() => setShowEdit(false)}
+            >
+              <IonIcon color="dark" slot="end" icon={closeOutline} />
+              Dismiss
+            </IonButton>
+          </div>
+          <EditTeacher teacher={teacher} />
+        </IonModal>
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="12">
@@ -163,11 +236,38 @@ const Techers: React.FC = observer(() => {
                                         </strong>
                                       </IonCardTitle>
                                       <IonChip outline={false} color="dark">
-                                        <IonLabel>{e.promotion}</IonLabel>
+                                        <IonLabel>{e.email}</IonLabel>
                                       </IonChip>
 
                                       <IonCardContent>
-                                        <IonText>A simple user.</IonText>
+                                        <div className="ion-text-center">
+                                          <IonButton
+                                            class="ion-text-end"
+                                            color="dark"
+                                            onClick={() => edit(e)}
+                                          >
+                                            <IonIcon
+                                              slot="end"
+                                              icon={createOutline}
+                                            />
+                                            EDIT
+                                          </IonButton>
+                                          <IonButton
+                                            class="ion-text-end"
+                                            color="danger"
+                                            key={e.id}
+                                            onClick={() => {
+                                              setId(e.id);
+                                              setShowAlert(true);
+                                            }}
+                                          >
+                                            <IonIcon
+                                              slot="end"
+                                              icon={closeOutline}
+                                            />
+                                            DELETE
+                                          </IonButton>
+                                        </div>
                                       </IonCardContent>
                                     </IonCard>
                                   </Anime>

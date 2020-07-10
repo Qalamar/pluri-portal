@@ -18,15 +18,16 @@ import {
   IonSearchbar,
   IonText,
   IonToast,
-  IonItem,
 } from "@ionic/react";
-import axios from "axios";
 import {
   addCircleOutline,
-  filterOutline,
-  closeCircleOutline,
   closeOutline,
+  createOutline,
+  filterOutline,
+  peopleCircleOutline,
+  personCircleOutline,
 } from "ionicons/icons";
+import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import AddPromo from "../components/AddPromo";
@@ -34,7 +35,6 @@ import EditPromo from "../components/EditPromo";
 import Toolbar from "../components/Toolbar";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
-import { observer } from "mobx-react";
 import "./Promo.css";
 
 export interface promotion {
@@ -78,7 +78,6 @@ const Promo: React.FC = observer(() => {
       setpromos(store.promos);
     }
     fetchPromotion();
-    console.log(promos);
   }, []);
 
   const edit = (promos: promotion) => {
@@ -136,15 +135,12 @@ const Promo: React.FC = observer(() => {
               text: "Cancel",
               role: "cancel",
 
-              handler: () => {
-                console.log("Confirm cancel");
-              },
+              handler: () => {},
             },
             {
               cssClass: "del",
               text: "Delete",
               handler: () => {
-                console.log(Id);
                 api.deletePromotion(Id);
                 setshowToast(true);
               },
@@ -210,7 +206,7 @@ const Promo: React.FC = observer(() => {
                             {
                               return (
                                 <IonCol
-                                  size="10"
+                                  size="12"
                                   sizeSm="6"
                                   sizeMd="4"
                                   class="ion-text-center"
@@ -230,74 +226,91 @@ const Promo: React.FC = observer(() => {
                                         </strong>
                                       </IonCardTitle>
                                     </IonCardHeader>
-                                    {promo.cycle.localeCompare("CPI") === 0 ? (
-                                      <IonChip outline={false} color="primary">
-                                        <IonLabel>Preparatory</IonLabel>
-                                      </IonChip>
-                                    ) : (
-                                      <IonChip outline={false} color="primary">
-                                        <IonLabel>Secondary</IonLabel>
-                                      </IonChip>
-                                    )}
-                                    {promo.specialityName.localeCompare("") !==
-                                      0 && (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>
-                                          {promo.specialityName}
-                                        </IonLabel>
-                                      </IonChip>
-                                    )}
-                                    {promo.minTeamMembers !== 0 && (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>
-                                          Min Members &nbsp;
-                                          {promo.minTeamMembers}{" "}
-                                        </IonLabel>
-                                      </IonChip>
-                                    )}
-                                    {promo.maxTeamMembers !== 0 && (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>
-                                          Max Members &nbsp;
-                                          {promo.maxTeamMembers}{" "}
-                                        </IonLabel>
-                                      </IonChip>
-                                    )}
-                                    {promo.maxTeamsInProject !== 0 && (
-                                      <IonChip outline={true} color="dark">
-                                        <IonLabel>
-                                          Max Projects &nbsp;
-                                          {promo.maxTeamsInProject}{" "}
-                                        </IonLabel>
-                                      </IonChip>
-                                    )}
+                                    <IonList class="ion-padding">
+                                      {promo.cycle.localeCompare("CPI") ===
+                                      0 ? (
+                                        <IonChip
+                                          outline={false}
+                                          color="primary"
+                                        >
+                                          <IonLabel>Preparatory</IonLabel>
+                                        </IonChip>
+                                      ) : (
+                                        <IonChip
+                                          outline={false}
+                                          color="primary"
+                                        >
+                                          <IonLabel>Secondary</IonLabel>
+                                        </IonChip>
+                                      )}
+                                      {promo.specialityName.localeCompare(
+                                        ""
+                                      ) !== 0 && (
+                                        <IonChip outline={true} color="dark">
+                                          <IonLabel>
+                                            {promo.specialityName}
+                                          </IonLabel>
+                                        </IonChip>
+                                      )}
+                                      {promo.minTeamMembers !== 0 && (
+                                        <IonChip outline={true} color="dark">
+                                          <IonIcon
+                                            icon={personCircleOutline}
+                                          ></IonIcon>
+                                          <IonLabel>
+                                            {promo.minTeamMembers}{" "}
+                                          </IonLabel>
+                                        </IonChip>
+                                      )}
+                                      {promo.maxTeamMembers !== 0 && (
+                                        <IonChip outline={true} color="dark">
+                                          <IonIcon
+                                            icon={peopleCircleOutline}
+                                          ></IonIcon>
+                                          <IonLabel>
+                                            {promo.maxTeamMembers}{" "}
+                                          </IonLabel>
+                                        </IonChip>
+                                      )}
+                                      {promo.maxTeamsInProject !== 0 && (
+                                        <IonChip outline={true} color="dark">
+                                          <IonLabel>
+                                            Projects Teams:{" "}
+                                            {promo.maxTeamsInProject}{" "}
+                                          </IonLabel>
+                                        </IonChip>
+                                      )}
+                                    </IonList>
                                     <IonCardContent>
                                       <IonText>{promo.description}</IonText>
-
-                                      <IonList>
+                                      <div className="ion-text-center">
                                         <IonButton
+                                          class="ion-text-end"
+                                          color="dark"
                                           onClick={() => edit(promo)}
-                                          target="_blank"
-                                          color="danger"
                                         >
-                                          <IonLabel class="ion-margin">
-                                            Edit
-                                          </IonLabel>
+                                          <IonIcon
+                                            slot="end"
+                                            icon={createOutline}
+                                          />
+                                          EDIT
                                         </IonButton>
                                         <IonButton
+                                          class="ion-text-end"
+                                          color="danger"
                                           key={promo.id}
                                           onClick={() => {
                                             setId(promo.id);
                                             setShowAlert(true);
                                           }}
-                                          target="_blank"
-                                          color="dark"
                                         >
-                                          <IonLabel class="ion-margin">
-                                            Delete
-                                          </IonLabel>
+                                          <IonIcon
+                                            slot="end"
+                                            icon={closeOutline}
+                                          />
+                                          DELETE
                                         </IonButton>
-                                      </IonList>
+                                      </div>
                                     </IonCardContent>
                                   </IonCard>{" "}
                                 </IonCol>
