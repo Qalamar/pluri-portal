@@ -18,6 +18,8 @@
 .env.test.local
 .env.production.local
 .vscode
+.firebaserc
+firebase.json
 
 npm-debug.log*
 yarn.lock
