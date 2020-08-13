@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -7,25 +8,50 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
+  IonItem,
   IonLabel,
+  IonModal,
   IonPage,
   IonRow,
   IonTitle,
 } from "@ionic/react";
-import {
-  logoIonic,
-  logoReact,
-  personCircleOutline,
-  server,
-} from "ionicons/icons";
-import React from "react";
+import { closeOutline, logoIonic, logoReact, server } from "ionicons/icons";
+import React, { useEffect, useState } from "react";
 import Toolbar from "../components/Toolbar";
+import { store } from "../stores/Store";
 import "./Auth.css";
 
 const Homepage: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    if (store.isAuth.access === "2") setShowModal(true);
+  }, []);
   return (
     <IonPage>
       <Toolbar page={"About"} />
+      <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+        <div className="ion-text-end">
+          <IonButton
+            class="ion-text-end"
+            color="dark"
+            fill="clear"
+            onClick={() => setShowModal(false)}
+          >
+            <IonIcon color="dark" slot="end" icon={closeOutline} />
+            Dismiss
+          </IonButton>
+        </div>
+        <IonContent>
+          <div className="centered ion-text-center">
+            <IonLabel class="teacher ion-text-center ion-padding ion-justify-content-center">
+              <strong>Guest Access</strong>
+            </IonLabel>
+            <IonLabel class="ion-margin-top">
+              You will not be able to preview or modify any data.
+            </IonLabel>
+          </div>
+        </IonContent>
+      </IonModal>
       <IonContent>
         <IonGrid>
           <IonRow class="ion-align-items-center ">
@@ -69,7 +95,7 @@ const Homepage: React.FC = () => {
                         </IonChip>
                       </IonCol>
                     </IonRow>
-                    <IonLabel>
+                    {/*   <IonLabel>
                       <strong>Contributors</strong>
                     </IonLabel>
                     <IonRow class="ion-justify-content-center">
@@ -103,7 +129,7 @@ const Homepage: React.FC = () => {
                           <IonLabel>Khodja Moses</IonLabel>
                         </IonChip>
                       </IonCol>
-                    </IonRow>
+                    </IonRow> */}
                   </IonGrid>
                 </IonCardContent>
               </IonCard>

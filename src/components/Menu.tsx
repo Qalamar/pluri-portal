@@ -56,13 +56,13 @@ const appPages: AppPage[] = [
   },
   {
     title: "Promos",
-    url: "/Promo",
+    url: "/promo",
     iosIcon: albumsOutline,
     mdIcon: albumsOutline,
   },
   {
     title: "Teams",
-    url: "/Teams",
+    url: "/teams",
     iosIcon: peopleCircleOutline,
     mdIcon: peopleCircleOutline,
   },
@@ -84,14 +84,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
-        <IonList id="inbox-list">
-          {store.isAuth.access === "0" && (
-            <>
-              <IonListHeader>Admin</IonListHeader>{" "}
-              <IonNote>All privileges granted</IonNote>
-            </>
-          )}
-
+        <IonList class="ion-margin-top" id="inbox-list">
           <IonMenuToggle autoHide={false}>
             <IonItem
               onClick={() =>

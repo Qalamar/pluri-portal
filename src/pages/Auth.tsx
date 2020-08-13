@@ -1,9 +1,9 @@
 import {
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardTitle,
   IonCol,
   IonContent,
   IonGrid,
@@ -13,15 +13,25 @@ import {
   IonLabel,
   IonModal,
   IonPage,
+  IonPopover,
   IonRow,
-  IonText,
   IonTitle,
+  IonToast,
+  IonToolbar,
 } from "@ionic/react";
-import { keyOutline, mailOutline } from "ionicons/icons";
+import {
+  closeOutline,
+  keyOutline,
+  mailOutline,
+  peopleCircleOutline,
+} from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+//@ts-ignore
+import Lottie from "react-lottie";
 import { useHistory } from "react-router-dom";
-import Toolbar from "../components/Toolbar";
+import TextLoop from "react-text-loop";
+import animationData from "../images/ProjectLoop.json";
 import * as api from "../utils/API";
 import "./Auth.css";
 
@@ -29,11 +39,15 @@ let initialValues = {
   email: "",
   password: "",
 };
+let guestValues = {
+  email: "john@doe.com",
+  password: "johndoe",
+};
 interface login {
   email: string;
   password: string;
 }
-let Log: login = {
+let defaultLogin: login = {
   email: "",
   password: "",
 };
@@ -52,9 +66,26 @@ const Auth: React.FC = () => {
     } */
   }, []);
 
-  const [image, setimage] = useState();
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  const [showModal, setShowModal] = useState(false);
+  const [showToast, setshowToast] = useState(false);
 
-  const { control, handleSubmit, formState, reset, errors } = useForm({
+  const [showPopover, setShowPopover] = useState<{
+    open: boolean;
+    event: Event | undefined;
+  }>({
+    open: false,
+    event: undefined,
+  });
+
+  const { control, handleSubmit, formState, errors } = useForm({
     defaultValues: { ...initialValues },
     mode: "onChange",
   });
@@ -91,146 +122,245 @@ const Auth: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar page={"Authentication"} />
-      <IonContent>
-        <IonModal
-          cssClass="popup"
-          isOpen={isOpen}
-          onDidDismiss={() => setisOpen(false)}
+      <IonToolbar class="ion-padding">
+        <IonTitle>
+          <h1>
+            <strong>Pluri</strong>
+          </h1>
+        </IonTitle>
+        <IonButton
+          slot="end"
+          fill="clear"
+          id="teacher"
+          color="dark"
+          onClick={(e) => setShowModal(true)}
         >
-          <IonContent color="dark" class="ion-padding ion-text-center">
-            <IonCard color="dark">
-              <IonCardTitle class="ion-padding title">
-                <strong>INFO</strong>
-              </IonCardTitle>
-              <IonCardContent class="ion-padding">
-                <IonGrid>
-                  <IonRow>
-                    <IonCol>
-                      {" "}
-                      <IonText color="light">Simple Modal</IonText>
-                    </IonCol>
-                  </IonRow>
-                  <IonRow>
-                    <IonCol class="ion-text-center ion-margin-top ion-align-items-baseline"></IonCol>
-                  </IonRow>
-                </IonGrid>
-              </IonCardContent>
-            </IonCard>
-
+          <IonLabel>Teachers</IonLabel>
+        </IonButton>
+        <IonButton
+          slot="end"
+          fill="outline"
+          color="dark"
+          onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}
+        >
+          <IonLabel>Login</IonLabel>
+          {/* <IonIcon class="ion-padding-start icons" icon={peopleCircleOutline} /> */}
+        </IonButton>
+        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+          <div className="ion-text-end">
             <IonButton
-              class="ion-margin"
-              color="danger"
-              onClick={() => setisOpen(false)}
+              class="ion-text-end"
+              color="dark"
+              fill="clear"
+              onClick={() => setShowModal(false)}
             >
-              Close Preview
+              <IonIcon color="dark" slot="end" icon={closeOutline} />
+              Dismiss
             </IonButton>
+          </div>
+          <IonContent>
+            <IonToast
+              isOpen={showToast}
+              onDidDismiss={() => setshowToast(false)}
+              message="Your request will be processed soon."
+              duration={1000}
+            />
+            <div className="centered">
+              <IonLabel class="teacher ion-text-center ion-justify-content-center">
+                <strong>Application Form</strong>
+              </IonLabel>
+              <form
+                onSubmit={handleSubmit(() => setshowToast(true))}
+                style={{ padding: 10, margin: 15, height: "auto" }}
+              >
+                <IonItem>
+                  <IonIcon slot="start" icon={peopleCircleOutline}></IonIcon>
+                  <Controller
+                    as={IonInput}
+                    placeholder="Full Name"
+                    className="firstCapital"
+                    control={control}
+                    onChangeName="onIonChange"
+                    onChange={([selected]) => {
+                      /*             setTeacher((prevState) => ({
+                ...prevState,
+                firstName: selected.detail.value,
+              })); */
+                      /*    student.firstName = selected.detail.value; */
+
+                      return selected.detail.value;
+                    }}
+                    name="firstName"
+                    rules={{
+                      required: true,
+                    }}
+                  />
+                  {showError("firstName")}
+                </IonItem>
+                <IonItem>
+                  <IonIcon slot="start" icon={mailOutline}></IonIcon>
+                  <Controller
+                    as={IonInput}
+                    placeholder="Email"
+                    control={control}
+                    onChangeName="onIonChange"
+                    onChange={([selected]) => {
+                      /*  student.email = selected.detail.value;*/
+                      return selected.detail.value;
+                    }}
+                    name="email"
+                    rules={{
+                      required: true,
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "Invalid email address",
+                      },
+                    }}
+                  />
+                  {showError("email")}
+                </IonItem>
+                <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
+                  <IonButton
+                    color="dark"
+                    type="submit"
+                    onClick={() =>
+                      setTimeout(function () {
+                        setShowModal(false);
+                      }, 1000)
+                    }
+                    disabled={formState.isValid === false}
+                  >
+                    Request Access
+                  </IonButton>
+                </IonButtons>
+              </form>
+            </div>
           </IonContent>
         </IonModal>
+        <IonPopover
+          isOpen={showPopover.open}
+          event={showPopover.event}
+          onDidDismiss={(e) =>
+            setShowPopover({ open: false, event: undefined })
+          }
+        >
+          <IonCard class="ion-text-center login shadow">
+            <div className="ion-text-end">
+              <IonButton
+                class="ion-text-end"
+                color="dark"
+                fill="clear"
+                onClick={(e) =>
+                  setShowPopover({ open: false, event: undefined })
+                }
+              >
+                <IonIcon color="dark" slot="end" icon={closeOutline} />
+                Dismiss
+              </IonButton>
+            </div>
+            <IonCardHeader>
+              <IonTitle color="light" class="title ion-padding">
+                Sign In
+              </IonTitle>
+            </IonCardHeader>
 
+            <IonCardContent class=" ion-text-center">
+              <form
+                onSubmit={handleSubmit(() => onSubmit(defaultLogin))}
+                style={{ padding: 38 }}
+              >
+                <IonItem>
+                  <IonIcon slot="start" icon={mailOutline}></IonIcon>
+                  <Controller
+                    as={IonInput}
+                    placeholder="Email"
+                    inputmode="email"
+                    control={control}
+                    onChangeName="onIonChange"
+                    onChange={([selected]) => {
+                      defaultLogin.email = selected.detail.value;
+                      return selected.detail.value;
+                    }}
+                    name="email"
+                    rules={{
+                      required: true,
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "invalid email address",
+                      },
+                    }}
+                  />
+                </IonItem>
+                {showError("email")}
+
+                <IonItem class="ion-margin-bottom">
+                  <IonIcon slot="start" icon={keyOutline}></IonIcon>
+
+                  <Controller
+                    as={IonInput}
+                    type="password"
+                    placeholder="Password"
+                    control={control}
+                    onChangeName="onIonChange"
+                    onChange={([selected]) => {
+                      defaultLogin.password = selected.detail.value;
+                      return selected.detail.value;
+                    }}
+                    name="password"
+                    rules={{ required: true }}
+                  />
+                </IonItem>
+                {showError("password")}
+                {/*   <IonButton
+                  color="primary"
+                  onClick={handleSubmit(() => onSubmit(guestValues))}
+                >
+                  Guest
+                </IonButton> */}
+                <IonButton
+                  color="dark"
+                  type="submit"
+                  disabled={formState.isValid === false}
+                >
+                  Login
+                </IonButton>
+              </form>
+            </IonCardContent>
+          </IonCard>
+        </IonPopover>
+      </IonToolbar>
+      <IonContent>
         <IonGrid>
-          <IonRow class="ion-align-items-center container">
-            <IonCol></IonCol>
-            <IonCol size="12" sizeMd="7" sizeLg="5">
-              <IonCard class="ion-text-center shadow">
-                <IonCardHeader>
-                  <IonTitle color="light" class="title ion-padding">
-                    Auth
-                  </IonTitle>
-                </IonCardHeader>
-
-                <IonCardContent class="ion-padding ion-text-center">
-                  <form
-                    onSubmit={handleSubmit(() => onSubmit(Log))}
-                    style={{ padding: 38 }}
-                  >
-                    <IonLabel>
-                      <strong>Email:</strong> throwaway@test.com <br></br>
-                      <strong>Password:</strong> throwaway1@
-                    </IonLabel>
-                    <IonItem>
-                      <IonIcon slot="start" icon={mailOutline}></IonIcon>
-                      <Controller
-                        as={IonInput}
-                        placeholder="Email"
-                        inputmode="email"
-                        control={control}
-                        onChangeName="onIonChange"
-                        onChange={([selected]) => {
-                          Log.email = selected.detail.value;
-                          return selected.detail.value;
-                        }}
-                        name="email"
-                        rules={{
-                          required: true,
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: "invalid email address",
-                          },
-                        }}
-                      />
-                    </IonItem>
-                    {showError("email")}
-                    {/* <IonItem class="">
-                      <IonIcon
-                        slot="start"
-                        icon={personCircleOutline}
-                      ></IonIcon>
-
-                      <Controller
-                        as={IonInput}
-                        placeholder="UserName"
-                        control={control}
-                        onChangeName="onIonChange"
-                        onChange={([selected]) => {
-                          
-                          Log.userName = selected.detail.value;
-                          return selected.detail.value;
-                        }}
-                        name="userName"
-                        rules={{
-                          required: true,
-                        }}
-                      />
-                    </IonItem>
-                    {showError("userName")} */}
-                    <IonItem class="ion-margin-bottom">
-                      <IonIcon slot="start" icon={keyOutline}></IonIcon>
-
-                      <Controller
-                        as={IonInput}
-                        type="password"
-                        placeholder="Password"
-                        control={control}
-                        onChangeName="onIonChange"
-                        onChange={([selected]) => {
-                          Log.password = selected.detail.value;
-                          return selected.detail.value;
-                        }}
-                        name="password"
-                        rules={{ required: true }}
-                      />
-                    </IonItem>
-                    {showError("password")}
-                    <IonButton
-                      color="success"
-                      type="submit"
-                      // disabled={formState.isValid === false}
-                    >
-                      Register
-                    </IonButton>
-                    <IonButton
-                      color="dark"
-                      type="submit"
-                      disabled={formState.isValid === false}
-                    >
-                      Login
-                    </IonButton>
-                  </form>
-                </IonCardContent>
-              </IonCard>
+          <IonRow class="ion-align-items-center ion-justify-content-center">
+            <IonCol size="0" sizeLg="1.25"></IonCol>
+            <IonCol
+              class="ion-padding-horizontal"
+              size="12"
+              sizeMd="6"
+              sizeLg="5"
+            >
+              <IonItem lines="none">
+                <div className="title">
+                  The Academic Project Platform for{" "}
+                  <TextLoop>
+                    <IonLabel color="primary">Students</IonLabel>
+                    <IonLabel color="danger">Teachers</IonLabel>
+                  </TextLoop>
+                </div>
+              </IonItem>
+              <IonItem class="ion-padding-top" lines="none">
+                <h3>
+                  Pluri-project is a platform aimed at teachers and students to
+                  showcase and attribute academic projects in accordance with
+                  university curriculums
+                </h3>
+              </IonItem>
             </IonCol>
-            <IonCol></IonCol>
+
+            <IonCol size="12" sizeMd="4" sizeLg="3">
+              <Lottie options={defaultOptions} height={600} width={600} />
+            </IonCol>
+            <IonCol size="0" sizeMd="2" sizeLg="2.75"></IonCol>
           </IonRow>
         </IonGrid>
       </IonContent>

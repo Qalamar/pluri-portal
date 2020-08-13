@@ -25,7 +25,7 @@ const Settings: React.FC = () => {
   return (
     <div>
       <IonList>
-        <IonItem>
+        {/* <IonItem>
           <IonSegment
             color="dark"
             value="light"
@@ -41,25 +41,27 @@ const Settings: React.FC = () => {
               <IonLabel>Light</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-        </IonItem>
-        <a href="https://github.com/Qalamar/project-portal" target="_blank">
-          {" "}
-          <IonItem lines="none">
-            <IonLabel>Check the code</IonLabel>
-            <IonIcon size="large" icon={logoGithub} />
-          </IonItem>
-        </a>
+        </IonItem> */}
 
-        <IonItem lines="none">
-          <IonButtons class="ion-text-center">
+        <IonItem
+          class="ion-text-center  ion-justify-content-center"
+          lines="none"
+        >
+          <IonButtons class="cent">
             <IonButton color="dark" fill="outline" onClick={() => logout()}>
               <IonIcon slot="end" icon={closeOutline} />
               LOGOUT
             </IonButton>
             <a href="mailto:contact@tariqhamrit.com" target="_blank">
-              <IonButton class=" ion-padding-start" color="dark" fill="outline">
+              <IonButton slot="end" color="dark" fill="outline">
                 <IonIcon slot="end" icon={mailOutline} />
                 CONTACT
+              </IonButton>
+            </a>
+            <a href="https://github.com/Qalamar/project-portal" target="_blank">
+              <IonButton slot="end" color="dark" fill="outline">
+                <IonIcon slot="end" icon={logoGithub} />
+                Github
               </IonButton>
             </a>
           </IonButtons>

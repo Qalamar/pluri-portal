@@ -120,3 +120,16 @@ ion-item.selected {
 a {
   text-decoration: none;
 }
+
+ion-toolbar {
+  box-shadow: none !important;
+}
+ion-button {
+  box-shadow: none;
+  --ripple-color: transparent;
+  --border-radius: 6px;
+}
+
+.cent {
+  margin: 0 auto;
+}

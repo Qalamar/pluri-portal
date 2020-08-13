@@ -2,7 +2,7 @@ import axios from "axios";
 import { store } from "../stores/Store";
 
 const url = "http://localhost:3000/";
-const apiUrl = "http://bragdonilyes.pythonanywhere.com/";
+const apiUrl = "https://bragdonilyes.pythonanywhere.com/";
 
 /*********** Student calls ***************************************************/
 
@@ -15,10 +15,9 @@ export const getStudents = async () => {
       },
     });
     // .then();
-    console.log(res.data);
     store.students = res.data;
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -54,11 +53,9 @@ export const addStudent = async (
   })
     .then(function (response) {
       //handle success
-      console.log(response);
     })
     .catch(function (response) {
       //handle error
-      console.log(response.response.request);
     });
 };
 
@@ -71,9 +68,8 @@ export const getStudent = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -86,9 +82,8 @@ export const deleteStudent = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -121,9 +116,8 @@ export const modifyStudent = async (
       currentYear: "currentYear",
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -163,11 +157,9 @@ export const addProfessor = async (
   })
     .then(function (response) {
       //handle success
-      console.log(response);
     })
     .catch(function (response) {
       //handle error
-      console.log(response.response.request);
     });
 };
 
@@ -207,9 +199,8 @@ export const modifyProfessor = async (
       }
     );
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -222,9 +213,8 @@ export const deleteProfessor = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -237,10 +227,10 @@ export const getProffessors = async () => {
       },
     });
     // .then();
-    console.log(res.data);
+
     store.teachers = res.data;
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -256,7 +246,7 @@ export const userLogin = async (email: string, password: string) => {
       password: password,
     });
     // .then();
-    console.log(res.data);
+
     store.isAuth.state = true;
     // Check permissions from the token
     switch (res.data.token.slice(-1)) {
@@ -272,11 +262,11 @@ export const userLogin = async (email: string, password: string) => {
     let token = res.data.token.substring(0, res.data.token.length - 1);
     store.isAuth.token = token;
     store.isAuth.id = res.data.userId;
-    console.log(store.isAuth);
+
     localStorage.setItem("Auth", JSON.stringify(store.isAuth));
     window.location.reload();
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -290,10 +280,10 @@ export const getPromotions = async () => {
       },
     });
     // .then();
-    console.log(res.data);
+
     store.promos = res.data;
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -325,11 +315,9 @@ export const addPromotion = async (
   })
     .then(function (response) {
       //handle success
-      console.log(response);
     })
     .catch(function (response) {
       //handle error
-      console.log(response.response.request);
     });
 };
 
@@ -354,9 +342,8 @@ export const setupPromotion = async (
       maxTeamsInProject: maxTeamsInProject,
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -392,11 +379,9 @@ export const modifyPromotion = async (
   })
     .then(function (response) {
       //handle success
-      console.log(response);
     })
     .catch(function (response) {
       //handle error
-      console.log(response.response.request);
     });
 };
 
@@ -409,9 +394,8 @@ export const deletePromotion = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -429,11 +413,9 @@ export const addProject = async (data: FormData) => {
   })
     .then(function (response) {
       //handle success
-      console.log(response);
     })
     .catch(function (response) {
       //handle error
-      console.log(response.response.request);
     });
 };
 
@@ -446,10 +428,10 @@ export const getProjects = async () => {
       },
     });
     // .then();
-    console.log(res.data);
+
     store.projects = res.data;
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -462,9 +444,8 @@ export const getProject = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -480,11 +461,9 @@ export const modifyProject = async (id: number, data: FormData) => {
   })
     .then(function (response) {
       //handle success
-      console.log(response);
     })
     .catch(function (response) {
       //handle error
-      console.log(response.response.request);
     });
 };
 
@@ -497,9 +476,8 @@ export const deleteProject = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -513,9 +491,8 @@ export const handleProject = async (id: number, status: string) => {
       status: status,
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -528,9 +505,8 @@ export const acceptedProject = async () => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -546,9 +522,8 @@ export const addTeam = async (name: string) => {
       name: name,
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -561,9 +536,8 @@ export const getCurrentTeam = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -577,9 +551,8 @@ export const validateTeam = async (id: number, readiness: boolean) => {
       readiness: readiness,
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -594,9 +567,8 @@ export const getInvites = async () => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -619,9 +591,8 @@ export const handleInvites = async (
       receiver: receiver,
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -634,9 +605,8 @@ export const inviteStudent = async (id: number) => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -649,9 +619,8 @@ export const getStudentTeam = async () => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };
 
@@ -664,8 +633,7 @@ export const getStudentPromo = async () => {
       },
     });
     // .then();
-    console.log(res.data);
   } catch (error) {
-    return console.log(error.response.request);
+    return;
   }
 };

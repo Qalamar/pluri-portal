@@ -1,12 +1,8 @@
-.container {
-  margin-top: 6em;
-}
-
 .icons {
-  font-size: 7em;
+  font-size: 5em;
   height: 9em;
   size: 5em;
-  scale: 1.2;
+  scale: 1;
 }
 
 .popup {
@@ -42,9 +38,26 @@ ion-card-title {
   text-shadow: 0px 0px 5px rgb(18, 17, 18, 0.2);
   font-weight: bold;
 }
+.header {
+  margin-top: -25px;
+}
+.teacher {
+  font-size: 2.5em;
+  display: block;
+}
 .ico {
   font-size: 6em;
 }
 ion-modal a {
   text-decoration: none;
+}
+ion-popover {
+  --min-width: 400px !important;
+  --background: none !important;
+  --box-shadow: none !important;
+}
+@media only screen and (max-width: 622px) {
+  #teacher {
+    display: none;
+  }
 }
