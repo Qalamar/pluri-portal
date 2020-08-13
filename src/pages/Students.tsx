@@ -29,7 +29,6 @@ import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import AddStudent from "../components/AddStudent";
-import EditStudent from "../components/EditStudent";
 import Toolbar from "../components/Toolbar";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
@@ -77,6 +76,7 @@ const Students: React.FC = observer(() => {
   };
 
   useEffect(() => {
+    store.page = "students";
     getUsers();
   }, []);
 
@@ -125,20 +125,7 @@ const Students: React.FC = observer(() => {
           </div>
           <AddStudent />
         </IonModal>
-        <IonModal isOpen={showEdit} onDidDismiss={() => setShowEdit(false)}>
-          <div className="ion-text-end">
-            <IonButton
-              class="ion-text-end"
-              color="dark"
-              fill="clear"
-              onClick={() => setShowEdit(false)}
-            >
-              <IonIcon color="dark" slot="end" icon={closeOutline} />
-              Dismiss
-            </IonButton>
-          </div>
-          <EditStudent student={student} />
-        </IonModal>
+
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="12">
@@ -194,10 +181,10 @@ const Students: React.FC = observer(() => {
                       </IonCol>
                     </IonRow>
                     <IonRow>
-                      {students.length === 0 ? (
+                      {store.students.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
-                        students.map((e: any, i) => {
+                        store.students.map((e: any, i) => {
                           {
                             if (
                               e.firstName

@@ -52,7 +52,7 @@ export const addStudent = async (
     },
   })
     .then(function (response) {
-      //handle success
+      getStudents();
     })
     .catch(function (response) {
       //handle error

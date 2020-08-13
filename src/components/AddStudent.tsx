@@ -73,13 +73,13 @@ const AddStudent: React.FC = observer(() => {
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
-        message="Promo Added"
+        message="Student Added"
         duration={400}
       />
       <IonAlert
         isOpen={showAlert}
         onDidDismiss={() => setshowAlert(false)}
-        message={"This Promotion Exists"}
+        message={"This Student Exists"}
         buttons={["OK"]}
       />
       <div className="centered">

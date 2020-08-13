@@ -46,13 +46,13 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
-        message="Promo Modified "
+        message="Teacher Modified"
         duration={400}
       />
       <IonAlert
         isOpen={showAlert}
         onDidDismiss={() => setShowAlert(false)}
-        message={"Do you Confirm your demand ?"}
+        message={"Confirm changes?"}
         buttons={[
           {
             text: "Cancel",

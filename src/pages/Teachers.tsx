@@ -77,6 +77,7 @@ const Techers: React.FC = observer(() => {
   };
 
   useEffect(() => {
+    store.page = "teachers";
     getUsers();
   }, []);
 

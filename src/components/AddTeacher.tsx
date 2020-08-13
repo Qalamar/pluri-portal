@@ -76,7 +76,7 @@ const AddTeacher: React.FC = observer(() => {
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
-        message="Promo Added"
+        message="Teacher Added"
         duration={400}
       />
       <IonAlert
@@ -161,7 +161,7 @@ const AddTeacher: React.FC = observer(() => {
             <IonIcon slot="start" icon={lockClosedOutline}></IonIcon>
             <Controller
               as={IonInput}
-              placeholder="Password"
+              placeholder="Access Key"
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {

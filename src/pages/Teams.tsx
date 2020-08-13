@@ -24,6 +24,7 @@ import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
 import { Student, useTeam } from "../utils/Interfaces";
 import "./Teams.css";
+import { store } from "../stores/Store";
 
 let value: Student[] = [];
 let size: number = 0;
@@ -70,6 +71,7 @@ const Teams: React.FC = observer(() => {
     return val;
   };
   useEffect(() => {
+    store.page = "teams";
     getTeams();
     getUsers();
     getPromos();

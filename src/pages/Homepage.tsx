@@ -24,6 +24,7 @@ import "./Auth.css";
 const Homepage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
+    store.page = "about";
     if (store.isAuth.access === "2") setShowModal(true);
   }, []);
   return (

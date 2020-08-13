@@ -79,6 +79,7 @@ const Projects: React.FC = observer(() => {
   };
 
   useEffect(() => {
+    store.page = "projects";
     getUsers();
   }, []);
 
