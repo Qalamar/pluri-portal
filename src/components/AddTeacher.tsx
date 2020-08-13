@@ -82,7 +82,7 @@ const AddTeacher: React.FC = observer(() => {
       <IonAlert
         isOpen={showAlert}
         onDidDismiss={() => setshowAlert(false)}
-        message={"This Promotion Exists"}
+        message={"This Teacher Exists"}
         buttons={["OK"]}
       />
       <div className="centered">

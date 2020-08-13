@@ -58,7 +58,7 @@ const Settings: React.FC = () => {
                 CONTACT
               </IonButton>
             </a>
-            <a href="https://github.com/Qalamar/project-portal" target="_blank">
+            <a href="https://github.com/Qalamar/pluri-portal" target="_blank">
               <IonButton slot="end" color="dark" fill="outline">
                 <IonIcon slot="end" icon={logoGithub} />
                 Github

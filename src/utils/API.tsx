@@ -75,13 +75,16 @@ export const getStudent = async (id: number) => {
 
 export const deleteStudent = async (id: number) => {
   try {
-    const res = await axios.delete(apiUrl + `users/student/delete/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
+    const res = await axios
+      .delete(apiUrl + `users/student/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${store.isAuth.token}`,
+        },
+      })
+      .then(function (response) {
+        getStudents();
+      });
   } catch (error) {
     return;
   }
@@ -115,7 +118,6 @@ export const modifyStudent = async (
       promo: 7,
       currentYear: "currentYear",
     });
-    // .then();
   } catch (error) {
     return;
   }
@@ -156,7 +158,7 @@ export const addProfessor = async (
     },
   })
     .then(function (response) {
-      //handle success
+      getProffessors();
     })
     .catch(function (response) {
       //handle error
@@ -177,28 +179,31 @@ export const modifyProfessor = async (
   currentYear: string
 ) => {
   try {
-    const res = await axios.patch(
-      apiUrl +
-        `users/professor/modify/${id}/
+    const res = await axios
+      .patch(
+        apiUrl +
+          `users/professor/modify/${id}/
     `,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${store.isAuth.token}`,
-        },
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
-        password: password,
-        email: email,
-        birthday: birthday,
-        birthPlace: birthPlace,
-        speciality: speciality,
-        grade: grade,
-        currentYear: currentYear,
-      }
-    );
-    // .then();
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${store.isAuth.token}`,
+          },
+          firstName: firstName,
+          lastName: lastName,
+          username: username,
+          password: password,
+          email: email,
+          birthday: birthday,
+          birthPlace: birthPlace,
+          speciality: speciality,
+          grade: grade,
+          currentYear: currentYear,
+        }
+      )
+      .then(function (response) {
+        getProffessors();
+      });
   } catch (error) {
     return;
   }
@@ -206,13 +211,16 @@ export const modifyProfessor = async (
 
 export const deleteProfessor = async (id: number) => {
   try {
-    const res = await axios.delete(apiUrl + `users/professor/delete/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
+    const res = await axios
+      .delete(apiUrl + `users/professor/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${store.isAuth.token}`,
+        },
+      })
+      .then(function (response) {
+        getProffessors();
+      });
   } catch (error) {
     return;
   }
@@ -220,15 +228,16 @@ export const deleteProfessor = async (id: number) => {
 
 export const getProffessors = async () => {
   try {
-    const res = await axios.get(apiUrl + "users/professors/all", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
-
-    store.teachers = res.data;
+    const res = await axios
+      .get(apiUrl + "users/professors/all", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${store.isAuth.token}`,
+        },
+      })
+      .then(function (res) {
+        store.teachers = res.data;
+      });
   } catch (error) {
     return;
   }

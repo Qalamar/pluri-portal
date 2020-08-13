@@ -4,25 +4,23 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonListHeader,
   IonMenu,
   IonMenuToggle,
-  IonNote,
 } from "@ionic/react";
 import {
   albumsOutline,
-  homeOutline,
+  informationOutline,
   peopleCircleOutline,
   personCircleOutline,
   readerOutline,
   schoolOutline,
-  informationOutline,
+  informationCircleOutline,
 } from "ionicons/icons";
-import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react";
+import React, { useEffect } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { store } from "../stores/Store";
 import "./Menu.css";
-import { observer } from "mobx-react";
 
 interface MenuProps extends RouteComponentProps {
   selectedPage: string;
@@ -39,8 +37,8 @@ const appPages: AppPage[] = [
   {
     title: "About",
     url: "/about",
-    iosIcon: informationOutline,
-    mdIcon: informationOutline,
+    iosIcon: informationCircleOutline,
+    mdIcon: informationCircleOutline,
   },
   {
     title: "Teachers",
@@ -83,13 +81,13 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
 
     return (
       <IonMenu contentId="main" type="overlay">
-        <IonContent>
+        <div className="items">
           <IonList class="ion-margin-top" id="inbox-list">
             <IonMenuToggle autoHide={false}>
               <IonItem
                 onClick={() => (store.page = "about")}
                 className={
-                  appPages[0].title.toLowerCase() == store.page
+                  appPages[0].title.toLowerCase() === store.page
                     ? "selected"
                     : ""
                 }
@@ -104,7 +102,7 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
               <IonItem
                 onClick={() => (store.page = "teachers")}
                 className={
-                  appPages[1].title.toLowerCase() == store.page
+                  appPages[1].title.toLowerCase() === store.page
                     ? "selected"
                     : ""
                 }
@@ -120,7 +118,7 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
               <IonItem
                 onClick={() => (store.page = "projects")}
                 className={
-                  appPages[2].title.toLowerCase() == store.page
+                  appPages[2].title.toLowerCase() === store.page
                     ? "selected"
                     : ""
                 }
@@ -135,7 +133,7 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
               <IonItem
                 onClick={() => (store.page = "promo")}
                 className={
-                  appPages[3].title.toLowerCase() == store.page
+                  appPages[3].title.toLowerCase() === store.page
                     ? "selected"
                     : ""
                 }
@@ -164,7 +162,7 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
               <IonItem
                 onClick={() => (store.page = "students")}
                 className={
-                  appPages[5].title.toLowerCase() == store.page
+                  appPages[5].title.toLowerCase() === store.page
                     ? "selected"
                     : ""
                 }
@@ -178,7 +176,7 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
               </IonItem>
             </IonMenuToggle>
           </IonList>
-        </IonContent>
+        </div>
       </IonMenu>
     );
   }

@@ -32,7 +32,6 @@ import AddStudent from "../components/AddStudent";
 import Toolbar from "../components/Toolbar";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
-import "./Users.css";
 
 const Students: React.FC = observer(() => {
   const [students, setStudents] = useState([]);
@@ -131,9 +130,7 @@ const Students: React.FC = observer(() => {
             <IonCol size="12">
               <IonCard class="neum">
                 <IonCardHeader class="ion-text-center ion-padding">
-                  <IonCardTitle color="light" className="title">
-                    Students
-                  </IonCardTitle>
+                  <IonCardTitle className="title">Students</IonCardTitle>
                 </IonCardHeader>
 
                 <IonCardContent>
@@ -195,7 +192,7 @@ const Students: React.FC = observer(() => {
                                 <IonCol
                                   size="12"
                                   sizeMd="4"
-                                  sizeLg="3"
+                                  sizeXl="3"
                                   class=" ion-text-center"
                                 >
                                   <Anime
@@ -204,14 +201,14 @@ const Students: React.FC = observer(() => {
                                     easing="easeOutElastic"
                                   >
                                     <IonCard
-                                      className="user"
+                                      className="user holder"
                                       class="shadow ion-text-center"
                                     >
                                       <IonCardHeader>
                                         <IonIcon
                                           icon={personCircleOutline}
                                           class="ico"
-                                          color="light"
+                                          color="dark"
                                         ></IonIcon>
                                       </IonCardHeader>
                                       <IonCardTitle

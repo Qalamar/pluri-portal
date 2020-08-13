@@ -53,14 +53,14 @@ const Homepage: React.FC = () => {
           </div>
         </IonContent>
       </IonModal>
-      <IonContent>
+      <IonContent className="showcase">
         <IonGrid>
           <IonRow class="ion-align-items-center ">
             <IonCol></IonCol>
-            <IonCol size="12" sizeMd="7" sizeLg="5">
-              <IonCard class="ion-text-center shadow">
+            <IonCol size="12" sizeMd="7" sizeXl="5">
+              <IonCard class="ion-text-center shadow holder">
                 <IonCardHeader>
-                  <IonTitle color="light" class="title ion-padding">
+                  <IonTitle color="dark" class="title">
                     Project Portal
                   </IonTitle>
                 </IonCardHeader>
@@ -96,41 +96,6 @@ const Homepage: React.FC = () => {
                         </IonChip>
                       </IonCol>
                     </IonRow>
-                    {/*   <IonLabel>
-                      <strong>Contributors</strong>
-                    </IonLabel>
-                    <IonRow class="ion-justify-content-center">
-                      <IonCol size="12">
-                        <IonChip outline={false}>
-                          <IonIcon icon={personCircleOutline} />
-                          <IonLabel>Ilyes Bacha</IonLabel>
-                        </IonChip>
-                      </IonCol>
-                      <IonCol size="12">
-                        <IonChip outline={false}>
-                          <IonIcon icon={personCircleOutline} />
-                          <IonLabel>Souhila Guendozi</IonLabel>
-                        </IonChip>
-                      </IonCol>
-                      <IonCol size="12">
-                        <IonChip outline={false}>
-                          <IonIcon icon={personCircleOutline} />
-                          <IonLabel>Tariq Hamrit</IonLabel>
-                        </IonChip>
-                      </IonCol>
-                      <IonCol size="12">
-                        <IonChip outline={false}>
-                          <IonIcon icon={personCircleOutline} />
-                          <IonLabel>Wided Touhami</IonLabel>
-                        </IonChip>
-                      </IonCol>
-                      <IonCol size="12">
-                        <IonChip outline={false}>
-                          <IonIcon icon={personCircleOutline} />
-                          <IonLabel>Khodja Moses</IonLabel>
-                        </IonChip>
-                      </IonCol>
-                    </IonRow> */}
                   </IonGrid>
                 </IonCardContent>
               </IonCard>

@@ -33,7 +33,6 @@ import EditTeacher from "../components/EditTeacher";
 import Toolbar from "../components/Toolbar";
 import { store } from "../stores/Store";
 import * as api from "../utils/API";
-import "./Users.css";
 
 const Techers: React.FC = observer(() => {
   const [teachers, setTeachers] = useState([]);
@@ -182,7 +181,7 @@ const Techers: React.FC = observer(() => {
                         <IonButton
                           fill="clear"
                           size="default"
-                          onClick={() => addUser()}
+                          //onClick={() => addUser()}
                           color="dark"
                         >
                           <IonIcon
@@ -195,10 +194,10 @@ const Techers: React.FC = observer(() => {
                       </IonCol>
                     </IonRow>
                     <IonRow>
-                      {teachers.length === 0 ? (
+                      {store.teachers.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
-                        teachers.map((e: any, i) => {
+                        store.teachers.map((e: any, i) => {
                           {
                             if (
                               e.firstName
@@ -208,8 +207,8 @@ const Techers: React.FC = observer(() => {
                               return (
                                 <IonCol
                                   size="12"
+                                  sizeSm="6"
                                   sizeMd="4"
-                                  sizeLg="3"
                                   class=" ion-text-center"
                                 >
                                   <Anime

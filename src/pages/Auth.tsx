@@ -53,8 +53,6 @@ let defaultLogin: login = {
 };
 
 const Auth: React.FC = () => {
-  const [isOpen, setisOpen] = useState(false);
-
   useEffect(() => {
     /*     const rest = JSON.parse(localStorage.getItem("Auth")!);
     if (rest === null) store.isAuth.state = false;
@@ -76,6 +74,7 @@ const Auth: React.FC = () => {
   };
   const [showModal, setShowModal] = useState(false);
   const [showToast, setshowToast] = useState(false);
+  const [login, setLogin] = useState("Login");
 
   const [showPopover, setShowPopover] = useState<{
     open: boolean;
@@ -286,14 +285,14 @@ const Auth: React.FC = () => {
                       required: true,
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                        message: "invalid email address",
+                        message: "Invalid email address",
                       },
                     }}
                   />
                 </IonItem>
                 {showError("email")}
 
-                <IonItem class="ion-margin-bottom">
+                <IonItem>
                   <IonIcon slot="start" icon={keyOutline}></IonIcon>
 
                   <Controller
@@ -318,11 +317,13 @@ const Auth: React.FC = () => {
                   Guest
                 </IonButton> */}
                 <IonButton
+                  class="ion-margin-top"
                   color="dark"
                   type="submit"
+                  onClick={() => setLogin("Checking...")}
                   disabled={formState.isValid === false}
                 >
-                  Login
+                  {login}
                 </IonButton>
               </form>
             </IonCardContent>
