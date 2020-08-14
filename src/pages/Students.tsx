@@ -1,6 +1,7 @@
 import {
   IonAlert,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -17,52 +18,30 @@ import {
   IonRow,
   IonSearchbar,
   IonToast,
-  IonButtons,
 } from "@ionic/react";
 import {
   addCircleOutline,
   closeOutline,
-  createOutline,
   filterOutline,
   personCircleOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
-import AddStudent from "../components/AddStudent";
 import Toolbar from "../components/Toolbar";
-import { store } from "../stores/Store";
+import AddStudent from "../forms/student/AddStudent";
 import * as api from "../utils/API";
+import { store } from "../utils/Store";
 
 const Students: React.FC = observer(() => {
-  const [students, setStudents] = useState([]);
   const [Id, setId] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showToast, setshowToast] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
-  const [student, setStudent] = useState({
-    id: 0,
-    firstName: "",
-    lastName: "",
-    userName: "",
-    password: "",
-    email: "",
-  });
-  const edit = (data: any) => {
-    student.id = data.id;
-    student.firstName = data.firstName;
-    student.lastName = data.lastName;
-    student.userName = data.userName;
-    student.email = data.email;
-    student.password = data.password;
-    setShowEdit(true);
-  };
 
   const getUsers = async () => {
     async function fetchPromotion() {
       await api.getStudents();
-      setStudents(store.students);
     }
     fetchPromotion();
   };

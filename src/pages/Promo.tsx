@@ -35,12 +35,11 @@ import {
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
-import AddPromo from "../components/AddPromo";
-import EditPromo from "../components/EditPromo";
+import AddPromo from "../forms/promotion/AddPromo";
+import EditPromo from "../forms/promotion/EditPromo";
 import Toolbar from "../components/Toolbar";
-import { store } from "../stores/Store";
+import { store } from "../utils/Store";
 import * as api from "../utils/API";
-import "./Promo.css";
 
 export interface promotion {
   id: number;
@@ -321,7 +320,6 @@ const Promo: React.FC = observer(() => {
                   </IonCardContent>
                 </IonCard>
               </IonCol>
-
               <IonCol></IonCol>
             </IonRow>
           </IonGrid>

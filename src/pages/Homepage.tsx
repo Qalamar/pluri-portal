@@ -8,7 +8,6 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
-  IonItem,
   IonLabel,
   IonModal,
   IonPage,
@@ -18,7 +17,8 @@ import {
 import { closeOutline, logoIonic, logoReact, server } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import Toolbar from "../components/Toolbar";
-import { store } from "../stores/Store";
+import "../forms/promotion/PromoForm.css";
+import { store } from "../utils/Store";
 import "./Auth.css";
 
 const Homepage: React.FC = () => {
@@ -69,7 +69,6 @@ const Homepage: React.FC = () => {
                   <IonGrid>
                     <IonRow class="ion-padding">
                       <IonCol>
-                        {/* <IonProgressBar type="indeterminate"></IonProgressBar> */}
                         <IonLabel>
                           Pluri portal is an academic platform for teachers and
                           students , allowing project submission, preview and

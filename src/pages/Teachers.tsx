@@ -1,6 +1,7 @@
 import {
   IonAlert,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -17,7 +18,6 @@ import {
   IonRow,
   IonSearchbar,
   IonToast,
-  IonButtons,
 } from "@ionic/react";
 import {
   addCircleOutline,
@@ -29,11 +29,11 @@ import {
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
-import AddTeacher from "../components/AddTeacher";
-import EditTeacher from "../components/EditTeacher";
 import Toolbar from "../components/Toolbar";
-import { store } from "../stores/Store";
+import AddTeacher from "../forms/teacher/AddTeacher";
+import EditTeacher from "../forms/teacher/EditTeacher";
 import * as api from "../utils/API";
+import { store } from "../utils/Store";
 
 const Techers: React.FC = observer(() => {
   const [teachers, setTeachers] = useState([]);
@@ -173,12 +173,7 @@ const Techers: React.FC = observer(() => {
                           ></IonIcon>
                           Add
                         </IonButton>
-                        <IonButton
-                          fill="clear"
-                          size="default"
-                          //onClick={() => addUser()}
-                          color="dark"
-                        >
+                        <IonButton fill="clear" size="default" color="dark">
                           <IonIcon
                             icon={filterOutline}
                             slot="start"

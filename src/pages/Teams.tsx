@@ -23,7 +23,7 @@ import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
 import { Student, useTeam } from "../utils/Interfaces";
-import { store } from "../stores/Store";
+import { store } from "../utils/Store";
 
 let value: Student[] = [];
 let size: number = 0;

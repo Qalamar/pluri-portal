@@ -1,5 +1,5 @@
 import axios from "axios";
-import { store } from "../stores/Store";
+import { store } from "./Store";
 
 const url = "http://localhost:3000/";
 const apiUrl = "https://bragdonilyes.pythonanywhere.com/";

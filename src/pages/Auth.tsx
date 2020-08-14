@@ -3,7 +3,6 @@ import {
   IonButtons,
   IonCard,
   IonCardContent,
-  IonCardHeader,
   IonCol,
   IonContent,
   IonGrid,
@@ -31,7 +30,7 @@ import { Controller, useForm } from "react-hook-form";
 import Lottie from "react-lottie";
 import { useHistory } from "react-router-dom";
 import TextLoop from "react-text-loop";
-import animationData from "../images/ProjectLoop.json";
+import animationData from "../assets/Logo.json";
 import * as api from "../utils/API";
 import "./Auth.css";
 
@@ -49,17 +48,6 @@ let defaultLogin: login = {
 };
 
 const Auth: React.FC = () => {
-  useEffect(() => {
-    /*     const rest = JSON.parse(localStorage.getItem("Auth")!);
-    if (rest === null) store.isAuth.state = false;
-    else {
-      store.isAuth.access = rest.access;
-      store.isAuth.token = rest.token;
-      store.isAuth.id = rest.id;
-      
-    } */
-  }, []);
-
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -97,20 +85,6 @@ const Auth: React.FC = () => {
   const onSubmit = (data: any) => {
     let mail = initialValues.email;
     let pass = initialValues.password;
-    /*  axios
-      .post("/login", {
-        email: data.email,
-        userName: data.userName,
-        password: data.password,
-      })
-      .then(function (response) {
-        
-        localStorage.setItem("Auth", JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        
-      }); */
-    // Awaiting API Changes
     api.userLogin(mail, pass);
     history.push("/home");
   };
@@ -139,7 +113,6 @@ const Auth: React.FC = () => {
           onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}
         >
           <IonLabel>Login</IonLabel>
-          {/* <IonIcon class="ion-padding-start icons" icon={peopleCircleOutline} /> */}
         </IonButton>
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
           <div className="ion-text-end">
@@ -177,12 +150,6 @@ const Auth: React.FC = () => {
                     control={control}
                     onChangeName="onIonChange"
                     onChange={([selected]) => {
-                      /*             setTeacher((prevState) => ({
-                ...prevState,
-                firstName: selected.detail.value,
-              })); */
-                      /*    student.firstName = selected.detail.value; */
-
                       return selected.detail.value;
                     }}
                     name="firstName"
@@ -200,7 +167,6 @@ const Auth: React.FC = () => {
                     control={control}
                     onChangeName="onIonChange"
                     onChange={([selected]) => {
-                      /*  student.email = selected.detail.value;*/
                       return selected.detail.value;
                     }}
                     name="email"
@@ -301,12 +267,7 @@ const Auth: React.FC = () => {
                   />
                 </IonItem>
                 {showError("password")}
-                {/*   <IonButton
-                  color="primary"
-                  onClick={handleSubmit(() => onSubmit(guestValues))}
-                >
-                  Guest
-                </IonButton> */}
+
                 <IonButton
                   class="ion-margin-top"
                   color="dark"
@@ -324,7 +285,7 @@ const Auth: React.FC = () => {
       <IonContent>
         <IonGrid>
           <IonRow class="ion-align-items-center ion-justify-content-between">
-            <IonCol size="1"></IonCol>
+            <IonCol size="0.5"></IonCol>
             <IonCol class="ion-padding" size="12" sizeMd="6" sizeLg="5">
               <div className="title">
                 The Academic Project Platform for{" "}
@@ -344,7 +305,7 @@ const Auth: React.FC = () => {
             <IonCol size="12" sizeMd="4" sizeLg="3">
               <Lottie options={defaultOptions} height={600} width={600} />
             </IonCol>
-            <IonCol size="1"></IonCol>
+            <IonCol size="1.5"></IonCol>
           </IonRow>
         </IonGrid>
       </IonContent>

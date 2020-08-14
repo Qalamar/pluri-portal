@@ -1,5 +1,4 @@
 import {
-  IonContent,
   IonIcon,
   IonItem,
   IonLabel,
@@ -9,17 +8,16 @@ import {
 } from "@ionic/react";
 import {
   albumsOutline,
-  informationOutline,
+  informationCircleOutline,
   peopleCircleOutline,
   personCircleOutline,
   readerOutline,
   schoolOutline,
-  informationCircleOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { store } from "../stores/Store";
+import { store } from "../utils/Store";
 import "./Menu.css";
 
 interface MenuProps extends RouteComponentProps {
@@ -60,12 +58,6 @@ const appPages: AppPage[] = [
     mdIcon: albumsOutline,
   },
   {
-    title: "Teams",
-    url: "/teams",
-    iosIcon: peopleCircleOutline,
-    mdIcon: peopleCircleOutline,
-  },
-  {
     title: "Students",
     url: "/students",
     iosIcon: personCircleOutline,
@@ -75,10 +67,6 @@ const appPages: AppPage[] = [
 
 const Menu: React.FunctionComponent<MenuProps> = observer(
   ({ selectedPage }) => {
-    useEffect(() => {
-      // store.page = selectedPage;
-    }, []);
-
     return (
       <IonMenu contentId="main" type="overlay">
         <div className="items">
@@ -145,24 +133,10 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
                 <IonIcon slot="start" icon={appPages[3].iosIcon} />
                 <IonLabel>{appPages[3].title}</IonLabel>
               </IonItem>
-              {/*  <IonItem
-              onClick={() => {
-                setSelected([false, false, false, false, true, false]);
-              }}
-              className={selected[  4] ? "selected" : ""}
-              routerLink={"/Teams"}
-              routerDirection="none"
-              lines="none"
-              detail={false}
-            >
-              {" "}
-              <IonIcon slot="start" icon={appPages[4].iosIcon} />
-              <IonLabel>{appPages[4].title}</IonLabel>
-            </IonItem> */}
               <IonItem
                 onClick={() => (store.page = "students")}
                 className={
-                  appPages[5].title.toLowerCase() === store.page
+                  appPages[4].title.toLowerCase() === store.page
                     ? "selected"
                     : ""
                 }
@@ -171,8 +145,8 @@ const Menu: React.FunctionComponent<MenuProps> = observer(
                 lines="none"
                 detail={false}
               >
-                <IonIcon slot="start" icon={appPages[5].iosIcon} />
-                <IonLabel>{appPages[5].title}</IonLabel>
+                <IonIcon slot="start" icon={appPages[4].iosIcon} />
+                <IonLabel>{appPages[4].title}</IonLabel>
               </IonItem>
             </IonMenuToggle>
           </IonList>

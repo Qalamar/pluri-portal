@@ -7,7 +7,6 @@ import {
   IonInput,
   IonItem,
   IonToast,
-  IonCard,
 } from "@ionic/react";
 import {
   lockClosedOutline,
@@ -18,8 +17,7 @@ import {
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import * as api from "../utils/API";
-import "./PromoForm.css";
+import * as api from "../../utils/API";
 
 let initialValues = {
   firstName: "",
@@ -41,8 +39,6 @@ const AddTeacher: React.FC = observer(() => {
     mode: "onChange",
   });
   const [showToast, setshowToast] = useState(false);
-  const [SelectCycle, setCycle] = useState<"">();
-  const [SelectYear, setYear] = useState<"">();
   const [showAlert, setshowAlert] = useState(false);
 
   useEffect(() => {}, []);
@@ -100,12 +96,7 @@ const AddTeacher: React.FC = observer(() => {
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
-                /*             setTeacher((prevState) => ({
-                ...prevState,
-                firstName: selected.detail.value,
-              })); */
                 teacher.firstName = selected.detail.value;
-
                 return selected.detail.value;
               }}
               name="firstName"

@@ -1,4 +1,5 @@
 import {
+  IonAlert,
   IonButton,
   IonButtons,
   IonContent,
@@ -14,30 +15,31 @@ import {
   briefcaseOutline,
   bulbOutline,
   cloudUploadOutline,
-  documentsOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Controller, useForm } from "react-hook-form";
-import * as api from "../utils/API";
-import { Project } from "../utils/Interfaces";
-import "./PromoForm.css";
+import * as api from "../../utils/API";
 
-export interface Projects {
-  data: Project;
-}
+let initialValues = {
+  title: "",
+  domain: "",
+  professor: "",
+  tools: "",
+  requiredDocuments: "",
+  promo: "",
+};
 
 let formData = new FormData();
 
-const AddProject: React.FC<Projects> = observer(({ data }) => {
+const AddProject: React.FC = observer(() => {
   const onDrop = useCallback((acceptedFiles) => {
     formData.append("document", acceptedFiles[0]);
   }, []);
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   const [project, setProject] = useState({
-    id: 0,
     title: "",
     domain: "",
     professor: "",
@@ -47,20 +49,11 @@ const AddProject: React.FC<Projects> = observer(({ data }) => {
   });
 
   const { control, handleSubmit, formState, reset, errors } = useForm({
-    defaultValues: { ...data },
+    defaultValues: { ...initialValues },
     mode: "onChange",
   });
   const [showToast, setshowToast] = useState(false);
-
-  useEffect(() => {
-    project.id = data.id;
-    project.title = data.title;
-    project.domain = data.domain;
-    project.professor = data.professor;
-    project.tools = data.tools;
-    project.requiredDocuments = data.requiredDocuments;
-    project.promo = data.promo;
-  }, []);
+  const [showAlert, setshowAlert] = useState(false);
 
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
@@ -76,66 +69,33 @@ const AddProject: React.FC<Projects> = observer(({ data }) => {
     formData.append("domain", project.domain);
     formData.append("professor", project.professor);
     formData.append("tools", project.tools);
-    formData.append("requiredDocuments", project.requiredDocuments);
+    formData.append("requiredDocuments", "");
     formData.append("promo", project.promo);
-    /* for (var pair of formData.entries()) {
-      
-    } */
-    api.modifyProject(project.id, formData);
+    api.addProject(formData);
     setshowToast(true);
   };
 
   return (
-    <IonContent color="dark">
+    <IonContent>
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
-        message="Promo Added"
+        message="Project Added"
         duration={400}
       />
-      {/*  <IonAlert
+      <IonAlert
         isOpen={showAlert}
-        onDidDismiss={() => setShowAlert(false)}
-        message={"Do you Confirm your demand ?"}
-        buttons={[
-          {
-            text: "Cancel",
-            role: "cancel",
-            cssClass: "secondary",
-            handler: () => {
-              
-            },
-          },
-          {
-            text: "Save",
-            handler: () => {
-              
-              api.modifyStudent(
-                student.id,
-                student.firstName,
-                student.lastName,
-                Math.floor(Math.random() * 100000 + 1).toString(),
-                student.password,
-                student.email,
-                "2000-01-01",
-                "",
-                7,
-                "Pr"
-              );
-              api.getStudents();
-              setshowToast(true);
-            },
-          },
-        ]}
-      /> */}
+        onDidDismiss={() => setshowAlert(false)}
+        message={"This projects exists"}
+        buttons={["OK"]}
+      />
       <div className="centered">
         <form
           onSubmit={handleSubmit(() => onSubmit())}
           style={{ padding: 10, margin: 15, height: "auto" }}
         >
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={bookOutline}></IonIcon>
-
             <Controller
               as={IonInput}
               placeholder="Title"
@@ -151,13 +111,13 @@ const AddProject: React.FC<Projects> = observer(({ data }) => {
                 required: true,
                 minLength: {
                   value: 4,
-                  message: "Must be at least 4 chars long",
+                  message: "Must be at least 4 characters long",
                 },
               }}
             />
           </IonItem>
           {showError("title")}
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={bulbOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -174,13 +134,13 @@ const AddProject: React.FC<Projects> = observer(({ data }) => {
                 required: true,
                 minLength: {
                   value: 4,
-                  message: "Must be at least 4 chars long",
+                  message: "Must be at least 4 characters long",
                 },
               }}
             />
           </IonItem>
           {showError("domain")}
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={briefcaseOutline}></IonIcon>
 
             <Controller
@@ -198,37 +158,13 @@ const AddProject: React.FC<Projects> = observer(({ data }) => {
                 required: true,
                 minLength: {
                   value: 4,
-                  message: "Must be at least 4 chars long",
+                  message: "Must be at least 4 characters long",
                 },
               }}
             />
           </IonItem>
           {showError("tools")}
-          <IonItem color="dark" class="">
-            <IonIcon slot="start" icon={documentsOutline}></IonIcon>
-
-            <Controller
-              as={IonInput}
-              placeholder="Required Documents"
-              className="firstCapital"
-              control={control}
-              onChangeName="onIonChange"
-              onChange={([selected]) => {
-                project.requiredDocuments = selected.detail.value;
-                return selected.detail.value;
-              }}
-              name="requiredDocuments"
-              rules={{
-                required: true,
-                minLength: {
-                  value: 4,
-                  message: "Must be at least 4 chars long",
-                },
-              }}
-            />
-          </IonItem>
-          {showError("requiredDocuments")}
-          <IonItem color="dark" class="ion-margin-bottom">
+          <IonItem>
             <IonIcon slot="start" icon={albumsOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -246,11 +182,8 @@ const AddProject: React.FC<Projects> = observer(({ data }) => {
             />
           </IonItem>
           {showError("promo")}
-          <IonItem color="black">
-            <IonLabel class="ion-text-center">Attachements</IonLabel>
-          </IonItem>
 
-          <IonItem class="ion-text-center" {...getRootProps()}>
+          <IonItem lines="none" class="ion-text-center" {...getRootProps()}>
             <input {...getInputProps()} />
             <IonIcon icon={cloudUploadOutline}></IonIcon>
 
@@ -260,19 +193,14 @@ const AddProject: React.FC<Projects> = observer(({ data }) => {
           <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
             <IonButton
               color="danger"
-              class="ion-padding-horizontal"
               type="button"
               onClick={() => {
-                reset(data);
+                reset(initialValues);
               }}
             >
               Reset
             </IonButton>
-            <IonButton
-              color="light"
-              type="submit"
-              disabled={formState.isValid === false}
-            >
+            <IonButton type="submit" disabled={formState.isValid === false}>
               Submit
             </IonButton>
           </IonButtons>

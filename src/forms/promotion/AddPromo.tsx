@@ -2,82 +2,60 @@ import {
   IonAlert,
   IonButton,
   IonButtons,
+  IonCol,
   IonContent,
+  IonGrid,
   IonIcon,
   IonInput,
   IonItem,
   IonLabel,
+  IonRow,
   IonSelect,
   IonSelectOption,
   IonToast,
-  IonGrid,
-  IonRow,
-  IonCol,
 } from "@ionic/react";
 import {
   albumsOutline,
   clipboardOutline,
-  ellipsisHorizontalOutline,
   layersOutline,
-  peopleCircleOutline,
-  personCircleOutline,
+  readerOutline,
   timeOutline,
   trendingDownOutline,
   trendingUpOutline,
-  readerOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { promotion } from "../pages/Promo";
-import * as api from "../utils/API";
-import "./PromoForm.css";
+import * as api from "../../utils/API";
+import { usePromo } from "./EditPromo";
 
-export interface Promo {
-  promo: promotion;
-}
-interface PromoState {
-  promot: promotion;
-  setPromo: React.Dispatch<React.SetStateAction<promotion>>;
-}
-
-export const usePromo = (overrides?: Partial<promotion>): PromoState => {
-  const defaultPromo: promotion = {
-    id: 0,
-    description: "",
+let initialValues = {
+  cycle: "",
+  year: "",
+  specialityName: "",
+  description: "",
+  minTeamMembers: "",
+  maxTeamMembers: "",
+  maxTeamsInProject: "",
+};
+const AddPromo: React.FC = observer(() => {
+  const { promot } = usePromo({
     cycle: "",
     year: "",
     specialityName: "",
+    description: "",
     minTeamMembers: 0,
     maxTeamMembers: 0,
     maxTeamsInProject: 0,
-  };
-  const [promot, setPromo] = useState<promotion>({
-    ...defaultPromo,
-    ...overrides,
-  });
-  return { promot, setPromo };
-};
-const EditPromo: React.FC<Promo> = observer(({ promo }) => {
-  const { promot } = usePromo({
-    id: promo.id,
-    description: promo.description,
-    cycle: promo.cycle,
-    year: promo.year,
-    specialityName: promo.specialityName,
-    minTeamMembers: promo.minTeamMembers,
-    maxTeamMembers: promo.maxTeamMembers,
-    maxTeamsInProject: promo.maxTeamsInProject,
   });
   const { control, handleSubmit, formState, reset, errors } = useForm({
-    defaultValues: { ...promot },
+    defaultValues: { ...initialValues },
     mode: "onChange",
   });
-
-  const [showAlert, setShowAlert] = useState(false);
   const [showToast, setshowToast] = useState(false);
   const [SelectCycle, setCycle] = useState<string>();
   const [SelectYear, setYear] = useState<string>();
+  const [showAlert, setshowAlert] = useState(false);
 
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
@@ -87,47 +65,37 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
       </div>
     ) : null;
   };
+  const onSubmit = () => {
+    api.addPromotion(
+      promot.cycle,
+      promot.year,
+      promot.specialityName,
+      promot.description,
+      promot.minTeamMembers,
+      promot.maxTeamMembers,
+      promot.maxTeamsInProject
+    );
+    api.getPromotions();
+    setshowToast(true);
+  };
+
   return (
     <IonContent>
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
-        message="Promo Modified "
+        message="Promo Added"
         duration={400}
       />
       <IonAlert
         isOpen={showAlert}
-        onDidDismiss={() => setShowAlert(false)}
-        message={"Do you Confirm your demand ?"}
-        buttons={[
-          {
-            text: "Cancel",
-            role: "cancel",
-            cssClass: "secondary",
-            handler: () => {},
-          },
-          {
-            text: "Save",
-            handler: () => {
-              api.modifyPromotion(
-                promot.id,
-                promot.cycle,
-                promot.year,
-                promot.specialityName,
-                promot.description,
-                promot.minTeamMembers,
-                promot.maxTeamMembers,
-                promot.maxTeamsInProject
-              );
-              api.getPromotions();
-              setshowToast(true);
-            },
-          },
-        ]}
+        onDidDismiss={() => setshowAlert(false)}
+        message={"This Promotion Exists"}
+        buttons={["OK"]}
       />
       <div className="centered">
         <form
-          onSubmit={handleSubmit(() => setShowAlert(true))}
+          onSubmit={handleSubmit(() => onSubmit())}
           style={{ padding: 10, margin: 15, height: "auto" }}
         >
           <IonGrid>
@@ -235,9 +203,6 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             />
             {showError("description")}
           </IonItem>
-          {/*  <IonLabel >
-          <h1>Team Members</h1>
-        </IonLabel> */}
           <IonItem class="">
             <IonIcon slot="start" icon={trendingDownOutline}></IonIcon>
             <Controller
@@ -253,7 +218,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
               rules={{
                 pattern: {
                   value: /^[0-9]+$/i,
-                  message: "invalid Number",
+                  message: "Invalid number",
                 },
               }}
             />
@@ -275,16 +240,12 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
               rules={{
                 pattern: {
                   value: /^[0-9]+$/i,
-                  message: "invalid Number",
+                  message: "Invalid number",
                 },
               }}
             />
             {showError("maxTeamMembers")}
           </IonItem>
-          {/*  <br></br>
-        <IonLabel >
-          <h1>Project teams</h1>
-        </IonLabel> */}
           <IonItem class="">
             <IonIcon slot="start" icon={readerOutline}></IonIcon>
             <Controller
@@ -300,7 +261,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
               rules={{
                 pattern: {
                   value: /^[0-9]+$/i,
-                  message: "invalid Number",
+                  message: "Invalid number",
                 },
               }}
             />
@@ -311,17 +272,12 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
               color="danger"
               type="button"
               onClick={() => {
-                reset(promo);
+                reset(initialValues);
               }}
             >
               Reset
             </IonButton>
-            <IonButton
-              type="submit"
-              //onClick={() => console.log(promot)}
-
-              disabled={formState.isValid === false}
-            >
+            <IonButton type="submit" disabled={formState.isValid === false}>
               Submit
             </IonButton>
           </IonButtons>
@@ -330,4 +286,4 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
     </IonContent>
   );
 });
-export default EditPromo;
+export default AddPromo;

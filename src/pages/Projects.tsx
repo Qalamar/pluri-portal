@@ -28,10 +28,10 @@ import {
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
-import AddProject from "../components/AddProject";
-import EditProject from "../components/EditProject";
+import AddProject from "../forms/project/AddProject";
+import EditProject from "../forms/project/EditProject";
 import Toolbar from "../components/Toolbar";
-import { store } from "../stores/Store";
+import { store } from "../utils/Store";
 import * as api from "../utils/API";
 import "./Projects.css";
 

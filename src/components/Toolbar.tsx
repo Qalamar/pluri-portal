@@ -29,7 +29,6 @@ const Toolbar: React.FC<PageProps> = observer(({ page }) => {
       <IonButtons slot="start">
         <IonMenuButton />
       </IonButtons>
-
       <IonButtons slot="end">
         <IonButton
           size="large"
@@ -38,7 +37,6 @@ const Toolbar: React.FC<PageProps> = observer(({ page }) => {
         >
           <IonIcon slot="icon-only" class="icons" icon={settingsSharp} />
         </IonButton>
-
         <IonPopover
           isOpen={showPopover.open}
           event={showPopover.event}
