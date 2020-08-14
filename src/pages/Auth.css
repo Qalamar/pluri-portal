@@ -62,3 +62,47 @@ ion-content {
   width: 100%;
   --background: #f5f5f579 !important;
 }
+ion-grid.full {
+  height: 100vh;
+}
+
+.row {
+  width: 100%;
+  height: 60vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+/* -- SVG CSS -- */
+
+.svg-separator {
+  display: block;
+  background: 0 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9;
+  -webkit-transform: translateY(-100%) translateY(2px);
+  transform: translateY(-100%) translateY(2px);
+  width: 100%;
+}
+.svg-separator.bottom {
+  top: auto;
+  bottom: 0;
+}
+.sep1 {
+  transform: translateY(-100%) translateY(2px) scale(1, 1);
+  transform-origin: top;
+}
+
+/* -- Row BG Color -- */
+
+.red {
+  margin-top: 35px;
+  background-color: #d24d57;
+}
