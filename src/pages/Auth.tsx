@@ -294,6 +294,9 @@ const Auth: React.FC = () => {
             </IonCard>
           </IonPopover>
         </IonToolbar>
+        <section className="container">
+          <div className="wave"></div>
+        </section>{" "}
         <IonGrid class="ion-margin-top ion-padding-top">
           <IonRow class="ion-align-items-center ion-justify-content-between">
             <IonCol size="0.5"></IonCol>

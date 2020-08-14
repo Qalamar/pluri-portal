@@ -10,7 +10,7 @@ ion-toolbar.main {
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 7px;
-  padding-bottom: 7px;
+  padding-bottom: 0px;
 }
 :root {
   /** primary **/
