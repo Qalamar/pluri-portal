@@ -42,7 +42,7 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
     ) : null;
   };
   return (
-    <IonContent color="dark">
+    <IonContent>
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
@@ -87,7 +87,7 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
           onSubmit={handleSubmit(() => setShowAlert(true))}
           style={{ padding: 10, margin: 15, height: "auto" }}
         >
-          <IonItem color="dark">
+          <IonItem>
             <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -112,7 +112,7 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
             {showError("firstName")}
           </IonItem>
 
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={peopleCircleOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -132,7 +132,7 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
             {showError("lastName")}
           </IonItem>
 
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={mailOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -154,7 +154,7 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
             />
             {showError("email")}
           </IonItem>
-          {/* <IonItem color="dark" class="">
+          {/* <IonItem  class="">
           <IonIcon slot="start" icon={clipboardOutline}></IonIcon>
           <Controller
             as={IonInput}
@@ -185,7 +185,6 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
               Reset
             </IonButton>
             <IonButton
-              color="light"
               type="submit"
               // onClick={() => console.log(teacher)}
               disabled={formState.isValid === false}

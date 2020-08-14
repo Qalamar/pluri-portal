@@ -17,6 +17,7 @@ import {
   IonRow,
   IonSearchbar,
   IonToast,
+  IonButtons,
 } from "@ionic/react";
 import {
   addCircleOutline,
@@ -145,13 +146,7 @@ const Projects: React.FC = observer(() => {
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="12">
-              <IonCard class="neum">
-                <IonCardHeader class="ion-text-center ion-padding">
-                  <IonCardTitle color="light" className="title">
-                    Projects
-                  </IonCardTitle>
-                </IonCardHeader>
-
+              <IonCard class="neum holder">
                 <IonCardContent>
                   <IonGrid>
                     <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
@@ -196,7 +191,7 @@ const Projects: React.FC = observer(() => {
                         </IonButton>
                       </IonCol>
                     </IonRow>
-                    <IonRow>
+                    <IonRow class="ion-justify-content-center">
                       {projects.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
@@ -210,8 +205,9 @@ const Projects: React.FC = observer(() => {
                               return (
                                 <IonCol
                                   size="12"
+                                  sizeSm="6"
                                   sizeMd="4"
-                                  sizeLg="3"
+                                  sizeXl="3"
                                   class=" ion-text-center"
                                 >
                                   <Anime
@@ -219,10 +215,7 @@ const Projects: React.FC = observer(() => {
                                     duration={2000}
                                     easing="easeOutElastic"
                                   >
-                                    <IonCard
-                                      className="user"
-                                      class="shadow ion-text-center"
-                                    >
+                                    <IonCard class="shadow user holder ion-text-center">
                                       <IonCardHeader>
                                         <IonCardTitle
                                           color="light"
@@ -242,22 +235,7 @@ const Projects: React.FC = observer(() => {
                                       </IonChip>
 
                                       <IonCardContent>
-                                        <div className="ion-text-center">
-                                          {e.document != null && (
-                                            <a href={e.docuemt} target="_blank">
-                                              <IonButton
-                                                class="ion-text-end"
-                                                color="dark"
-                                                //onClick={() => edit(e)}
-                                              >
-                                                <IonIcon
-                                                  slot="end"
-                                                  icon={createOutline}
-                                                />
-                                                Documents
-                                              </IonButton>
-                                            </a>
-                                          )}
+                                        <IonButtons class="ion-justify-content-center ion-text-center">
                                           <IonButton
                                             class="ion-text-end"
                                             color="danger"
@@ -268,12 +246,11 @@ const Projects: React.FC = observer(() => {
                                             }}
                                           >
                                             <IonIcon
-                                              slot="end"
+                                              slot="icon-only"
                                               icon={closeOutline}
                                             />
-                                            DELETE
                                           </IonButton>
-                                        </div>
+                                        </IonButtons>
                                       </IonCardContent>
                                     </IonCard>
                                   </Anime>

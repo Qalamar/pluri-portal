@@ -17,6 +17,7 @@ import {
   IonRow,
   IonSearchbar,
   IonToast,
+  IonButtons,
 } from "@ionic/react";
 import {
   addCircleOutline,
@@ -142,16 +143,10 @@ const Techers: React.FC = observer(() => {
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="12">
-              <IonCard class="neum">
-                <IonCardHeader class="ion-text-center ion-padding">
-                  <IonCardTitle color="light" className="title">
-                    Teachers
-                  </IonCardTitle>
-                </IonCardHeader>
-
+              <IonCard class="neum holder">
                 <IonCardContent>
                   <IonGrid>
-                    <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
+                    <IonRow class="ion-text-center ion-margin ion-justify-content-center">
                       <IonCol size="12" sizeMd="10">
                         <IonItem lines="none">
                           <IonSearchbar
@@ -193,7 +188,7 @@ const Techers: React.FC = observer(() => {
                         </IonButton>
                       </IonCol>
                     </IonRow>
-                    <IonRow>
+                    <IonRow class="ion-justify-content-center">
                       {store.teachers.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
@@ -209,6 +204,7 @@ const Techers: React.FC = observer(() => {
                                   size="12"
                                   sizeSm="6"
                                   sizeMd="4"
+                                  sizeXl="3"
                                   class=" ion-text-center"
                                 >
                                   <Anime
@@ -217,19 +213,19 @@ const Techers: React.FC = observer(() => {
                                     easing="easeOutElastic"
                                   >
                                     <IonCard
-                                      className="user"
+                                      className="user holder"
                                       class="shadow ion-text-center"
                                     >
                                       <IonCardHeader>
                                         <IonIcon
                                           icon={personCircleOutline}
                                           class="ico"
-                                          color="light"
+                                          color="dark"
                                         ></IonIcon>
                                       </IonCardHeader>
                                       <IonCardTitle
                                         color="dark"
-                                        className="ion-padding "
+                                        className="ion-padding-horizontal "
                                       >
                                         <strong>
                                           {e.firstName + " " + e.lastName}
@@ -240,20 +236,17 @@ const Techers: React.FC = observer(() => {
                                       </IonChip>
 
                                       <IonCardContent>
-                                        <div className="ion-text-center">
+                                        <IonButtons class="ion-justify-content-center ion-text-center">
                                           <IonButton
-                                            class="ion-text-end"
                                             color="dark"
                                             onClick={() => edit(e)}
                                           >
                                             <IonIcon
-                                              slot="end"
+                                              slot="icon-only"
                                               icon={createOutline}
                                             />
-                                            EDIT
                                           </IonButton>
                                           <IonButton
-                                            class="ion-text-end"
                                             color="danger"
                                             key={e.id}
                                             onClick={() => {
@@ -262,12 +255,11 @@ const Techers: React.FC = observer(() => {
                                             }}
                                           >
                                             <IonIcon
-                                              slot="end"
+                                              slot="icon-only"
                                               icon={closeOutline}
                                             />
-                                            DELETE
                                           </IonButton>
-                                        </div>
+                                        </IonButtons>
                                       </IonCardContent>
                                     </IonCard>
                                   </Anime>

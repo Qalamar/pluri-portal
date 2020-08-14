@@ -18,6 +18,8 @@ import {
   IonSearchbar,
   IonText,
   IonToast,
+  IonButtons,
+  IonItem,
 } from "@ionic/react";
 import {
   addCircleOutline,
@@ -26,6 +28,9 @@ import {
   filterOutline,
   peopleCircleOutline,
   personCircleOutline,
+  trendingUpOutline,
+  trendingDown,
+  readerOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
@@ -153,12 +158,7 @@ const Promo: React.FC = observer(() => {
             <IonRow class="ion-align-items-center">
               <IonCol></IonCol>
               <IonCol size="12">
-                <IonCard class="neum">
-                  <IonCardHeader class="head">
-                    <IonCardTitle color="light" className="title">
-                      Promos
-                    </IonCardTitle>
-                  </IonCardHeader>
+                <IonCard class="holder neum">
                   <IonCardContent>
                     <IonGrid>
                       <IonRow class="ion-justify-content-center ion-text-center ion-align-items-center">
@@ -198,7 +198,6 @@ const Promo: React.FC = observer(() => {
                       </IonRow>
                       <IonRow></IonRow>
                       <IonRow class="ion-justify-content-center">
-                        {" "}
                         {store.promos.length === 0 ? (
                           <div>Loading...</div>
                         ) : (
@@ -209,15 +208,16 @@ const Promo: React.FC = observer(() => {
                                   size="12"
                                   sizeSm="6"
                                   sizeMd="4"
+                                  sizeXl="3"
                                   class="ion-text-center"
                                 >
                                   <IonCard
                                     key={promo.id}
-                                    class="shadow ion-text-center"
+                                    class="shadow holder ion-text-center"
                                   >
-                                    <IonCardHeader class="ion-margin-bottom">
+                                    <IonCardHeader>
                                       <IonCardTitle
-                                        color="light"
+                                        color="dark"
                                         className="ion-padding title"
                                       >
                                         <strong>
@@ -226,23 +226,23 @@ const Promo: React.FC = observer(() => {
                                         </strong>
                                       </IonCardTitle>
                                     </IonCardHeader>
-                                    <IonList class="ion-padding">
-                                      {promo.cycle.localeCompare("CPI") ===
-                                      0 ? (
-                                        <IonChip
-                                          outline={false}
-                                          color="primary"
-                                        >
-                                          <IonLabel>Preparatory</IonLabel>
-                                        </IonChip>
-                                      ) : (
-                                        <IonChip
-                                          outline={false}
-                                          color="primary"
-                                        >
-                                          <IonLabel>Secondary</IonLabel>
-                                        </IonChip>
-                                      )}
+
+                                    {promo.cycle.localeCompare("CPI") === 0 ? (
+                                      <IonChip outline={false} color="primary">
+                                        <IonIcon
+                                          icon={personCircleOutline}
+                                        ></IonIcon>
+                                        <IonLabel>Preparatory</IonLabel>
+                                      </IonChip>
+                                    ) : (
+                                      <IonChip outline={false} color="primary">
+                                        <IonIcon
+                                          icon={peopleCircleOutline}
+                                        ></IonIcon>
+                                        <IonLabel>Secondary</IonLabel>
+                                      </IonChip>
+                                    )}
+                                    <IonList>
                                       {promo.specialityName.localeCompare(
                                         ""
                                       ) !== 0 && (
@@ -255,7 +255,7 @@ const Promo: React.FC = observer(() => {
                                       {promo.minTeamMembers !== 0 && (
                                         <IonChip outline={true} color="dark">
                                           <IonIcon
-                                            icon={personCircleOutline}
+                                            icon={trendingDown}
                                           ></IonIcon>
                                           <IonLabel>
                                             {promo.minTeamMembers}{" "}
@@ -265,7 +265,7 @@ const Promo: React.FC = observer(() => {
                                       {promo.maxTeamMembers !== 0 && (
                                         <IonChip outline={true} color="dark">
                                           <IonIcon
-                                            icon={peopleCircleOutline}
+                                            icon={trendingUpOutline}
                                           ></IonIcon>
                                           <IonLabel>
                                             {promo.maxTeamMembers}{" "}
@@ -274,29 +274,28 @@ const Promo: React.FC = observer(() => {
                                       )}
                                       {promo.maxTeamsInProject !== 0 && (
                                         <IonChip outline={true} color="dark">
+                                          <IonIcon
+                                            icon={readerOutline}
+                                          ></IonIcon>
                                           <IonLabel>
-                                            Projects Teams:{" "}
-                                            {promo.maxTeamsInProject}{" "}
+                                            {promo.maxTeamsInProject}
                                           </IonLabel>
                                         </IonChip>
                                       )}
                                     </IonList>
                                     <IonCardContent>
                                       <IonText>{promo.description}</IonText>
-                                      <div className="ion-text-center">
+                                      <IonButtons class="ion-justify-content-center ion-text-center">
                                         <IonButton
-                                          class="ion-text-end"
                                           color="dark"
                                           onClick={() => edit(promo)}
                                         >
                                           <IonIcon
-                                            slot="end"
+                                            slot="icon-only"
                                             icon={createOutline}
                                           />
-                                          EDIT
                                         </IonButton>
                                         <IonButton
-                                          class="ion-text-end"
                                           color="danger"
                                           key={promo.id}
                                           onClick={() => {
@@ -305,12 +304,11 @@ const Promo: React.FC = observer(() => {
                                           }}
                                         >
                                           <IonIcon
-                                            slot="end"
+                                            slot="icon-only"
                                             icon={closeOutline}
                                           />
-                                          DELETE
                                         </IonButton>
-                                      </div>
+                                      </IonButtons>
                                     </IonCardContent>
                                   </IonCard>{" "}
                                 </IonCol>

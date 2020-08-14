@@ -73,7 +73,7 @@ const AddProject: React.FC = observer(() => {
     formData.append("domain", project.domain);
     formData.append("professor", project.professor);
     formData.append("tools", project.tools);
-    formData.append("requiredDocuments", project.requiredDocuments);
+    formData.append("requiredDocuments", "");
     formData.append("promo", project.promo);
     /*   for (var pair of formData.entries()) {
       
@@ -84,7 +84,7 @@ const AddProject: React.FC = observer(() => {
   };
 
   return (
-    <IonContent color="dark">
+    <IonContent>
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
@@ -102,7 +102,7 @@ const AddProject: React.FC = observer(() => {
           onSubmit={handleSubmit(() => onSubmit())}
           style={{ padding: 10, margin: 15, height: "auto" }}
         >
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={bookOutline}></IonIcon>
 
             <Controller
@@ -126,7 +126,7 @@ const AddProject: React.FC = observer(() => {
             />
           </IonItem>
           {showError("title")}
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={bulbOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -149,7 +149,7 @@ const AddProject: React.FC = observer(() => {
             />
           </IonItem>
           {showError("domain")}
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={briefcaseOutline}></IonIcon>
 
             <Controller
@@ -173,31 +173,7 @@ const AddProject: React.FC = observer(() => {
             />
           </IonItem>
           {showError("tools")}
-          <IonItem color="dark" class="">
-            <IonIcon slot="start" icon={documentsOutline}></IonIcon>
-
-            <Controller
-              as={IonInput}
-              placeholder="Required Documents"
-              className="firstCapital"
-              control={control}
-              onChangeName="onIonChange"
-              onChange={([selected]) => {
-                project.requiredDocuments = selected.detail.value;
-                return selected.detail.value;
-              }}
-              name="requiredDocuments"
-              rules={{
-                required: true,
-                minLength: {
-                  value: 4,
-                  message: "Must be at least 4 chars long",
-                },
-              }}
-            />
-          </IonItem>
-          {showError("requiredDocuments")}
-          <IonItem color="dark" class="ion-margin-bottom">
+          <IonItem>
             <IonIcon slot="start" icon={albumsOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -215,11 +191,8 @@ const AddProject: React.FC = observer(() => {
             />
           </IonItem>
           {showError("promo")}
-          <IonItem color="black">
-            <IonLabel class="ion-text-center">Attachements</IonLabel>
-          </IonItem>
 
-          <IonItem class="ion-text-center" {...getRootProps()}>
+          <IonItem lines="none" class="ion-text-center" {...getRootProps()}>
             <input {...getInputProps()} />
             <IonIcon icon={cloudUploadOutline}></IonIcon>
 
@@ -229,7 +202,6 @@ const AddProject: React.FC = observer(() => {
           <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
             <IonButton
               color="danger"
-              class="ion-padding-horizontal"
               type="button"
               onClick={() => {
                 reset(initialValues);
@@ -237,11 +209,7 @@ const AddProject: React.FC = observer(() => {
             >
               Reset
             </IonButton>
-            <IonButton
-              color="light"
-              type="submit"
-              disabled={formState.isValid === false}
-            >
+            <IonButton type="submit" disabled={formState.isValid === false}>
               Submit
             </IonButton>
           </IonButtons>

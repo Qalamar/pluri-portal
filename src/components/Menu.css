@@ -134,3 +134,8 @@ ion-button {
 .cent {
   margin: 0 auto;
 }
+
+ion-searchbar {
+  --box-shadow: 0 23px 36px rgba(237, 237, 237, 0.5) !important;
+  margin-bottom: 20px;
+}

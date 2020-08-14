@@ -7,6 +7,7 @@ import {
   IonInput,
   IonItem,
   IonToast,
+  IonCard,
 } from "@ionic/react";
 import {
   lockClosedOutline,
@@ -72,7 +73,7 @@ const AddTeacher: React.FC = observer(() => {
   };
 
   return (
-    <IonContent color="dark">
+    <IonContent>
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
@@ -90,7 +91,7 @@ const AddTeacher: React.FC = observer(() => {
           onSubmit={handleSubmit(() => onSubmit())}
           style={{ padding: 10, margin: 15, height: "auto" }}
         >
-          <IonItem color="dark">
+          <IonItem>
             <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -115,7 +116,7 @@ const AddTeacher: React.FC = observer(() => {
             {showError("firstName")}
           </IonItem>
 
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={peopleCircleOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -135,7 +136,7 @@ const AddTeacher: React.FC = observer(() => {
             {showError("lastName")}
           </IonItem>
 
-          <IonItem color="dark" class="">
+          <IonItem>
             <IonIcon slot="start" icon={mailOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -157,7 +158,7 @@ const AddTeacher: React.FC = observer(() => {
             />
             {showError("email")}
           </IonItem>
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={lockClosedOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -179,7 +180,6 @@ const AddTeacher: React.FC = observer(() => {
           <IonButtons class="ion-justify-content-center ion-padding ion-margin-top">
             <IonButton
               color="danger"
-              class="ion-padding-horizontal"
               type="button"
               onClick={() => {
                 reset(initialValues);
@@ -188,7 +188,6 @@ const AddTeacher: React.FC = observer(() => {
               Reset
             </IonButton>
             <IonButton
-              color="light"
               type="submit"
               // onClick={() => console.log(teacher)}
               disabled={formState.isValid === false}

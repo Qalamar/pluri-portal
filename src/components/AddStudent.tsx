@@ -69,7 +69,7 @@ const AddStudent: React.FC = observer(() => {
   };
 
   return (
-    <IonContent color="dark">
+    <IonContent>
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
@@ -87,7 +87,7 @@ const AddStudent: React.FC = observer(() => {
           onSubmit={handleSubmit(() => onSubmit())}
           style={{ padding: 10, margin: 15, height: "auto" }}
         >
-          <IonItem color="dark">
+          <IonItem>
             <IonIcon slot="start" icon={personCircleOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -112,7 +112,7 @@ const AddStudent: React.FC = observer(() => {
             {showError("firstName")}
           </IonItem>
 
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={peopleCircleOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -132,7 +132,7 @@ const AddStudent: React.FC = observer(() => {
             {showError("lastName")}
           </IonItem>
 
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={mailOutline}></IonIcon>
             <Controller
               as={IonInput}
@@ -154,11 +154,11 @@ const AddStudent: React.FC = observer(() => {
             />
             {showError("email")}
           </IonItem>
-          <IonItem color="dark" class="">
+          <IonItem class="">
             <IonIcon slot="start" icon={lockClosedOutline}></IonIcon>
             <Controller
               as={IonInput}
-              placeholder="Password"
+              placeholder="Access Key"
               control={control}
               onChangeName="onIonChange"
               onChange={([selected]) => {
@@ -185,7 +185,6 @@ const AddStudent: React.FC = observer(() => {
               Reset
             </IonButton>
             <IonButton
-              color="light"
               type="submit"
               //onClick={() => console.log(student)}
               disabled={formState.isValid === false}

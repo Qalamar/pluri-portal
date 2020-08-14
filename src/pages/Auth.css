@@ -17,7 +17,7 @@ ion-popover {
 ion-card.holder {
   border-radius: 12px;
   background: #ffffff;
-  box-shadow: 0 23px 36px rgba(237, 237, 237, 0.4);
+  box-shadow: 0 23px 36px rgba(237, 237, 237, 0.6);
 }
 ion-card-header {
   height: 150px;
@@ -51,6 +51,9 @@ ion-card-title {
 }
 ion-modal a {
   text-decoration: none;
+}
+ion-modal {
+  --max-height: 420px !important;
 }
 ion-popover {
   --min-width: 400px !important;

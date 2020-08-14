@@ -17,6 +17,7 @@ import {
   IonRow,
   IonSearchbar,
   IonToast,
+  IonButtons,
 } from "@ionic/react";
 import {
   addCircleOutline,
@@ -128,10 +129,10 @@ const Students: React.FC = observer(() => {
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="12">
-              <IonCard class="neum">
-                <IonCardHeader class="ion-text-center ion-padding">
+              <IonCard class="neum holder">
+                {/* <IonCardHeader class="ion-text-center ion-padding">
                   <IonCardTitle className="title">Students</IonCardTitle>
-                </IonCardHeader>
+                </IonCardHeader> */}
 
                 <IonCardContent>
                   <IonGrid>
@@ -177,7 +178,7 @@ const Students: React.FC = observer(() => {
                         </IonButton>
                       </IonCol>
                     </IonRow>
-                    <IonRow>
+                    <IonRow class="ion-justify-content-center">
                       {store.students.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
@@ -191,6 +192,7 @@ const Students: React.FC = observer(() => {
                               return (
                                 <IonCol
                                   size="12"
+                                  sizeSm="6"
                                   sizeMd="4"
                                   sizeXl="3"
                                   class=" ion-text-center"
@@ -211,10 +213,7 @@ const Students: React.FC = observer(() => {
                                           color="dark"
                                         ></IonIcon>
                                       </IonCardHeader>
-                                      <IonCardTitle
-                                        color="dark"
-                                        className="ion-padding "
-                                      >
+                                      <IonCardTitle color="dark">
                                         <strong>
                                           {e.firstName + " " + e.lastName}
                                         </strong>
@@ -224,18 +223,7 @@ const Students: React.FC = observer(() => {
                                       </IonChip>
 
                                       <IonCardContent>
-                                        <div className="ion-text-center">
-                                          {/*  <IonButton
-                                            class="ion-text-end"
-                                            color="dark"
-                                            onClick={() => edit(e)}
-                                          >
-                                            <IonIcon
-                                              slot="end"
-                                              icon={createOutline}
-                                            />
-                                            EDIT
-                                          </IonButton> */}
+                                        <IonButtons class="ion-justify-content-center ion-text-center">
                                           <IonButton
                                             class="ion-text-end"
                                             color="danger"
@@ -246,12 +234,11 @@ const Students: React.FC = observer(() => {
                                             }}
                                           >
                                             <IonIcon
-                                              slot="end"
+                                              slot="icon-only"
                                               icon={closeOutline}
                                             />
-                                            DELETE
                                           </IonButton>
-                                        </div>
+                                        </IonButtons>
                                       </IonCardContent>
                                     </IonCard>
                                   </Anime>
