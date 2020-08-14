@@ -65,12 +65,34 @@ ion-content {
 ion-grid.full {
   height: 100vh;
 }
+.full-width {
+  width: 100%;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.feature {
+  padding-right: 120px;
+  padding-left: 120px;
+  padding-top: 50px;
+}
+ion-card.show {
+  background-color: #181a22 !important;
+  box-shadow: 0 23px 36px rgba(#d24d57, 0.6);
 
+  padding: 8px;
+  min-width: 440px;
+}
+ion-input.newsletter {
+  color: darkgray !important;
+  --background: #181a22c9;
+  --color: #eaeaea !important;
+}
 .row {
   width: 100%;
-  height: 60vh;
+  height: 50vh;
   padding: 0;
-  margin: 0;
   display: flex;
   justify-content: center;
   flex-direction: column;

@@ -207,10 +207,7 @@ const Techers: React.FC = observer(() => {
                                     duration={2000}
                                     easing="easeOutElastic"
                                   >
-                                    <IonCard
-                                      className="user holder"
-                                      class="shadow ion-text-center"
-                                    >
+                                    <IonCard class="shadow holder ion-text-center">
                                       <IonCardHeader>
                                         <IonIcon
                                           icon={personCircleOutline}

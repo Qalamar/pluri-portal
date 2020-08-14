@@ -210,7 +210,7 @@ const Projects: React.FC = observer(() => {
                                     duration={2000}
                                     easing="easeOutElastic"
                                   >
-                                    <IonCard class="shadow user holder ion-text-center">
+                                    <IonCard class="shadow holder ion-text-center">
                                       <IonCardHeader>
                                         <IonCardTitle
                                           color="light"

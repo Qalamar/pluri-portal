@@ -5,6 +5,13 @@ http://ionicframework.com/docs/theming/ */
 * {
   font-family: "Montserrat" !important;
 }
+ion-toolbar.main {
+  --ion-toolbar-background: #d24d57;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
 :root {
   /** primary **/
   --ion-color-primary: #3880ff;

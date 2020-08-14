@@ -17,6 +17,10 @@ import {
   IonTitle,
   IonToast,
   IonToolbar,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonChip,
 } from "@ionic/react";
 import {
   closeOutline,
@@ -24,6 +28,12 @@ import {
   mailOutline,
   peopleCircleOutline,
   readerOutline,
+  personCircleOutline,
+  createOutline,
+  logoGithub,
+  mailOpenOutline,
+  mailOpen,
+  send,
 } from "ionicons/icons";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -59,6 +69,7 @@ const Auth: React.FC = () => {
   };
   const [showModal, setShowModal] = useState(false);
   const [showToast, setshowToast] = useState(false);
+  const [text, setText] = useState<string>();
   const [login, setLogin] = useState("Login");
 
   const [showPopover, setShowPopover] = useState<{
@@ -93,11 +104,9 @@ const Auth: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonToolbar class="ion-padding">
-          <IonTitle>
-            <h1>
-              <strong>Pluri</strong>
-            </h1>
+        <IonToolbar class="ion-padding-horizontal main">
+          <IonTitle color="light" class="sub-title">
+            <strong>Pluri</strong>
           </IonTitle>
           <IonButton
             slot="end"
@@ -106,12 +115,11 @@ const Auth: React.FC = () => {
             color="dark"
             onClick={(e) => setShowModal(true)}
           >
-            <IonLabel>Teachers</IonLabel>
+            <IonLabel color="light">Teachers</IonLabel>
           </IonButton>
           <IonButton
             slot="end"
-            fill="outline"
-            color="dark"
+            color="light"
             onClick={(e) =>
               setShowPopover({ open: true, event: e.nativeEvent })
             }
@@ -286,7 +294,7 @@ const Auth: React.FC = () => {
             </IonCard>
           </IonPopover>
         </IonToolbar>
-        <IonGrid class="">
+        <IonGrid class="ion-margin-top ion-padding-top">
           <IonRow class="ion-align-items-center ion-justify-content-between">
             <IonCol size="0.5"></IonCol>
             <IonCol class="ion-padding" size="12" sizeMd="6" sizeLg="5">
@@ -396,12 +404,68 @@ s60.2,40,120,40s60.1-40,120-40s60.5,40,120,40s60-40,120-40s60.4,40,120,40s59.9-4
 s60.2,40,120,40s59.8,0,59.8,0l0.2,143H-60V96L-40,95.6z"
               ></path>
             </svg>
-            <IonGrid>
-              <IonRow>
-                <IonCol></IonCol>
-              </IonRow>
-            </IonGrid>
-            <IonIcon class="ico" icon={readerOutline} />
+          </div>
+          <div className="full-width">
+            <div className="feature">
+              <IonCard class=" show">
+                <IonGrid>
+                  <IonRow>
+                    <IonCol size="8">
+                      <IonChip color="danger">
+                        <IonLabel>Version 0.7.6</IonLabel>
+                      </IonChip>
+                    </IonCol>
+                    <IonCol size="4">
+                      <IonButtons class="ion-justify-content-center ion-text-center">
+                        <a
+                          href="https://github.com/Qalamar/pluri-portal"
+                          target="_blank"
+                        >
+                          <IonButton color="light">
+                            <IonIcon slot="icon-only" icon={logoGithub} />
+                          </IonButton>
+                        </a>
+                        <a
+                          href="mailto:contact@tariqhamrit.com"
+                          target="_blank"
+                        >
+                          <IonButton color="light">
+                            <IonIcon slot="icon-only" icon={mailOpen} />
+                          </IonButton>
+                        </a>
+                      </IonButtons>
+                    </IonCol>
+                  </IonRow>
+                  <IonRow class="ion-justify-content-center">
+                    <IonCol>
+                      <IonItem
+                        color="none"
+                        class="ion-text-center"
+                        lines="none"
+                      >
+                        <IonLabel color="light">
+                          Subscribe to our newsletter
+                        </IonLabel>
+                      </IonItem>
+                      <IonItem color="none">
+                        <IonInput
+                          value={text}
+                          class="newsletter"
+                          placeholder="Email"
+                          onIonChange={(e) => setText(e.detail.value!)}
+                          clearInput
+                        ></IonInput>
+                        <IonButtons class="ion-justify-content-center ion-text-center">
+                          <IonButton color="light">
+                            <IonIcon slot="icon-only" icon={send} />
+                          </IonButton>
+                        </IonButtons>
+                      </IonItem>
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+              </IonCard>
+            </div>
           </div>
         </div>
       </IonContent>
