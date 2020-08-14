@@ -36,12 +36,8 @@ import * as api from "../utils/API";
 import "./Auth.css";
 
 let initialValues = {
-  email: "",
-  password: "",
-};
-let guestValues = {
-  email: "john@doe.com",
-  password: "johndoe",
+  email: "throwaway@test.com",
+  password: "throwaway1@",
 };
 interface login {
   email: string;
@@ -99,8 +95,8 @@ const Auth: React.FC = () => {
   const history = useHistory();
 
   const onSubmit = (data: any) => {
-    let mail = data.email;
-    let pass = data.password;
+    let mail = initialValues.email;
+    let pass = initialValues.password;
     /*  axios
       .post("/login", {
         email: data.email,
@@ -257,11 +253,6 @@ const Auth: React.FC = () => {
                 Dismiss
               </IonButton>
             </div>
-            <IonCardHeader>
-              <IonTitle color="light" class="title ion-padding">
-                Sign In
-              </IonTitle>
-            </IonCardHeader>
 
             <IonCardContent class=" ion-text-center">
               <form
@@ -332,36 +323,28 @@ const Auth: React.FC = () => {
       </IonToolbar>
       <IonContent>
         <IonGrid>
-          <IonRow class="ion-align-items-center ion-justify-content-center">
-            <IonCol size="0" sizeLg="1.25"></IonCol>
-            <IonCol
-              class="ion-padding-horizontal"
-              size="12"
-              sizeMd="6"
-              sizeLg="5"
-            >
-              <IonItem lines="none">
-                <div className="title">
-                  The Academic Project Platform for{" "}
-                  <TextLoop>
-                    <IonLabel color="primary">Students</IonLabel>
-                    <IonLabel color="danger">Teachers</IonLabel>
-                  </TextLoop>
-                </div>
-              </IonItem>
-              <IonItem class="ion-padding-top" lines="none">
-                <h3>
-                  Pluri-project is a platform aimed at teachers and students to
-                  showcase and attribute academic projects in accordance with
-                  university curriculums
-                </h3>
-              </IonItem>
+          <IonRow class="ion-align-items-center ion-justify-content-between">
+            <IonCol size="1"></IonCol>
+            <IonCol class="ion-padding" size="12" sizeMd="6" sizeLg="5">
+              <div className="title">
+                The Academic Project Platform for{" "}
+                <TextLoop>
+                  <IonLabel color="primary">Students</IonLabel>
+                  <IonLabel color="danger">Teachers</IonLabel>
+                </TextLoop>
+              </div>
+
+              <h3>
+                Pluri-project is a platform aimed at teachers and students to
+                showcase and attribute academic projects in accordance with
+                university curriculums
+              </h3>
             </IonCol>
 
             <IonCol size="12" sizeMd="4" sizeLg="3">
               <Lottie options={defaultOptions} height={600} width={600} />
             </IonCol>
-            <IonCol size="0" sizeMd="2" sizeLg="2.75"></IonCol>
+            <IonCol size="1"></IonCol>
           </IonRow>
         </IonGrid>
       </IonContent>

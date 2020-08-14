@@ -61,7 +61,7 @@ const Homepage: React.FC = () => {
               <IonCard class="ion-text-center shadow holder">
                 <IonCardHeader>
                   <IonTitle color="dark" class="title">
-                    Project Portal
+                    Pluri Portal
                   </IonTitle>
                 </IonCardHeader>
 
@@ -71,9 +71,9 @@ const Homepage: React.FC = () => {
                       <IonCol>
                         {/* <IonProgressBar type="indeterminate"></IonProgressBar> */}
                         <IonLabel>
-                          Project portal is an academic platform for teachers
-                          and students , allowing project submission, preview
-                          and attribution.
+                          Pluri portal is an academic platform for teachers and
+                          students , allowing project submission, preview and
+                          attribution.
                         </IonLabel>
                       </IonCol>
                     </IonRow>
