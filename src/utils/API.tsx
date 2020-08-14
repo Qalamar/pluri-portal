@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from "./Store";
 
-const url = "http://localhost:3000/";
+const testUrl = "http://localhost:3000/";
 const apiUrl = "https://bragdonilyes.pythonanywhere.com/";
 
 /*********** Student calls ***************************************************/
@@ -85,39 +85,6 @@ export const deleteStudent = async (id: number) => {
       .then(function (response) {
         getStudents();
       });
-  } catch (error) {
-    return;
-  }
-};
-
-export const modifyStudent = async (
-  id: number,
-  firstName: string,
-  lastName: string,
-  username: string,
-  password: string,
-  email: string,
-  birthday: string,
-  birthPlace: string,
-  promo: number,
-  currentYear: string
-) => {
-  try {
-    const res = await axios.patch(apiUrl + `users/student/modify/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-      firstName: "firstName",
-      lastName: "lastName",
-      username: "username",
-      password: "password",
-      email: "email",
-      birthday: "birthday",
-      birthPlace: "birthPlace",
-      promo: 7,
-      currentYear: "currentYear",
-    });
   } catch (error) {
     return;
   }

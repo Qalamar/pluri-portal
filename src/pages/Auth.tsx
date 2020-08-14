@@ -24,7 +24,7 @@ import {
   mailOutline,
   peopleCircleOutline,
 } from "ionicons/icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 //@ts-ignore
 import Lottie from "react-lottie";

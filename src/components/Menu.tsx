@@ -9,13 +9,12 @@ import {
 import {
   albumsOutline,
   informationCircleOutline,
-  peopleCircleOutline,
   personCircleOutline,
   readerOutline,
   schoolOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
-import React, { useEffect } from "react";
+import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { store } from "../utils/Store";
 import "./Menu.css";

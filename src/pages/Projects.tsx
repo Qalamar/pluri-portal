@@ -1,6 +1,7 @@
 import {
   IonAlert,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -17,22 +18,16 @@ import {
   IonRow,
   IonSearchbar,
   IonToast,
-  IonButtons,
 } from "@ionic/react";
-import {
-  addCircleOutline,
-  closeOutline,
-  createOutline,
-  filterOutline,
-} from "ionicons/icons";
+import { addCircleOutline, closeOutline, filterOutline } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
+import Toolbar from "../components/Toolbar";
 import AddProject from "../forms/project/AddProject";
 import EditProject from "../forms/project/EditProject";
-import Toolbar from "../components/Toolbar";
-import { store } from "../utils/Store";
 import * as api from "../utils/API";
+import { store } from "../utils/Store";
 import "./Projects.css";
 
 const Projects: React.FC = observer(() => {

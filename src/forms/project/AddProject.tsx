@@ -17,7 +17,7 @@ import {
   cloudUploadOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Controller, useForm } from "react-hook-form";
 import * as api from "../../utils/API";

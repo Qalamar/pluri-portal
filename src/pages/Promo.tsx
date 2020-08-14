@@ -1,6 +1,7 @@
 import {
   IonAlert,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -18,8 +19,6 @@ import {
   IonSearchbar,
   IonText,
   IonToast,
-  IonButtons,
-  IonItem,
 } from "@ionic/react";
 import {
   addCircleOutline,
@@ -28,18 +27,18 @@ import {
   filterOutline,
   peopleCircleOutline,
   personCircleOutline,
-  trendingUpOutline,
-  trendingDown,
   readerOutline,
+  trendingDown,
+  trendingUpOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
+import Toolbar from "../components/Toolbar";
 import AddPromo from "../forms/promotion/AddPromo";
 import EditPromo from "../forms/promotion/EditPromo";
-import Toolbar from "../components/Toolbar";
-import { store } from "../utils/Store";
 import * as api from "../utils/API";
+import { store } from "../utils/Store";
 
 export interface promotion {
   id: number;

@@ -36,4 +36,4 @@ Project portal is an academic platform for teachers and students, allowing proje
 # Links
 
 - **[Demo](https://pluri-portal.web.app/)** (Not fully accessible)
-- **[Back-end repository](https://pluri-portal.web.app/)**
+- **[Back-end repository](https://github.com/BachaZachry/Project-Portal-Backend/)**
