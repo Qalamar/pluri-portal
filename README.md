@@ -24,16 +24,17 @@ Project portal is an academic platform for teachers and students, allowing proje
 
 # Screenshots
 
-![Screenshot - Desktop](https://i.imgur.com/Ea4o9hT.png)
-![Screenshot - Desktop](https://i.imgur.com/tjEOTG4.png)
+![Screenshot - Desktop](https://i.imgur.com/3R9Z5cO.gif)
+![Screenshot - Desktop](https://i.imgur.com/RMAVkfq.gif)
+![Screenshot - Desktop](https://i.imgur.com/2gGj7yt.gif)
 
 **Mobile:**
 
-![Mobile Screenshot](https://i.imgur.com/cIh76el.png)
+![Mobile Screenshot](https://i.imgur.com/1YAS8R1.png)
 
-![Mobile Screenshot](https://i.imgur.com/bmBcOJE.png)
+![Mobile Screenshot](https://i.imgur.com/avedMtS.png)
 
 # Links
 
-- **[Demo](https://pluri-portal.web.app/)** (Not fully accessible)
+- **[Demo](https://pluri-portal.web.app/)** (Guest access)
 - **[Back-end repository](https://github.com/BachaZachry/Project-Portal-Backend/)**
