@@ -80,8 +80,8 @@ const AddProject: React.FC = observer(() => {
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setshowToast(false)}
-        message="Project Added"
-        duration={400}
+        message="You don't have permission to add projects"
+        duration={800}
       />
       <IonAlert
         isOpen={showAlert}

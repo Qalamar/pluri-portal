@@ -214,9 +214,9 @@ const Projects: React.FC = observer(() => {
                                         <IonCardHeader>
                                           <IonCardTitle
                                             color="dark"
-                                            className="ion-padding title"
-                                          >
-                                            {e.title}
+                                            className="ion-padding project"
+                                          ><strong>{e.title}</strong>
+
                                           </IonCardTitle>
                                         </IonCardHeader>
                                         <IonCardTitle
