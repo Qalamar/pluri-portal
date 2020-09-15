@@ -100,7 +100,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
             text: "Cancel",
             role: "cancel",
             cssClass: "secondary",
-            handler: () => {},
+            handler: () => { },
           },
           {
             text: "Save",

@@ -41,7 +41,9 @@ const AddStudent: React.FC = observer(() => {
   const [showToast, setshowToast] = useState(false);
   const [showAlert, setshowAlert] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setStudent(initialValues)
+  }, []);
 
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];

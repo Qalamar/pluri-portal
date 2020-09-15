@@ -16,24 +16,13 @@ import {
   IonRow,
   IonTitle,
   IonToast,
-  IonToolbar,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonChip,
+  IonToolbar
 } from "@ionic/react";
 import {
   closeOutline,
   keyOutline,
   mailOutline,
-  peopleCircleOutline,
-  readerOutline,
-  personCircleOutline,
-  createOutline,
-  logoGithub,
-  mailOpenOutline,
-  mailOpen,
-  send,
+  peopleCircleOutline
 } from "ionicons/icons";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";

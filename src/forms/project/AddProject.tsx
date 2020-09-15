@@ -133,8 +133,8 @@ const AddProject: React.FC = observer(() => {
               rules={{
                 required: true,
                 minLength: {
-                  value: 4,
-                  message: "Must be at least 4 characters long",
+                  value: 2,
+                  message: "Must be at least 2 characters long",
                 },
               }}
             />

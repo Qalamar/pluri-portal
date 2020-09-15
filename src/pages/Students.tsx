@@ -72,7 +72,7 @@ const Students: React.FC = observer(() => {
               text: "Cancel",
               role: "cancel",
 
-              handler: () => {},
+              handler: () => { },
             },
             {
               cssClass: "del",
@@ -161,8 +161,7 @@ const Students: React.FC = observer(() => {
                       {store.students.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
-                        store.students.map((e: any, i) => {
-                          {
+                          store.students.map((e: any, i) => {
                             if (
                               e.firstName
                                 .toLowerCase()
@@ -181,10 +180,11 @@ const Students: React.FC = observer(() => {
                                     duration={2000}
                                     easing="easeOutElastic"
                                   >
-                                    <IonCard class="shadow holder ion-text-center">
+                                    <IonCard class="shadow holder ion-text-center" key={e.id}>
                                       <IonCardHeader>
                                         <IonIcon
                                           icon={personCircleOutline}
+
                                           class="ico"
                                           color="dark"
                                         ></IonIcon>
@@ -220,9 +220,9 @@ const Students: React.FC = observer(() => {
                                   </Anime>
                                 </IonCol>
                               );
-                          }
-                        })
-                      )}
+
+                          })
+                        )}
                     </IonRow>
                   </IonGrid>
                 </IonCardContent>

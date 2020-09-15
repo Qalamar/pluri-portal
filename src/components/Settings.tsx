@@ -19,13 +19,13 @@ const Settings: React.FC = () => {
               <IonIcon slot="end" icon={closeOutline} />
               LOGOUT
             </IonButton>
-            <a href="mailto:contact@tariqhamrit.com" target="_blank">
+            <a href="mailto:contact@tariqhamrit.com" target="_blank" rel="noopener noreferrer">
               <IonButton slot="end" color="dark" fill="outline">
                 <IonIcon slot="end" icon={mailOutline} />
                 CONTACT
               </IonButton>
             </a>
-            <a href="https://github.com/Qalamar/pluri-portal" target="_blank">
+            <a href="https://github.com/Qalamar/pluri-portal" target="_blank" rel="noopener noreferrer">
               <IonButton slot="end" color="dark" fill="outline">
                 <IonIcon slot="end" icon={logoGithub} />
                 Github

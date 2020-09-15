@@ -55,7 +55,6 @@ const Promo: React.FC = observer(() => {
   const [Id, setId] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showModalEditing, setShowModalEditing] = useState(false);
-  const [promos, setpromos] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
   const [editpromo, setEditpromo] = useState<promotion>({
     id: 0,
@@ -78,7 +77,6 @@ const Promo: React.FC = observer(() => {
   useEffect(() => {
     async function fetchPromotion() {
       await api.getPromotions();
-      setpromos(store.promos);
     }
     fetchPromotion();
   }, []);
@@ -138,7 +136,7 @@ const Promo: React.FC = observer(() => {
               text: "Cancel",
               role: "cancel",
 
-              handler: () => {},
+              handler: () => { },
             },
             {
               cssClass: "del",
@@ -199,8 +197,7 @@ const Promo: React.FC = observer(() => {
                         {store.promos.length === 0 ? (
                           <div>Loading...</div>
                         ) : (
-                          store.promos.map((promo: any) => {
-                            {
+                            store.promos.map((promo: any) => {
                               return (
                                 <IonCol
                                   size="12"
@@ -233,23 +230,23 @@ const Promo: React.FC = observer(() => {
                                         <IonLabel>Preparatory</IonLabel>
                                       </IonChip>
                                     ) : (
-                                      <IonChip outline={false} color="primary">
-                                        <IonIcon
-                                          icon={peopleCircleOutline}
-                                        ></IonIcon>
-                                        <IonLabel>Secondary</IonLabel>
-                                      </IonChip>
-                                    )}
+                                        <IonChip outline={false} color="primary">
+                                          <IonIcon
+                                            icon={peopleCircleOutline}
+                                          ></IonIcon>
+                                          <IonLabel>Secondary</IonLabel>
+                                        </IonChip>
+                                      )}
                                     <IonList>
                                       {promo.specialityName.localeCompare(
                                         ""
                                       ) !== 0 && (
-                                        <IonChip outline={true} color="dark">
-                                          <IonLabel>
-                                            {promo.specialityName}
-                                          </IonLabel>
-                                        </IonChip>
-                                      )}
+                                          <IonChip outline={true} color="dark">
+                                            <IonLabel>
+                                              {promo.specialityName}
+                                            </IonLabel>
+                                          </IonChip>
+                                        )}
                                       {promo.minTeamMembers !== 0 && (
                                         <IonChip outline={true} color="dark">
                                           <IonIcon
@@ -311,9 +308,8 @@ const Promo: React.FC = observer(() => {
                                   </IonCard>{" "}
                                 </IonCol>
                               );
-                            }
-                          })
-                        )}
+                            })
+                          )}
                       </IonRow>
                     </IonGrid>
                   </IonCardContent>

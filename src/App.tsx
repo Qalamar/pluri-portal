@@ -23,7 +23,6 @@ import Projects from "./pages/Projects";
 import Promo from "./pages/Promo";
 import Students from "./pages/Students";
 import Techers from "./pages/Teachers";
-import Teams from "./pages/Teams";
 import { store } from "./utils/Store";
 //import MyTeam from "./student/MyTeam";
 import "./theme/variables.css";
@@ -59,17 +58,15 @@ const App: React.FC = observer(() => {
               <Route path="/teachers" component={Techers} exact={true} />
               <Route path="/students" component={Students} exact={true} />
               <Route path="/promo" component={Promo} exact={true} />
-              {/* <Route path="/myteam" component={MyTeam} exact={true} /> */}
-              <Route path="/teams" component={Teams} exact={true} />
               <Route path="/home" component={Home} exact={true} />
             </IonRouterOutlet>
           </IonSplitPane>
         ) : (
-          <IonRouterOutlet id="main">
-            <Route path="/home" component={Auth} exact={true} />
-            <Redirect to="/home" />
-          </IonRouterOutlet>
-        )}
+            <IonRouterOutlet id="main">
+              <Route path="/home" component={Auth} exact={true} />
+              <Redirect to="/home" />
+            </IonRouterOutlet>
+          )}
       </IonReactRouter>
     </IonApp>
   );
