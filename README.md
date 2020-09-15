@@ -1,8 +1,10 @@
-# Project Portal
+# Description
 
-Project portal is an academic platform for teachers and students, allowing project submission, preview and attrubition. Done as a pluri-disciplinary project for college.
+Pluri portal is an academic platform for teachers and students, allowing project submission, preview and attrubition. Done as a pluri-disciplinary project for university.
 
-**Technologies:** React | Ionic Framework | Styled-componants | Django Rest Framework | MySQL
+**Technologies:** React | Ionic Framework | Django Rest Framework | MySQL | Firebase
+
+- **[Live Preview:](https://pluriportal.web.app/)** (Guest access)
 
 # Prequisities
 
@@ -20,7 +22,7 @@ Project portal is an academic platform for teachers and students, allowing proje
 - Project submission with file-upload.
 - Promotions management and project attribution.
 - Fully-responsive across all screen sizes.
-- Search and sorting filters.
+- Search filters.
 
 # Screenshots
 
@@ -28,7 +30,7 @@ Project portal is an academic platform for teachers and students, allowing proje
 ![Screenshot - Desktop](https://i.imgur.com/RMAVkfq.gif)
 ![Screenshot - Desktop](https://i.imgur.com/2gGj7yt.gif)
 
-**Mobile:**
+# Mobile
 
 ![Mobile Screenshot](https://i.imgur.com/1YAS8R1.png)
 
@@ -36,5 +38,4 @@ Project portal is an academic platform for teachers and students, allowing proje
 
 # Links
 
-- **[Demo](https://pluri-portal.web.app/)** (Guest access)
 - **[Back-end repository](https://github.com/BachaZachry/Project-Portal-Backend/)**
