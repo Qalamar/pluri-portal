@@ -1,10 +1,10 @@
-# Pluri Portal
+# Description
 
-Pluri portal is an academic platform for teachers and students, allowing project submission, preview and attrubition. Done as a pluri-disciplinary project for college.
+Pluri portal is an academic platform for teachers and students, allowing project submission, preview and attrubition. Done as a pluri-disciplinary project for university.
 
 **Technologies:** React | Ionic Framework | Django Rest Framework | MySQL | Firebase
 
-- **[Live Preview:](https://pluri-portal.web.app/)** (Guest access)
+- **[Live Preview:](https://pluriportal.web.app/)** (Guest access)
 
 # Prequisities
 
