@@ -294,10 +294,12 @@ const Auth: React.FC = () => {
             </IonCard>
           </IonPopover>
         </IonToolbar>
+
         <section className="container">
           <div className="wave"></div>
-        </section>{" "}
-        <IonGrid class="ion-margin-top ion-padding-top">
+        </section>
+
+        <IonGrid class="ion-padding-top">
           <IonRow class="ion-align-items-center ion-justify-content-between">
             <IonCol size="0.5"></IonCol>
             <IonCol class="ion-padding" size="12" sizeMd="6" sizeLg="5">
@@ -409,66 +411,7 @@ s60.2,40,120,40s59.8,0,59.8,0l0.2,143H-60V96L-40,95.6z"
             </svg>
           </div>
           <div className="full-width">
-            <div className="feature">
-              <IonCard class=" show">
-                <IonGrid>
-                  <IonRow>
-                    <IonCol size="8">
-                      <IonChip color="danger">
-                        <IonLabel>Version 0.7.6</IonLabel>
-                      </IonChip>
-                    </IonCol>
-                    <IonCol size="4">
-                      <IonButtons class="ion-justify-content-center ion-text-center">
-                        <a
-                          href="https://github.com/Qalamar/pluri-portal"
-                          target="_blank"
-                        >
-                          <IonButton color="light">
-                            <IonIcon slot="icon-only" icon={logoGithub} />
-                          </IonButton>
-                        </a>
-                        <a
-                          href="mailto:contact@tariqhamrit.com"
-                          target="_blank"
-                        >
-                          <IonButton color="light">
-                            <IonIcon slot="icon-only" icon={mailOpen} />
-                          </IonButton>
-                        </a>
-                      </IonButtons>
-                    </IonCol>
-                  </IonRow>
-                  <IonRow class="ion-justify-content-center">
-                    <IonCol>
-                      <IonItem
-                        color="none"
-                        class="ion-text-center"
-                        lines="none"
-                      >
-                        <IonLabel color="light">
-                          Subscribe to our newsletter
-                        </IonLabel>
-                      </IonItem>
-                      <IonItem color="none">
-                        <IonInput
-                          value={text}
-                          class="newsletter"
-                          placeholder="Email"
-                          onIonChange={(e) => setText(e.detail.value!)}
-                          clearInput
-                        ></IonInput>
-                        <IonButtons class="ion-justify-content-center ion-text-center">
-                          <IonButton color="light">
-                            <IonIcon slot="icon-only" icon={send} />
-                          </IonButton>
-                        </IonButtons>
-                      </IonItem>
-                    </IonCol>
-                  </IonRow>
-                </IonGrid>
-              </IonCard>
-            </div>
+
           </div>
         </div>
       </IonContent>
