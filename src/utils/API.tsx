@@ -13,7 +13,7 @@ export const getStudents = async () => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+
     store.students = res.data;
   } catch (error) {
     return;
@@ -50,11 +50,11 @@ export const addStudent = async (
       Authorization: `Token ${store.isAuth.token}`,
     },
   })
-    .then(function (response) {
+    .then(function () {
       getStudents();
     })
     .catch(function (response) {
-      //handle error
+      console.log(response)
     });
 };
 
@@ -67,9 +67,7 @@ export const deleteStudent = async (id: number) => {
           Authorization: `Token ${store.isAuth.token}`,
         },
       })
-      .then(function (response) {
-        getStudents();
-      });
+    console.log(res.data)
   } catch (error) {
     return;
   }
@@ -113,7 +111,7 @@ export const addProfessor = async (
       getProffessors();
     })
     .catch(function (response) {
-      //handle error
+
     });
 };
 
@@ -153,9 +151,8 @@ export const modifyProfessor = async (
           currentYear: currentYear,
         }
       )
-      .then(function (response) {
-        getProffessors();
-      });
+    console.log(res.data)
+    getProffessors();
   } catch (error) {
     return;
   }
@@ -170,9 +167,8 @@ export const deleteProfessor = async (id: number) => {
           Authorization: `Token ${store.isAuth.token}`,
         },
       })
-      .then(function (response) {
-        getProffessors();
-      });
+    console.log(res.data)
+    getProffessors();
   } catch (error) {
     return;
   }
@@ -187,9 +183,9 @@ export const getProffessors = async () => {
           Authorization: `Token ${store.isAuth.token}`,
         },
       })
-      .then(function (res) {
-        store.teachers = res.data;
-      });
+
+    store.teachers = res.data;
+
   } catch (error) {
     return;
   }
@@ -206,16 +202,17 @@ export const userLogin = async (email: string, password: string) => {
       email: email,
       password: password,
     });
-    // .then();
+
 
     store.isAuth.state = true;
-    // Check permissions from the token
+
     switch (res.data.token.slice(-1)) {
       case "0":
         store.isAuth.access = "0";
         break;
       case "1":
         store.isAuth.access = "1";
+        break;
       default:
         store.isAuth.access = "2";
         break;
@@ -240,7 +237,7 @@ export const getPromotions = async () => {
         "Content-Type": "application/json",
       },
     });
-    // .then();
+
 
     store.promos = res.data;
   } catch (error) {
@@ -275,10 +272,10 @@ export const addPromotion = async (
     },
   })
     .then(function (response) {
-      //handle success
+
     })
     .catch(function (response) {
-      //handle error
+
     });
 };
 
@@ -302,7 +299,8 @@ export const setupPromotion = async (
       maxTeamMembers: maxTeamMembers,
       maxTeamsInProject: maxTeamsInProject,
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -339,10 +337,10 @@ export const modifyPromotion = async (
     },
   })
     .then(function (response) {
-      //handle success
+
     })
     .catch(function (response) {
-      //handle error
+
     });
 };
 
@@ -354,7 +352,7 @@ export const deletePromotion = async (id: number) => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
   } catch (error) {
     return;
   }
@@ -373,10 +371,10 @@ export const addProject = async (data: FormData) => {
     },
   })
     .then(function (response) {
-      //handle success
+
     })
     .catch(function (response) {
-      //handle error
+
     });
 };
 
@@ -388,7 +386,7 @@ export const getProjects = async () => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+
 
     store.projects = res.data;
   } catch (error) {
@@ -404,7 +402,8 @@ export const getProject = async (id: number) => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -421,10 +420,10 @@ export const modifyProject = async (id: number, data: FormData) => {
     },
   })
     .then(function (response) {
-      //handle success
+
     })
     .catch(function (response) {
-      //handle error
+
     });
 };
 
@@ -436,7 +435,8 @@ export const deleteProject = async (id: number) => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -451,7 +451,8 @@ export const handleProject = async (id: number, status: string) => {
       },
       status: status,
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -465,7 +466,8 @@ export const acceptedProject = async () => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -482,7 +484,8 @@ export const addTeam = async (name: string) => {
       },
       name: name,
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -496,7 +499,8 @@ export const getCurrentTeam = async (id: number) => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -511,7 +515,8 @@ export const validateTeam = async (id: number, readiness: boolean) => {
       },
       readiness: readiness,
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -527,7 +532,8 @@ export const getInvites = async () => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -551,7 +557,8 @@ export const handleInvites = async (
       sender: sender,
       receiver: receiver,
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -565,7 +572,8 @@ export const inviteStudent = async (id: number) => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -579,7 +587,8 @@ export const getStudentTeam = async () => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
@@ -593,7 +602,8 @@ export const getStudentPromo = async () => {
         Authorization: `Token ${store.isAuth.token}`,
       },
     });
-    // .then();
+    console.log(res.data)
+
   } catch (error) {
     return;
   }
