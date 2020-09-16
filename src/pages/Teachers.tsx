@@ -35,6 +35,14 @@ import EditTeacher from "../forms/teacher/EditTeacher";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
 
+let initialValues = {
+  id: 0,
+  firstName: "",
+  lastName: "",
+  password: "",
+  email: "",
+};
+
 const Techers: React.FC = observer(() => {
   const [teachers, setTeachers] = useState([]);
   const [Id, setId] = useState(0);
@@ -51,11 +59,11 @@ const Techers: React.FC = observer(() => {
   });
 
   const getUsers = async () => {
-    async function fetchPromotion() {
+    async function fetchTeachers() {
       await api.getProffessors();
-      setTeachers(store.teachers);
+      setTeachers(teachers);
     }
-    fetchPromotion();
+    fetchTeachers();
   };
 
   const searchHandle = (input: string) => {
@@ -72,11 +80,11 @@ const Techers: React.FC = observer(() => {
     teacher.lastName = data.lastName;
     teacher.email = data.email;
     teacher.password = data.password;
-
     setShowEdit(true);
   };
 
   useEffect(() => {
+    setTeacher(initialValues)
     store.page = "teachers";
     getUsers();
   }, []);
@@ -94,7 +102,7 @@ const Techers: React.FC = observer(() => {
               text: "Cancel",
               role: "cancel",
 
-              handler: () => {},
+              handler: () => { },
             },
             {
               cssClass: "del",
@@ -187,8 +195,7 @@ const Techers: React.FC = observer(() => {
                       {store.teachers.length === 0 ? (
                         <div>Loading...</div>
                       ) : (
-                        store.teachers.map((e: any, i) => {
-                          {
+                          store.teachers.map((e: any, i) => {
                             if (
                               e.firstName
                                 .toLowerCase()
@@ -196,6 +203,7 @@ const Techers: React.FC = observer(() => {
                             )
                               return (
                                 <IonCol
+                                  key={e.title}
                                   size="12"
                                   sizeSm="6"
                                   sizeMd="4"
@@ -257,9 +265,8 @@ const Techers: React.FC = observer(() => {
                                   </Anime>
                                 </IonCol>
                               );
-                          }
-                        })
-                      )}
+                          })
+                        )}
                     </IonRow>
                   </IonGrid>
                 </IonCardContent>

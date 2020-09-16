@@ -17,7 +17,7 @@ import {
   cloudUploadOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Controller, useForm } from "react-hook-form";
 import * as api from "../../utils/API";
@@ -47,6 +47,10 @@ const AddProject: React.FC = observer(() => {
     requiredDocuments: "",
     promo: "",
   });
+
+  useEffect(() => {
+    setProject(initialValues)
+  }, []);
 
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...initialValues },

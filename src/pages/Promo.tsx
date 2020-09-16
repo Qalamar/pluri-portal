@@ -200,6 +200,7 @@ const Promo: React.FC = observer(() => {
                             store.promos.map((promo: any) => {
                               return (
                                 <IonCol
+                                  key={promo.title}
                                   size="12"
                                   sizeSm="6"
                                   sizeMd="4"

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { store } from "./Store";
 
-const testUrl = "http://localhost:3000/";
 const apiUrl = "https://bragdonilyes.pythonanywhere.com/";
 
 /*********** Student calls ***************************************************/
@@ -57,20 +56,6 @@ export const addStudent = async (
     .catch(function (response) {
       //handle error
     });
-};
-
-export const getStudent = async (id: number) => {
-  try {
-    const res = await axios.get(apiUrl + `users/student/invite/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${store.isAuth.token}`,
-      },
-    });
-    // .then();
-  } catch (error) {
-    return;
-  }
 };
 
 export const deleteStudent = async (id: number) => {
@@ -149,7 +134,7 @@ export const modifyProfessor = async (
     const res = await axios
       .patch(
         apiUrl +
-          `users/professor/modify/${id}/
+        `users/professor/modify/${id}/
     `,
         {
           headers: {

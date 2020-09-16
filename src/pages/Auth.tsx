@@ -58,7 +58,6 @@ const Auth: React.FC = () => {
   };
   const [showModal, setShowModal] = useState(false);
   const [showToast, setshowToast] = useState(false);
-  const [text, setText] = useState<string>();
   const [login, setLogin] = useState("Login");
 
   const [showPopover, setShowPopover] = useState<{

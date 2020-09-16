@@ -64,95 +64,94 @@ const appPages: AppPage[] = [
   },
 ];
 
-const Menu: React.FunctionComponent<MenuProps> = observer(
-  ({ selectedPage }) => {
-    return (
-      <IonMenu contentId="main" type="overlay">
-        <div className="items">
-          <IonList class="ion-margin-top" id="inbox-list">
-            <IonMenuToggle autoHide={false}>
-              <IonItem
-                onClick={() => (store.page = "about")}
-                className={
-                  appPages[0].title.toLowerCase() === store.page
-                    ? "selected"
-                    : ""
-                }
-                routerLink={"/about"}
-                routerDirection="none"
-                lines="none"
-                detail={false}
-              >
-                <IonIcon slot="start" icon={appPages[0].iosIcon} />
-                <IonLabel>{appPages[0].title}</IonLabel>
-              </IonItem>
-              <IonItem
-                onClick={() => (store.page = "teachers")}
-                className={
-                  appPages[1].title.toLowerCase() === store.page
-                    ? "selected"
-                    : ""
-                }
-                routerLink={"/teachers"}
-                routerDirection="none"
-                lines="none"
-                detail={false}
-              >
-                <IonIcon slot="start" icon={appPages[1].iosIcon} />
-                <IonLabel>{appPages[1].title}</IonLabel>
-              </IonItem>
+const Menu: React.FC = observer(() => {
+  return (
+    <IonMenu contentId="main" type="overlay">
+      <div className="items">
+        <IonList class="ion-margin-top" id="inbox-list">
+          <IonMenuToggle autoHide={false}>
+            <IonItem
+              onClick={() => (store.page = "about")}
+              className={
+                appPages[0].title.toLowerCase() === store.page
+                  ? "selected"
+                  : ""
+              }
+              routerLink={"/about"}
+              routerDirection="none"
+              lines="none"
+              detail={false}
+            >
+              <IonIcon slot="start" icon={appPages[0].iosIcon} />
+              <IonLabel>{appPages[0].title}</IonLabel>
+            </IonItem>
+            <IonItem
+              onClick={() => (store.page = "teachers")}
+              className={
+                appPages[1].title.toLowerCase() === store.page
+                  ? "selected"
+                  : ""
+              }
+              routerLink={"/teachers"}
+              routerDirection="none"
+              lines="none"
+              detail={false}
+            >
+              <IonIcon slot="start" icon={appPages[1].iosIcon} />
+              <IonLabel>{appPages[1].title}</IonLabel>
+            </IonItem>
 
-              <IonItem
-                onClick={() => (store.page = "projects")}
-                className={
-                  appPages[2].title.toLowerCase() === store.page
-                    ? "selected"
-                    : ""
-                }
-                routerLink={"/projects"}
-                routerDirection="none"
-                lines="none"
-                detail={false}
-              >
-                <IonIcon slot="start" icon={appPages[2].iosIcon} />
-                <IonLabel>{appPages[2].title}</IonLabel>
-              </IonItem>
-              <IonItem
-                onClick={() => (store.page = "promo")}
-                className={
-                  appPages[3].title.toLowerCase() === store.page
-                    ? "selected"
-                    : ""
-                }
-                routerLink={"/promo"}
-                routerDirection="none"
-                lines="none"
-                detail={false}
-              >
-                <IonIcon slot="start" icon={appPages[3].iosIcon} />
-                <IonLabel>{appPages[3].title}</IonLabel>
-              </IonItem>
-              <IonItem
-                onClick={() => (store.page = "students")}
-                className={
-                  appPages[4].title.toLowerCase() === store.page
-                    ? "selected"
-                    : ""
-                }
-                routerLink={"/students"}
-                routerDirection="none"
-                lines="none"
-                detail={false}
-              >
-                <IonIcon slot="start" icon={appPages[4].iosIcon} />
-                <IonLabel>{appPages[4].title}</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-          </IonList>
-        </div>
-      </IonMenu>
-    );
-  }
+            <IonItem
+              onClick={() => (store.page = "projects")}
+              className={
+                appPages[2].title.toLowerCase() === store.page
+                  ? "selected"
+                  : ""
+              }
+              routerLink={"/projects"}
+              routerDirection="none"
+              lines="none"
+              detail={false}
+            >
+              <IonIcon slot="start" icon={appPages[2].iosIcon} />
+              <IonLabel>{appPages[2].title}</IonLabel>
+            </IonItem>
+            <IonItem
+              onClick={() => (store.page = "promo")}
+              className={
+                appPages[3].title.toLowerCase() === store.page
+                  ? "selected"
+                  : ""
+              }
+              routerLink={"/promo"}
+              routerDirection="none"
+              lines="none"
+              detail={false}
+            >
+              <IonIcon slot="start" icon={appPages[3].iosIcon} />
+              <IonLabel>{appPages[3].title}</IonLabel>
+            </IonItem>
+            <IonItem
+              onClick={() => (store.page = "students")}
+              className={
+                appPages[4].title.toLowerCase() === store.page
+                  ? "selected"
+                  : ""
+              }
+              routerLink={"/students"}
+              routerDirection="none"
+              lines="none"
+              detail={false}
+            >
+              <IonIcon slot="start" icon={appPages[4].iosIcon} />
+              <IonLabel>{appPages[4].title}</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+        </IonList>
+      </div>
+    </IonMenu>
+  );
+}
 );
 
 export default withRouter(Menu);

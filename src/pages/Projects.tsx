@@ -25,7 +25,6 @@ import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
 import AddProject from "../forms/project/AddProject";
-import EditProject from "../forms/project/EditProject";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
 import "./Projects.css";
@@ -37,33 +36,13 @@ const Projects: React.FC = observer(() => {
   const [showModal, setShowModal] = useState(false);
   const [showToast, setshowToast] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const [project, setProject] = useState({
-    id: 0,
-    title: "",
-    domain: "",
-    professor: "",
-    tools: "",
-    requiredDocuments: "",
-    promo: "",
-  });
-  const edit = (data: any) => {
-    project.id = data.id;
-    project.title = data.title;
-    project.domain = data.domain;
-    project.professor = data.professor;
-    project.tools = data.tools;
-    project.requiredDocuments = data.requiredDocuments;
-    project.promo = data.promo;
-
-    setShowEdit(true);
-  };
 
   const getUsers = async () => {
-    async function fetchPromotion() {
+    async function fetchProjects() {
       await api.getProjects();
       setProjects(store.projects);
     }
-    fetchPromotion();
+    fetchProjects();
   };
 
   const searchHandle = (input: string) => {
@@ -136,7 +115,6 @@ const Projects: React.FC = observer(() => {
               Dismiss
             </IonButton>
           </div>
-          <EditProject data={project} />
         </IonModal>
         <IonGrid>
           <IonRow class="ion-align-items-center">
@@ -191,67 +169,65 @@ const Projects: React.FC = observer(() => {
                         <div>Loading...</div>
                       ) : (
                           projects.map((e: any, i) => {
-                            {
-                              if (
-                                e.title
-                                  .toLowerCase()
-                                  .includes(store.searchList.toLowerCase())
-                              )
-                                return (
-                                  <IonCol
-                                    size="12"
-                                    sizeSm="6"
-                                    sizeMd="4"
-                                    sizeXl="3"
-                                    class=" ion-text-center"
+                            if (
+                              e.title
+                                .toLowerCase()
+                                .includes(store.searchList.toLowerCase())
+                            )
+                              return (
+                                <IonCol
+                                  key={e.title}
+                                  size="12"
+                                  sizeSm="6"
+                                  sizeMd="4"
+                                  sizeXl="3"
+                                  class=" ion-text-center"
+                                >
+                                  <Anime
+                                    opacity={[0, 1]}
+                                    duration={2000}
+                                    easing="easeOutElastic"
                                   >
-                                    <Anime
-                                      opacity={[0, 1]}
-                                      duration={2000}
-                                      easing="easeOutElastic"
-                                    >
-                                      <IonCard class="shadow holder ion-text-center">
-                                        <IonCardHeader>
-                                          <IonCardTitle
-                                            color="dark"
-                                            className="ion-padding project"
-                                          ><strong>{e.title}</strong>
-
-                                          </IonCardTitle>
-                                        </IonCardHeader>
+                                    <IonCard class="shadow holder ion-text-center">
+                                      <IonCardHeader>
                                         <IonCardTitle
                                           color="dark"
-                                          className="ion-padding "
-                                        >
-                                          <IonLabel>{e.domain}</IonLabel>
+                                          className="ion-padding project"
+                                        ><strong>{e.title}</strong>
                                         </IonCardTitle>
-                                        <IonChip outline={false} color="dark">
-                                          <IonLabel>{e.tools}</IonLabel>
-                                        </IonChip>
+                                      </IonCardHeader>
+                                      <IonCardTitle
+                                        color="dark"
+                                        className="ion-padding "
+                                      >
+                                        <IonLabel>{e.domain}</IonLabel>
+                                      </IonCardTitle>
+                                      <IonChip outline={false} color="dark">
+                                        <IonLabel>{e.tools}</IonLabel>
+                                      </IonChip>
 
-                                        <IonCardContent>
-                                          <IonButtons class="ion-justify-content-center ion-text-center">
-                                            <IonButton
-                                              class="ion-text-end"
-                                              color="danger"
-                                              key={e.id}
-                                              onClick={() => {
-                                                setId(e.id);
-                                                setShowAlert(true);
-                                              }}
-                                            >
-                                              <IonIcon
-                                                slot="icon-only"
-                                                icon={closeOutline}
-                                              />
-                                            </IonButton>
-                                          </IonButtons>
-                                        </IonCardContent>
-                                      </IonCard>
-                                    </Anime>
-                                  </IonCol>
-                                );
-                            }
+                                      <IonCardContent>
+                                        <IonButtons class="ion-justify-content-center ion-text-center">
+                                          <IonButton
+                                            class="ion-text-end"
+                                            color="danger"
+                                            key={e.id}
+                                            onClick={() => {
+                                              setId(e.id);
+                                              setShowAlert(true);
+                                            }}
+                                          >
+                                            <IonIcon
+                                              slot="icon-only"
+                                              icon={closeOutline}
+                                            />
+                                          </IonButton>
+                                        </IonButtons>
+                                      </IonCardContent>
+                                    </IonCard>
+                                  </Anime>
+                                </IonCol>
+                              );
                           })
                         )}
                     </IonRow>

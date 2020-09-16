@@ -169,6 +169,7 @@ const Students: React.FC = observer(() => {
                             )
                               return (
                                 <IonCol
+                                  key={e.title}
                                   size="12"
                                   sizeSm="6"
                                   sizeMd="4"

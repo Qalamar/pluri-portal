@@ -14,7 +14,7 @@ import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import Menu from "./components/Menu";
 import Auth from "./pages/Auth";
@@ -23,12 +23,11 @@ import Projects from "./pages/Projects";
 import Promo from "./pages/Promo";
 import Students from "./pages/Students";
 import Techers from "./pages/Teachers";
-import { store } from "./utils/Store";
 //import MyTeam from "./student/MyTeam";
 import "./theme/variables.css";
+import { store } from "./utils/Store";
 
 const App: React.FC = observer(() => {
-  const [selectedPage, setSelectedPage] = useState("");
 
   const isAuth = () => {
     var session = JSON.parse(localStorage.getItem("Auth")!);
@@ -37,7 +36,6 @@ const App: React.FC = observer(() => {
       store.isAuth.state = session.state;
       store.isAuth.token = session.token;
       store.isAuth.id = session.id;
-
       return true;
     } else return false;
   };
@@ -46,7 +44,7 @@ const App: React.FC = observer(() => {
       <IonReactRouter>
         {isAuth() ? (
           <IonSplitPane contentId="main">
-            <Menu selectedPage={selectedPage} />
+            <Menu />
             <IonRouterOutlet id="main">
               <Route
                 path="/"
