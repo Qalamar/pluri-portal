@@ -139,3 +139,14 @@ ion-searchbar {
   --box-shadow: 0 23px 36px rgba(237, 237, 237, 0.5) !important;
   margin-bottom: 20px;
 }
+
+.home-cart {
+  width: 100%;
+  min-height: 300px;
+}
+.summary {
+  min-height: 200px;
+  width: 100%;
+  background-color: #6570eb;
+  border-radius: 20px;
+}
