@@ -27,7 +27,11 @@ Pluri portal is an academic platform for teachers and students, allowing project
 # Screenshots
 
 ![Screenshot - Desktop](https://i.imgur.com/3R9Z5cO.gif)
+
+![Screenshot - Desktop](https://i.imgur.com/dYLAj94.gif)
+
 ![Screenshot - Desktop](https://i.imgur.com/RMAVkfq.gif)
+
 ![Screenshot - Desktop](https://i.imgur.com/2gGj7yt.gif)
 
 # Mobile
