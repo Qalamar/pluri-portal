@@ -144,9 +144,39 @@ ion-searchbar {
   width: 100%;
   min-height: 300px;
 }
+
 .summary {
   min-height: 200px;
-  width: 100%;
+  min-width: 30%;
   background-color: #6570eb;
   border-radius: 20px;
+  box-shadow: 0 23px 36px rgba(207, 207, 207, 0.781);
+}
+
+@media only screen and (max-width: 1200px) {
+  .summary,
+  .backend,
+  .github,
+  .report {
+    display: none;
+  }
+}
+
+.backend {
+  background-image: url("../assets/Backend.svg");
+  background-size: cover;
+  width: auto;
+  height: 256px;
+}
+.github {
+  background-image: url("../assets/Github.svg");
+  background-size: cover;
+  width: auto;
+  height: 256px;
+}
+.report {
+  background-image: url("../assets/Report.svg");
+  background-size: cover;
+  width: auto;
+  height: 256px;
 }

@@ -2,47 +2,75 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
-  IonCardHeader,
+
   IonChip,
   IonCol,
   IonContent,
   IonGrid,
   IonIcon,
-  IonLabel,
+
+
+
+
+
+  IonItem, IonLabel,
   IonModal,
   IonPage,
   IonRow,
-  IonTitle
+
+
+  IonSelect,
+  IonSelectOption, IonTitle, IonItemDivider
 } from "@ionic/react";
-import { closeOutline, logoIonic, logoReact, newspaperOutline, server } from "ionicons/icons";
+import { ResponsivePie } from "@nivo/pie";
+import { motion } from "framer-motion";
+import { closeOutline, globeOutline, logoIonic, logoReact, server, fileTrayFullOutline } from "ionicons/icons";
+import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Toolbar from "../components/Toolbar";
 import "../forms/promotion/PromoForm.css";
+import * as api from "../utils/API";
 import { store } from "../utils/Store";
-import { ResponsivePie } from "@nivo/pie";
-
 import "./Auth.css";
 
-const Homepage: React.FC = () => {
+
+
+const Homepage: React.FC = observer(() => {
   const [showModal, setShowModal] = useState(false);
+  const [mail, setMail] = useState<string>();
+
   useEffect(() => {
     store.page = "about";
     if (store.isAuth.access === "2") setShowModal(true);
+    api.getProjects();
+    api.getPromotions();
+    api.getStudents();
+    api.getProffessors();
   }, []);
 
   const data = [
     {
-      id: "Correct",
-      label: "Correct",
-      value: 6,
+      id: "Students",
+      label: "Students",
+      value: store.students.length,
       color: "hsl(134, 70%, 50%)",
     },
     {
-      id: "Wrong",
-      label: "Wrong",
-      value: 4,
+      id: "Teachers",
+      label: "Teachers",
+      value: store.teachers.length,
       color: "hsl(127, 70%, 50%)",
-    },
+    }, {
+      id: "Promos",
+      label: "Promos",
+      value: store.promos.length,
+      color: "hsl(127, 70%, 50%)",
+    }, {
+      id: "Projects",
+      label: "Projects",
+      value: store.projects.length,
+      color: "hsl(127, 70%, 50%)",
+    }
   ];
 
   return (
@@ -71,20 +99,17 @@ const Homepage: React.FC = () => {
           </div>
         </IonContent>
       </IonModal>
-      <IonContent className="showcase">
+      <IonContent className="flow">
         <IonGrid>
-          <IonRow class="ion-align-items-center ">
+          <IonRow class="">
             <IonCol size="12" sizeXl="8" class='ion-padding'>
               <IonCard className='home-cart holder ion-padding'>
                 <IonGrid>
                   <IonRow>
-                    <IonCol>
-                      <IonTitle>Summary</IonTitle>
-                      <IonCard className='summary'>
-
-                      </IonCard>
+                    <IonCol size='12' sizeLg='6'>
+                      <IonTitle class='project'><strong>Summary</strong></IonTitle>
                     </IonCol>
-                    <IonCol>
+                    <IonCol size='12' sizeLg='6'>
                       <div style={{ height: "250px" }}>
                         <ResponsivePie
                           data={data}
@@ -205,56 +230,134 @@ const Homepage: React.FC = () => {
                 </IonGrid>
               </IonCard>
             </IonCol>
-            <IonCol size="12" sizeMd="4" sizeXl="4" class='ion-padding'>
-              <IonCard class="ion-text-center holder home-cart ion-padding">
-                <div>
-                  <IonIcon
-                    icon={newspaperOutline}
-                    class="ico"
-                    color="dark"
-                  />
-                </div>
-                <IonCardContent class=" ion-text-center">
-                  <IonGrid>
-                    <IonRow class="ion-margin-bottom">
-                      <IonCol>
-                        <IonTitle color="dark" class="project">
-                          <strong>Pluri Portal</strong></IonTitle>
-                        <IonLabel>
-                          Pluri portal is an academic platform for teachers and
-                          students , allowing project submission, preview and
-                          attribution.
-                        </IonLabel>
-                      </IonCol>
-                    </IonRow>
-                    <IonLabel>
-                      <strong>Technologies</strong>
-                    </IonLabel>
-                    <IonRow class="ion-padding-horizontal ion-justify-content-center">
-                      <IonCol>
-                        <IonChip outline={false} color="danger">
-                          <IonIcon icon={logoReact} />
-                          <IonLabel>React</IonLabel>
-                        </IonChip>
-                        <IonChip outline={false} color="primary">
-                          <IonIcon icon={logoIonic} />
-                          <IonLabel>Ionic</IonLabel>
-                        </IonChip>
-                        <IonChip outline={false} color="success">
-                          <IonIcon icon={server} />
-                          <IonLabel>Django</IonLabel>
-                        </IonChip>
-                      </IonCol>
-                    </IonRow>
+            <IonCol size="12" sizeXl="4" class='ion-padding-top'>
+              <IonCard class="ion-text-center holder home-cart ion-padding-top">
 
+                <IonCardContent class="ion-text-center">
+                  <IonGrid>
+                    <IonRow>
+                      <IonCol>
+                        <IonChip class='ion-padding' outline={true} color="primary">
+                          <IonLabel>1 CPI</IonLabel>
+                        </IonChip>
+                        <IonChip class='ion-padding' outline={true} color="primary">
+                          <IonLabel>2 CPI</IonLabel>
+                        </IonChip>
+                        <IonChip class='ion-padding' outline={true} color="primary">
+                          <IonLabel>1 CS</IonLabel>
+                        </IonChip>
+                        <IonChip class='ion-padding' outline={true} color="primary">
+                          <IonIcon icon={globeOutline} />
+                          <IonLabel>2 CS - SIW</IonLabel>
+                        </IonChip>
+                        <IonChip class='ion-padding' outline={true} color="primary">
+                          <IonIcon icon={fileTrayFullOutline} />
+                          <IonLabel>2 CS - SIL</IonLabel>
+                        </IonChip>
+                        <IonChip class='ion-padding' outline={true} color="primary">
+                          <IonIcon icon={globeOutline} />
+                          <IonLabel>3 CS - SIW</IonLabel>
+                        </IonChip>
+                        <IonChip class='ion-padding' outline={true} color="primary">
+                          <IonIcon icon={fileTrayFullOutline} />
+                          <IonLabel>3 CS - SIL</IonLabel>
+                        </IonChip>
+                        <IonItem lines='none' class='ion-margin-top ion-padding-horizontal'>
+                          <IonLabel>Promotion</IonLabel>
+                          <IonSelect value={mail} placeholder="Select" onIonChange={e => setMail(e.detail.value)}>
+                            <IonSelectOption value="mailto:etudiant1@esi-sba.dz">1CPI</IonSelectOption>
+                            <IonSelectOption value="mailto:etudiant2@esi-sba.dz">2CPI</IonSelectOption>
+                            <IonSelectOption value="mailto:etudiant3@esi-sba.dz">1CS</IonSelectOption>
+                            <IonSelectOption value="mailto:etudiant4@esi-sba.dz">2CS - SIW</IonSelectOption>
+                            <IonSelectOption value="mailto:etudiant4@esi-sba.dz">2CS - SIL</IonSelectOption>
+                            <IonSelectOption value="mailto:etudiant5@esi-sba.dz">3CS - SIW</IonSelectOption>
+                            <IonSelectOption value="mailto:etudiant5@esi-sba.dz">3CS - SIL</IonSelectOption>
+                          </IonSelect>
+                        </IonItem>
+                        <IonButton href={mail} class='ion-margin-top'>Send Mail</IonButton>
+                      </IonCol>
+                    </IonRow>
                   </IonGrid>
                 </IonCardContent>
               </IonCard>
             </IonCol>
+            <motion.div
+              animate={{ x: -10, y: -220 }}
+              whileHover={{ y: -230 }}
+            >
+              <IonCard className='summary ion-padding'>
+                <IonGrid>
+                  <IonRow class="ion-margin-vertical">
+                    <IonCol>
+                      <IonLabel color="light" class="project">
+                        <strong>Pluri Portal</strong></IonLabel>
+                      <br></br>
+                      <IonLabel color='light'>
+                        Pluri portal is an academic platform for teachers and<br></br>
+                        students,allowing project submission, preview and<br></br> attribution.
+                        </IonLabel>
+                    </IonCol>
+                  </IonRow>
+                  <IonRow class="ion-justify-content-center">
+                    <IonCol>
+                      <IonChip outline={true} color="light">
+                        <IonIcon icon={logoReact} />
+                        <IonLabel>React</IonLabel>
+                      </IonChip>
+                      <IonChip outline={true} color="light">
+                        <IonIcon icon={logoIonic} />
+                        <IonLabel>Ionic</IonLabel>
+                      </IonChip>
+                      <IonChip outline={true} color="light">
+                        <IonIcon icon={server} />
+                        <IonLabel>Django</IonLabel>
+                      </IonChip>
+                    </IonCol>
+                  </IonRow>
+
+                </IonGrid>
+              </IonCard>
+            </motion.div>
+          </IonRow>
+          <IonRow class="ion-no-padding">
+            <IonCol size='12' sizeLg='4'>
+              <a href='https://bragdonilyes.pythonanywhere.com/cantbefoundkids/login/?next=/cantbefoundkids/' target='_blank' rel='noopener'>
+                <motion.div
+                  animate={{ y: -220 }}
+                  whileHover={{ scale: 1.1, y: -240 }}
+
+                >
+                  <div className='backend'></div>
+                </motion.div>
+              </a>
+
+            </IonCol>
+            <IonCol size='12' sizeLg='4'>
+              <a href='https://github.com/Qalamar/pluri-portal' target='_blank' rel='noopener'>
+                <motion.div
+                  animate={{ y: -220 }}
+                  whileHover={{ scale: 1.1, y: -240 }}
+
+                >
+                  <div className='github'></div>
+                </motion.div>
+              </a>
+            </IonCol>
+            <IonCol size='12' sizeLg='4'>
+              <a href='#' target='_blank' rel='noopener'>
+                <motion.div
+                  animate={{ y: -220 }}
+                  whileHover={{ scale: 1.1, y: -240 }}
+
+                >
+                  <div className='report'></div>
+                </motion.div></a>
+            </IonCol>
+
           </IonRow>
         </IonGrid>
       </IonContent>
     </IonPage>
   );
-};
+});
 export default Homepage;
