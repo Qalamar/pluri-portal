@@ -2,37 +2,29 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
-
   IonChip,
   IonCol,
   IonContent,
   IonGrid,
   IonIcon,
-
-
-
-
-
   IonItem, IonLabel,
   IonModal,
   IonPage,
   IonRow,
-
-
   IonSelect,
-  IonSelectOption, IonTitle, IonItemDivider
+  IonSelectOption,
+  IonTitle
 } from "@ionic/react";
 import { ResponsivePie } from "@nivo/pie";
 import { motion } from "framer-motion";
-import { closeOutline, globeOutline, logoIonic, logoReact, server, fileTrayFullOutline } from "ionicons/icons";
+import { closeOutline, fileTrayFullOutline, globeOutline, logoIonic, logoReact, server } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Toolbar from "../components/Toolbar";
-import "../forms/promotion/PromoForm.css";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
 import "./Auth.css";
-
+import "../forms/promotion/PromoForm.css";
 
 
 const Homepage: React.FC = observer(() => {
@@ -232,7 +224,6 @@ const Homepage: React.FC = observer(() => {
             </IonCol>
             <IonCol size="12" sizeXl="4" class='ion-padding-top'>
               <IonCard class="ion-text-center holder home-cart ion-padding-top">
-
                 <IonCardContent class="ion-text-center">
                   <IonGrid>
                     <IonRow>
@@ -314,7 +305,6 @@ const Homepage: React.FC = observer(() => {
                       </IonChip>
                     </IonCol>
                   </IonRow>
-
                 </IonGrid>
               </IonCard>
             </motion.div>
@@ -325,19 +315,16 @@ const Homepage: React.FC = observer(() => {
                 <motion.div
                   animate={{ y: -220 }}
                   whileHover={{ scale: 1.1, y: -240 }}
-
                 >
                   <div className='backend'></div>
                 </motion.div>
               </a>
-
             </IonCol>
             <IonCol size='12' sizeLg='4'>
               <a href='https://github.com/Qalamar/pluri-portal' target='_blank' rel='noopener'>
                 <motion.div
                   animate={{ y: -220 }}
                   whileHover={{ scale: 1.1, y: -240 }}
-
                 >
                   <div className='github'></div>
                 </motion.div>
@@ -348,12 +335,10 @@ const Homepage: React.FC = observer(() => {
                 <motion.div
                   animate={{ y: -220 }}
                   whileHover={{ scale: 1.1, y: -240 }}
-
                 >
                   <div className='report'></div>
                 </motion.div></a>
             </IonCol>
-
           </IonRow>
         </IonGrid>
       </IonContent>
