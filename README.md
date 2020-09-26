@@ -4,7 +4,7 @@ Pluri portal is an academic platform for teachers and students, allowing project
 
 **Technologies:** React | Ionic Framework | Django Rest Framework | MySQL | Firebase
 
-- **[Live Preview:](https://pluriportal.web.app/)** (Guest access)
+- **[Live Preview:](https://pluriportal.web.app/)** (Limited access)
 
 # Prequisities
 
@@ -27,7 +27,11 @@ Pluri portal is an academic platform for teachers and students, allowing project
 # Screenshots
 
 ![Screenshot - Desktop](https://i.imgur.com/3R9Z5cO.gif)
+
+![Screenshot - Desktop](https://i.imgur.com/dYLAj94.gif)
+
 ![Screenshot - Desktop](https://i.imgur.com/RMAVkfq.gif)
+
 ![Screenshot - Desktop](https://i.imgur.com/2gGj7yt.gif)
 
 # Mobile
