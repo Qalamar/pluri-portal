@@ -19,7 +19,6 @@ const Settings: React.FC = () => {
               <IonIcon slot="end" icon={closeOutline} />
               LOGOUT
             </IonButton>
-
           </IonButtons>
         </IonItem>
       </IonList>

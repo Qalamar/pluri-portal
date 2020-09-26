@@ -34,20 +34,17 @@ import animationData from "../assets/Logo.json";
 import * as api from "../utils/API";
 import "./Auth.css";
 
-let initialValues = {
-  email: "throwaway@test.com",
-  password: "throwaway1@",
-};
 interface login {
   email: string;
   password: string;
 }
 let defaultLogin: login = {
-  email: "",
-  password: "",
+  email: "throwaway@test.com",
+  password: "throwaway1@",
 };
 
 const Auth: React.FC = () => {
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -69,7 +66,7 @@ const Auth: React.FC = () => {
   });
 
   const { control, handleSubmit, formState, errors } = useForm({
-    defaultValues: { ...initialValues },
+    defaultValues: { ...defaultLogin },
     mode: "onChange",
   });
 
@@ -82,13 +79,12 @@ const Auth: React.FC = () => {
 
   const history = useHistory();
 
-  const onSubmit = (data: any) => {
-    let mail = initialValues.email;
-    let pass = initialValues.password;
+  const onSubmit = () => {
+    let mail = defaultLogin.email;
+    let pass = defaultLogin.password;
     api.userLogin(mail, pass);
     history.push("/home");
   };
-
   return (
     <IonPage>
       <IonContent>
@@ -219,10 +215,9 @@ const Auth: React.FC = () => {
                   Dismiss
                 </IonButton>
               </div>
-
               <IonCardContent class=" ion-text-center">
                 <form
-                  onSubmit={handleSubmit(() => onSubmit(defaultLogin))}
+                  onSubmit={handleSubmit(() => onSubmit())}
                   style={{ padding: 38 }}
                 >
                   <IonItem>
@@ -282,11 +277,9 @@ const Auth: React.FC = () => {
             </IonCard>
           </IonPopover>
         </IonToolbar>
-
         <section className="container">
           <div className="wave"></div>
         </section>
-
         <IonGrid class="ion-padding-top">
           <IonRow class="ion-align-items-center ion-justify-content-between">
             <IonCol size="0.5"></IonCol>
@@ -305,7 +298,6 @@ const Auth: React.FC = () => {
                 university curriculums
               </h3>
             </IonCol>
-
             <IonCol size="12" sizeMd="4" sizeLg="3">
               <Lottie options={defaultOptions} height={600} width={600} />
             </IonCol>
@@ -399,7 +391,6 @@ s60.2,40,120,40s59.8,0,59.8,0l0.2,143H-60V96L-40,95.6z"
             </svg>
           </div>
           <div className="full-width">
-
           </div>
         </div>
       </IonContent>

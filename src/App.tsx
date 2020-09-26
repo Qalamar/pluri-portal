@@ -1,5 +1,17 @@
 import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
+import { observer } from "mobx-react";
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
+import Menu from "./components/Menu";
+import Auth from "./pages/Auth";
+import Home from "./pages/Homepage";
+import Projects from "./pages/Projects";
+import Promo from "./pages/Promo";
+import Students from "./pages/Students";
+import Techers from "./pages/Teachers";
+import { store } from "./utils/Store";
+
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/display.css";
@@ -13,22 +25,9 @@ import "@ionic/react/css/structure.css";
 import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
-import { observer } from "mobx-react";
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
-import Menu from "./components/Menu";
-import Auth from "./pages/Auth";
-import Home from "./pages/Homepage";
-import Projects from "./pages/Projects";
-import Promo from "./pages/Promo";
-import Students from "./pages/Students";
-import Techers from "./pages/Teachers";
-//import MyTeam from "./student/MyTeam";
 import "./theme/variables.css";
-import { store } from "./utils/Store";
 
 const App: React.FC = observer(() => {
-
   const isAuth = () => {
     var session = JSON.parse(localStorage.getItem("Auth")!);
     if (session != null) {
