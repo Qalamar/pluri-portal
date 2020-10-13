@@ -25,6 +25,7 @@ import * as api from "../utils/API";
 import { store } from "../utils/Store";
 import "./Auth.css";
 import "../forms/promotion/PromoForm.css";
+import Iframe from "react-iframe";
 
 
 const Homepage: React.FC = observer(() => {
@@ -223,9 +224,9 @@ const Homepage: React.FC = observer(() => {
               </IonCard>
             </IonCol>
             <IonCol size="12" sizeXl="4" class='ion-padding-top'>
-              <IonCard class="ion-text-center holder home-cart ion-padding-top">
-                <IonCardContent class="ion-text-center">
-                  <IonGrid>
+              <IonCard class="ion-text-center holder home-cart ion-no-padding">
+                <IonCardContent class="">
+                  {/* <IonGrid>
                     <IonRow>
                       <IonCol>
                         <IonChip class='ion-padding' outline={true} color="primary">
@@ -268,7 +269,14 @@ const Homepage: React.FC = observer(() => {
                         <IonButton href={mail} class='ion-margin-top'>Send Mail</IonButton>
                       </IonCol>
                     </IonRow>
-                  </IonGrid>
+                  </IonGrid> */}
+                  <Iframe url="https://desolate-journey-22370.herokuapp.com/"
+                    width="100%"
+                    frameBorder={0}
+                    height="400px"
+                    id="myId"
+                    className="myClassname"
+                    position="relative" />
                 </IonCardContent>
               </IonCard>
             </IonCol>

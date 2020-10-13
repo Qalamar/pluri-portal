@@ -85,7 +85,7 @@ const Menu: React.FC = observer(() => {
               <IonIcon slot="start" icon={appPages[0].iosIcon} />
               <IonLabel>{appPages[0].title}</IonLabel>
             </IonItem>
-            <IonItem
+            {store.isAuth.access === '0' && <IonItem
               onClick={() => (store.page = "teachers")}
               className={
                 appPages[1].title.toLowerCase() === store.page
@@ -99,7 +99,8 @@ const Menu: React.FC = observer(() => {
             >
               <IonIcon slot="start" icon={appPages[1].iosIcon} />
               <IonLabel>{appPages[1].title}</IonLabel>
-            </IonItem>
+            </IonItem>}
+            
 
             <IonItem
               onClick={() => (store.page = "projects")}
