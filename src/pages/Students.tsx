@@ -142,19 +142,7 @@ const Students: React.FC = observer(() => {
                           ></IonIcon>
                           Add
                         </IonButton>
-                        <IonButton
-                          fill="clear"
-                          size="default"
-                          onClick={() => addUser()}
-                          color="dark"
-                        >
-                          <IonIcon
-                            icon={filterOutline}
-                            slot="start"
-                            size="large"
-                          ></IonIcon>
-                          Filter
-                        </IonButton>
+
                       </IonCol>
                     </IonRow>
                     <IonRow class="ion-justify-content-center">

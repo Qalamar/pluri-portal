@@ -182,14 +182,7 @@ const Promo: React.FC = observer(() => {
                             ></IonIcon>
                             Add
                           </IonButton>
-                          <IonButton fill="clear" size="default" color="dark">
-                            <IonIcon
-                              icon={filterOutline}
-                              slot="start"
-                              size="large"
-                            ></IonIcon>
-                            Filter
-                          </IonButton>
+
                         </IonCol>
                       </IonRow>
                       <IonRow></IonRow>

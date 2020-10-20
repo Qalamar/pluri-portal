@@ -9,6 +9,7 @@ import Home from "./pages/Homepage";
 import Projects from "./pages/Projects";
 import Promo from "./pages/Promo";
 import Students from "./pages/Students";
+import Teams from "./pages/Teams";
 import Techers from "./pages/Teachers";
 import { store } from "./utils/Store";
 
@@ -56,6 +57,7 @@ const App: React.FC = observer(() => {
               <Route path="/students" component={Students} exact={true} />
               <Route path="/promo" component={Promo} exact={true} />
               <Route path="/home" component={Home} exact={true} />
+              <Route path="/teams" component={Teams} exact={true} />
             </IonRouterOutlet>
           </IonSplitPane>
         ) : (
