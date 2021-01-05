@@ -34,7 +34,6 @@ import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
-import AddPromo from "../forms/promotion/AddPromo";
 import EditPromo from "../forms/promotion/EditPromo";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
@@ -67,9 +66,7 @@ const Promo: React.FC = observer(() => {
   });
 
   const [showToast, setshowToast] = useState(false);
-  const addPromo = () => {
-    setShowModal(true);
-  };
+
   const searchHandle = (input: string) => {
     store.searchList = input;
   };
@@ -106,7 +103,6 @@ const Promo: React.FC = observer(() => {
               Dismiss
             </IonButton>
           </div>
-          <AddPromo />
         </IonModal>
 
         <IonModal
@@ -166,24 +162,7 @@ const Promo: React.FC = observer(() => {
                           />
                         </IonCol>
                       </IonRow>
-                      <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
-                        <IonCol>
-                          <IonButton
-                            size="default"
-                            fill="clear"
-                            onClick={() => addPromo()}
-                            color="danger"
-                          >
-                            <IonIcon
-                              icon={addCircleOutline}
-                              slot="start"
-                              size="large"
-                            ></IonIcon>
-                            Add
-                          </IonButton>
 
-                        </IonCol>
-                      </IonRow>
                       <IonRow></IonRow>
                       <IonRow class="ion-justify-content-center">
                         {store.promos.length === 0 ? (

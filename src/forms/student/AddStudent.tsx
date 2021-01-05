@@ -15,24 +15,20 @@ import {
   personCircleOutline,
 } from "ionicons/icons";
 import { observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as api from "../../utils/API";
 
-let initialValues = {
-  firstName: "",
-  lastName: "",
-  password: "",
-  email: "",
-};
-
 const AddStudent: React.FC = observer(() => {
-  const [student, setStudent] = useState({
+
+  let initialValues = {
     firstName: "",
     lastName: "",
     password: "",
     email: "",
-  });
+  };
+
+  const [student, setStudent] = useState(initialValues);
 
   const { control, handleSubmit, formState, reset, errors } = useForm({
     defaultValues: { ...initialValues },
@@ -41,15 +37,11 @@ const AddStudent: React.FC = observer(() => {
   const [showToast, setshowToast] = useState(false);
   const [showAlert, setshowAlert] = useState(false);
 
-  useEffect(() => {
-    setStudent(initialValues)
-  }, []);
-
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
     return error ? (
       <div style={{ color: "red", fontWeight: "bold" }}>
-        {error.message || "Field Is Required"}
+        {error.message || "Required"}
       </div>
     ) : null;
   };

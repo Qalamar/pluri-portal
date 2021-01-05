@@ -24,7 +24,6 @@ import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
-import AddProject from "../forms/project/AddProject";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
 
@@ -100,7 +99,6 @@ const Projects: React.FC = observer(() => {
               Dismiss
             </IonButton>
           </div>
-          <AddProject />
         </IonModal>
         <IonModal isOpen={showEdit} onDidDismiss={() => setShowEdit(false)}>
           <div className="ion-text-end">
@@ -133,24 +131,7 @@ const Projects: React.FC = observer(() => {
                         </IonItem>
                       </IonCol>
                     </IonRow>
-                    <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">
-                      <IonCol>
-                        <IonButton
-                          size="default"
-                          fill="clear"
-                          onClick={() => addUser()}
-                          color="danger"
-                        >
-                          <IonIcon
-                            icon={addCircleOutline}
-                            slot="start"
-                            size="large"
-                          ></IonIcon>
-                          Add
-                        </IonButton>
 
-                      </IonCol>
-                    </IonRow>
                     <IonRow class="ion-justify-content-center">
                       {projects.length === 0 ? (
                         <div>Loading...</div>
