@@ -38,10 +38,7 @@ interface login {
   email: string;
   password: string;
 }
-let defaultLogin: login = {
-  email: "throwaway@test.com",
-  password: "throwaway1@",
-};
+
 
 const Auth: React.FC = () => {
 
@@ -65,6 +62,11 @@ const Auth: React.FC = () => {
     event: undefined,
   });
 
+  let defaultLogin: login = {
+    email: "throwaway@test.com",
+    password: "throwaway1@",
+  };
+
   const { control, handleSubmit, formState, errors } = useForm({
     defaultValues: { ...defaultLogin },
     mode: "onChange",
@@ -73,11 +75,13 @@ const Auth: React.FC = () => {
   const showError = (_fieldName: string) => {
     let error = (errors as any)[_fieldName];
     return error ? (
-      <div style={{ color: "red" }}>{error.message || "Field Is Required"}</div>
+      <div style={{ color: "red" }}>{error.message || "Required"}</div>
     ) : null;
   };
 
   const history = useHistory();
+
+
 
   const onSubmit = () => {
     let mail = defaultLogin.email;

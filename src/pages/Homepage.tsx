@@ -7,30 +7,27 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
-  IonItem, IonLabel,
+  IonLabel,
   IonModal,
   IonPage,
   IonRow,
-  IonSelect,
-  IonSelectOption,
   IonTitle
 } from "@ionic/react";
 import { ResponsivePie } from "@nivo/pie";
 import { motion } from "framer-motion";
-import { closeOutline, fileTrayFullOutline, globeOutline, logoIonic, logoReact, server } from "ionicons/icons";
+import { closeOutline, logoIonic, logoReact, server } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
+import Iframe from "react-iframe";
 import Toolbar from "../components/Toolbar";
+import "../forms/promotion/PromoForm.css";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
 import "./Auth.css";
-import "../forms/promotion/PromoForm.css";
-import Iframe from "react-iframe";
 
 
 const Homepage: React.FC = observer(() => {
   const [showModal, setShowModal] = useState(false);
-  const [mail, setMail] = useState<string>();
 
   useEffect(() => {
     store.page = "about";
@@ -319,7 +316,7 @@ const Homepage: React.FC = observer(() => {
           </IonRow>
           <IonRow class="ion-no-padding">
             <IonCol size='12' sizeLg='4'>
-              <a href='https://bragdonilyes.pythonanywhere.com/cantbefoundkids/login/?next=/cantbefoundkids/' target='_blank' rel='noopener'>
+              <a href='https://bragdonilyes.pythonanywhere.com/cantbefoundkids/login/?next=/cantbefoundkids/' target='_blank' rel="noopener noreferrer">
                 <motion.div
                   animate={{ y: -220 }}
                   whileHover={{ scale: 1.1, y: -240 }}
@@ -329,7 +326,7 @@ const Homepage: React.FC = observer(() => {
               </a>
             </IonCol>
             <IonCol size='12' sizeLg='4'>
-              <a href='https://github.com/Qalamar/pluri-portal' target='_blank' rel='noopener'>
+              <a href='https://github.com/Qalamar/pluri-portal' target='_blank' rel="noopener noreferrer">
                 <motion.div
                   animate={{ y: -220 }}
                   whileHover={{ scale: 1.1, y: -240 }}
@@ -339,7 +336,7 @@ const Homepage: React.FC = observer(() => {
               </a>
             </IonCol>
             <IonCol size='12' sizeLg='4'>
-              <a href='#' target='_blank' rel='noopener'>
+              <a href='mailto:contact@tariqhamrit.com' target='_blank' rel="noopener noreferrer">
                 <motion.div
                   animate={{ y: -220 }}
                   whileHover={{ scale: 1.1, y: -240 }}
