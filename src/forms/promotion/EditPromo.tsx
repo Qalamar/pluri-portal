@@ -27,7 +27,7 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { promotion } from "../../pages/Promo";
-import * as api from "../../utils/API";
+import { modifyPromotion, getPromotions } from "../../utils/API";
 
 export interface Promo {
   promo: promotion;
@@ -105,7 +105,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
           {
             text: "Save",
             handler: () => {
-              api.modifyPromotion(
+              modifyPromotion(
                 promot.id,
                 promot.cycle,
                 promot.year,
@@ -115,7 +115,7 @@ const EditPromo: React.FC<Promo> = observer(({ promo }) => {
                 promot.maxTeamMembers,
                 promot.maxTeamsInProject
               );
-              api.getPromotions();
+              getPromotions();
               setshowToast(true);
             },
           },

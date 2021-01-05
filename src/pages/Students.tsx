@@ -29,7 +29,7 @@ import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
 import AddStudent from "../forms/student/AddStudent";
-import * as api from "../utils/API";
+import { getStudents, deleteStudent } from "../utils/API";
 import { store } from "../utils/Store";
 
 const Students: React.FC = observer(() => {
@@ -40,7 +40,7 @@ const Students: React.FC = observer(() => {
 
   const getUsers = async () => {
     async function fetchPromotion() {
-      await api.getStudents();
+      await getStudents();
     }
     fetchPromotion();
   };
@@ -77,7 +77,7 @@ const Students: React.FC = observer(() => {
               cssClass: "del",
               text: "Delete",
               handler: () => {
-                api.deleteStudent(Id);
+                deleteStudent(Id);
                 setshowToast(true);
               },
             },

@@ -31,7 +31,7 @@ import Lottie from "react-lottie";
 import { useHistory } from "react-router-dom";
 import TextLoop from "react-text-loop";
 import animationData from "../assets/Logo.json";
-import * as api from "../utils/API";
+import { userLogin } from "../utils/API";
 import "../theme/main.css";
 
 interface login {
@@ -86,7 +86,7 @@ const Auth: React.FC = () => {
   const onSubmit = () => {
     let mail = defaultLogin.email;
     let pass = defaultLogin.password;
-    api.userLogin(mail, pass);
+    userLogin(mail, pass);
     history.push("/home");
   };
   return (

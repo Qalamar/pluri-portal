@@ -16,7 +16,7 @@ import {
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import * as api from "../../utils/API";
+import { modifyProfessor, getProffessors } from "../../utils/API";
 import { TeacherInterface } from "../../utils/Interfaces";
 
 export interface Professor {
@@ -57,12 +57,12 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
             text: "Cancel",
             role: "cancel",
             cssClass: "secondary",
-            handler: () => {},
+            handler: () => { },
           },
           {
             text: "Save",
             handler: () => {
-              api.modifyProfessor(
+              modifyProfessor(
                 teacher.id,
                 teacher.firstName,
                 teacher.lastName,
@@ -75,7 +75,7 @@ const EditPromo: React.FC<Professor> = observer(({ teacher }) => {
                 "Pr",
                 ""
               );
-              api.getProffessors();
+              getProffessors();
               setshowToast(true);
             },
           },

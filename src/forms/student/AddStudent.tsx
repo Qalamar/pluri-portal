@@ -17,7 +17,7 @@ import {
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import * as api from "../../utils/API";
+import { addStudent, getStudents } from "../../utils/API";
 
 const AddStudent: React.FC = observer(() => {
 
@@ -46,7 +46,7 @@ const AddStudent: React.FC = observer(() => {
     ) : null;
   };
   const onSubmit = () => {
-    api.addStudent(
+    addStudent(
       student.firstName,
       student.lastName,
       Math.floor(Math.random() * 100000 + 1).toString(),
@@ -57,7 +57,7 @@ const AddStudent: React.FC = observer(() => {
       7,
       "Pr"
     );
-    api.getStudents();
+    getStudents();
     setshowToast(true);
   };
 

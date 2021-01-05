@@ -31,7 +31,7 @@ import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
 import AddTeacher from "../forms/teacher/AddTeacher";
 import EditTeacher from "../forms/teacher/EditTeacher";
-import * as api from "../utils/API";
+import { getProffessors, deleteProfessor } from "../utils/API";
 import { store } from "../utils/Store";
 
 const Techers: React.FC = observer(() => {
@@ -51,7 +51,7 @@ const Techers: React.FC = observer(() => {
 
   const getUsers = async () => {
     async function fetchTeachers() {
-      await api.getProffessors();
+      await getProffessors();
       setTeachers(teachers);
     }
     fetchTeachers();
@@ -98,7 +98,7 @@ const Techers: React.FC = observer(() => {
               cssClass: "del",
               text: "Delete",
               handler: () => {
-                api.deleteProfessor(Id);
+                deleteProfessor(Id);
                 setshowToast(true);
               },
             },

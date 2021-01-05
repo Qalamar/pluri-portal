@@ -21,7 +21,7 @@ import React, { useEffect, useState } from "react";
 import Iframe from "react-iframe";
 import Toolbar from "../components/Toolbar";
 import "../forms/promotion/PromoForm.css";
-import * as api from "../utils/API";
+import { getProjects, getPromotions, getStudents, getProffessors } from "../utils/API";
 import { store } from "../utils/Store";
 import "../theme/main.css";
 
@@ -32,10 +32,10 @@ const Homepage: React.FC = observer(() => {
   useEffect(() => {
     store.page = "about";
     if (store.isAuth.access === "2") setShowModal(true);
-    api.getProjects();
-    api.getPromotions();
-    api.getStudents();
-    api.getProffessors();
+    getProjects();
+    getPromotions();
+    getStudents();
+    getProffessors();
   }, []);
 
   const data = [

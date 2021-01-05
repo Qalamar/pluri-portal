@@ -19,12 +19,12 @@ import {
   IonSearchbar,
   IonToast
 } from "@ionic/react";
-import { addCircleOutline, closeOutline } from "ionicons/icons";
+import { closeOutline } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
-import * as api from "../utils/API";
+import { getProjects, deleteProject } from "../utils/API";
 import { store } from "../utils/Store";
 
 const Projects: React.FC = observer(() => {
@@ -37,7 +37,7 @@ const Projects: React.FC = observer(() => {
 
   const getUsers = async () => {
     async function fetchProjects() {
-      await api.getProjects();
+      await getProjects();
       setProjects(store.projects);
     }
     fetchProjects();
@@ -45,10 +45,6 @@ const Projects: React.FC = observer(() => {
 
   const searchHandle = (input: string) => {
     store.searchList = input;
-  };
-
-  const addUser = () => {
-    setShowModal(true);
   };
 
   useEffect(() => {
@@ -75,7 +71,7 @@ const Projects: React.FC = observer(() => {
               cssClass: "del",
               text: "Delete",
               handler: () => {
-                api.deleteProject(Id);
+                deleteProject(Id);
                 setshowToast(true);
               },
             },

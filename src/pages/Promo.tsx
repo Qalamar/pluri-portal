@@ -21,7 +21,6 @@ import {
   IonToast
 } from "@ionic/react";
 import {
-  addCircleOutline,
   closeOutline,
   createOutline,
   peopleCircleOutline,
@@ -35,7 +34,7 @@ import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
 import Toolbar from "../components/Toolbar";
 import EditPromo from "../forms/promotion/EditPromo";
-import * as api from "../utils/API";
+import { getPromotions, deletePromotion } from "../utils/API";
 import { store } from "../utils/Store";
 
 export interface promotion {
@@ -72,7 +71,7 @@ const Promo: React.FC = observer(() => {
   };
   useEffect(() => {
     async function fetchPromotion() {
-      await api.getPromotions();
+      await getPromotions();
     }
     fetchPromotion();
   }, []);
@@ -137,7 +136,7 @@ const Promo: React.FC = observer(() => {
               cssClass: "del",
               text: "Delete",
               handler: () => {
-                api.deletePromotion(Id);
+                deletePromotion(Id);
                 setshowToast(true);
               },
             },
