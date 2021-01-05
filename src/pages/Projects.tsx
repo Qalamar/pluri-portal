@@ -17,9 +17,9 @@ import {
   IonPage,
   IonRow,
   IonSearchbar,
-  IonToast,
+  IonToast
 } from "@ionic/react";
-import { addCircleOutline, closeOutline, filterOutline } from "ionicons/icons";
+import { addCircleOutline, closeOutline } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Anime from "react-anime";
@@ -27,7 +27,6 @@ import Toolbar from "../components/Toolbar";
 import AddProject from "../forms/project/AddProject";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
-import "./Projects.css";
 
 const Projects: React.FC = observer(() => {
   const [projects, setProjects] = useState([]);

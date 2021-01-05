@@ -18,18 +18,17 @@ import {
   IonRow,
   IonSearchbar,
   IonText,
-  IonToast,
+  IonToast
 } from "@ionic/react";
 import {
   addCircleOutline,
   closeOutline,
   createOutline,
-  filterOutline,
   peopleCircleOutline,
   personCircleOutline,
   readerOutline,
   trendingDown,
-  trendingUpOutline,
+  trendingUpOutline
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";

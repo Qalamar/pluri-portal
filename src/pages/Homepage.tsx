@@ -23,7 +23,7 @@ import Toolbar from "../components/Toolbar";
 import "../forms/promotion/PromoForm.css";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
-import "./Auth.css";
+import "../theme/main.css";
 
 
 const Homepage: React.FC = observer(() => {

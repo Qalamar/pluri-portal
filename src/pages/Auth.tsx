@@ -32,7 +32,7 @@ import { useHistory } from "react-router-dom";
 import TextLoop from "react-text-loop";
 import animationData from "../assets/Logo.json";
 import * as api from "../utils/API";
-import "./Auth.css";
+import "../theme/main.css";
 
 interface login {
   email: string;
