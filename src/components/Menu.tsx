@@ -4,21 +4,20 @@ import {
   IonLabel,
   IonList,
   IonMenu,
-  IonMenuToggle,
+  IonMenuToggle
 } from "@ionic/react";
 import {
   albumsOutline,
   informationCircleOutline,
-  peopleCircleOutline,
   personCircleOutline,
   readerOutline,
-  schoolOutline,
+  schoolOutline
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { store } from "../utils/Store";
-import "./Menu.css";
+import "../theme/menu.css";
 
 interface MenuProps extends RouteComponentProps {
   selectedPage: string;
