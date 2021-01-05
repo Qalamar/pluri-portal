@@ -62,12 +62,6 @@ const appPages: AppPage[] = [
     url: "/students",
     iosIcon: personCircleOutline,
     mdIcon: personCircleOutline,
-  },
-  {
-    title: "Teams",
-    url: "/teams",
-    iosIcon: peopleCircleOutline,
-    mdIcon: peopleCircleOutline,
   }
 ];
 
@@ -154,21 +148,7 @@ const Menu: React.FC = observer(() => {
               <IonIcon slot="start" icon={appPages[4].iosIcon} />
               <IonLabel>{appPages[4].title}</IonLabel>
             </IonItem>
-            <IonItem
-              onClick={() => (store.page = "teams")}
-              className={
-                appPages[5].title.toLowerCase() === store.page
-                  ? "selected"
-                  : ""
-              }
-              routerLink={"/teams"}
-              routerDirection="none"
-              lines="none"
-              detail={false}
-            >
-              <IonIcon slot="start" icon={appPages[5].iosIcon} />
-              <IonLabel>{appPages[5].title}</IonLabel>
-            </IonItem>
+
           </IonMenuToggle>
         </IonList>
       </div>

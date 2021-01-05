@@ -17,13 +17,12 @@ import {
   IonPage,
   IonRow,
   IonSearchbar,
-  IonToast,
+  IonToast
 } from "@ionic/react";
 import {
   addCircleOutline,
   closeOutline,
-  filterOutline,
-  personCircleOutline,
+  personCircleOutline
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
@@ -109,10 +108,6 @@ const Students: React.FC = observer(() => {
           <IonRow class="ion-align-items-center">
             <IonCol size="12">
               <IonCard class="neum holder">
-                {/* <IonCardHeader class="ion-text-center ion-padding">
-                  <IonCardTitle className="title">Students</IonCardTitle>
-                </IonCardHeader> */}
-
                 <IonCardContent>
                   <IonGrid>
                     <IonRow class="ion-text-center ion-align-items-center ion-justify-content-center">

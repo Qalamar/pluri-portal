@@ -17,14 +17,13 @@ import {
   IonPage,
   IonRow,
   IonSearchbar,
-  IonToast,
+  IonToast
 } from "@ionic/react";
 import {
   addCircleOutline,
   closeOutline,
   createOutline,
-  filterOutline,
-  personCircleOutline,
+  personCircleOutline
 } from "ionicons/icons";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
@@ -34,14 +33,6 @@ import AddTeacher from "../forms/teacher/AddTeacher";
 import EditTeacher from "../forms/teacher/EditTeacher";
 import * as api from "../utils/API";
 import { store } from "../utils/Store";
-
-let initialValues = {
-  id: 0,
-  firstName: "",
-  lastName: "",
-  password: "",
-  email: "",
-};
 
 const Techers: React.FC = observer(() => {
   const [teachers, setTeachers] = useState([]);
@@ -84,7 +75,6 @@ const Techers: React.FC = observer(() => {
   };
 
   useEffect(() => {
-    setTeacher(initialValues)
     store.page = "teachers";
     getUsers();
   }, []);
